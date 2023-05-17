@@ -5,7 +5,7 @@ FROM php:8.2.5-fpm-alpine
 WORKDIR /var/www/html
 
 # Install dependencies
-RUN apt-get update && apt-get install -y \
+RUN yum update && yum install -y \
     libzip-dev \
     zip \
     && docker-php-ext-configure zip \
