@@ -1,35 +1,30 @@
-# Use the official PHP image as the base image
+# Use the official PHP 8.2.5 image as the base image
 FROM php:8.2.5-fpm-alpine
+
+# Set the working directory in the container
+WORKDIR /var/www/html
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    git \
     libzip-dev \
     zip \
-    unzip \
-    libpq-dev
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install zip
 
-# Clear the default web directory
-RUN rm -rf /var/www/html
+# Copy composer.lock and composer.json
+COPY composer.lock composer.json ./
 
-# Set the working directory
-WORKDIR /var/www
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql zip
-
-# Install Composer
+# Install composer dependencies
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer install --no-scripts
 
-# Copy the project files to the container
-COPY . /var/www
+# Copy the rest of the application code
+COPY . .
 
-# Install Composer dependencies
-RUN composer install --no-interaction
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage
 
-# Expose port 9000
+# Expose port 9000 and start PHP-FPM server
 EXPOSE 9000
-
-# Start the PHP-FPM server
 CMD ["php-fpm"]
 
