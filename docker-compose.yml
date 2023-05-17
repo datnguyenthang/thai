@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: laravel-app
-    container_name: laravel-app
+    container_name: ThaiTicket
     ports:
       - 80:8080
     volumes:
