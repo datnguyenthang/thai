@@ -5,7 +5,7 @@ FROM php:8.2.5-fpm-alpine
 WORKDIR /var/www/html
 
 # Install PHP extensions and dependencies
-RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql zip
 
 # Copy the application files to the container
 COPY . .
