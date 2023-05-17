@@ -1,10 +1,12 @@
-# Use the official PHP 8.2.5 image as the base image
-FROM php:8.2.5-fpm-alpine
+FROM php:7.4-apache-alpine
 
 RUN apk update && apk add --no-cache \
     zip \
     unzip \
-    libzip-dev
+    libzip-dev \
+    zlib-dev \
+    libxml2-dev \
+    oniguruma-dev
 
 RUN docker-php-ext-install pdo_mysql zip
 
@@ -15,5 +17,4 @@ RUN chown -R www-data:www-data /var/www/html \
     && echo "ServerName localhost" >> /etc/apache2/httpd.conf
 
 CMD ["httpd", "-D", "FOREGROUND"]
-
 
