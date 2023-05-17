@@ -1,34 +1,35 @@
-# Use the official CentOS 7 image as the base
-FROM centos:7
+# Base image
+FROM php:8.2-fpm
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /var/www/html
 
-# Install required packages
-RUN yum -y update && \
-    yum -y install epel-release && \
-    yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm && \
-    yum -y install yum-utils && \
-    yum-config-manager --enable remi-php82 && \
-    yum -y install php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysqlnd && \
-    yum -y install curl git unzip && \
-    yum -y install nginx && \
-    systemctl enable nginx
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    zip \
+    unzip \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy the Laravel project files to the container
-COPY . /var/www/html
+# Copy project files
+COPY . .
 
-# Install project dependencies
-RUN composer install --no-interaction
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Copy Nginx configuration file
-COPY nginx.conf /etc/nginx/nginx.conf
+# Install Laravel dependencies
+RUN composer install --optimize-autoloader --no-dev
 
-# Expose port 80 for Nginx
-EXPOSE 8080
+# Generate key
+RUN php artisan key:generate
 
-# Start Nginx and PHP-FPM services
-CMD ["nginx", "-g", "daemon off;"]
+# Expose port
+EXPOSE 9000
+
+# Run Laravel application
+CMD ["php-fpm"]
