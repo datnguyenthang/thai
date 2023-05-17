@@ -16,7 +16,7 @@ services:
       - laravel-network
   db:
     image: mysql:5.7
-    container_name: laravel-db
+    container_name: ThaiTicket-db
     restart: always
     environment:
       MYSQL_DATABASE: thai
