@@ -2,7 +2,7 @@
 FROM php:8.2-fpm
 
 # Set working directory
-WORKDIR /var/www/html
+WORKDIR /app
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -12,13 +12,11 @@ RUN apt-get update && apt-get install -y \
 	libpng-dev \
     zip \
     unzip \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+	git \
+	openssl \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip 
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Copy project files
-COPY . .
+COPY . /app
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
@@ -29,8 +27,10 @@ RUN composer install --optimize-autoloader --no-dev
 # Generate key
 RUN php artisan key:generate
 
+RUN php artisan serve --host=0.0.0.0 --port=8080
+
 # Expose port
-EXPOSE 9000
+EXPOSE 8080
 
 # Run Laravel application
 CMD ["php-fpm"]
