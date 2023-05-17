@@ -32,10 +32,10 @@ RUN composer install --optimize-autoloader --no-dev
 # Generate key
 RUN php artisan key:generate
 
-RUN php artisan serve --host=0.0.0.0 --port=8080
+RUN php artisan serve --host=0.0.0.0 --port=80
 
 # Expose port
-EXPOSE 8080
+#EXPOSE 8080
 
 # Run Laravel application
-CMD ["php-fpm"]
+#CMD ["php-fpm"]

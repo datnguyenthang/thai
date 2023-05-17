@@ -3,8 +3,10 @@ services:
   app:
     build: .
         #dockerfile: Dockerfile
+        context: .
+        dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - 8080:80
     volumes:
       - .:/app
     env_file: .env
@@ -34,4 +36,7 @@ services:
       - 8080:80
     environment:
       PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: 
+      MYSQL_ROOT_PASSWORD:
+  networks:
+  app:
+    driver: bridge
