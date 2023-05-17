@@ -1,4 +1,4 @@
-FROM FROM php:8.1.19-fpm-alpine
+FROM FROM php:8.0.5-fpm-alpine
 
 RUN apk update && apk add --no-cache \
     zip \
