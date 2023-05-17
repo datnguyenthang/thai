@@ -1,26 +1,29 @@
 version: '3'
-
 services:
-  app:
+  web:
     build:
       context: .
       dockerfile: Dockerfile
+    image: laravel-app
+    container_name: laravel-app
+    ports:
+      - 80:8080
     volumes:
       - .:/var/www/html
-    ports:
-      - 8000:9000
     depends_on:
-      - database
-
-  database:
+      - db
+    networks:
+      - laravel-network
+  db:
     image: mysql:5.7
+    container_name: laravel-db
+    restart: always
     environment:
-      MYSQL_DATABASE: thaiticket
+      MYSQL_DATABASE: thai
       MYSQL_USER: root
-      MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: secret
-    volumes:
-      - dbdata:/var/lib/mysql
-
-volumes:
-  dbdata:
+      MYSQL_PASSWORD:
+      MYSQL_ROOT_PASSWORD:
+    networks:
+      - laravel-network
+networks:
+  laravel-network:
