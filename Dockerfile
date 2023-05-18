@@ -30,7 +30,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 # Set permissions
-RUN chown -R www-data:www-data /storage /bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Install Laravel dependencies
 RUN composer install
