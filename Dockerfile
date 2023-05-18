@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
 	git \
 	openssl \
 	curl \
+	npm \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip 
 	
 # Install Composer
