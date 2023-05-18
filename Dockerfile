@@ -38,4 +38,4 @@ RUN php artisan key:generate
 #EXPOSE 8080
 
 # Run Laravel application
-CMD php artisan serve --host=0.0.0.0 --port=80
+RUN php artisan serve --host=0.0.0.0 --port=80
