@@ -29,12 +29,13 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 # Install Laravel dependencies
 RUN composer install
+RUN composer dump-autoload --optimize
 
 # Generate key
 RUN php artisan key:generate
 
 # Expose port
-EXPOSE 8000
+#EXPOSE 8080
 
 # Run Laravel application
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+CMD php artisan serve --host=0.0.0.0 --port=80
