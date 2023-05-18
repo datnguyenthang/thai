@@ -5,16 +5,18 @@ services:
             context: .
             dockerfile: Dockerfile
         ports:
-          - 8080:80
+            - 8080:80
         volumes:
-          - .:/app
+            - .:/app
         env_file: .env
         working_dir: /app
         command: bash -c 'npm run dev && php artisan serve --host 0.0.0.0'
         depends_on:
-          - db
+            - db
         links:
-          - db
+            - db
+        networks:
+            - app-network
     #db:
     #   image: "mysql:5.7"
     #    environment:
