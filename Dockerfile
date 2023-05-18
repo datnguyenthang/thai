@@ -33,6 +33,9 @@ RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 # Install Laravel dependencies
 RUN composer install --optimize-autoloader --no-dev
 
+# Install Node dependencies
+RUN npm install
+
 # Generate key
 RUN php artisan key:generate
 
