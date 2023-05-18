@@ -22,8 +22,8 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
 RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 # Install Node.js 16
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs
+#RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+#RUN apt-get install -y nodejs
 
 COPY . /app
 
@@ -34,7 +34,7 @@ RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 RUN composer install --optimize-autoloader --no-dev
 
 # Install Node dependencies
-RUN npm install
+#RUN npm install
 
 # Generate key
 RUN php artisan key:generate
