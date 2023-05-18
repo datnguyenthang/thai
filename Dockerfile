@@ -2,7 +2,7 @@
 FROM php:8.2-fpm
 
 # Set working directory
-WORKDIR /app
+#WORKDIR /app
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -25,7 +25,9 @@ RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 #RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 #RUN apt-get install -y nodejs
 
-COPY . .
+WORKDIR /var/www/html
+
+COPY . /var/www/html
 
 # Set permissions
 RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
