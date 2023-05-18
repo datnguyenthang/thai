@@ -25,13 +25,13 @@ RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 #RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 #RUN apt-get install -y nodejs
 
-COPY . /app
+COPY . .
 
 # Set permissions
 RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 
 # Install Laravel dependencies
-RUN composer install --optimize-autoloader --no-dev
+RUN composer install
 
 # Install Node dependencies
 #RUN npm install
