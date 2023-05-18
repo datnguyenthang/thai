@@ -6,6 +6,8 @@ services:
             dockerfile: Dockerfile
         ports:
             - 8080:8080
+        expose:
+            - 8080
         volumes:
             - .:/var/www/html
         env_file: .env
