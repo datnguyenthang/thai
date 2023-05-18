@@ -7,7 +7,7 @@ services:
         ports:
             - 8080:80
         volumes:
-            - .:/app
+            - .:/var/www/html
         env_file: .env
         working_dir: /app
         command: bash -c 'php artisan serve --host 0.0.0.0'
