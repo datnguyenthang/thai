@@ -34,6 +34,7 @@ RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 RUN composer install --optimize-autoloader --no-dev
 
 # Install Node dependencies
+COPY package.json package-lock.json ./
 RUN npm install
 
 # Generate key
