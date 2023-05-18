@@ -10,6 +10,11 @@ services:
             - .:/var/www/html
         env_file: .env
         working_dir: /app
+        networks:
+            - thai_app_network
+    networks:
+        thai_app_network:
+            driver: bridge
         #command: bash -c 'php artisan serve --host 0.0.0.0'
         #depends_on:
         #    - db
