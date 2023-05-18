@@ -21,8 +21,8 @@ RUN apt-get update && apt-get install -y \
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
 RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-# Install Node.js 17
-RUN curl -fsSL https://deb.nodesource.com/setup_17.x | bash -
+# Install Node.js 16
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 RUN apt-get install -y nodejs
 
 COPY . /app
