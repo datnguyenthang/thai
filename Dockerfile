@@ -2,31 +2,26 @@
 FROM php:8.2-fpm
 
 # Set working directory
-#WORKDIR /app
+WORKDIR /var/www/html
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libzip-dev \
-	libpng-dev \
+    libpng-dev \
     zip \
     unzip \
-	git \
-	openssl \
-	curl \
+    git \
+    openssl \
+    curl \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip 
-	
+
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
 RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-# Install Node.js 16
-#RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-#RUN apt-get install -y nodejs
-
-WORKDIR /var/www/html
-
+# Copy the application files
 COPY . /var/www/html
 
 # Set permissions
@@ -35,16 +30,11 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # Install Laravel dependencies
 RUN composer install
 
-# Install Node dependencies
-#RUN npm install
-
 # Generate key
 RUN php artisan key:generate
 
-RUN php artisan serve --host=0.0.0.0 --port=80
-
 # Expose port
-EXPOSE 80
+EXPOSE 8000
 
 # Run Laravel application
-#CMD ["php-fpm"]
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
