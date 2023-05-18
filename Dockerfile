@@ -22,8 +22,8 @@ RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
 RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 # Install Node.js and NPM
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
-RUN apt-get install -y nodejs
+#RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+#RUN apt-get install -y nodejs
 
 COPY . /app
 
