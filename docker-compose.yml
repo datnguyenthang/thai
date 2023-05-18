@@ -16,7 +16,7 @@ services:
         links:
             - db
         networks:
-            - app-network
+            - laravel-network
     #db:
     #   image: "mysql:5.7"
     #    environment:
@@ -39,5 +39,5 @@ services:
     #      PMA_HOST: db
     #      MYSQL_ROOT_PASSWORD:
     networks:
-        app-network:
+        laravel-network:
             driver: bridge
