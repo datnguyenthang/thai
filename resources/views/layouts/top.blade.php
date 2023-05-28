@@ -14,11 +14,17 @@
         </div>
         <div class="lang1">
           <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">English<span class="caret"></span>
-            </button>
+            <a class="btn btn-default dropdown-toggle {{ app()->getLocale() == 'en' ? 'en' : 'tha' }}" href="{{ route('home', ['lang' => app()->getLocale() == 'en' ? 'tha' : 'en']) }}"
+            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ app()->getLocale() == 'en' ? 'English' : 'Thailand' }}
+            </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a class="ge" href="#">German</a></li>
-              <li><a class="ru" href="#">Russian</a></li>
+              <li>
+                <a 	class="{{ app()->getLocale() == 'en' ? 'tha' : 'en' }}" 
+                  href="{{ route('home', ['lang' => app()->getLocale() == 'en' ? 'tha' : 'en']) }}">
+                  {{ app()->getLocale() == 'en' ? 'Thailand' : 'English' }}
+                </a>
+              </li>
             </ul>
           </div>
         </div>

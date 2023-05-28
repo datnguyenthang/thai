@@ -29,10 +29,10 @@ class Trip extends Component
     public $fromLocationName;
     public $toLocationName;
 
-    public $order_depart_rideId;
+    public $order_depart_rideId = null;
     public $order_depart_seatClassId;
 
-    public $order_return_rideId;
+    public $order_return_rideId = null;
     public $order_return_seatClassId;
 
     public function mount(Request $request){
@@ -65,6 +65,11 @@ class Trip extends Component
     }
 
     public function chooseTicketDepart($rideId, $seatClassId){
+        if ($this->order_depart_rideId > 0) { // preventing select more when selecting enough
+            $this->updateState();
+            return false; // preventing select more when selecting enough
+        }
+
         $this->countTicketSelected += 1;
         $this->order_depart_rideId = $rideId;
         $this->order_depart_seatClassId = $seatClassId;
@@ -73,6 +78,11 @@ class Trip extends Component
     }
 
     public function chooseTicketReturn($rideId, $seatClassId){
+        if ($this->order_return_rideId > 0) {
+            $this->updateState();
+            return false; // preventing select more when selecting enough
+        }
+
         $this->countTicketSelected += 1;
         $this->order_return_rideId = $rideId;
         $this->order_return_seatClassId = $seatClassId;

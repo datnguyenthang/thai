@@ -1,4 +1,4 @@
-<h1>{{ trans('messages.createorder') }}</h1>
+<h1>{{ trans('backend.createorder') }}</h1>
 
 <div class="row">
     <div class="col-md-8">
@@ -80,7 +80,7 @@
 
     <div class="col-md-3">
         <div class="form-group">
-            <span class="form-label">{{ trans('messages.customertype') }}</span>
+            <span class="form-label">{{ trans('backend.customertype') }}</span>
             <select id="customerType" name="customerType" class="form-select" type="date" wire:model="customerType">
                 <option value=""></option>
                 @foreach(CUSTOMERTYPE as $key => $value)
@@ -93,7 +93,7 @@
 
     <div class="col-md-3 pt-4">
         <div class="text-center">
-            <button class="btn btn-info form-control" wire:click="applyFilter">{{ trans('messages.applyfilter') }}</button>
+            <button class="btn btn-info form-control" wire:click="applyFilter">{{ trans('backend.applyfilter') }}</button>
         </div>
     </div>
 </div>

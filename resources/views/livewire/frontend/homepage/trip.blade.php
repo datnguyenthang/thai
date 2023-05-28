@@ -4,89 +4,102 @@
     @endif
     <div class="col-md-8 col-md-offset-1">
         <div style="background-color: #def8f3;">
-            <h2 class="mt-3" >
+            <h4 class="mt-3" >
                 {{ $fromLocationName }}
                     <i class="fas fa-arrow-right fa-md fa-1x"></i>
                 {{ $toLocationName }}
-            </h2>
+            </h4>
         </div>
 
         @if (sizeof($departRides)) 
-        
-            <span> {{ trans('messages.foundrides', ['totalride' => count($departRides)]) }}</span>
-                @foreach($departRides as $key => $ride)
-                    <div class="row m-0 mt-2 p-2 border rounded-2 pointer" role="button"
-                        wire:click="chooseTicketDepart({{ $ride->id }}, {{ $ride->seatClassId }})">
-                        <div class="fs-5 mt-2 fw-bold">{{ $ride->name }}</div>
-                        <div class="col-md-1">
-                            <img src="https://images.ferryhopper.com/companies/optimized/SJT-min.png" alt="SEAJETS"  style="height: 50px; width: 50px;">
-                        </div>
-                        <div class="col-md-3 pl-0">
-                            <span class="fw-bold fs-5 lh-1">{{ $ride->departTime }}</span><br/>
-                            <span class="fs-5 text-secondary lh-1-2">{{ $ride->fromLocationName }}</span>
-                        </div>
-                        <div class="col-md-3 pl-0">
-                            <span class="fs-5 text-secondary lh-1-2">
-                                ·· {{ $ride->distanceTime }} ··
-                            </span>
-                        </div>
-                        <div class="col-md-3">
-                            <span class="fw-bold fs-5 lh-1">{{ $ride->returnTime }}</span><br/>
-                            <span class="fs-5 text-secondary lh-1-2 text-ellipsis">{{ $ride->toLocationName }}</span>
-                        </div>
-                        <div class="col-md-2 text-center">
-                            <span class="fw-bold fs-5 lh-1">{{ trans('messages.seatclass') }}</span><br/>
-                            <span class="fs-5 text-secondary lh-1-2 seatclass">{{ $ride->seatClass }}</span>
-                        </div>
+            <div class="col d-flex justify-content-center align-items-center">
+                <span class="text-center text-dark mt-3 mb-3 fs-5"> {{ trans('messages.foundrides', ['totalride' => count($departRides)]) }}</span>
+            </div>
+
+            @foreach($departRides as $key => $ride)
+                <div class="row m-0 mt-2 p-2 border rounded-2 pointer" role="button"
+                    wire:click="@if(is_null($order_depart_rideId))chooseTicketDepart({{ $ride->id }}, {{ $ride->seatClassId }})@endif"
+                    wire:loading.attr="disabled">
+                    <div class="fs-5 mt-2 fw-bold text-dark">{{ $ride->name }}</div>
+                    <div class="col-md-1">
+                        <img src="https://images.ferryhopper.com/companies/optimized/SJT-min.png" alt="SEAJETS"  style="height: 50px; width: 50px;">
                     </div>
-                @endforeach
+                    <div class="col-md-2 pl-0">
+                        <span class="fw-bold fs-5 lh-1 text-dark">{{ $ride->departTime }}</span><br/>
+                        <span class="fs-10 text-secondary lh-1-2">{{ $fromLocationName }}</span>
+                    </div>
+                    <div class="col-md-2 pl-0">
+                        <span class="fs-5 text-secondary lh-1-2">
+                            ·· {{ $ride->distanceTime }} ··
+                        </span>
+                    </div>
+                    <div class="col-md-2">
+                        <span class="fw-bold fs-5 lh-1 text-dark">{{ $ride->returnTime }}</span><br/>
+                        <span class="fs-10 text-secondary lh-1-2 text-ellipsis">{{ $toLocationName }}</span>
+                    </div>
+                    <div class="col-md-2 text-center">
+                        <span class="fw-bold fs-5 lh-1">{{ trans('messages.seatclass') }}</span><br/>
+                        <span class="fs-10 text-secondary lh-1-2 seatclass">{{ $ride->seatClass }}</span>
+                    </div>
+                    <div class="col-md-3 justify-content-center text-center">
+                        <span class="fw-bold fs-5 lh-1 text-center text-dark">฿{{ $ride->price }}</span>
+                    </div>
+                </div>
+            @endforeach
 
         @else
-            <h4 style="color: #CC2131">{{ trans('messages.notripmatch') }}</h4>
+            <h5 style="color: #CC2131">{{ trans('messages.notripmatch') }}</h5>
         @endif
 
         {{----------------------------------------}}
 
         @if ($tripType == ROUNDTRIP)
             <div style="background-color: #def8f3;">
-                <h2 class="mt-3" >
+                <h4 class="mt-5" >
                     {{ $toLocationName }}
                         <i class="fas fa-arrow-right fa-md fa-1x"></i>
                     {{ $fromLocationName }}
-                </h2>
+                </h4>
             </div>
 
             @if (sizeof($returnRides))
-                <span> {{ trans('messages.foundrides', ['totalride' => count($returnRides)]) }}</span>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <span class="text-center text-dark mt-3 mb-3 fs-5"> {{ trans('messages.foundrides', ['totalride' => count($returnRides)]) }}</span>
+                </div>
+
                 @foreach ($returnRides as $ride) 
                     <div class="row m-0 mt-2 p-2 border rounded-2 pointer" role="button"
-                        wire:click="chooseTicketReturn({{ $ride->id }}, {{ $ride->seatClassId }})">
-                        <div class="fs-5 mt-2 fw-bold">{{ $ride->name }}</div>
+                        wire:click="@if(is_null($order_return_rideId))chooseTicketReturn({{ $ride->id }}, {{ $ride->seatClassId }})@endif"
+                        wire:loading.attr="disabled">
+                        <div class="fs-5 mt-2 fw-bold text-dark">{{ $ride->name }}</div>
                         <div class="col-md-1">
                             <img src="https://images.ferryhopper.com/companies/optimized/SJT-min.png" alt="SEAJETS"  style="height: 50px; width: 50px;">
                         </div>
-                        <div class="col-md-3 pl-0">
-                            <span class="fw-bold fs-5 lh-1">{{ $ride->departTime }}</span><br/>
-                            <span class="fs-5 text-secondary lh-1-2">{{ $ride->fromLocationName }}</span>
+                        <div class="col-md-2 pl-0">
+                            <span class="fw-bold fs-5 lh-1 text-dark">{{ $ride->departTime }}</span><br/>
+                            <span class="fs-10 text-secondary lh-1-2">{{ $fromLocationName }}</span>
                         </div>
-                        <div class="col-md-3 pl-0">
+                        <div class="col-md-2 pl-0">
                             <span class="fs-5 text-secondary lh-1-2">
                                 ·· {{ $ride->distanceTime }} ··
                             </span>
                         </div>
-                        <div class="col-md-3">
-                            <span class="fw-bold fs-5 lh-1">{{ $ride->returnTime }}</span><br/>
-                            <span class="fs-5 text-secondary lh-1-2 text-ellipsis">{{ $ride->toLocationName }}</span>
+                        <div class="col-md-2">
+                            <span class="fw-bold fs-5 lh-1 text-dark">{{ $ride->returnTime }}</span><br/>
+                            <span class="fs-10 text-secondary lh-1-2 text-ellipsis">{{ $toLocationName }}</span>
                         </div>
                         <div class="col-md-2 text-center">
                             <span class="fw-bold fs-5 lh-1">{{ trans('messages.seatclass') }}</span>
-                            <span class="fs-5 text-secondary lh-1-2">{{ $ride->seatClass }}</span>
+                            <span class="fs-10 text-secondary lh-1-2">{{ $ride->seatClass }}</span>
+                        </div>
+                        <div class="col-md-3 justify-content-center text-center">
+                            <span class="fw-bold fs-5 lh-1 text-center text-dark">฿{{ $ride->price }}</span>
                         </div>
                     </div>
                 @endforeach 
 
             @else
-                <h4 style="color: #CC2131">{{ trans('messages.notripmatch') }}</h4>
+                <h5 style="color: #CC2131">{{ trans('messages.notripmatch') }}</h5>
             @endif 
             
         @endif
@@ -109,10 +122,11 @@
             <input type="hidden" wire:model="order_return_seatClassId" name="order_return_seatClassId" value>
 
             <div class="d-flex flex-column justify-content-normal align-items-normal border rounded-3 overflow-hidden p-20 mt-3">
-                <div class="text-center pt-2  pb-3 fw-bold fs-5 border-bottom border-1 pb-3">
-                    <h5> {{ $text_ticket_select }}</h5>
+                <div class="pt-2  pb-3 fw-bold fs-5 border-bottom border-1 pb-3">
+                    <h5 class="text-center"> {{ $text_ticket_select }}</h5>
                 </div>
                 <div class="bg-warning">
+                @if (isset($departRides[0]))
                     <div class="p-3 {{ $order_depart_rideId > 0 ? '' : 'd-none' }}"">
                         <div class="d-flex justify-content-between">
                             <h5 class="text-center fw-bold mt-3" >
@@ -130,26 +144,28 @@
                         </div>
                         <span>{{ date('F j, Y', strtotime($departRides[0]->departDate)) }}, {{$departRides[0]->departTime }}</span>
                     </div>
+                @endif
                 @if ($tripType == ROUNDTRIP && $order_return_rideId > 0)
-                    
-                    <div class="p-3 {{ $order_return_rideId > 0 ? '' : 'd-none' }}"">
-                        <hr />
-                        <div class="d-flex justify-content-between">
-                            <h5 class="text-center fw-bold mt-3" >
-                                {{ $toLocationName }}
-                                    <i class="fas fa-arrow-right fa-md fa-1x"></i>
-                                {{ $fromLocationName }}
-                            </h5>
-                            <div class="mt-2 pointer" role="button" wire:click="clearReturnTicket">
-                                <i aria-hidden="true" class="fas fa-close"></i>
+                    @if (isset($returnRides[0]))
+                        <div class="p-3 {{ $order_return_rideId > 0 ? '' : 'd-none' }}"">
+                            <hr />
+                            <div class="d-flex justify-content-between">
+                                <h5 class="text-center fw-bold mt-3" >
+                                    {{ $toLocationName }}
+                                        <i class="fas fa-arrow-right fa-md fa-1x"></i>
+                                    {{ $fromLocationName }}
+                                </h5>
+                                <div class="mt-2 pointer" role="button" wire:click="clearReturnTicket">
+                                    <i aria-hidden="true" class="fas fa-close"></i>
+                                </div>
                             </div>
+                            <div class="text-left">
+                                <span><i class="fas fa-chair fa-lg"></i> {{ $returnRides[0]->name }} ({{ $returnRides[0]->seatClass }})</span>
+                                <span class="float-end">{{ $returnRides[0]->price }}$</span>
+                            </div>
+                            <span>{{ date('F j, Y', strtotime($returnRides[0]->departDate)) }}, {{$returnRides[0]->departTime }}</span>
                         </div>
-                        <div class="text-left">
-                            <span><i class="fas fa-chair fa-lg"></i> {{ $returnRides[0]->name }} ({{ $returnRides[0]->seatClass }})</span>
-                            <span class="float-end">{{ $returnRides[0]->price }}$</span>
-                        </div>
-                        <span>{{ date('F j, Y', strtotime($returnRides[0]->departDate)) }}, {{$returnRides[0]->departTime }}</span>
-                    </div>
+                    @endif
                 @endif
                 </div>
                 <div class="text-center pt-2 pb-2">

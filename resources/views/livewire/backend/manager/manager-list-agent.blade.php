@@ -1,14 +1,14 @@
 <div>
-    <h1>List Agent</h1>
+    <h1>{{ trans('backend.listagent') }}</h1>
     <input type="text" wire:model.debounce.500ms="search" placeholder="Search...">
-    <a href="/agent/create/0" class="btn btn-info">Create agent</a>
+    <a href="/agent/create/0" class="btn btn-info">{{ trans('backend.createagent') }}</a>
     
     <table class="table datatable-table">
         <thead>
             <tr>
-                <th wire:click="sortBy('name')"><i class="fas fa-sort"></i>Name</th>
-                <th wire:click="sortBy('status')"><i class="fas fa-sort"></i>Status</th>
-                <th><i class="fas fa-tasks"></i>Action</th>
+                <th wire:click="sortBy('name')"><i class="fas fa-sort"></i>{{ trans('backend.agentname') }}</th>
+                <th wire:click="sortBy('status')"><i class="fas fa-sort"></i>{{ trans('backend.agentstatus') }}</th>
+                <th><i class="fas fa-tasks"></i>{{ trans('backend.action') }}</th>
             </tr>
         </thead>
         <tbody>

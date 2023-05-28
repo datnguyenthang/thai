@@ -14,6 +14,7 @@ return [
     'children' => 'Children (0-17)',
     'seatclass' => 'Seat Class',
     'showboat' => 'Show boats',
+    'bookingtrip' => 'Booking Boat',
 
     //BOOKING PAGE
     'selecttime' => 'Please select rides for your trip!',

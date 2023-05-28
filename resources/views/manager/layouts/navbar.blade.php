@@ -8,33 +8,33 @@
             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}" 
             aria-current="true">
             <i class="fas fa-tachometer-alt fa-fw me-3"></i>
-            <span>Main dashboard</span>
+            <span>{{ trans('backend.dashboard') }}</span>
           </a>
 
           <a href="{{ route('managerListUser') }}" 
             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'user' ? 'active' : '' }}">
             <i class="fas fa-chart-area fa-fw me-3"></i>
-            <span>User</span>
+            <span>{{ trans('backend.user') }}</span>
           </a>
 
           <a href="{{ route('managerLocation') }}" 
              class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'location' ? 'active' : '' }}">
              <i class="fas fa-lock fa-fw me-3"></i>
-             <span>Location</span>
+             <span>{{ trans('backend.location') }}</span>
           </a>
 
           <a href="{{ route('managerListRide') }}" 
              class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'ride' ? 'active' : '' }}">
              <i class="fas fa-chart-line fa-fw me-3"></i>
-             <span>Ride</span>
+             <span>{{ trans('backend.ride') }}</span>
           </a>
           
           <a href="{{ route('managerAgent') }}" 
             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'agent' ? 'active' : '' }}">
             <i class="fas fa-chart-pie fa-fw me-3"></i>
-            <span>Agent</span>
+            <span>{{ trans('backend.agent') }}</span>
           </a>
-
+{{--
           <a href="#" class="list-group-item list-group-item-action py-2 ripple">
             <i class="fas fa-chart-bar fa-fw me-3"></i>
             <span>Orders</span>
@@ -64,7 +64,7 @@
             <i class="fas fa-money-bill fa-fw me-3"></i>
             <span>Sales</span>
           </a>
-
+--}}
         </div>
       </div>
     </nav>

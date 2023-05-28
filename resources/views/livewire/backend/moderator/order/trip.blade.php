@@ -11,17 +11,17 @@
             </div>
     
             @if (sizeof($departRides))
-                <span> {{ trans('messages.foundrides', ['totalride' => count($departRides)]) }}</span>
+                <span> {{ trans('backend.foundrides', ['totalride' => count($departRides)]) }}</span>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>{{ trans('messages.nametrip') }}</th>
-                            <th>{{ trans('messages.departtime') }}</th>
-                            <th>{{ trans('messages.distancetime') }}</th>
-                            <th>{{ trans('messages.returntime') }}</th>
-                            <th>{{ trans('messages.seatclass') }}</th>
-                            <th>{{ trans('messages.selecttrip') }}</th>
-                            <th>{{ trans('messages.seatclassprice') }}</th>
+                            <th>{{ trans('backend.nametrip') }}</th>
+                            <th>{{ trans('backend.departtime') }}</th>
+                            <th>{{ trans('backend.distancetime') }}</th>
+                            <th>{{ trans('backend.returntime') }}</th>
+                            <th>{{ trans('backend.seatclass') }}</th>
+                            <th>{{ trans('backend.selecttrip') }}</th>
+                            <th>{{ trans('backend.seatclassprice') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,7 +39,7 @@
                     </tbody>
                 </table>
             @else
-                <h4 style="color: #CC2131">{{ trans('messages.notripmatch') }}</h4>
+                <h4 style="color: #CC2131">{{ trans('backend.notripmatch') }}</h4>
             @endif
     
             {{----------------------------------------}}
@@ -54,17 +54,17 @@
                 </div>
     
                 @if (sizeof($returnRides))
-                    <span> {{ trans('messages.foundrides', ['totalride' => count($returnRides)]) }}</span>
+                    <span> {{ trans('backend.foundrides', ['totalride' => count($returnRides)]) }}</span>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>{{ trans('messages.nametrip') }}</th>
-                                <th>{{ trans('messages.departtime') }}</th>
-                                <th>{{ trans('messages.distancetime') }}</th>
-                                <th>{{ trans('messages.returntime') }}</th>
-                                <th>{{ trans('messages.seatclass') }}</th>
-                                <th>{{ trans('messages.seatclassprice') }}</th>
-                                <th>{{ trans('messages.selecttrip') }}</th>
+                                <th>{{ trans('backend.nametrip') }}</th>
+                                <th>{{ trans('backend.departtime') }}</th>
+                                <th>{{ trans('backend.distancetime') }}</th>
+                                <th>{{ trans('backend.returntime') }}</th>
+                                <th>{{ trans('backend.seatclass') }}</th>
+                                <th>{{ trans('backend.seatclassprice') }}</th>
+                                <th>{{ trans('backend.selecttrip') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,7 +83,7 @@
                     </table>
     
                 @else
-                    <h4 style="color: #CC2131">{{ trans('messages.notripmatch') }}</h4>
+                    <h4 style="color: #CC2131">{{ trans('backend.notripmatch') }}</h4>
                 @endif 
                 
             @endif

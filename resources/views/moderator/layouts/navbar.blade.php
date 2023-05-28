@@ -8,24 +8,23 @@
           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorDashboard' ? 'active' : '' }}" 
           aria-current="true">
           <i class="fas fa-tachometer-alt fa-fw me-3"></i>
-          <span>{{ trans('messages.dashboard') }}</span>
+          <span>{{ trans('backend.dashboard') }}</span>
         </a>
 
         <a href="{{ route('moderatorOrderlist') }}" 
         class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorOrderlist' ? 'active' : '' }}" 
         aria-current="true">
           <i class="fas fa-chart-bar fa-fw me-3"></i>
-          <span>{{ trans('messages.orderlist') }}</span>
+          <span>{{ trans('backend.orderlist') }}</span>
         </a>
 
         <a href="{{ route('moderatorOrder') }}" 
         class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorOrder' ? 'active' : '' }}" 
         aria-current="true">
           <i class="fas fa-chart-bar fa-fw me-3"></i>
-          <span>{{ trans('messages.order') }}</span>
+          <span>{{ trans('backend.order') }}</span>
         </a>
-        
-
+{{--
         <a href="{{ route('managerListUser') }}" 
           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'user' ? 'active' : '' }}">
           <i class="fas fa-chart-area fa-fw me-3"></i>
@@ -79,7 +78,7 @@
           <i class="fas fa-money-bill fa-fw me-3"></i>
           <span>Sales</span>
         </a>
-
+--}}
       </div>
     </div>
   </nav>

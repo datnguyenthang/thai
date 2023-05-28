@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Frontend\Homepage;
 
+use Carbon\Carbon;
+
 use Livewire\Component;
 use App\Models\Ride;
 use App\Models\Location;
@@ -17,24 +19,33 @@ class Booking extends Component
 
     public $fromLocationList;
     public $toLocationList;
-    public $departDate;
+    public $departureDate;
     public $returnDate;
     public $adults;
     public $children;
 
     public function mount(){
-        $this->fromLocationList = $this->toLocationList = Location::get();
+        $locations = Location::get();
+        $this->fromLocationList = $this->toLocationList = $locations;
+
         $this->tripType = ROUNDTRIP;
         $this->roundtrip = ROUNDTRIP;
-        $this->returnDate = date('Y-m-d');
+
+        $this->fromLocation = $locations->random()->id;
+        $this->toLocation = $locations->filter(function ($location){
+            return $location->id !==  $this->fromLocation;
+        })->random()->id;
+
+        $this->departureDate = now()->toDateString();
+        $this->returnDate = now()->addDay()->toDateString();
     }
 
     public function chooseTripType($typeTrip = 0){
         $this->roundtrip = $typeTrip;
     }
 
-    public function chooseDepartDate($departDate){
-        $this->returnDate = $departDate;
+    public function chooseDepartDate($departureDate){
+        $this->returnDate = Carbon::create($departureDate)->addDay()->toDateString();
     }
 
     public function chooseFromLocation($fromLocation){

@@ -1,15 +1,15 @@
 <div>
-    <h1>Create Massive Ride</h1>
+    <h1>{{ trans('backend.createmassiveride') }}</h1>
     <form wire:submit.prevent="save">
 
         <div class="form-outline mb-4">
-            <label class="form-label">Name:</label>
+            <label class="form-label">{{ trans('backend.ridename') }}</label>
             <input type="text" class="form-control w-50" wire:model="name">
             @error('name') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
     
         <div class="form-outline mb-4">
-            <label class="form-label" for="fromLocation">From location</label>
+            <label class="form-label" for="fromLocation">{{ trans('backend.fromlocation') }}</label>
             <select id="fromLocation" class="form-select w-50" wire:model="fromLocation">
                 @foreach($locations as $location)
                     <option value="{{ $location->id }}">{{ $location->name }}</option>
@@ -19,7 +19,7 @@
         </div>
     
         <div class="form-outline mb-4">
-            <label class="form-label" for="toLocation">To location</label>
+            <label class="form-label" for="toLocation">{{ trans('backend.tolocation') }}</label>
             <select id="toLocation" class="form-select w-50" wire:model="toLocation">
                 @foreach($locations as $location)
                     <option value="{{ $location->id }}">{{ $location->name }}</option>
@@ -29,27 +29,27 @@
         </div>
 
         <div class="form-outline mb-4">
-            <label class="form-label" for="departTime">Depart Time:</label>
+            <label class="form-label" for="departTime">{{ trans('backend.departtime') }}</label>
             <input type="time" class="form-control w-50" id="departTime" wire:model="departTime" >
             @error('departTime') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
-            <label class="form-label" for="returnTime">Return Time:</label>
+            <label class="form-label" for="returnTime">{{ trans('backend.returntime') }}</label>
             <input type="time" class="form-control w-50" id="returnTime" wire:model="returnTime">
             @error('returnTime') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         {{--
         <div class="form-outline mb-4">
-            <label class="form-label" for="departDate">Depart Date:</label>
+            <label class="form-label" for="departDate">{{ trans('backend.departdate') }}</label>
             <input type="date" class="form-control w-50" id="departDate" wire:model="departDate">
             @error('returnTime') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
         --}}
         
         <div class="form-outline mb-4">
-            <label class="form-label" for="status">Status</label>
+            <label class="form-label" for="status">{{ trans('backend.ridestatus') }}</label>
             <select id="status" class="form-select w-50"  wire:model="status">
                 @foreach(RIDESTATUS as $key => $value)
                     <option value="{{ $key }}">{{ $value }}</option>
@@ -62,50 +62,50 @@
         <h5>Looping</h5>
 
         <div class="form-outline mb-4">
-            <label class="form-label" for="loopOnDay">Loop on days:</label>
+            <label class="form-label" for="loopOnDay">{{ trans('backend.loopondays') }}</label>
             <br/>
             <input type="checkbox" class="form-checkbox w-10" id="monday" value="2" wire:model="monday">
-            <label for="monday">Monday</label><br/>
+            <label for="monday">{{ trans('backend.monday') }}</label><br/>
 
             <input type="checkbox" class="form-checkbox w-10" id="tuesday" value="3" wire:model="tuesday">
-            <label for="tuesday">Tuesday</label><br/>
+            <label for="tuesday">{{ trans('backend.tuesday') }}</label><br/>
 
             <input type="checkbox" class="form-checkbox w-10" id="wednesday" value="4" wire:model="wednesday">
-            <label for="wednesday">Wednesday</label><br/>
+            <label for="wednesday">{{ trans('backend.wednesday') }}</label><br/>
 
             <input type="checkbox" class="form-checkbox w-10" id="thursday" value="5" wire:model="thursday">
-            <label for="thursday">Thursday</label><br/>
+            <label for="thursday">{{ trans('backend.thursday') }}</label><br/>
 
             <input type="checkbox" class="form-checkbox w-10" id="friday" value="6" wire:model="friday">
-            <label for="friday">Friday</label><br/>
+            <label for="friday">{{ trans('backend.friday') }}</label><br/>
 
             <input type="checkbox" class="form-checkbox w-10" id="saturday" value="7" wire:model="saturday">
-            <label for="saturday">Saturday</label><br/>
+            <label for="saturday">{{ trans('backend.saturday') }}</label><br/>
 
             <input type="checkbox" class="form-checkbox w-10" id="sunday" value="8" wire:model="sunday">
-            <label for="sunday">Sunday</label>
+            <label for="sunday">{{ trans('backend.sunday') }}</label>
         </div>
 
         <div class="form-outline mb-4">
-            <label class="form-label" for="loopfrom">Loop From:</label>
+            <label class="form-label" for="loopfrom">{{ trans('backend.loopfrom') }}</label>
             <input type="date" class="form-control w-50" id="loopfrom" wire:model="loopfrom">
             @error('loopfrom') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
-            <label class="form-label" for="loopto">Loop To:</label>
+            <label class="form-label" for="loopto">{{ trans('backend.loopto') }}</label>
             <input type="date" class="form-control w-50" id="loopto" wire:model="loopto">
             @error('loopto') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <hr />
-        <h1>Create Seat Classes</h1>
+        <h1>{{ trans('backend.createseatclasses') }}</h1>
         <table class="table">
             <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Capacity</th>
-                  <th>Price</th>
+                  <th>{{ trans('backend.createseatclasses') }}</th>
+                  <th>{{ trans('backend.capacity') }}</th>
+                  <th>{{ trans('backend.price') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -142,6 +142,6 @@
 
         <br />
     
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">{{ trans('backend.save') }}</button>
     </form>
 </div>

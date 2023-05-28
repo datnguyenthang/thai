@@ -1,15 +1,15 @@
 <div>
-    <input type="text" wire:model.debounce.500ms="search" placeholder="Search...">
-    <a href="/user/create/0" class="btn btn-info">Create User</a>
+    <input type="text" wire:model.debounce.500ms="search" placeholder="{{ trans('backend.search') }}...">
+    <a href="/user/create/0" class="btn btn-info">{{ trans('backend.createuser') }}</a>
     
     <table class="table datatable-table">
         <thead>
             <tr>
-                <th wire:click="sortBy('name')"><i class="fas fa-sort"></i>Name</th>
-                <th wire:click="sortBy('email')"><i class="fas fa-sort"></i>Email</th>
-                <th wire:click="sortBy('role')"><i class="fas fa-sort"></i>Role</th>
-                <th><i class="fas fa-sort"></i>Status</th>
-                <th><i class="fas fa-tasks"></i>Action</th>
+                <th wire:click="sortBy('name')"><i class="fas fa-sort"></i>{{ trans('backend.username') }}</th>
+                <th wire:click="sortBy('email')"><i class="fas fa-sort"></i>{{ trans('backend.useremail') }}</th>
+                <th wire:click="sortBy('role')"><i class="fas fa-sort"></i>{{ trans('backend.userrole') }}</th>
+                <th><i class="fas fa-sort"></i>{{ trans('backend.userstatus') }}</th>
+                <th><i class="fas fa-tasks"></i>{{ trans('backend.action') }}</th>
             </tr>
         </thead>
         <tbody>

@@ -44,7 +44,7 @@
                         <label>{{ trans('messages.fromlocation') }}</label>
                         <div class="select1_inner">
                           <select id="fromLocation" name="fromLocation" class="form-control" wire:model="fromLocation" wire:change="chooseFromLocation($event.target.value)" required placeholder="{{ trans('messages.pickup') }}">
-                            <option value=""></option>
+                            {{--<option value=""></option>--}}
                             @foreach($fromLocationList as $location)
                                 <option value="{{ $location->id }}">{{ $location->name }}</option>
                             @endforeach
@@ -58,7 +58,7 @@
                         <label>{{ trans('messages.tolocation') }}</label>
                         <div class="select1_inner">
                           <select id="toLocation" name="toLocation" class="form-control" wire:model="toLocation" required placeholder="{{ trans('messages.dropoff') }}">
-                            <option value=""></option>
+                            {{--<option value=""></option>--}}
                             @foreach($toLocationList as $location)
                                 <option value="{{ $location->id }}">{{ $location->name }}</option>
                             @endforeach
@@ -71,7 +71,7 @@
                       <div class="input1_wrapper">
                         <label>{{ trans('messages.departuredate') }}</label>
                         <div class="">
-                          <input id="departureDate" name="departureDate" class="form-control" type="date" wire:change="chooseDepartDate($event.target.value)" min="{{ date('Y-m-d') }}" required>
+                          <input id="departureDate" name="departureDate" wire:model="departureDate" class="form-control" type="date" wire:change="chooseDepartDate($event.target.value)" min="{{ date('Y-m-d') }}" required>
                         </div>
                       </div>
                     </div>
@@ -81,7 +81,7 @@
                       <div class="input1_wrapper">
                         <label>{{ trans('messages.returndate') }}</label>
                         <div class="">
-                          <input id="returnDate" name="returnDate" class="form-control" type="date" min="{{ $returnDate }}" required="">
+                          <input id="returnDate" name="returnDate" wire:model="returnDate" class="form-control" type="date" min="{{ $returnDate }}" required="">
                         </div>
                       </div>
                     </div>

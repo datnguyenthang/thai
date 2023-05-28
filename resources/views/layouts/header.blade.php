@@ -1,12 +1,12 @@
 <div class="top2_wrapper">
     
       <div class="top2 clearfix">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
           <div class="container">
             <!-- Navbar brand/logo -->
             <header>
               <div class="logo_wrapper">
-                <a href="#" class="logo">
+                <a href="/" class="logo">
                   <img src="/img/logo.png" alt="" class="img-fluid">
                 </a>
               </div>

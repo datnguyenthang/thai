@@ -1,16 +1,16 @@
 <div>
-    <h1>Create Ride</h1>
+    <h1>{{ trans('backend.createride') }}</h1>
     <form wire:submit.prevent="save">
         <input type="hidden" name="userid" value="{{ $rideId }}">
 
         <div class="form-outline mb-4">
-            <label class="form-label">Name:</label>
+            <label class="form-label">{{ trans('backend.ridename') }}</label>
             <input type="text" class="form-control w-50" wire:model="name">
             @error('name') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
     
         <div class="form-outline mb-4">
-            <label class="form-label" for="fromLocation">From location</label>
+            <label class="form-label" for="fromLocation">{{ trans('backend.fromlocation') }}</label>
             <select id="fromLocation" class="form-select w-50" wire:model="fromLocation">
                 @foreach($locations as $location)
                     <option value="{{ $location->id }}">{{ $location->name }}</option>
@@ -20,7 +20,7 @@
         </div>
     
         <div class="form-outline mb-4">
-            <label class="form-label" for="toLocation">To location</label>
+            <label class="form-label" for="toLocation">{{ trans('backend.tolocation') }}</label>
             <select id="toLocation" class="form-select w-50" wire:model="toLocation">
                 @foreach($locations as $location)
                     <option value="{{ $location->id }}">{{ $location->name }}</option>
@@ -30,25 +30,25 @@
         </div>
 
         <div class="form-outline mb-4">
-            <label class="form-label" for="departTime">Depart Time:</label>
+            <label class="form-label" for="departTime">{{ trans('backend.departuretime') }}</label>
             <input type="time" class="form-control w-50" id="departTime" wire:model="departTime" >
             @error('departTime') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
-            <label class="form-label" for="returnTime">Return Time:</label>
+            <label class="form-label" for="returnTime">{{ trans('backend.returntime') }}</label>
             <input type="time" class="form-control w-50" id="returnTime" wire:model="returnTime">
             @error('returnTime') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
-            <label class="form-label" for="departDate">Depart Date:</label>
+            <label class="form-label" for="departDate">{{ trans('backend.departdate') }}</label>
             <input type="date" class="form-control w-50" id="departDate" wire:model="departDate">
             @error('returnTime') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
-            <label class="form-label" for="status">Status</label>
+            <label class="form-label" for="status">{{ trans('backend.ridestatus') }}</label>
             <select id="status" class="form-select w-50" wire:model="status">
                 @foreach(RIDESTATUS as $key => $value)
                     <option value="{{ $key }}">{{ $value }}</option>
@@ -58,13 +58,13 @@
         </div>
 
         <hr />
-        <h1>Create Seat Classes</h1>
+        <h1>{{ trans('backend.createseatclassess') }}</h1>
         <table class="table">
             <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Capacity</th>
-                  <th>Price</th>
+                  <th>{{ trans('backend.seatclassname') }}</th>
+                  <th>{{ trans('backend.capacity') }}</th>
+                  <th>{{ trans('backend.price') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -86,7 +86,7 @@
                     </td>
                     @if($index  > 0)
                     <td>
-                        <button type="button" wire:click="removeSeatClass({{ $index }})">Remove</button>
+                        <button type="button" wire:click="removeSeatClass({{ $index }})">{{ trans('backend.remove') }}</button>
                     </td>
                     @endif
                 </tr>
@@ -97,9 +97,9 @@
 
         <br />
     
-        <button type="button" class="d-flex justify-content-center" wire:click="addSeatClass">Add Seat Class</button>
+        <button type="button" class="d-flex justify-content-center" wire:click="addSeatClass">{{ trans('backend.addseatclass') }}</button>
 
         <br />
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">{{ trans('backend.save') }}</button>
     </form>
 </div>

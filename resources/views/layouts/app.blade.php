@@ -29,12 +29,13 @@
         @if(Request::is('/'))
             @include('layouts.slider-wrapper')
             @livewire('frontend.homepage.booking')
-            
+{{--
             @include('layouts.category')
             @include('layouts.parallax')
             @include('layouts.advertising')
             @include('layouts.feedback')
             @include('layouts.partner')
+--}}
         @else 
             <div class="container mt-4">
                 {{ $slot }}
@@ -44,9 +45,9 @@
         @include('layouts.footer')
         @include('layouts.bottom')
     </div>
-    <a href="#" id="toTop" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span></a>
 
-    <script src="{{ mix('js/app.js') }}"></script>
+    {{--<a href="#" id="toTop" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span></a>--}}
+
     @livewireScripts
 </body>
 </html>

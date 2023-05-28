@@ -33,7 +33,6 @@
         @include('layouts.footer')
     </div>
 
-    <script src="{{ mix('js/app.js') }}"></script>
     @livewireScripts
 </body>
 </html>
