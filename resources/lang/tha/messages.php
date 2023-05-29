@@ -14,6 +14,7 @@ return [
     'seatclass' => 'Seat Class',
     'showboat' => 'Show boats',
     'bookingtrip' => 'Booking Boat',
+    'submit' => 'Submit',
 
     'selecttime' => 'Please select rides for your trip!',
     'select' => 'Choose',

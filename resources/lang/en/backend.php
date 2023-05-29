@@ -10,7 +10,9 @@ return [
 
     //ORDER
     'listorder' => 'List Order',
+    'noorderfound' => 'No order found!',
     'orderid' => 'Order Id',
+    'customerType' => 'Customer Type',
     'trip' => 'Trip',
     'triptype' => 'Trip Type',
     'customername' => 'Customer Name',
