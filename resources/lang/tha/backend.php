@@ -33,6 +33,10 @@ return [
     'applyfilter' => 'Filter',
     'createorder' => 'Create Order',
     'contactdetail' => 'Contact Detail',
+    'vieworder' => 'View',
+    'editorder' => 'Edit',
+    'processorder'=> 'Process',
+    'orderdetail' => 'Order Detail',
 
     'firstname' => 'First Name',
     'lastname' => 'Last Name',

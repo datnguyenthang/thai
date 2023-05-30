@@ -1,8 +1,10 @@
 <?php
 return [
     'title' => 'This is Thai Language Title.',
-    'roundtrip' => 'Round Trip Thailand',
-    'oneway' => 'One Way Thailand',
+    'departure' => 'Departure',
+    'destination' => 'Destination',
+    'roundtrip' => 'Round Trip',
+    'oneway' => 'One Way',
     'fromlocation' => 'Pick up location',
     'tolocation' => 'Drop off location',
     'pickup' => 'Pick up',
@@ -15,6 +17,7 @@ return [
     'showboat' => 'Show boats',
     'bookingtrip' => 'Booking Boat',
     'submit' => 'Submit',
+
 
     'selecttime' => 'Please select rides for your trip!',
     'select' => 'Choose',

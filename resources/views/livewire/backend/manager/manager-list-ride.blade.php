@@ -57,7 +57,7 @@
                     <button wire:click="$set('showModal', false)">{{ trans('backend.close') }}</button>
                 </div>
                 <div class="modal-body">
-                    @if($rideDetail)
+                    @if($showModal === true &&  $rideDetail)
                         <p>{{ trans('backend.id') }} : {{ $rideDetail['id'] }}</p>
                         <p>{{ trans('backend.ridename') }} : {{ $rideDetail['name'] }}</p>
                         <p>{{ trans('backend.fromlocation') }} : {{ $rideDetail['fromLocation'] }}</p>

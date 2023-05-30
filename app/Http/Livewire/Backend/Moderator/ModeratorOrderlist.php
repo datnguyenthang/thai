@@ -36,6 +36,9 @@ class ModeratorOrderlist extends Component
     public $orderStatus;
     public $customerType = -1;
 
+    public $orderDetail;
+    public $showModal = false;
+
     protected $orderList;
 
     public function mount(){
@@ -61,8 +64,28 @@ class ModeratorOrderlist extends Component
         $this->resetPage();
     }
 
-    public function detail(){
-        
+    public function viewOrder($orderId) {
+        $this->orderDetail = Order::select('orders.id as orderId', 'orders.code as orderCode', 'orders.userId', 'orders.isReturn', 'orders.agentId', 'orders.promotionId',
+                                    DB::raw('CONCAT(orders.firstName, " ", orders.lastName) as fullname'), 'orders.firstName', 'orders.lastName', 'orders.phone', 'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.childrenQuantity',
+                                    'orders.price as totalPrice', 'orders.bookingDate', 'orders.status as orderStatus', 'orders.customerType as customerType',
+                                    'ot.id as orderTicketId', 'ot.rideId', 'ot.code as ticketCode', 'ot.price as detailPrice', 'ot.status as orderTicketStatus',
+                                    //'sc.name as seatClassName', 'sc.capacity as capacity', 'sc.price as seatPrice',
+                                    'fl.name as fromLocationName', 'tl.name as toLocationName', 'p.name as promotionName',
+                                    'a.name as agentName',
+                                    'r.name as rideName', 'r.departTime as departTime', 'r.returnTime as returnTime', 'r.departDate as departDate')
+                            ->leftJoin('order_tickets as ot', 'ot.orderId', '=', 'orders.id')
+                            ->leftJoin('rides as r', 'r.id', '=', 'ot.rideId')
+                            ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
+                            ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
+                            ->leftJoin('seat_classes as sc', 'sc.rideId', '=', 'r.id')
+                            ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
+                            ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
+                            ->where('orders.id', $orderId)
+                            ->first();
+
+        //dd($this->orderDetail);
+
+        $this->showModal = true;
     }
 
     public function render()
@@ -93,7 +116,7 @@ class ModeratorOrderlist extends Component
                                     if ($this->agentId) $query->where('orders.agentId', $this->agentName);
                                     if ($this->orderStatus) $query->where('orders.status', $this->orderStatus);
                                     if ($this->customerType >= 0) $query->where('orders.customerType', $this->customerType);
-                                    
+
                                     //$query->where('r.status', 0);
                                 })
                                 ->orderBy($this->sortField, $this->sortDirection)

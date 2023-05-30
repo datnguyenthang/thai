@@ -2,6 +2,8 @@
 return [
     //HOMEPAGE
     'title' => 'This is English Language Title.',
+    'departure' => 'Departure',
+    'destination' => 'Destination',
     'roundtrip' => 'Round Trip',
     'oneway' => 'One Way',
     'fromlocation' => 'Pick up location',
@@ -16,6 +18,7 @@ return [
     'showboat' => 'Show boats',
     'bookingtrip' => 'Booking Boat',
     'submit' => 'Submit',
+
 
     //BOOKING PAGE
     'selecttime' => 'Please select rides for your trip!',

@@ -23,25 +23,26 @@
                   <div class="row">
 
                     <div class="col-lg-1 col-sm-12">
-                      <div class="select1_wrapper">
-                        <div class="form-group">
-                          <div class="form-checkbox">
-                              <label for="roundtrip" class="checkbox-inline">
-                                  <input type="radio" id="roundtrip" value="{{ ROUNDTRIP }}" name="tripType" wire:model="tripType" wire:click="chooseTripType(1)">
-                                  <span></span>{{ trans('messages.roundtrip') }}
-                              </label>
-                              <label for="one-way" class="checkbox-inline">
-                                  <input type="radio" id="one-way" value="{{ ONEWAY }}" name="tripType" wire:model="tripType" wire:click="chooseTripType(0)">
-                                  <span></span>{{ trans('messages.oneway') }}
-                              </label>
+                        <div class="select1_wrapper">
+                          <label></label>
+                          <div class="form-group">
+                            <div class="form-checkbox">
+                                <label for="roundtrip" class="">
+                                    <input type="radio" class="" id="roundtrip" value="{{ ROUNDTRIP }}" name="tripType" wire:model="tripType" wire:click="chooseTripType(1)">
+                                    <span></span>{{ trans('messages.roundtrip') }}
+                                </label>
+                                <label for="one-way" class="">
+                                    <input type="radio" class="" id="one-way" value="{{ ONEWAY }}" name="tripType" wire:model="tripType" wire:click="chooseTripType(0)">
+                                    <span></span>{{ trans('messages.oneway') }}
+                                </label>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                  </div>
+                    </div>
 
                     <div class="col-lg-2 col-sm-12">
                       <div class="select1_wrapper">
-                        <label>{{ trans('messages.fromlocation') }}</label>
+                        <label>{{ trans('messages.departure') }}</label>
                         <div class="select1_inner">
                           <select id="fromLocation" name="fromLocation" class="form-control" wire:model="fromLocation" wire:change="chooseFromLocation($event.target.value)" required placeholder="{{ trans('messages.pickup') }}">
                             {{--<option value=""></option>--}}
@@ -49,13 +50,13 @@
                                 <option value="{{ $location->id }}">{{ $location->name }}</option>
                             @endforeach
                         </select>
-                          <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-vflw-container"><span class="select2-selection__rendered" id="select2-vflw-container" title="City or Airport">City or Airport</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                          <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-vflw-container"><span class="select2-selection__rendered" id="select2-vflw-container" title="City or Airport">City or Port</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
                         </div>
                       </div>
                     </div>
                     <div class="col-lg-2 col-sm-12">
                       <div class="select1_wrapper">
-                        <label>{{ trans('messages.tolocation') }}</label>
+                        <label>{{ trans('messages.destination') }}</label>
                         <div class="select1_inner">
                           <select id="toLocation" name="toLocation" class="form-control" wire:model="toLocation" required placeholder="{{ trans('messages.dropoff') }}">
                             {{--<option value=""></option>--}}
@@ -63,7 +64,7 @@
                                 <option value="{{ $location->id }}">{{ $location->name }}</option>
                             @endforeach
                           </select>
-                          <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-65of-container"><span class="select2-selection__rendered" id="select2-65of-container" title="City or Airport">City or Airport</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                          <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-65of-container"><span class="select2-selection__rendered" id="select2-65of-container" title="City or Airport">City or Port</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
                         </div>
                       </div>
                     </div>
