@@ -55,7 +55,7 @@ class Payment extends Component
     }
 
     public function render() {
-        //if ($this->step === 0) return view('livewire.frontend.homepage.payment');
+        if ($this->step === 0) return view('livewire.frontend.homepage.payment');
         if ($this->step === 1) {
             $order = $this->order;
             $pdfFiles = [];
