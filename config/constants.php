@@ -13,6 +13,9 @@
     define('ONEWAY', 1);
     define('ROUNDTRIP', 2);
 
+    define('DEPARTURETICKET', 1);
+    define('RETURNTICKET', 2);
+
     define('CUSTOMERTYPE', [0 => "Online", 1 => "Walk-in", 2 => "Admin-Order"]);
   
     define('ORDERSTATUS', [0 => "New Order", 1 => "Waiting for Payment", 2 => "Partial paid", 3 => "Wait Approve", 4 => "Complete", 5 => "Transfered", 6 => "Canceled"]);

@@ -112,6 +112,7 @@ class ProceedBooking extends Component
                 'rideId' => intVal($this->order_depart_rideId),
                 'seatClassId' => intVal($this->order_depart_seatClassId),
                 'price' => $this->seatDepart->price * ($this->adults + $this->children),
+                'type' => DEPARTURETICKET,
                 'status' => 0,
             ]);
             
@@ -123,6 +124,7 @@ class ProceedBooking extends Component
                     'rideId' => intVal($this->order_return_rideId),
                     'seatClassId' => intVal($this->order_return_seatClassId),
                     'price' => $this->seatReturn->price * ($this->adults + $this->children),
+                    'RETURN' => RETURNTICKET,
                     'status' => 0,
                 ]);
             }

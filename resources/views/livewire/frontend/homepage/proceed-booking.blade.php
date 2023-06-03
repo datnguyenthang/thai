@@ -14,10 +14,10 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" wire:model="email" placeholder="{{ trans('messages.email') }}" required />
+                            <input type="email" class="form-control" wire:model="email" placeholder="{{ trans('messages.email') }}" required />
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" wire:model="phone" placeholder="{{ trans('messages.phone') }}" required />
+                            <input type="tel" class="form-control" wire:model="phone" placeholder="{{ trans('messages.phone') }}" required />
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-md-6">
                             <input type="text" class="form-control" wire:model="coupon" placeholder="{{ trans('messages.coupon') }}" />
-                            <button class="btn btn-success float-end mt-2" type="button">{{ trans('messages.apply') }}</button>
+                            <button class="btn btn-danger float-end mt-2" type="button">{{ trans('messages.apply') }}</button>
                         </div>
                     </div>
                     <hr />
@@ -77,7 +77,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-success form-control">
+                            <button type="submit" class="btn btn-danger form-control">
                                 {{ trans('messages.bookandpay') }}
                             </button>
                         </div>
@@ -87,13 +87,13 @@
             
             <div class="col-md-4 col-md-offset-1 mt-3">
                 <div class="border rounded-3 overflow-hidden depart_trip">
-                    <div class="bg-warning p-3">
-                        <h5 class="fw-bold" >
+                    <div class="bg_own_color p-3">
+                        <h5 class="fw-bold text-light">
                             {{ $fromLocationName }}
                                 <i class="fas fa-arrow-right fa-md fa-1x"></i>
                             {{ $toLocationName }}
                         </h5>
-                        <div class="fw-bold text-center">
+                        <div class="fw-bold text-center text-light">
                             <span>{{ date('F j, Y', strtotime($depart->departDate)) }}</span>
                             <span>, {{ $depart->departTime }}</span>
                         </div>
@@ -114,13 +114,13 @@
 
             @if ($tripType == ROUNDTRIP)
                 <div class="border rounded-3 overflow-hidden return_trip mt-4">
-                    <div class="bg-warning p-3">
-                        <h5 class="fw-bold" >
+                    <div class="bg_own_color p-3">
+                        <h5 class="fw-bold text-light" >
                             {{ $toLocationName }}
                                 <i class="fas fa-arrow-right fa-md fa-1x"></i>
                             {{ $fromLocationName }}
                         </h5>
-                        <div class="fw-bold text-center">
+                        <div class="fw-bold text-center text-light">
                             <span>{{ date('F j, Y', strtotime($return->departDate)) }}</span>
                             <span>, {{ $return->departTime }}</span>
                         </div>

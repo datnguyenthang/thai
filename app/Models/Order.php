@@ -15,6 +15,11 @@ class Order extends Model
         'adultQuantity', 'childrenQuantity', 'price', 'bookingDate', 'status'
     ];
 
+    public function orderTickets()
+    {
+        return $this->hasMany(OrderTicket::class, 'orderId');
+    }
+
     public static function generateCode()
     {
         $code = Str::random(10);

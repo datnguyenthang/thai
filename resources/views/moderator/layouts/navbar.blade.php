@@ -1,6 +1,7 @@
 <!--Main Navigation-->
 <header>
   <!-- Sidebar -->
+  {{--
   <nav id="sidebarMenu" class="collapse d-lg-block sidebar bg-white">
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
@@ -24,7 +25,7 @@
           <i class="fas fa-chart-bar fa-fw me-3"></i>
           <span>{{ trans('backend.order') }}</span>
         </a>
-{{--
+
         <a href="{{ route('managerListUser') }}" 
           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'user' ? 'active' : '' }}">
           <i class="fas fa-chart-area fa-fw me-3"></i>
@@ -78,10 +79,10 @@
           <i class="fas fa-money-bill fa-fw me-3"></i>
           <span>Sales</span>
         </a>
---}}
       </div>
     </div>
   </nav>
+  --}}
   <!-- Sidebar -->
 
   <!-- Navbar -->
@@ -89,13 +90,13 @@
     <!-- Container wrapper -->
     <div class="container-fluid">
       <!-- Toggle button -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
-        aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="{{ route('moderatorDashboard') }}">
         <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="25" alt="MDB Logo"
           loading="lazy" />
       </a>
@@ -107,31 +108,58 @@
         <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
       </form>
       -->
+      <!-- Left links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a href="{{ route('moderatorDashboard') }}" 
+              class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorDashboard' ? 'active' : '' }}" 
+              aria-current="true">
+                <span>{{ trans('backend.dashboard') }}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('moderatorOrderlist') }}" 
+              class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorOrderlist' ? 'active' : '' }}" 
+              aria-current="true">
+                <span>{{ trans('backend.orderlist') }}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('moderatorOrder') }}" 
+            class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorOrder' ? 'active' : '' }}" 
+            aria-current="true">
+              <span>{{ trans('backend.order') }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+  
       <!-- Right links -->
-      <ul class="navbar-nav ms-auto d-flex flex-row">
+      <div class="d-flex align-items-center">
         <!-- Notification dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
-            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-bell"></i>
-            <span class="badge rounded-pill badge-notification bg-danger">1</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li>
-              <a class="dropdown-item" href="#">Some news</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Another news</a>
-            </li>
-          </ul>
-        </li>
+        <div class="dropdown">
+            <a class="nav-link link-secondary me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-bell"></i>
+              <span class="badge rounded-pill badge-notification bg-danger">1</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="#">Some news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Another news</a>
+              </li>
+            </ul>
+        </div>
 
         <!-- Icon dropdown -->
         @include('lang')
 
-        <!-- Avatar -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
+        <!-- User menu -->
+        <div class="dropdown">
+          <a class="nav-link me-3 dropdown-toggle hidden-arrow" href="#"
             id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{ Auth::user()->name }}
           </a>
@@ -140,8 +168,9 @@
               <a class="dropdown-item" href="/logout">Logout</a>
             </li>
           </ul>
-        </li>
-      </ul>
+        </div>
+      </div>
+      <!-- Right elements -->
     </div>
     <!-- Container wrapper -->
   </nav>

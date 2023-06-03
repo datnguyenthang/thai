@@ -1,10 +1,10 @@
 <div class="row align-items-start d-flex">
     @if (sizeof($departRides) > 0 || sizeof($returnRides) > 0)
-        <h4 style="color: #CC2131">{{ trans('messages.selecttime') }}</h4>
+        <h4>{{ trans('messages.selecttime') }}</h4>
     @endif
     <div class="col-md-8 col-md-offset-1">
-        <div style="background-color: #def8f3;">
-            <h4 class="mt-3" >
+        <div class="bg_own_color">
+            <h4 class="mt-3 ms-3 text-light">
                 {{ $fromLocationName }}
                     <i class="fas fa-arrow-right fa-md fa-1x"></i>
                 {{ $toLocationName }}
@@ -13,7 +13,7 @@
 
         @if (sizeof($departRides)) 
             <div class="col d-flex justify-content-center align-items-center">
-                <span class="text-center text-dark mt-3 mb-3 fs-5"> {{ trans('messages.foundrides', ['totalride' => count($departRides)]) }}</span>
+                <span class="text-center text-dark mt-3 mb-3 fs-6"> {{ trans('messages.foundrides', ['totalride' => count($departRides)]) }}</span>
             </div>
 
             @foreach($departRides as $key => $ride)
@@ -54,8 +54,8 @@
         {{----------------------------------------}}
 
         @if ($tripType == ROUNDTRIP)
-            <div style="background-color: #def8f3;">
-                <h4 class="mt-5" >
+            <div class="bg_own_color">
+                <h4 class="mt-5 ms-3 text-light">
                     {{ $toLocationName }}
                         <i class="fas fa-arrow-right fa-md fa-1x"></i>
                     {{ $fromLocationName }}
@@ -64,11 +64,11 @@
 
             @if (sizeof($returnRides))
                 <div class="col d-flex justify-content-center align-items-center">
-                    <span class="text-center text-dark mt-3 mb-3 fs-5"> {{ trans('messages.foundrides', ['totalride' => count($returnRides)]) }}</span>
+                    <span class="text-center text-dark mt-3 mb-3 fs-6"> {{ trans('messages.foundrides', ['totalride' => count($returnRides)]) }}</span>
                 </div>
 
                 @foreach ($returnRides as $ride) 
-                    <div class="row m-0 mt-2 p-2 border rounded-2 pointer" role="button"
+                    <div class="row m-0 mt-2 mb-2 p-2 border rounded-2 pointer" role="button"
                         wire:click="@if(is_null($order_return_rideId))chooseTicketReturn({{ $ride->id }}, {{ $ride->seatClassId }})@endif"
                         wire:loading.attr="disabled">
                         <div class="fs-5 mt-2 fw-bold text-dark">{{ $ride->name }}</div>
@@ -125,7 +125,7 @@
                 <div class="pt-2  pb-3 fw-bold fs-5 border-bottom border-1 pb-3">
                     <h5 class="text-center"> {{ $text_ticket_select }}</h5>
                 </div>
-                <div class="bg-warning">
+                <div class="">
                 @if (isset($departRides[0]))
                     <div class="p-3 {{ $order_depart_rideId > 0 ? '' : 'd-none' }}"">
                         <div class="d-flex justify-content-between">
@@ -169,7 +169,7 @@
                 @endif
                 </div>
                 <div class="text-center pt-2 pb-2">
-                    <button class="btn btn-success btn-lg btn_order" {{ $enableSubmit ? '' : 'disabled' }}>
+                    <button class="btn btn-danger btn-lg btn_order" {{ $enableSubmit ? '' : 'disabled' }}>
                         {{ trans('messages.continuebooking') }}
                     </button>
                 </div>

@@ -23,18 +23,18 @@
 </head>
 <body class="front">
     <div id="main">
-        @include('layouts.top')
-        @include('layouts.header')
+        @include('home.top')
+        @include('home.header')
 
         @if(Request::is('/'))
-            @include('layouts.slider-wrapper')
+            @include('home.slider-wrapper')
             @livewire('frontend.homepage.booking')
 {{--
-            @include('layouts.category')
-            @include('layouts.parallax')
-            @include('layouts.advertising')
-            @include('layouts.feedback')
-            @include('layouts.partner')
+            @include('home.category')
+            @include('home.parallax')
+            @include('home.advertising')
+            @include('home.feedback')
+            @include('home.partner')
 --}}
         @else 
             <div class="container mt-4">
@@ -42,8 +42,8 @@
             </div>
         @endif
 
-        @include('layouts.footer')
-        @include('layouts.bottom')
+        @include('home.footer')
+        @include('home.bottom')
     </div>
 
     {{--<a href="#" id="toTop" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span></a>--}}

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('rideId');
             $table->string('code');
             $table->integer('seatClassId');
+            $table->tinyInteger('type');/* 1=>Departure, 2=>Return */
             $table->decimal('price', $precision = 10, $scale = 2);
             $table->tinyInteger('status')->default(0); /* 0=>Book, 9=>Already paid */
             $table->timestamps();

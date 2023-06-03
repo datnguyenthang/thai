@@ -105,19 +105,19 @@
         </div>
     </div>
 
-    <table class="table datatable-table">
+    <table class="table datatable-table table-secondary table-striped mt-3">
         <thead>
             <tr>
-                <th wire:click="sortBy('orderId')"><i class="fas fa-sort"></i>{{ trans('backend.orderid') }}</th>
-                <th wire:click="sortBy('orderCode')"><i class="fas fa-sort"></i>{{ trans('backend.ordercode') }}</th>
-                <th wire:click="sortBy('ticketCode')"><i class="fas fa-sort"></i>{{ trans('backend.codeticket') }}</th>
-                <th wire:click="sortBy('customerType')"><i class="fas fa-sort"></i>{{ trans('backend.customertype') }}</th>
-                <th wire:click="sortBy('agentName')"><i class="fas fa-sort"></i>{{ trans('backend.agentname') }}</th>
-                <th wire:click="sortBy('bookingDate')"><i class="fas fa-sort"></i>{{ trans('backend.bookingdate') }}</th>
-                <th wire:click="sortBy('bookingDate')"><i class="fas fa-sort"></i>{{ trans('backend.bookingdate') }}</th>
-                <th wire:click="sortBy('isReturn')"><i class="fas fa-sort"></i>{{ trans('backend.triptype') }}</th>
-                <th wire:click="sortBy('totalPrice')"><i class="fas fa-sort"></i>{{ trans('backend.totalprice') }}</th>
-                <th wire:click="sortBy('orderStatus')"><i class="fas fa-sort"></i>{{ trans('backend.orderstatus') }}</th>
+                <th>{{ trans('backend.orderid') }}</th>
+                <th>{{ trans('backend.ordercode') }}</th>
+                <th>{{ trans('backend.triptype') }}</th>
+                <th>{{ trans('backend.codeticketdepart') }}</th>
+                <th>{{ trans('backend.codeticketreturn') }}</th>
+                <th>{{ trans('backend.customertype') }}</th>
+                <th>{{ trans('backend.agentname') }}</th>
+                <th>{{ trans('backend.bookingdate') }}</th>
+                <th>{{ trans('backend.totalprice') }}</th>
+                <th>{{ trans('backend.orderstatus') }}</th>
                 
                 <th><i class="fas fa-tasks"></i>{{ trans('backend.action') }}</th>
             </tr>
@@ -126,30 +126,41 @@
             @if (!empty($orderList))
                 @foreach ($orderList as $order)
                     <tr>
-                        <td>{{ $order->orderTicketId }}</td>
-                        <td>{{ $order->orderCode }}</td>
-                        <td>{{ $order->ticketCode }}</td>
+                        <td>{{ $order->id }}</td>
+                        <td>{{ $order->code }}</td>
+                        <td>{{ TRIPTYPE[$order->isReturn] }}</td>
+                        @foreach ($order->orderTickets as $orderTicket)
+                            @if($order->isReturn == ONEWAY)
+                                @if($orderTicket->type == DEPARTURETICKET) 
+                                    <td> {{ $orderTicket->code }} </td>
+                                    <td> - </td> 
+                                @endif
+                            @endif
+                            @if($order->isReturn == ROUNDTRIP)
+                                @if($orderTicket->type == DEPARTURETICKET) <td> {{ $orderTicket->code }} </td>@endif
+                                @if($orderTicket->type == RETURNTICKET) <td> {{ $orderTicket->code }} </td> @endif
+                            @endif
+                            
+                        @endforeach
                         <td>{{ CUSTOMERTYPE[$order->customerType] }}</td>
                         <td>{{ $order->agentName }}</td>
                         <td>{{ $order->bookingDate }}</td>
-                        <td>{{ $order->bookingDate }}</td>
-                        <td>{{ TRIPTYPE[$order->isReturn] }}</td>
-                        <td>{{ $order->totalPrice }}</td>
-                        <td>{{ ORDERSTATUS[$order->orderStatus] }}</td>
+                        <td>{{ $order->price }}</td>
+                        <td>{{ ORDERSTATUS[$order->status] }}</td>
                         <td>
                             <!--<button class="btn btn-info" wire:click="detail({{ $order->orderTicketId }})"></button>-->
                             <button class="call-btn btn btn-outline-success btn-floating btn-sm"
-                                wire:click="viewOrder({{ $order->orderId }})">
+                                wire:click="viewOrder({{ $order->id }})">
                                     <!--<i class="fa fa-eye"></i>-->
                                     {{ trans('backend.vieworder') }}
                             </button>
                             <button class="call-btn btn btn-outline-info btn-floating btn-sm"
-                                wire:click="editOrder({{ $order->orderId }})">
+                                wire:click="editOrder({{ $order->id }})">
                                     <!--<i class="fa fa-edit"></i>-->
                                     {{ trans('backend.editorder') }}
                             </button>
                             <button class="call-btn btn btn-outline-warning btn-floating btn-sm"
-                                wire:click="processOrder({{ $order->orderId }})">
+                                wire:click="processOrder({{ $order->id }})">
                                     <!--<i class="fa fa-process"></i>-->
                                     {{ trans('backend.processorder') }}
                             </button>
@@ -174,20 +185,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ trans('backend.orderdetail') }}</h5>
-                    <button wire:click="$set('showModal', false)">{{ trans('backend.close') }}</button>
+                    <button class="btn-close" wire:click="$set('showModal', false)"></button>
                 </div>
                 <div class="modal-body">
                     
                     @if($showModal === true && $orderDetail)
-                        <p>{{ trans('backend.id') }} : {{ $orderDetail['orderId'] }}</p>
-                        <p>{{ trans('backend.ridename') }} : {{ $orderDetail['rideName'] }}</p>
-                        <p>{{ trans('backend.fromlocation') }} : {{ $orderDetail['fromLocationName'] }}</p>
-                        <p>{{ trans('backend.tolocation') }} : {{ $orderDetail['toLocationName'] }}</p>
-                        <p>{{ trans('backend.departtime') }} : {{ $orderDetail['departTime'] }}</p>
-                        <p>{{ trans('backend.returntime') }}: {{ $orderDetail['returnTime'] }}</p>
-                        <p>{{ trans('backend.departdate') }}: {{ $orderDetail['departDate'] }}</p>
-                    <!-- Other details -->
-                        <p>{{ trans('backend.ordercode') }}: {{ $orderDetail['orderCode'] }}</p>
+                        <p>{{ trans('backend.id') }} : {{ $orderDetail['id'] }}</p>
+                        <p>{{ trans('backend.ordercode') }}: {{ $orderDetail['code'] }}</p>
                         <p>{{ trans('backend.agentname') }}: {{ $orderDetail['agentName'] }}</p>
                         <p>{{ trans('backend.fullname') }}: {{ $orderDetail['fullname'] }}</p>
                         <p>{{ trans('backend.phone') }}: {{ $orderDetail['phone'] }}</p>
@@ -197,9 +201,52 @@
                         <p>{{ trans('backend.adults') }}: {{ $orderDetail['adultQuantity'] }}</p>
                         <p>{{ trans('backend.children') }}: {{ $orderDetail['childrenQuantity'] }}</p>
                         <p>{{ trans('backend.customerType') }}: {{ CUSTOMERTYPE[$orderDetail->customerType] }}</p>
-                        <p>{{ trans('backend.orderstatus') }}: {{ ORDERSTATUS[$orderDetail->orderStatus] }}</p>
+                        <p>{{ trans('backend.orderstatus') }}: {{ ORDERSTATUS[$orderDetail->status] }}</p>
+
+                        <!-- Other details -->
+                        @foreach ($orderDetail->orderTickets as $orderTicket)
+                            @if($orderDetail->isReturn == ONEWAY)
+                                @if($orderTicket->type == DEPARTURETICKET)
+                                    <h5>{{ trans('backend.ticketdepart') }}</h5>
+                                    <p>{{ trans('backend.ridename') }} : {{ $orderTicket['name'] }}</p>
+                                    <p>{{ trans('backend.fromlocation') }} : {{ $orderTicket['fromLocationName'] }}</p>
+                                    <p>{{ trans('backend.tolocation') }} : {{ $orderTicket['toLocationName'] }}</p>
+                                    <p>{{ trans('backend.departtime') }} : {{ $orderTicket['departTime'] }}</p>
+                                    <p>{{ trans('backend.returntime') }}: {{ $orderTicket['returnTime'] }}</p>
+                                    <p>{{ trans('backend.departdate') }}: {{ $orderTicket['departDate'] }}</p>
+                                @endif
+                            @endif
+
+                            @if($orderDetail->isReturn == ROUNDTRIP)
+                                @if($orderTicket->type == DEPARTURETICKET)
+                                    <h5>{{ trans('backend.ticketdepart') }}</h5>
+                                    <p>{{ trans('backend.ridename') }} : {{ $orderTicket['name'] }}</p>
+                                    <p>{{ trans('backend.fromlocation') }} : {{ $orderTicket['fromLocationName'] }}</p>
+                                    <p>{{ trans('backend.tolocation') }} : {{ $orderTicket['toLocationName'] }}</p>
+                                    <p>{{ trans('backend.departtime') }} : {{ $orderTicket['departTime'] }}</p>
+                                    <p>{{ trans('backend.returntime') }}: {{ $orderTicket['returnTime'] }}</p>
+                                    <p>{{ trans('backend.departdate') }}: {{ $orderTicket['departDate'] }}</p>
+                                @endif
+
+                                @if($orderTicket->type == RETURNTICKET)
+                                    <h5>{{ trans('backend.ticketreturn') }}</h5>
+                                    <p>{{ trans('backend.ridename') }} : {{ $orderTicket['name'] }}</p>
+                                    <p>{{ trans('backend.fromlocation') }} : {{ $orderTicket['fromLocationName'] }}</p>
+                                    <p>{{ trans('backend.tolocation') }} : {{ $orderTicket['toLocationName'] }}</p>
+                                    <p>{{ trans('backend.departtime') }} : {{ $orderTicket['departTime'] }}</p>
+                                    <p>{{ trans('backend.returntime') }}: {{ $orderTicket['returnTime'] }}</p>
+                                    <p>{{ trans('backend.departdate') }}: {{ $orderTicket['departDate'] }}</p>
+                                @endif
+                            @endif
+                            
+                        @endforeach
+                        
+                    
                     @endif
                 </div>
+                <div class="modal-footer">
+                    <button type="button" wire:click="$set('showModal', false)" class="btn btn-secondary">{{ trans('backend.close') }}</button>
+                  </div>
             </div>
         </div>
     </div>

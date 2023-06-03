@@ -14,6 +14,11 @@ class OrderTicket extends Model
         'orderId', 'rideId', 'code', 'seatClassId', 'price', 'status'
     ];
 
+    public function Order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
     public static function generateCode()
     {
         $code = Str::random(10);

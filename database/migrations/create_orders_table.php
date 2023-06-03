@@ -26,6 +26,8 @@ return new class extends Migration
             $table->decimal('phone', $precision = 11, $scale = 0);
             $table->string('email');
             $table->string('note')->nullable($value = true);
+            $table->string('pickup')->nullable($value = true);;
+            $table->string('dropoff')->nullable($value = true);;
             $table->integer('adultQuantity')->nullable($value = true);
             $table->integer('childrenQuantity')->nullable($value = true);
             $table->decimal('price', $precision = 10, $scale = 2);

@@ -26,12 +26,12 @@
         @include('moderator.layouts.navbar')
 
         <!--Main layout-->
-        <main style="margin-top: 58px;">
-            <div class="container pt-2">
+        <!--<main style="margin-top: 58px;">-->
+            <div class="container-fluid pt-3 mt-5">
                 @include('moderator.layouts.flash-message')
                 {{ $slot }}
             </div>
-        </main>
+        <!--</main>-->
 
     </div>
 
