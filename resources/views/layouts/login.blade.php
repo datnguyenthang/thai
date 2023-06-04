@@ -18,19 +18,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
 <body>
     <div id="app">
-        @include('layouts.header')
+        @include('home.header')
 
         
         <main class="py-4">
             @yield('content')
         </main>
 
-        @include('layouts.footer')
+        @include('home.footer')
     </div>
 
     @livewireScripts
