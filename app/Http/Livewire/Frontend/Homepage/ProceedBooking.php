@@ -47,7 +47,6 @@ class ProceedBooking extends Component
     public $promotionId;
     public $agreepolicy;
 
-
     public function mount(Request $request) {
         $this->tripType = $request->input('tripType');
         $this->fromLocation = $request->input('fromLocation');
@@ -124,7 +123,7 @@ class ProceedBooking extends Component
                     'rideId' => intVal($this->order_return_rideId),
                     'seatClassId' => intVal($this->order_return_seatClassId),
                     'price' => $this->seatReturn->price * ($this->adults + $this->children),
-                    'RETURN' => RETURNTICKET,
+                    'type' => RETURNTICKET,
                     'status' => 0,
                 ]);
             }
