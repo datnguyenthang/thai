@@ -64,6 +64,7 @@ class Payment extends Component
                 $orderTickets->fullname = $order->fullname;
                 $orderTickets->pickup = $order->pickup;
                 $orderTickets->dropoff = $order->dropoff;
+
                 if($orderTickets->type == DEPARTURETICKET) $pdfFiles[] = ['content' => generateTicket($orderTickets), 'filename' => 'Departure Ticket.pdf'];
                 if($orderTickets->type == RETURNTICKET) $pdfFiles[] = ['content' => generateTicket($orderTickets), 'filename' => 'Return Ticket.pdf'];
             }

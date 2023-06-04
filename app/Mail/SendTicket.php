@@ -13,6 +13,8 @@ class SendTicket extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $pdfFiles;
+
     public function __construct(array $pdfFiles)
     {
         $this->pdfFiles = $pdfFiles;
