@@ -1,5 +1,5 @@
 <?php
-    define('LANGUAGES', ['en', 'tha']);
+    define('LANGUAGEINAPPS', ['en', 'tha']);
 
     define('USERSTATUS', [0 => 'Active', 1 => 'Deactive']);
     define('USERTYPE', [0 => 'User', 1 => 'Admin', 2 => 'Manager', 3 => 'Moderator']);

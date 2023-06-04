@@ -1,5 +1,6 @@
 <?php
 return [
+    //HOMEPAGE
     'title' => 'This is Thai Language Title.',
     'departure' => 'Departure',
     'destination' => 'Destination',
@@ -18,7 +19,7 @@ return [
     'bookingtrip' => 'Booking Boat',
     'submit' => 'Submit',
 
-
+    //BOOKING PAGE
     'selecttime' => 'Please select rides for your trip!',
     'select' => 'Choose',
     'notripmatch' => 'There are no ride match your condition!',
@@ -26,6 +27,7 @@ return [
     'continuebooking' => 'Continue booking',
     'foundrides' => ':totalride direct trips found',
 
+    //PROCESSBOOKING
     'passenger' => 'Passenger',
     'firstname' => 'First name',
     'lastname' => 'Last name',
@@ -40,11 +42,22 @@ return [
     'summary' => 'Sumary',
     'note' => 'Note',
     'bookandpay' => 'Book and Pay',
+    'saveandpaylater' => 'Save and Pay Later',
 
+    //PAYMENT
     'cardnumber' => 'Card Number',
     'enteryourcardnumber' => 'Enter your card number',
     'cardholdername' => 'Card holder name',
     'entercardholdername' => 'Enter your card holder name',
     'expirationdate' => 'Expiration Date',
     'entercvvcode' => 'Enter CVV Code',
+
+    //MODERATOR
+    'nametrip' => 'Trip Name',
+    'departtime' => 'Depart Time',
+    'returntime' => 'Return Time',
+    'distancetime' => 'Distance Time',
+    'seatclass' => 'Seat Class',
+    'selecttrip' => 'Select Trip',
+    'seatclassprice' => 'Price',
 ];

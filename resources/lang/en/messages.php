@@ -19,7 +19,6 @@ return [
     'bookingtrip' => 'Booking Boat',
     'submit' => 'Submit',
 
-
     //BOOKING PAGE
     'selecttime' => 'Please select rides for your trip!',
     'select' => 'Choose',
@@ -43,6 +42,7 @@ return [
     'summary' => 'Sumary',
     'note' => 'Note',
     'bookandpay' => 'Book and Pay',
+    'saveandpaylater' => 'Save and Pay Later',
 
     //PAYMENT
     'cardnumber' => 'Card Number',
