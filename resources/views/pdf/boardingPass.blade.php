@@ -2,8 +2,10 @@
 <html>
     <head>
         <title>PDF View</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <style>
             @page { size: 600 550 portrait; }
+            *{ font-family: DejaVu Sans !important;}
         </style>
     </head>
     <body style="width: 550px;height: 600px;">
@@ -27,11 +29,11 @@
 
 		<div style="margin-left:70%;font-weight:bold; margin-top:-2% !important;">
 			<h4 style="margin-bottom: 1%; margin-top:0;">Booking no</h4>
-			<h3 style="margin-top: 1%;">{{ $orderTickets->code }}</h3>
+			<h3 style="margin-top: 1%;">{{ $orderTicket->code }}</h3>
 		</div>
 
         <div style="text-align: center; margin-top:-3% !important;">
-            <h1 style="margin-top: 0;">{{ $orderTickets->fromLocationName }} to {{ $orderTickets->toLocationName }}</h1>
+            <h1 style="margin-top: 0;">{{ $orderTicket->fromLocationName }} to {{ $orderTicket->toLocationName }}</h1>
         </div>
 
         <div>
@@ -42,7 +44,7 @@
                     <h3>Name:</h3>
                 </div>
                 <div style="margin-left:200pt;">
-                    <h3>{{ $orderTickets->fullname }}</h3>
+                    <h3>{{ $orderTicket->fullname }}</h3>
                 </div>
             </div>
 
@@ -51,7 +53,7 @@
                     <h3>Depart date:</h3>
                 </div>
                 <div style="margin-left:200pt;">
-                    <h3>{{ $orderTickets->departDate }}</h3>
+                    <h3>{{ $orderTicket->departDate }}</h3>
                 </div>
             </div>
 
@@ -60,7 +62,7 @@
                     <h3>Depart time:</h3>
                 </div>
                 <div style="margin-left:200pt;">
-                    <h3>{{ $orderTickets->departTime }}</h3>
+                    <h3>{{ $orderTicket->departTime }}</h3>
                 </div>
             </div>
 
@@ -69,7 +71,7 @@
                     <h3>Drop off:</h3>
                 </div>
                 <div style="margin-left:200pt;">
-                    <h3>{{ $orderTickets->dropoff }}</h3>
+                    <h3>{{ $orderTicket->dropoff }}</h3>
                 </div>
             </div>
 
@@ -78,7 +80,7 @@
                     <h3>Pickup:</h3>
                 </div>
                 <div style="margin-left:200pt;">
-                    <h3>{{ $orderTickets->pickup }}</h3>
+                    <h3>{{ $orderTicket->pickup }}</h3>
                 </div>
             </div>
 
@@ -87,7 +89,7 @@
                     <h1>AGENT</h1>
                 </div>
                 <div style="margin-left:200pt; margin-top: 25pt;">
-                    <span>Price <strong>฿{{ $orderTickets->price }}</strong></span>
+                    <span>Price <strong>฿{{ $orderTicket->price }}</strong></span>
                 </div>
             </div>
         </div>
