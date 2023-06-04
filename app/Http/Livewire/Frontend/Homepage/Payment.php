@@ -79,10 +79,9 @@ class Payment extends Component
 
             if($orderTicket->type == DEPARTURETICKET) $pdfFiles[] = ['content' => $this->generateTicket($orderTicket), 'filename' => 'Departure Ticket.pdf'];
             if($orderTicket->type == RETURNTICKET) $pdfFiles[] = ['content' => $this->generateTicket($orderTicket), 'filename' => 'Return Ticket.pdf'];
-
         }
 
-        Mail::to($order->email)->send(new SendTicket($pdfFiles));
+        Mail::to($order->email)->send(new SendTicket($order, $pdfFiles));
     }
 
     public function render() {
@@ -91,7 +90,7 @@ class Payment extends Component
     }
 
     public function generateTicket($orderTicket) {
-        $customPaper = array(0,0,600,550);
+        $customPaper = array(0,0,550,530);
 
         $logoPath = public_path('img/logo.png');
         $logoData = File::get($logoPath);

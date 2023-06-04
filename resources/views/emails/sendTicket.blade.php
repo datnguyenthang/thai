@@ -1,11 +1,11 @@
-<table border="0" cellpadding="0" cellspacing="0" width="600" id="m_-5315317613318567757template_container" style="background-color:#fff;border:1px solid #dedede;border-radius:3px" bgcolor="#fff">
+<table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color:#fff;border:1px solid #dedede;border-radius:3px" bgcolor="#fff">
     <tbody>
       <tr>
         <td align="center" valign="top">
-          <table border="0" cellpadding="0" cellspacing="0" width="100%" id="m_-5315317613318567757template_header" style="background-color:#7f54b3;color:#fff;border-bottom:0;font-weight:bold;line-height:100%;vertical-align:middle;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;border-radius:3px 3px 0 0" bgcolor="#7f54b3">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#7f54b3;color:#fff;border-bottom:0;font-weight:bold;line-height:100%;vertical-align:middle;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;border-radius:3px 3px 0 0" bgcolor="#7f54b3">
             <tbody>
               <tr>
-                <td id="m_-5315317613318567757header_wrapper" style="padding:36px 48px;display:block">
+                <td style="padding:36px 48px;display:block">
                   <h1 style="font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:30px;font-weight:300;line-height:150%;margin:0;text-align:left;color:#fff;background-color:inherit" bgcolor="inherit">Thank you for your order</h1>
                 </td>
               </tr>
@@ -15,18 +15,20 @@
       </tr>
       <tr>
         <td align="center" valign="top">
-          <table border="0" cellpadding="0" cellspacing="0" width="600" id="m_-5315317613318567757template_body">
+          <table border="0" cellpadding="0" cellspacing="0" width="600">
             <tbody>
               <tr>
-                <td valign="top" id="m_-5315317613318567757body_content" style="background-color:#fff" bgcolor="#fff">
+                <td valign="top" style="background-color:#fff" bgcolor="#fff">
                   <table border="0" cellpadding="20" cellspacing="0" width="100%">
                     <tbody>
                       <tr>
                         <td valign="top" style="padding:48px 48px 32px">
-                          <div id="m_-5315317613318567757body_content_inner" style="color:#636363;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:14px;line-height:150%;text-align:left" align="left">
-                            <p style="margin:0 0 16px">Hi Thang,</p>
+                          <div style="color:#636363;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:14px;line-height:150%;text-align:left" align="left">
+                            <p style="margin:0 0 16px">Hi {{ $order->fullname }},</p>
                             <p style="margin:0 0 16px">Thanks for your order. It’s on-hold until we confirm that payment has been received. In the meantime, here’s a reminder of what you ordered:</p>
-                            <h2 style="color:#7f54b3;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:0 0 18px;text-align:left"> [Order #SDG141312] (5 May, 2023)</h2>
+                            <h2 style="color:#7f54b3;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:0 0 18px;text-align:left"> 
+                              [Order #{{ $order->code }}] ({{ date("j F, Y", strtotime($order->bookingDate)) }})
+                            </h2>
                             <div style="margin-bottom:40px">
                               <table cellspacing="0" cellpadding="6" border="1" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;width:100%;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" width="100%">
                                 <thead>
@@ -37,21 +39,27 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif;word-wrap:break-word" align="left"> Transfer from Laem-sok (Trat) to Koh Kood by Ferry – เรือเฟอร์รี่ ( ) <br>on 3 May, 2023 at 12:00 <br>People: 1 </td>
-                                    <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left"> 1 </td>
-                                    <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
-                                      <span>
-                                        <span>฿</span>600 </span>
-                                    </td>
-                                  </tr>
+                                  @foreach ($order->orderTickets as $orderTicket)
+                                    <tr>
+                                      <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif;word-wrap:break-word" align="left">
+                                          Transfer from {{ $orderTicket->fromLocationName }} to {{ $orderTicket->toLocationName }} by {{ $orderTicket->name }} <br>
+                                          on {{ date("j F, Y", strtotime($orderTicket->departDate)) }} at {{ $orderTicket->departTime }} <br>
+                                          People: {{ $order->adultQuantity + $order->childrenQuantity }}
+                                      </td>
+                                      <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left"> {{ $order->adultQuantity + $order->childrenQuantity }} </td>
+                                      <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
+                                        <span>
+                                          <span>฿</span>{{ $orderTicket->price }} </span>
+                                      </td>
+                                    </tr>
+                                  @endforeach
                                 </tbody>
                                 <tfoot>
                                   <tr>
                                     <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">Subtotal:</th>
                                     <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">
                                       <span>
-                                        <span>฿</span>600 </span>
+                                        <span>฿</span>{{ $order->price }} </span>
                                     </td>
                                   </tr>
                                   <tr>
@@ -62,32 +70,30 @@
                                     <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Total:</th>
                                     <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
                                       <span>
-                                        <span>฿</span>600 </span>
+                                        <span>฿</span>{{ $order->price }} </span>
                                     </td>
                                   </tr>
                                 </tfoot>
                               </table>
                             </div>
-                            <table id="m_-5315317613318567757addresses" cellspacing="0" cellpadding="0" border="0" style="width:100%;vertical-align:top;margin-bottom:40px;padding:0" width="100%">
+                            <table cellspacing="0" cellpadding="0" border="0" style="width:100%;vertical-align:top;margin-bottom:40px;padding:0" width="100%">
                               <tbody>
                                 <tr>
                                   <td valign="top" width="50%" style="text-align:left;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif;border:0;padding:0" align="left">
                                     <h2 style="color:#7f54b3;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:18px;font-weight:bold;line-height:130%;margin:0 0 18px;text-align:left">Billing address</h2>
-                                    <address style="padding:12px;color:#636363;border:1px solid #e5e5e5"> Thang Nguyen <br>Vietnam <br>
-                                      <a href="tel:9057832039" style="color:#7f54b3;font-weight:normal;text-decoration:underline" target="_blank">9057832039</a>
+                                    <address style="padding:12px;color:#636363;border:1px solid #e5e5e5"> {{ $order->fullname }} <br>
+                                      <!--Vietnam <br>-->
+                                      <a href="tel:{{ $order->phone }}" style="color:#7f54b3;font-weight:normal;text-decoration:underline" target="_blank">
+                                        {{ $order->phone }}
+                                      </a>
                                       <br>
-                                      <a href="mailto:nguyen.thang.dat.nt@gmail.com" target="_blank">nguyen.thang.dat.nt@gmail.com</a>
+                                      <a href="mailto:{{ $order->email }}" target="_blank">{{ $order->email }}</a>
                                     </address>
                                   </td>
                                 </tr>
                               </tbody>
                             </table>
-                            <p style="margin:0 0 16px">
-                              <b>PLEASE MAKE PAYMENT VIA BANK ACCOUNT:</b>
-                              <br>
-                              <b style="color:red">*Please enter the Booking No in the transfer note for verification. Please paid with-in 1 hour.</b>
-                              <br> – Bank: Siam Commercial Bank <br> – Name: Leopard Transportation Co., Ltd. <br> – Account number: 619-280748-7 <br> – Branch: Ban Bueng <br> ___________________________
-                            </p>
+                            
                             <p style="margin:0 0 16px">
                               <b>POLICY FOR CUSTOMER</b>
                             </p>

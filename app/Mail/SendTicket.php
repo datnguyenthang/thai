@@ -13,10 +13,12 @@ class SendTicket extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $order;
     public $pdfFiles;
 
-    public function __construct(array $pdfFiles)
+    public function __construct($order, array $pdfFiles)
     {
+        $this->order = $order;
         $this->pdfFiles = $pdfFiles;
     }
     /**
@@ -30,7 +32,8 @@ class SendTicket extends Mailable
             $this->attachData($pdfFile['content'], $pdfFile['filename']);
         }
 
-        return $this->view('emails.sendTicket');
+        return $this->view('emails.sendTicket')
+                    ->with(['order' => $this->order]);
     }
 
     /**

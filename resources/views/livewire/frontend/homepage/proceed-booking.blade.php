@@ -81,11 +81,13 @@
                                 {{ trans('messages.bookandpay') }}
                             </button>
                         </div>
+                    <!--
                         <div class="col-md-12 mt-2">
                             <button wire:click="saveAndPayLater" class="btn btn-danger form-control">
                                 {{ trans('messages.saveandpaylater') }}
                             </button>
                         </div>
+                    -->
                     </div>
                 </div> 
             </div>
