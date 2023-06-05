@@ -1,4 +1,5 @@
 <div>
+    {{ Breadcrumbs::render('payment') }}
     <form wire:submit.prevent="payment">
         <div class="container">
             <div class="row">

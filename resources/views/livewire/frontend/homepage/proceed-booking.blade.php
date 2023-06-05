@@ -1,4 +1,5 @@
 <div>
+    {{ Breadcrumbs::render('proceedbooking') }}
     <form wire:submit.prevent="bookTicket">
         <div class="row align-items-start d-flex">
             <div class="col-md-8 col-md-offset-1">
@@ -71,7 +72,7 @@
                         <div class="col-md-12">
                             <input type="checkbox" class="form-check-input" wire:model="agreepolicy" required>
                             <label class="form-check-label" for="agreepolicy">
-                                {{ trans('messages.policy') }}
+                                {!! trans('messages.policy') !!}
                               </label>
                         </div>
                     </div>

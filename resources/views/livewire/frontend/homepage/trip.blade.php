@@ -1,4 +1,5 @@
 <div class="row align-items-start d-flex">
+    {{ Breadcrumbs::render('trip') }}
     @if (sizeof($departRides) > 0 || sizeof($returnRides) > 0)
         <h4>{{ trans('messages.selecttime') }}</h4>
     @endif

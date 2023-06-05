@@ -36,7 +36,27 @@ return [
     'coupon' => 'Coupon',
     'apply' => 'Apply',
     'total' => 'Total',
-    'policy' => 'Policy..............................',
+    'policy' => 'I accept Policy for Customer <a href="/policy-for-customer" target="_blank"><strong class="text-danger">(Policy for Customer  *)</strong></a>',
+    'policydetail' => '<article class="policy p-3 policy-border text-dark">
+                            <div class="entry-content">
+                                <ol>
+                                    <li>Destinations and Routes cannot be changed.</li>
+                                    <li>Children under 5 years old will not be charged.</li>
+                                    <li>Departure and arrival times can be subject to change due to weather conditions, SEUDAMGO reserves the right not to be liable for any such delays.</li>
+                                    <li>Smoking is not permitted in the cabins of our boats or on any of our buses.</li>
+                                    <li>No-shows: Passengers must check in at least 60 minutes prior to departure. Failure to check in on time or in the case of missing the boat, the company reserves the right to no refunds.</li>
+                                    <li>Cancellations: 50% will be refunded for cancellations 48 hours before the departure date time, thereafter there will be no refund. Notice of cancellation must be emailed to info@seudamgo.com or via Line official: @seudamgo.</li>
+                                    <li>Refund policy: For the faulty transaction, we will refund within 15 business days with the same as the original payment received method.</li>
+                                    <li>Car parking service: Passenger can park your car at our office in Laem Sok Trat, The service fee is 50 THB/day/car only.</li>
+                                    <li>Maximum 20KG luggage allowed per passenger, excess luggage will be charged at 20 THB per KG and in total not exceeding 30 KG.</li>
+                                    <li>Water sports equipment will be subject to a fee of 300 THB for travel by boat. (Such as short boards, longboards, skimboards, kneeboards, windsurfing boards etc.)</li>
+                                    <li>Bicycles will be subject to a fee of 500 THB (restricted to folding bicycles only) for transport by boat only. The company does not transport any form of motorcycle.</li>
+                                    <li>Happy pets’ travel: Passengers can bring pets on boats by bringing one’s own standard cage. Only one pet per cage is allowed or without cage, Passengers shall take care and tie chains or leash ropes throughout the trip. Pets will never be released without a leash. Passengers are responsible for any damage to other Passengers, or their belongings caused by pets. Please contact our office/pier staff for further instructions and procedures to be followed. (Passengers can leave pets in the back of the boat area, make sure pets are in the proper area, and do not bring pets into the air-conditioner area).</li>
+                                    <li>All passengers are advised to book and travel at least 12 hours before their trip.</li>
+                                    <li>The schedule is subject to change without any prior notice in accordance with weather conditions for your safety. If SEUDAMGO knows in advance the weather on the day you would like to go on the boat, we will inform you as soon as possible. Passengers can cancel the trip for a full refund. SEUDAMGO cannot be held responsible for adverse unforeseen weather conditions, involving rough seas and poor visibility.</li>
+                                </ol>
+                            </div>
+                        </article>',
     'inputcoupon' => 'Input coupon',
     'contactdetail' => 'Contact details',
     'summary' => 'Sumary',

@@ -29,6 +29,8 @@ Route::get('/trip', App\Http\Livewire\Frontend\Homepage\Trip::class)->name('trip
 Route::post('/proceedbooking', App\Http\Livewire\Frontend\Homepage\ProceedBooking::class)->name('proceedbooking');
 Route::get('/payment/{code}', App\Http\Livewire\Frontend\Homepage\Payment::class)->name('payment');
 
+
+Route::get('/policy-for-customer', App\Http\Livewire\Frontend\Policy::class)->name('policycustomer');
 /*
 Route::get('/admin', [AdminController::class,'index'])->name('dashboard');
 Route::get('/manager', [ManagerController::class,'index'])->name('dashboard');

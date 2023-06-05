@@ -1122,3 +1122,13 @@ transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -webkit-trans
 .bg_own_color {
   background-color: #9d474a;
 }
+
+.policy-border {
+  border-width: 2px;
+  border-color: red;
+  border-style: dashed;
+}
+
+.entry-content ol li {
+  margin-top: 20px;
+}
