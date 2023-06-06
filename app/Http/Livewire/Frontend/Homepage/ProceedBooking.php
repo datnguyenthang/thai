@@ -47,6 +47,13 @@ class ProceedBooking extends Component
     public $promotionId;
     public $agreepolicy;
 
+    protected $rules = [
+        'firstName' => 'required',
+        'lastName' => 'required',
+        'phone' => 'numeric|digits_between:8,11',
+        'email' => 'required|email',
+    ];
+
     public function mount(Request $request) {
         $this->tripType = $request->input('tripType');
         $this->fromLocation = $request->input('fromLocation');
@@ -76,8 +83,16 @@ class ProceedBooking extends Component
         $this->price +=  $this->seatDepart->price * ($this->adults + $this->children);
     }
 
-
     public function bookTicket(){
+        //$this->validate();
+        //$this->dispatchBrowserEvent('scroll-to-error');
+
+        $this->withValidator(function ($validator) {
+            if ($validator->fails()) {
+                $this->emit('scroll-to-error'); // or dispatch browser event here
+            }
+        })->validate();
+
         $codeDepart = OrderTicket::generateCode();
         $codeReturn = OrderTicket::generateCode();
 

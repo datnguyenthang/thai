@@ -70,7 +70,7 @@
                     <h4>Drop off:</h4>
                 </div>
                 <div style="margin-left:200pt;">
-                    <h4>{{ $order->dropoff }}</h4>
+                    <h4>{{ $orderTicket->dropoff }}</h4>
                 </div>
             </div>
 
@@ -79,7 +79,7 @@
                     <h4>Pickup:</h4>
                 </div>
                 <div style="margin-left:200pt;">
-                    <h4>{{ $order->pickup }}</h4>
+                    <h4>{{ $orderTicket->pickup }}</h4>
                 </div>
             </div>
 

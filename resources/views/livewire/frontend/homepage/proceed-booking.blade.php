@@ -8,17 +8,21 @@
                     <div class="row">
                         <div class="col-md-6">
                             <input type="text" class="form-control" wire:model="firstName" placeholder="{{ trans('messages.firstname') }}" required />
+                            @error('firstName') <span class="text-danger error">{{ $message }}</span> @enderror
                         </div>
                         <div class="col-md-6">
                             <input type="text" class="form-control" wire:model="lastName" placeholder="{{ trans('messages.lastname') }}" required />
+                            @error('lastName') <span class="text-danger error">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-6">
-                            <input type="email" class="form-control" wire:model="email" placeholder="{{ trans('messages.email') }}" required />
+                            <input type="text" class="form-control" wire:model="email" placeholder="{{ trans('messages.email') }}" required />
+                            @error('email') <span class="text-danger error">{{ $message }}</span> @enderror
                         </div>
                         <div class="col-md-6">
-                            <input type="tel" class="form-control" wire:model="phone" placeholder="{{ trans('messages.phone') }}" required />
+                            <input type="tel" class="form-control" wire:model="phone" placeholder="{{ trans('messages.phone') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
+                            @error('phone') <span class="text-danger error">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -149,4 +153,16 @@
             </div>
         </div>
     </form>
+
+    <script>
+        document.addEventListener('livewire:load', function () {
+            Livewire.on('scroll-to-error', function () {
+                const firstErrorElement = document.querySelector('.error');
+                if (firstErrorElement) {
+                    firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        });
+    </script>
+    
 </div>

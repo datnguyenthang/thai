@@ -44,7 +44,7 @@ class SendTicket extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Send Ticket',
+            subject: 'Seudamgo INFO',
         );
     }
 

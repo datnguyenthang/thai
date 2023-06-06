@@ -76,7 +76,7 @@ transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -webkit-trans
 
 .lang1 .dropdown-menu {min-width: 100%; margin: 0; padding: 0; left: -1px; right: -1px; margin-top: 13px; border-radius: 0; border: 1px solid #ebebeb; box-shadow: none;}
 .lang1 .dropdown-menu a{display: block; font-size: 13px; line-height: 20px; padding: 4px 30px; color: #acacac; text-decoration: none;}
-.lang1 .dropdown-menu a:hover{background: #3dd2cb; color: #fff;}
+.lang1 .dropdown-menu a:hover{background: #9d474a; color: #fff;}
 .lang1 .dropdown-menu a:before{content: ''; display: inline-block; width: 18px; height: 12px; background: url(../images/flag_en.png) 0 0 no-repeat; vertical-align: top; margin-top: 3px; margin-right: 5px;}
 .lang1 .dropdown-menu a.ge:before{background: url(../images/flag_ge.png) 0 0 no-repeat;}
 .lang1 .dropdown-menu a.ru:before{background: url(../images/flag_ru.png) 0 0 no-repeat;}
@@ -640,7 +640,7 @@ transition: color 0.3s ease-out; -moz-transition: color 0.3s ease-out; -webkit-t
 .navbar .navbar-nav > li > a em{display: inline-block; width: 8px; height: 5px; background: url(../images/caret.png); margin-left: 5px;}
 
 .navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus, .navbar .navbar-nav > li.sfHover > a, .navbar .navbar-nav > li.sfHover > a:hover{color: ##9d474a; text-decoration: none; background: none; box-shadow: none; moz-box-shadow: none; -webkit-box-shadow: none; border-color: #9d474a; }
-.navbar .navbar-nav > li.active > a, .navbar ..navbar-nav > li.active > a:hover, .navbar .navbar-nav > li.active > a:focus{color: #9d474a; text-decoration: none; background: none; box-shadow: none; moz-box-shadow: none; -webkit-box-shadow: none; border-color: #9d474a;}
+.navbar .navbar-nav > li.active > a, .navbar .navbar-nav > li.active > a:hover, .navbar .navbar-nav > li.active > a:focus{color: #9d474a; text-decoration: none; background: none; box-shadow: none; moz-box-shadow: none; -webkit-box-shadow: none; border-color: #9d474a;}
 
 .sub-menu ul{ position: absolute; display: none; left: -25px; top: 75px;  list-style: none; zoom: 1; z-index: 10; margin: 0; padding:15px 25px; background: #fff; text-align: left;margin-top: -6px; min-width: 180px; box-shadow: 0 0 25px rgba(0, 0, 0, 0.08); moz-box-shadow: 0 0 25px rgba(0, 0, 0, 0.08); -webkit-box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);}
 .sub-menu li{ margin: 0; position: relative; zoom: 1; display: block;border-top: 1px solid #ebebeb;}
