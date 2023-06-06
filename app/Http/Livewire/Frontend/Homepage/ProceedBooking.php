@@ -51,7 +51,7 @@ class ProceedBooking extends Component
         'firstName' => 'required',
         'lastName' => 'required',
         'phone' => 'numeric|digits_between:8,11',
-        'email' => 'required|email',
+        'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i',
     ];
 
     public function mount(Request $request) {
