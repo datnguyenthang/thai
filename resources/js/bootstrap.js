@@ -14,7 +14,9 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+//loading Jquery library into app
 import $ from 'jquery';
+window.jQuery = $;
 window.$ = $;
 
 /**
