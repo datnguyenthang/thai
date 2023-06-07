@@ -85,12 +85,14 @@ class Payment extends Component
     }
 
     public function render() {
+        //$this->testPDF(); // Test ticket PDF file
+
         if ($this->step === 0) return view('livewire.frontend.homepage.payment');
         if ($this->step === 1) return view('livewire.frontend.homepage.success-booking');
     }
 
     public function generateTicket($orderTicket) {
-        $customPaper = array(0,0,550,530);
+        $customPaper = array(0,0,302,378);
 
         $logoPath = public_path('img/logo.png');
         $logoData = File::get($logoPath);
@@ -100,9 +102,56 @@ class Payment extends Component
         
         $dompdf->loadHTML(View::make('pdf.boardingPass', compact('orderTicket', 'logoBase64')));
         $dompdf->setPaper($customPaper, 'portrait');
+        $dompdf->set_option('isHtml5ParserEnabled', true);
         $dompdf->render();
 
         $pdfData = $dompdf->output();
         return $pdfData;
+    }
+
+    public function testPDF(){
+        $order = Order::with(['orderTickets' => function($orderTicket){
+            $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
+                        ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
+                        ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
+                        ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
+                        ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId');
+            }])
+            ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
+            ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
+            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
+                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.price',
+                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.pickup', 'orders.dropoff',
+                    'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName')
+            ->where('orders.code', $this->code)
+            ->first();
+
+        $pdfFiles = [];
+
+        //Generate ticket
+        foreach($order->orderTickets as $orderTicket) {
+            $orderTicket->fullname = $order->fullname;
+            $orderTicket->pickup = $order->pickup;
+            $orderTicket->dropoff = $order->dropoff;
+
+            $customPaper = array(0,0,302,378);
+
+            $logoPath = public_path('img/logo.png');
+            $logoData = File::get($logoPath);
+            $logoBase64 = base64_encode($logoData);
+
+            $dompdf = new Dompdf();
+            
+            $dompdf->loadHTML(View::make('pdf.boardingPass', compact('orderTicket', 'logoBase64')));
+            $dompdf->setPaper($customPaper, 'portrait');
+            $dompdf->set_option('isHtml5ParserEnabled', true);
+
+            $dompdf->render();
+
+            $dompdf->stream('pdf.pdf');
+
+            break;
+            exit;
+        }
     }
 }

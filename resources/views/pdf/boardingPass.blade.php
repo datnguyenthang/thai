@@ -5,90 +5,91 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <style>
             *{ font-family: DejaVu Sans !important;}
+            @page { margin: 0.1in 0.1in 0.1in 0.1in;}
         </style>
     </head>
     <body>
 		<div>
-            <div style="clear:both; position:relative; margin-left:1%; margin-top:1%;">
-                <div style="position:absolute; left:0pt; width:192pt;">
-                    <img style="width:180px; margin-top: 12%;" src="data:image/png;base64,{{ $logoBase64 }}" alt="Logo">
+            <div style="clear:both; position:relative; margin-left:1%; margin-top:-1%;">
+                <div style="position:absolute; left:0pt; width:120pt;">
+                    <img style="width:140px; margin-top: 10%;" src="data:image/png;base64,{{ $logoBase64 }}" alt="Logo">
                 </div>
-                <div style="float: right; font-weight: bold; font-size:15px;">
+                <div style="float: right; font-weight: bold; font-size:10px;">
                     <p style="margin-bottom: 1%;">LEOPARD TRANSPORTATION CO.,LTD</p>
-                    <p style="margin-bottom: 1%; margin-top: 1%;">TEL: +666 3125 1421</p>
-                    <p style="margin-bottom: 1%; margin-top: 1%;">LINE: @seudamgo</p>
-                    <p style="margin-top: 1%;">WEBSITE: www.seudamgo.com</p>
+                    <p style="margin-bottom: 1%; margin-top: 0%;">TEL: +666 3125 1421</p>
+                    <p style="margin-bottom: 1%; margin-top: 0%;">LINE: @seudamgo</p>
+                    <p style="margin-top: 0%;">WEBSITE: www.seudamgo.com</p>
                 </div>
             </div>
 		</div>
 
-        <div style="clear:both; text-align: center; margin-top: 1%;">
-            <h2>BOARDING PASS</h2>
+        <div style="clear:both; text-align: center; padding: 0;">
+            <h3 style="padding: 0; margin: 0;">BOARDING PASS</h3>
         </div>
 
-		<div style="margin-left:70%;font-weight:bold; margin-top:-2% !important;">
-			<h4 style="margin-bottom: 1%; margin-top:0;">Booking no</h4>
-			<h3 style="margin-top: 1%;">{{ $orderTicket->code }}</h3>
+		<div style="margin-left:62%; margin-top:0% !important;">
+			<h6 style="margin-bottom: 1%; margin-top:0; font-style: italic; font-weight: bold;">Booking no</h6>
+			<h4 style="margin-top: 1%; font-weight:bold; margin-top:0;">{{ $orderTicket->code }}</h4>
 		</div>
 
         <div style="text-align: center; margin-top:-3% !important;">
-            <h2 style="margin-top: 0;">{{ $orderTicket->fromLocationName }} to {{ $orderTicket->toLocationName }}</h2>
+            <h4 style="margin-top: 0;">{{ $orderTicket->fromLocationName }} to {{ $orderTicket->toLocationName }}</h4>
         </div>
 
         <div>
-            <h4 style="margin-left:1%;margin-top:1%;">Customer Information</h4>
+            <h5 style="margin-left:1%; margin-top:-3%; font-style: italic; font-weight: bold;">Customer Information</h5>
 
-            <div style="clear:both; position:relative; margin-left:1%; margin-top:-3% !important;">
+            <div style="clear:both; position:relative; margin-left: 1%; margin-top: -13% !important;">
                 <div style="position:absolute; left:0pt; width:192pt;">
-                    <h4>Name:</h4>
+                    <h5>Name:</h5>
                 </div>
-                <div style="margin-left:200pt;">
-                    <h4>{{ $orderTicket->fullname }}</h4>
+                <div style="margin-left:100pt;">
+                    <h5>{{ $orderTicket->fullname }}</h5>
                 </div>
             </div>
 
-            <div style="clear:both; position:relative; margin-left:1%; margin-top:-3% !important;">
+            <div style="clear:both; position:relative; margin-left:1%; margin-top:-8% !important;">
                 <div style="position:absolute; left:0pt; width:192pt;">
-                    <h4>Depart date:</h4>
+                    <h5>Depart time:</h5>
                 </div>
-                <div style="margin-left:200pt;">
-                    <h4>{{ $orderTicket->departDate }}</h4>
-                </div>
-            </div>
-
-            <div style="clear:both; position:relative; margin-left:1%; margin-top:-3% !important;">
-                <div style="position:absolute; left:0pt; width:192pt;">
-                    <h4>Depart time:</h4>
-                </div>
-                <div style="margin-left:200pt;">
+                <div style="margin-left:100pt;">
                     <h4>{{ $orderTicket->departTime }}</h4>
                 </div>
             </div>
 
-            <div style="clear:both; position:relative; margin-left:1%; margin-top:-3% !important;">
+            <div style="clear:both; position:relative; margin-left:1%; margin-top:-8% !important;">
                 <div style="position:absolute; left:0pt; width:192pt;">
-                    <h4>Drop off:</h4>
+                    <h5>Depart date:</h5>
                 </div>
-                <div style="margin-left:200pt;">
-                    <h4>{{ $orderTicket->dropoff }}</h4>
+                <div style="margin-left:100pt;">
+                    <h4>{{ $orderTicket->departDate }}</h4>
                 </div>
             </div>
 
-            <div style="clear:both; position:relative; margin-left:1%; margin-top:-3% !important;">
+            <div style="clear:both; position:relative; margin-left:1%; margin-top:-8% !important;">
                 <div style="position:absolute; left:0pt; width:192pt;">
-                    <h4>Pickup:</h4>
+                    <h5>Drop off:</h5>
                 </div>
-                <div style="margin-left:200pt;">
-                    <h4>{{ $orderTicket->pickup }}</h4>
+                <div style="margin-left:100pt;">
+                    <h5>{{ $orderTicket->dropoff }}</h5>
                 </div>
             </div>
 
-            <div style="clear:both; position:relative; margin-left:1%;">
+            <div style="clear:both; position:relative; margin-left:1%; margin-top:-8% !important;">
                 <div style="position:absolute; left:0pt; width:192pt;">
-                    <h2>AGENT</h2>
+                    <h5>Pickup:</h5>
                 </div>
-                <div style="margin-left:200pt; margin-top: 25pt;">
-                    <span>Price <strong>฿{{ $orderTicket->price }}</strong></span>
+                <div style="margin-left:100pt;">
+                    <h5>{{ $orderTicket->pickup }}</h5>
+                </div>
+            </div>
+
+            <div style="clear:both; position:relative; margin-left:1%; margin-top:-5% !important;">
+                <div style="position:absolute; left:20pt; width:192pt;">
+                    <h3>AGENT</h3>
+                </div>
+                <div style="margin-left:170pt; margin-top: 13pt;">
+                    <span>Price</span> <strong style="font-size: 20px;">฿{{ $orderTicket->price }}</strong>
                 </div>
             </div>
         </div>
