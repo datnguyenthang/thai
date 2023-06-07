@@ -46,7 +46,7 @@
         @include('home.bottom')
     </div>
 
-    {{--<a href="#" id="toTop" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span></a>--}}
+    <a href="#" id="toTop" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span></a>
 
     @livewireScripts
 </body>
