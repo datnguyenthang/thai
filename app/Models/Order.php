@@ -12,7 +12,7 @@ class Order extends Model
 
     protected $fillable = [
         'userId', 'agentId', 'code', 'customerType', 'isReturn', 'promotionId', 'firstName', 'lastName', 'phone', 'email', 'note',
-        'adultQuantity', 'childrenQuantity', 'price', 'bookingDate', 'status'
+        'pickup', 'dropoff', 'adultQuantity', 'childrenQuantity', 'price', 'bookingDate', 'status'
     ];
 
     public function orderTickets()

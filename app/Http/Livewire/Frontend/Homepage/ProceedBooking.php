@@ -112,6 +112,8 @@ class ProceedBooking extends Component
                 'phone' => $this->phone,
                 'email' => $this->email,
                 'note' => $this->note,
+                'pickup' => $this->pickup,
+                'dropoff' => $this->dropoff,
                 'adultQuantity' => intVal($this->adults),
                 'childrenQuantity' => intVal($this->children),
                 'price' => $this->price,
