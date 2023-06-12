@@ -167,8 +167,8 @@ class Payment extends Component
     public function render() {
         //$this->testPDF(); // Test ticket PDF file
 
-        //if ($this->step === 0) return view('livewire.frontend.homepage.payment');
-        if ($this->step === 0) return view('livewire.frontend.homepage.success-booking');
+        if ($this->step === 0) return view('livewire.frontend.homepage.payment');
+        if ($this->step === 1) return view('livewire.frontend.homepage.success-booking');
     }
 
     public function generateTicket($orderTicket) {
