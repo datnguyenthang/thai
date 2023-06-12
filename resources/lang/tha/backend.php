@@ -109,7 +109,6 @@ return [
     'loopfrom' => 'Loop From',
     'loopto' => 'Loop To',
 
-
     //USER
     'createuser' => 'Create User',
     'username' => 'Name',

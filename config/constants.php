@@ -17,7 +17,29 @@
     define('RETURNTICKET', 2);
 
     define('CUSTOMERTYPE', [0 => "Online", 1 => "Walk-in", 2 => "Admin-Order"]);
-  
-    define('ORDERSTATUS', [0 => "New Order", 1 => "Waiting for Payment", 2 => "Partial paid", 3 => "Wait Approve", 4 => "Complete", 5 => "Transfered", 6 => "Canceled"]);
 
     define('PAYMENTTYPE', [0 => "Cash", 1 => "Transfer", 2 => "Card"]);
+
+    define('PICKUPDONTUSESERVICE', 0);
+    define('PICKUPANY', 1);
+    define('PICKUPANYOTHER', 2);
+
+    define('DROPOFFDONTUSESERVICE', 0);
+    define('DROPOFFANY', 1);
+    define('DROPOFFANYOTHER', 2);
+
+    define('CARDPAYMENT', 0);
+    define('BANKTRANSFERPAYMENT', 1);
+
+    define('NEWORDER', 0);
+    define('UPPLOADTRANSFER', 4);
+    define('COMPLETEDORDER', 99);
+
+    define('ORDERSTATUS', [NEWORDER => "New Order",
+                            1 => "Waiting for Payment", 
+                            2 => "Partial paid", 
+                            3 => "Wait Approve", 
+                            UPPLOADTRANSFER => "Upload Transfered", 
+                            5 => "Transfered", 
+                            6 => "Canceled",
+                            COMPLETEDORDER => "Completed"]);

@@ -1,5 +1,12 @@
 <?php
 return [
+    //Navigation
+    'nav_home' => 'Home',
+    'nav_trip' => 'Trip',
+    'nav_booking' => 'Booking',
+    'nav_payment' => 'Payment',
+    'nav_policycustomer' => 'Policy of Customer',
+
     //HOMEPAGE
     'title' => 'This is English Language Title.',
     'departure' => 'Departure',
@@ -28,6 +35,19 @@ return [
     'foundrides' => ':totalride direct trips found',
 
     //PROCESSBOOKING
+    'pickupinfo' => 'Pickup Information',
+    'dropoffinfo' => 'Dropoff Information',
+    'dontusetranferservie' => 'I dont use transfer service',
+    'pickupany' => 'Drop off any hotel/resort',
+    'pickupother' => 'Other hotel/resort',
+    'dropoffany' => 'Drop off any hotel/resort',
+    'pickupother' => 'Other hotel/resort',
+    'dropoffother' => 'Other hotel/resort',
+    'detailorder' => 'Transfer from :fromlocation to :tolocation by :ride <br>on :departdate at :departtime',
+    'people' => 'People',
+    'bookingdetail' => 'Booking Details',
+    'product' => 'Product',
+    'subtotal' => 'Subtotal',
     'passenger' => 'Passenger',
     'firstname' => 'First name',
     'lastname' => 'Last name',
@@ -65,12 +85,39 @@ return [
     'saveandpaylater' => 'Save and Pay Later',
 
     //PAYMENT
+    'creditcard' => 'Credit Card',
+    'banktranfer' => 'Bank Tranfer', 
+    'payment' => 'Payment Information',
     'cardnumber' => 'Card Number',
     'enteryourcardnumber' => 'Enter your card number',
     'cardholdername' => 'Card holder name',
     'entercardholdername' => 'Enter your card holder name',
     'expirationdate' => 'Expiration Date',
     'entercvvcode' => 'Enter CVV Code',
+    'bookingthanks' => 'Thank you. Your booking has been received.',
+    'bookingno' => 'Booking no:',
+    'bookingdate' => 'Date:',
+    'bookingtotal'=> 'Total:',
+    'transferinfomation'=> '<p>
+                <span style="font-size: 19px">PLEASE MAKE PAYMENT VIA BANK ACCOUNT:</span>
+                <br>- Bank:  Siam Commercial Bank
+                <br>- Name:  Leopard Transportation Co., Ltd.
+                <br>- Account number:  619-280748-7
+                <br>- Branch:  Ban Bueng
+                <span style="color: red">
+                <br> Please enter the Booking No in the transfer note for verification and paid within 1 hour.</span>
+            </p>',
+    'file'=> 'File',
+    'filename'=> 'Filename',
+    'dimensions'=> 'Dimensions',
+    'extension'=> 'Extension',
+    'action'=> 'Action',
+    'nofile'=> 'No files have been uploaded to this order.',
+    'upload' => 'Upload',
+    'delete' => 'Delete',
+    'savechange' => 'Save Change',
+    'thankyou' => 'Thank you for your booking',
+    'emailconfirm' => 'An email confirmation has been sent to :email',
 
     //MODERATOR
     'nametrip' => 'Trip Name',

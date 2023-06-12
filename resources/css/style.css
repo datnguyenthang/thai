@@ -1120,7 +1120,7 @@ transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -webkit-trans
 
 /* My own */
 .bg_own_color {
-  background-color: #9d474a;
+  background-color: #9d474a !important;
 }
 
 .own_color {
@@ -1135,4 +1135,31 @@ transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -webkit-trans
 
 .entry-content ol li {
   margin-top: 20px;
+}
+
+.nav-tabs .nav-link {
+  background-color: #fff !important; /* Set your desired background color */
+  color: #9d474a !important; /* Set the text color */
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #9d474a !important; /* Set your desired active tab background color */
+  color: #fff !important; /* Set the active tab text color */
+}
+
+.payment .order_details {
+  margin: 0 0 3em;
+  list-style: none;
+}
+.payment ul.order_details li {
+  float: left;
+  margin-right: 2em;
+  text-transform: uppercase;
+  font-size: 1em;
+  line-height: 1;
+  border-right: 1px dashed #d3ced2;
+  padding-right: 2em;
+  margin-left: 0;
+  padding-left: 0;
+  list-style-type: none;
 }

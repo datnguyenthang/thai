@@ -11,6 +11,7 @@ use App\Models\Location;
 use App\Models\SeatClass;
 use App\Models\Order;
 use App\Models\OrderTicket;
+use App\Models\Pickupdropoff;
 
 class ProceedBooking extends Component
 {
@@ -35,17 +36,26 @@ class ProceedBooking extends Component
     public $order_return_rideId;
     public $order_return_seatClassId;
 
-    public $price = 0;
+    public $departPrice = 0;
+    public $returnPrice = 0;
+    public $subPrice;
+    public $totalPrice;
 
     public $firstName;
     public $lastName;
     public $email;
     public $phone;
     public $pickup;
+    public $pickupAny;
+    public $pickupAnyOther;
     public $dropoff;
+    public $dropoffAny;
+    public $dropoffAnyOther;
     public $note;
     public $promotionId;
     public $agreepolicy;
+
+    public $pickupdropoffs;
 
     protected $rules = [
         'firstName' => 'required',
@@ -77,10 +87,17 @@ class ProceedBooking extends Component
         if ($this->tripType == ROUNDTRIP) {
             $this->return = Ride::find($this->order_return_rideId);
             $this->seatReturn = SeatClass::find($this->order_return_seatClassId);
-            $this->price +=  $this->seatReturn->price * ($this->adults + $this->children);
+            $this->returnPrice = $this->seatReturn->price * ($this->adults + $this->children);
         }
 
-        $this->price +=  $this->seatDepart->price * ($this->adults + $this->children);
+        $this->departPrice = $this->seatDepart->price * ($this->adults + $this->children);
+
+        $this->pickupdropoffs = Pickupdropoff::get();
+        $this->pickup = 0;
+        $this->dropoff = 0;
+
+        $this->subPrice = $this->departPrice + $this->returnPrice;
+        $this->totalPrice = $this->departPrice + $this->returnPrice;
     }
 
     public function bookTicket(){
@@ -92,11 +109,20 @@ class ProceedBooking extends Component
                 $this->emit('scroll-to-error'); // or dispatch browser event here
             }
         })->validate();
+        
+        //set value for pickup and dropoff
+        if ($this->pickup == PICKUPDONTUSESERVICE) $this->dropoff = "";
+        if ($this->pickup == PICKUPANY) $this->pickup = $this->pickupAny;
+        if ($this->pickup == PICKUPANYOTHER) $this->pickup = $this->pickupAnyOther;
+
+        if ($this->dropoff == DROPOFFDONTUSESERVICE) $this->dropoff = "";
+        if ($this->dropoff == DROPOFFANY) $this->dropoff = $this->dropoffAny;
+        if ($this->dropoff == DROPOFFANYOTHER) $this->dropoff = $this->dropoffAnyOther;
 
         $codeDepart = OrderTicket::generateCode();
         $codeReturn = OrderTicket::generateCode();
 
-        $price = $this->price;
+        $price = $this->totalPrice;
         
         // MAKE A TRANSACTION TO ENSURE DATA CONSISTENCY
         DB::beginTransaction();
@@ -116,7 +142,7 @@ class ProceedBooking extends Component
                 'dropoff' => $this->dropoff,
                 'adultQuantity' => intVal($this->adults),
                 'childrenQuantity' => intVal($this->children),
-                'price' => $this->price,
+                'price' => $this->totalPrice,
                 'bookingDate' => date('Y-m-d H:i:s'),
                 'status' => 0,
             ]);
@@ -127,7 +153,7 @@ class ProceedBooking extends Component
                 'code' => OrderTicket::generateCode(),
                 'rideId' => intVal($this->order_depart_rideId),
                 'seatClassId' => intVal($this->order_depart_seatClassId),
-                'price' => $this->seatDepart->price * ($this->adults + $this->children),
+                'price' => intVal($this->departPrice), 
                 'type' => DEPARTURETICKET,
                 'status' => 0,
             ]);
@@ -139,7 +165,7 @@ class ProceedBooking extends Component
                     'code' => OrderTicket::generateCode(),
                     'rideId' => intVal($this->order_return_rideId),
                     'seatClassId' => intVal($this->order_return_seatClassId),
-                    'price' => $this->seatReturn->price * ($this->adults + $this->children),
+                    'price' => intVal($this->returnPrice),
                     'type' => RETURNTICKET,
                     'status' => 0,
                 ]);

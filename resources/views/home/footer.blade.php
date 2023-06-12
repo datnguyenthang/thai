@@ -1,4 +1,4 @@
-<div class="bot1_wrapper">
+<div class="bot1_wrapper mt-3">
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-lg-4">

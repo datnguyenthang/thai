@@ -11,31 +11,31 @@ use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 //BOOKING FLOW PAGE
 // Home
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
-    $trail->push('Home', route('home'));
+    $trail->push(trans('messages.nav_home'), route('home'));
 });
 
 // Trip
 Breadcrumbs::for('trip', function (BreadcrumbTrail $trail) {
     $trail->parent('home', route('home'));
-    $trail->push('Trip', route('trip'));
+    $trail->push(trans('messages.nav_trip'), route('trip'));
 });
 
 // Booking
 Breadcrumbs::for('proceedbooking', function (BreadcrumbTrail $trail) {
     $trail->parent('trip', route('trip'));
     //$trail->push('Booking', route('proceedbooking'));
-    $trail->push('Booking');
+    $trail->push(trans('messages.nav_booking'));
 });
 
 // Payment
 Breadcrumbs::for('payment', function (BreadcrumbTrail $trail) {
     $trail->parent('proceedbooking', route('proceedbooking'));
-    $trail->push('Payment', route('payment', 'code'));
+    $trail->push(trans('messages.nav_payment'), route('payment', 'code'));
 });
 
 //FRONT PAGE
 // Policy of customer
 Breadcrumbs::for('policycustomer', function (BreadcrumbTrail $trail) {
     $trail->parent('home', route('home'));
-    $trail->push('Policy of Customer', route('policycustomer'));
+    $trail->push(trans('messages.nav_policycustomer'), route('policycustomer'));
 });

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
 
 use App\Mail\SendTicket;
 use Dompdf\Dompdf;
@@ -20,6 +22,8 @@ use App\Models\Order;
 
 class Payment extends Component
 {
+    use WithFileUploads;
+
     public $step = 0;
 
     public $code;
@@ -30,8 +34,13 @@ class Payment extends Component
     public $expirationDate = "09/27";
     public $cvv = 415;
 
+    public $files = [];
+    public $photos = [];
+    public $folderName;
+
     public function mount() {
-        $this->code = Route::current()->parameter('code');
+
+        $this->code = $this->folderName = Route::current()->parameter('code');
         $this->order = Order::with(['orderTickets' => function($orderTicket){
                             $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
                                         ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
@@ -47,9 +56,80 @@ class Payment extends Component
                                 'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName')
                         ->where('orders.code', $this->code)
                         ->first();
+
+        //redirect to homepage if there are no order match code found
+        if (!$this->order) redirect('/');
+
+        $this->loadProof();
     }
 
-    public function payment() {
+    //Loading proof images
+    function loadProof() {
+        $this->photos = null;
+
+        $folderPath = 'proofs/'. $this->folderName;
+        $files = Storage::disk('public')->allFiles($folderPath);
+
+        foreach ($files as $file) { 
+            $dimensions = getimagesize(Storage::disk('public')->path($file))[0] .'x'. getimagesize(Storage::disk('public')->path($file))[1];
+            $url = Storage::disk('public')->url($file);
+            //$path = Storage::disk('public')->path($file);
+            
+            $this->photos[] = [
+                'url' => $url,
+                'path' => $file,
+                'name' => basename($file),
+                'extension' => Storage::disk('public')->mimeType($file),
+                'dimension' => $dimensions,
+            ];
+        }
+    }
+
+    //Delete proof images
+    public function deleteProofs($filePath) {
+
+        if (Storage::disk('public')->exists($filePath)) {
+            Storage::disk('public')->delete($filePath);
+        }
+        $this->loadProof();
+    }
+
+    //Upload proof images
+    public function uploadProof() {
+        $this->validate([
+            'files.*' => 'required|max:5120',
+        ]);
+
+        //creating folder inside storage folder
+        $folderPath = 'proofs/'. $this->folderName;
+
+        if (!Storage::exists($folderPath)) { 
+            //Storage::makeDirectory($folderPath, 0777, true, true);
+            Storage::disk('public')->makeDirectory($folderPath, 0777, true, true);
+        }
+        
+        foreach ($this->files as $key => $file) {
+            $file->storeAs($folderPath, $file->getClientOriginalName(), 'public');
+        }
+
+        $this->reset('files');
+
+        //get image upload again
+        $this->loadProof();
+    }
+
+    public function payment($paymentMethod) {
+
+        if ($paymentMethod == BANKTRANSFERPAYMENT) {
+            Order::where('code', $this->code)
+                ->update(['status' => UPPLOADTRANSFER]);
+        }
+
+        if ($paymentMethod == CARDPAYMENT) {
+            Order::where('code', $this->code)
+                ->update(['status' => COMPLETEDORDER]);
+        }
+
         $this->step = 1;
         //send email after finish
 
@@ -77,18 +157,18 @@ class Payment extends Component
             $orderTicket->pickup = $order->pickup;
             $orderTicket->dropoff = $order->dropoff;
 
-            if($orderTicket->type == DEPARTURETICKET) $pdfFiles[] = ['content' => $this->generateTicket($orderTicket), 'filename' => 'Departure Ticket.pdf'];
-            if($orderTicket->type == RETURNTICKET) $pdfFiles[] = ['content' => $this->generateTicket($orderTicket), 'filename' => 'Return Ticket.pdf'];
+            if ($orderTicket->type == DEPARTURETICKET) $pdfFiles[] = ['content' => $this->generateTicket($orderTicket), 'filename' => 'Departure Ticket.pdf'];
+            if ($orderTicket->type == RETURNTICKET) $pdfFiles[] = ['content' => $this->generateTicket($orderTicket), 'filename' => 'Return Ticket.pdf'];
         }
 
-        Mail::to($order->email)->send(new SendTicket($order, $pdfFiles));
+        //Mail::to($order->email)->send(new SendTicket($order, $pdfFiles));
     }
 
     public function render() {
         //$this->testPDF(); // Test ticket PDF file
 
-        if ($this->step === 0) return view('livewire.frontend.homepage.payment');
-        if ($this->step === 1) return view('livewire.frontend.homepage.success-booking');
+        //if ($this->step === 0) return view('livewire.frontend.homepage.payment');
+        if ($this->step === 0) return view('livewire.frontend.homepage.success-booking');
     }
 
     public function generateTicket($orderTicket) {
