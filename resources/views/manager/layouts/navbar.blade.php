@@ -82,7 +82,7 @@
   
         <!-- Brand -->
         <a class="navbar-brand" href="#">
-          <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="25" alt="MDB Logo"
+          <img src="/img/logo.png" height="25" alt="MDB Logo"
             loading="lazy" />
         </a>
         <!-- Search form -->
