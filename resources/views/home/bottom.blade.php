@@ -1,7 +1,7 @@
 <div class="bot2_wrapper">
     <div class="container">
       <div class="left_side">
-        Copyright © 2017 
+        Copyright © 2023 
         <a href="#"><strong>SEUDAMGO</strong></a>
         <span>|</span>
         <a href="#">Privacy Policy</a>

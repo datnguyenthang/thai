@@ -4,7 +4,7 @@
       <div class="col-md-12 col-lg-4">
         <div class="logo2_wrapper">
           <a href="index.html" class="logo2">
-            <img src="img/logo.png" alt="" class="img-fluid">
+            <img src="/img/logo.png" alt="" class="img-fluid">
           </a>
         </div>
         <p>
@@ -24,7 +24,7 @@
 
         <div class="social2_wrapper">
           <ul class="social2 clearfix">
-            <li class="nav1"><a href="#"></a></li>
+            <li class="nav1"><a href="https://www.facebook.com/seudamgo"></a></li>
             <li class="nav2"><a href="#"></a></li>
             <li class="nav3"><a href="#"></a></li>
             <li class="nav4"><a href="#"></a></li>

@@ -194,15 +194,24 @@
                                     <tbody>
                                 </table>
                                 <div class="card-footer text-center">
-                                    <input type="file" wire:model="files" wire:change="uploadProof" accept="image/*" multiple>
-                                    @error('files.*') <span class="error text-red-500">{{ $message }}</span> @enderror
+                                    <form wire:submit.prevent="uploadProof" enctype="multipart/form-data">
+                                        <div class="row mt-3">
+                                            <div class="col-md-6">
+                                                <input type="file" class="form-control" wire:model="proofFiles" id="{{ $counting }}-proofFiles" accept="image/*" multiple />
+                                                @error('proofFiles.*') <span class="text-danger error">{{ $message }}</span> @enderror
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn bg_own_color text-light">Upload</button>
 
-                                    <button  wire:click="payment({{ BANKTRANSFERPAYMENT }})" class="btn bg_own_color text-light" @if (empty($photos) ) disabled @endif>
-                                        {{ trans('messages.submit') }}
-                                    </button>
+                                                <button wire:click="payment({{ BANKTRANSFERPAYMENT }})" class="btn bg_own_color text-light" @if (empty($photos) ) disabled @endif>
+                                                    {{ trans('messages.submit') }}
+                                                </button>
+                                            </div>
+                                    </form>
                                 </div>
                             </div> <!-- End -->
                         </div>
+                    </div>
                 </div>
             </div>
         </section>

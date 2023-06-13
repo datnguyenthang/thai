@@ -3,13 +3,14 @@
 namespace App\Http\Livewire\Frontend\Homepage;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Livewire\WithFileUploads;
 
 use App\Mail\SendTicket;
 use Dompdf\Dompdf;
@@ -34,9 +35,11 @@ class Payment extends Component
     public $expirationDate = "09/27";
     public $cvv = 415;
 
-    public $files = [];
+    public $proofFiles = [];
     public $photos = [];
     public $folderName;
+
+    public $counting = 1;
 
     public function mount() {
 
@@ -64,7 +67,7 @@ class Payment extends Component
     }
 
     //Loading proof images
-    function loadProof() {
+    public function loadProof() {
         $this->photos = null;
 
         $folderPath = 'proofs/'. $this->folderName;
@@ -97,22 +100,25 @@ class Payment extends Component
     //Upload proof images
     public function uploadProof() {
         $this->validate([
-            'files.*' => 'required|max:5120',
+           'proofFiles.*' => 'required|mimes:jpeg,jpg,png,gif|max:5120',
         ]);
 
         //creating folder inside storage folder
         $folderPath = 'proofs/'. $this->folderName;
+        $disk = 'public';
 
-        if (!Storage::exists($folderPath)) { 
-            //Storage::makeDirectory($folderPath, 0777, true, true);
-            Storage::disk('public')->makeDirectory($folderPath, 0777, true, true);
-        }
-        
-        foreach ($this->files as $key => $file) {
-            $file->storeAs($folderPath, $file->getClientOriginalName(), 'public');
+        if (!Storage::exists($folderPath)) {
+            Storage::disk($disk)->makeDirectory($folderPath, 0777, true, true);
         }
 
-        $this->reset('files');
+        if ($this->proofFiles){
+            foreach ($this->proofFiles as $file) {
+                $file->storeAs($folderPath, $file->getClientOriginalName(), 'public');
+                //Storage::disk($disk)->putFile($folderPath, $file);
+            }
+        }
+
+        $this->counting++;
 
         //get image upload again
         $this->loadProof();

@@ -1,8 +1,8 @@
 <div class="top1_wrapper">
     <div class="container p-0">
       <div class="top1 clearfix">
-        <div class="email1"><a href="#">support@travelagency.com</a></div>
-        <div class="phone1">+917 3386831</div>
+        <div class="email1"><a href="#">info@seudamgo.com</a></div>
+        <div class="phone1">+66 631251421</div>
         <div class="social_wrapper">
           <ul class="social clearfix">
             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
