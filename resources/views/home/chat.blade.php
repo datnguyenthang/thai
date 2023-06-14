@@ -1,6 +1,6 @@
 <div class="chaty"></div>
 
-<script type="module" id="chaty-front-end-js-extra">
+<script type="module">
     var chaty_settings = {
         "ajax_url": "https:\/\/seudamgo.com\/wp-admin\/admin-ajax.php",
         "analytics": "0",
