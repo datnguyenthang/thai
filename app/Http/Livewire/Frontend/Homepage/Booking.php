@@ -36,8 +36,8 @@ class Booking extends Component
             return $location->id !==  $this->fromLocation;
         })->random()->id;
 
-        $this->departureDate = now()->toDateString();
-        $this->returnDate = now()->addDay()->toDateString();
+        $this->departureDate = now()->addDay()->toDateString();
+        $this->returnDate = now()->addDays(2)->toDateString();
     }
 
     public function chooseTripType($typeTrip = 0){
