@@ -119,13 +119,6 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('moderatorBook') }}" 
-               class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorBook' ? 'active' : '' }}"
-               aria-current="true">
-              <span>{{ trans('backend.instantbook') }}</span>
-            </a>
-          </li>
-          <li class="nav-item">
             <a href="{{ route('moderatorOrderlist') }}" 
               class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorOrderlist' ? 'active' : '' }}" 
               aria-current="true">

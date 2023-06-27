@@ -142,7 +142,7 @@
                             @endif
                             
                         @endforeach
-                        <td>{{ CUSTOMERTYPE[$order->customerType] }}</td>
+                        <td>{{ $order->customerTypeName }}</td>
                         <td>{{ $order->agentName }}</td>
                         <td>{{ $order->bookingDate }}</td>
                         <td>{{ $order->price }}</td>

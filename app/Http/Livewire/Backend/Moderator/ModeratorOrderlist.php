@@ -20,7 +20,7 @@ class ModeratorOrderlist extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $search = '';
-    public $perPage = 50;
+    public $perPage = 10;
     public $sortField = 'orders.id';
     public $sortDirection = 'desc';
 
@@ -75,7 +75,8 @@ class ModeratorOrderlist extends Component
                             }])
                             ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
                             ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
-                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
+                            ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
+                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'ct.name as customerTypeName','orders.status',
                                     DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.finalPrice',
                                     'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 
                                     'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName')
@@ -100,7 +101,8 @@ class ModeratorOrderlist extends Component
                                 })
                             ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
                             ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
-                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
+                            ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
+                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType', 'ct.name as customerTypeName','orders.status',
                                      DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.finalPrice',
                                      'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 
                                      'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName')
