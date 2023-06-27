@@ -31,7 +31,7 @@ Route::get('/payment/{code}', App\Http\Livewire\Frontend\Homepage\Payment::class
 
 
 Route::get('/policy-for-customer', App\Http\Livewire\Frontend\Policy::class)->name('policycustomer');
-Route::get('//privacy-policy', App\Http\Livewire\Frontend\PrivatePolicy::class)->name('privatepolicy');
+Route::get('/privacy-policy', App\Http\Livewire\Frontend\PrivatePolicy::class)->name('privatepolicy');
 /*
 Route::get('/admin', [AdminController::class,'index'])->name('dashboard');
 Route::get('/manager', [ManagerController::class,'index'])->name('dashboard');
@@ -73,7 +73,6 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
 
 Route::middleware(['auth', 'user-access:moderator'])->group(function () {
     Route::get('/moderator', App\Http\Livewire\Backend\Moderator\ModeratorDashboard::class)->name('moderatorDashboard');
-    Route::get('/moderatorbook', App\Http\Livewire\Backend\Moderator\ModeratorBook::class)->name('moderatorBook');
     Route::get('/moderatororder', App\Http\Livewire\Backend\Moderator\ModeratorOrder::class)->name('moderatorOrder');
     Route::get('/moderatororderlist', App\Http\Livewire\Backend\Moderator\ModeratorOrderlist::class)->name('moderatorOrderlist');
 });
