@@ -1,15 +1,6 @@
 <div>
     <h1>{{ trans('backend.listorder') }}</h1>
-    <div class="row">
-        {{--
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="orderid" class="form-control-label">{{ trans('backend.orderid') }}</label>
-                <input wire:model.defer="orderid" class="form-control" type="text" placeholder="">
-            </div>
-        </div>
-        --}}
-        
+    <div class="row">        
         <div class="col-md-2">
             <div class="form-group">
                 <label for="trip" class="form-control-label">{{ trans('backend.ordercode') }}</label>
@@ -53,25 +44,6 @@
                 <input wire:model.defer="bookingDate" class="form-control" type="date" placeholder="">
             </div>
         </div>
-{{--
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="enddate" class="form-control-label">{{ trans('backend.enddate') }}</label>
-                <input wire:model.defer="endDate" class="form-control" type="date" placeholder="">
-            </div>
-        </div>
---}}
-        <div class="col-md-2">
-            <div class="form-group">
-                <label for="agentId" class="form-control-label">{{ trans('backend.agentname') }}</label>
-                <select id="agentId" name="agentId" class="form-select" wire:model.defer="agentId" >
-                    <option value=""></option>
-                    @foreach($agents as $agent)
-                        <option value="{{ $agent->id }}">{{ $agent->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
 
         <div class="col-md-2">
             <div class="form-group">
@@ -111,12 +83,7 @@
                 <th>{{ trans('backend.orderid') }}</th>
                 <th>{{ trans('backend.ordercode') }}</th>
                 <th>{{ trans('backend.triptype') }}</th>
-                <!--
-                <th>{{ trans('backend.codeticketdepart') }}</th>
-                <th>{{ trans('backend.codeticketreturn') }}</th>
-                -->
                 <th>{{ trans('backend.customertype') }}</th>
-                <th>{{ trans('backend.agentname') }}</th>
                 <th>{{ trans('backend.bookingdate') }}</th>
                 <th>{{ trans('backend.totalprice') }}</th>
                 <th>{{ trans('backend.orderstatus') }}</th>
@@ -131,23 +98,7 @@
                         <td>{{ $order->id }}</td>
                         <td>{{ $order->code }}</td>
                         <td>{{ TRIPTYPE[$order->isReturn] }}</td>
-                        <!--
-                        @foreach ($order->orderTickets as $orderTicket)
-                            @if($order->isReturn == ONEWAY)
-                                @if($orderTicket->type == DEPARTURETICKET) 
-                                    <td> {{ $orderTicket->code }} </td>
-                                    <td> - </td> 
-                                @endif
-                            @endif
-                            @if($order->isReturn == ROUNDTRIP)
-                                @if($orderTicket->type == DEPARTURETICKET) <td> {{ $orderTicket->code }} </td>@endif
-                                @if($orderTicket->type == RETURNTICKET) <td> {{ $orderTicket->code }} </td> @endif
-                            @endif
-                            
-                        @endforeach
-                        -->
                         <td>{{ $order->customerTypeName ? $order->customerTypeName : 'ONLINE' }}</td>
-                        <td>{{ $order->agentName }}</td>
                         <td>{{ $order->bookingDate }}</td>
                         <td>{{ round($order->finalPrice) }}</td>
                         <td>{{ ORDERSTATUS[$order->status] }}</td>
@@ -157,16 +108,6 @@
                                 wire:click="viewOrder({{ $order->id }})">
                                     <!--<i class="fa fa-eye"></i>-->
                                     {{ trans('backend.vieworder') }}
-                            </button>
-                            <button class="call-btn btn btn-outline-info btn-floating btn-sm"
-                                wire:click="editOrder({{ $order->id }})">
-                                    <!--<i class="fa fa-edit"></i>-->
-                                    {{ trans('backend.editorder') }}
-                            </button>
-                            <button class="call-btn btn btn-outline-warning btn-floating btn-sm"
-                                wire:click="processOrder({{ $order->id }})">
-                                    <!--<i class="fa fa-process"></i>-->
-                                    {{ trans('backend.processorder') }}
                             </button>
                         </td>
                     </tr>

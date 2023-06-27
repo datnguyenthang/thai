@@ -67,12 +67,12 @@ class ProceedBooking extends Component
     public $pickupdropoffs;
 
     protected $rules = [
-        'firstName' => 'required',
-        'lastName' => 'required',
-        'phone' => 'numeric|digits_between:8,11',
-        'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i',
-        'pickupAnyOther' => 'required_if:pickup,'.PICKUPANYOTHER,
-        'dropoffAnyOther' => 'required_if:dropoff,'.DROPOFFANYOTHER,
+        'firstName' => 'required|max:255',
+        'lastName' => 'required|max:255',
+        'phone' => 'numeric|digits_between:8,12',
+        'email' => 'required|max:255|email|regex:/(.+)@(.+)\.(.+)/i',
+        'pickupAnyOther' => 'max:255|required_if:pickup,'.PICKUPANYOTHER,
+        'dropoffAnyOther' => 'max:255|required_if:dropoff,'.DROPOFFANYOTHER,
     ];
 
     public function mount(Request $request) {

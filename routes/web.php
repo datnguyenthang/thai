@@ -76,3 +76,11 @@ Route::middleware(['auth', 'user-access:moderator'])->group(function () {
     Route::get('/moderatororder', App\Http\Livewire\Backend\Moderator\ModeratorOrder::class)->name('moderatorOrder');
     Route::get('/moderatororderlist', App\Http\Livewire\Backend\Moderator\ModeratorOrderlist::class)->name('moderatorOrderlist');
 });
+
+/*------All Agent Routes List------*/
+
+Route::middleware(['auth', 'user-access:agent'])->group(function () {
+    Route::get('/agent', App\Http\Livewire\Backend\Moderator\ModeratorDashboard::class)->name('agentDashboard');
+    Route::get('/agentorder', App\Http\Livewire\Backend\Agent\AgentOrder::class)->name('agentOrder');
+    Route::get('/agentorderlist', App\Http\Livewire\Backend\Agent\AgentOrderlist::class)->name('agentOrderlist');
+});

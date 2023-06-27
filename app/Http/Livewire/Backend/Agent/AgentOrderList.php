@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Moderator;
+namespace App\Http\Livewire\Backend\Agent;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\WithPagination;
@@ -14,13 +15,13 @@ use App\Models\SeatClass;
 use App\Models\Order;
 use App\Models\OrderTicket;
 
-class ModeratorOrderlist extends Component
+class AgentOrderList extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
     public $search = '';
-    public $perPage = 10;
+    public $perPage = 20;
     public $sortField = 'orders.id';
     public $sortDirection = 'desc';
 
@@ -41,10 +42,6 @@ class ModeratorOrderlist extends Component
     public $showModal = false;
 
     protected $orderList;
-
-    public function mount(){
-        $this->agents = Agent::get();
-    }
 
     public function sortBy($field)
     {
@@ -74,13 +71,13 @@ class ModeratorOrderlist extends Component
                                             ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId');
                             }])
                             ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
-                            ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
                             ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
                             ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.status',
                                     DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.finalPrice',
                                     'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 
-                                    'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName', 'ct.name as customerTypeName')
+                                    'orders.childrenQuantity', 'p.name as promotionName',  'ct.name as customerTypeName')
                             ->where('orders.id', $orderId)
+                            ->where('orders.agentId', Auth::user()->agentId)
                             ->first();
 
         $this->showModal = true;
@@ -103,19 +100,19 @@ class ModeratorOrderlist extends Component
                             ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
                             ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
                             ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType', 'orders.status',
-                                     DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.finalPrice',
-                                     'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 
-                                     'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName', 'ct.name as customerTypeName')
+                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.finalPrice',
+                                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 
+                                    'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName', 'ct.name as customerTypeName')
                             ->where(function ($query) {
                                 if ($this->orderCode) $query->where('orders.code', 'like', '%'.$this->orderCode.'%');
                                 if ($this->customerName) $query->whereRaw('CONCAT(orders.firstName, " ", orders.lastName) LIKE ?', ['%'.$this->customerName.'%']);
                                 if ($this->customerPhone) $query->where('orders.phone', 'like', '%'.$this->customerPhone.'%');
                                 if ($this->customerType >= 0) $query->where('orders.customerType', $this->customerType);
+                                $query->where('orders.agentId', Auth::user()->agentId);
                             })
                             ->orderBy($this->sortField, $this->sortDirection)
                             ->paginate($this->perPage);
-
-        return view('livewire.backend.moderator.moderator-orderlist', compact('orderList'))
-                ->layout('moderator.layouts.app');
+        return view('livewire.backend.agent.agent-order-list', compact('orderList'))
+                    ->layout('agent.layouts.app');
     }
 }

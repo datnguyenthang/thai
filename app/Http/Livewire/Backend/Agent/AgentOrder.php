@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Moderator;
+namespace App\Http\Livewire\Backend\Agent;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +16,7 @@ use App\Models\CustomerType;
 use App\Models\Promotion;
 use App\Models\Pickupdropoff;
 
-class ModeratorOrder extends Component
+class AgentOrder extends Component
 {
     public $step = 1;
 
@@ -246,7 +246,7 @@ class ModeratorOrder extends Component
         $codeOrder = Order::generateCode();
         $codeDepart = $codeOrder.'-001';
         $codeReturn = $codeOrder.'-002';
-        
+
         // MAKE A TRANSACTION TO ENSURE DATA CONSISTENCY
         DB::beginTransaction();
 
@@ -271,6 +271,8 @@ class ModeratorOrder extends Component
                 'finalPrice' => $this->finalPrice,
                 'bookingDate' => date('Y-m-d H:i:s'),
                 'userId' => Auth::id(),
+                'agentId' => Auth::user()->agentId,
+                
                 'status' => COMPLETEDORDER,
             ]);
 
@@ -370,15 +372,12 @@ class ModeratorOrder extends Component
             // Apply the discount to orginalPrice
             $this->couponAmount = $this->originalPrice * $coupon->discount;
             $this->finalPrice = round($this->originalPrice - $this->couponAmount);
-
-            //apply to each ticket 
-            //$this->departPrice = round($this->departPrice - ($this->departPrice * $coupon->discount));
-            //$this->returnPrice = round($this->returnPrice - ($this->returnPrice * $coupon->discount));
         }
     }
 
-    public function render() {
-        return view('livewire.backend.moderator.moderator-order')
-                ->layout('moderator.layouts.app');
+    public function render()
+    {
+        return view('livewire.backend.agent.agent-order')
+                ->layout('agent.layouts.app');
     }
 }
