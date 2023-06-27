@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('nameOffice');
+            $table->string('googleMapUrl');
             $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
             $table->timestamps();
         });

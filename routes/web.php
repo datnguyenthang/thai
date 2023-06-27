@@ -31,6 +31,7 @@ Route::get('/payment/{code}', App\Http\Livewire\Frontend\Homepage\Payment::class
 
 
 Route::get('/policy-for-customer', App\Http\Livewire\Frontend\Policy::class)->name('policycustomer');
+Route::get('//privacy-policy', App\Http\Livewire\Frontend\PrivatePolicy::class)->name('privatepolicy');
 /*
 Route::get('/admin', [AdminController::class,'index'])->name('dashboard');
 Route::get('/manager', [ManagerController::class,'index'])->name('dashboard');
@@ -60,12 +61,19 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
     Route::get('/ride', App\Http\Livewire\Backend\Manager\ManagerListRide::class)->name('managerListRide');
     Route::get('/ride/create/{rideId}', App\Http\Livewire\Backend\Manager\ManagerCreateRide::class)->name('managerCreateRide');
     Route::get('/ride/massiveCreate', App\Http\Livewire\Backend\Manager\ManagerMassiveCreateRide::class)->name('massiveCreate');
+
+    Route::get('/promotion', App\Http\Livewire\Backend\Manager\ManagerListPromotion::class)->name('managerPromotion');
+    Route::get('/promotion/create/{promotionId}', App\Http\Livewire\Backend\Manager\ManagerCreatePromotion::class)->name('managerCreatePromotion');
+
+    Route::get('/customertype', App\Http\Livewire\Backend\Manager\ManagerListCustomerType::class)->name('managerCustomerType');
+    Route::get('/customertype/create/{customerTypeId}', App\Http\Livewire\Backend\Manager\ManagerCreateCustomerType::class)->name('managerCreateCustomerType');
 });
 
 /*------All Moderator Routes List------*/
 
 Route::middleware(['auth', 'user-access:moderator'])->group(function () {
     Route::get('/moderator', App\Http\Livewire\Backend\Moderator\ModeratorDashboard::class)->name('moderatorDashboard');
+    Route::get('/moderatorbook', App\Http\Livewire\Backend\Moderator\ModeratorBook::class)->name('moderatorBook');
     Route::get('/moderatororder', App\Http\Livewire\Backend\Moderator\ModeratorOrder::class)->name('moderatorOrder');
     Route::get('/moderatororderlist', App\Http\Livewire\Backend\Moderator\ModeratorOrderlist::class)->name('moderatorOrderlist');
 });

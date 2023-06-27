@@ -15,7 +15,7 @@
 					{{ trans('messages.bookingdate') }}	  <strong>{{ date('F j, Y', strtotime($order->bookingDate)) }}</strong>
 				</li>
 				<li class="order_total">
-					{{ trans('messages.bookingtotal') }}	      <strong><span class="order_amount">฿</span>{{ $order->price }}</strong>
+					{{ trans('messages.bookingtotal') }}  <strong><span class="order_amount">฿</span>{{ round($order->finalPrice) }}</strong>
 				</li>		
 			</ul>
         </div>
@@ -42,7 +42,7 @@
                                 </td>
                                 <td class="product-total">
                                     <span class="amount">
-                                        <span>฿</span>{{ $orderTicket->price }}
+                                        <span>฿</span>{{ round($orderTicket->price) }}
                                     </span>
                                 </td>
                             </tr>
@@ -50,15 +50,15 @@
                         @if ($orderTicket->type == RETURNTICKET)
                             <tr class="order_item">
                                 <td class="">
-                                    {!! trans('messages.detailorder', ['fromlocation' => $orderTicket->toLocationName, 
-                                                                    'tolocation' => $orderTicket->fromLocationName, 
+                                    {!! trans('messages.detailorder', ['fromlocation' => $orderTicket->fromLocationName, 
+                                                                    'tolocation' => $orderTicket->toLocationName, 
                                                                     'ride' => $orderTicket->name,
                                                                     'departdate' => date('F j, Y', strtotime($orderTicket->departDate)),
                                                                     'departtime' =>  $orderTicket->departTime]) !!}
                                     <br>{{ trans('messages.people') }}: {{ $order->adultQuantity + $order->childrenQuantity }} <strong class="product-quantity">×{{ $order->adultQuantity + $order->childrenQuantity }}</strong>	</td>
                 
                                 <td class="product-total">
-                                    <span class="amount">฿</span>{{ $orderTicket->price }}
+                                    <span class="amount">฿</span>{{ round($orderTicket->price) }}
                                 </td>
                             </tr>
                         @endif
@@ -67,11 +67,17 @@
                 <tfoot>
                     <tr>
                         <th scope="row">{{ trans('messages.subtotal') }}</th>
-                        <td><span class="amount">฿{{ $order->price }}</span></td>
+                        <td><span class="amount">฿{{ round($order->originalPrice) }}</span></td>
                     </tr>
+                @if ($order->couponAmount)
+                    <tr class="bg-secondary">
+                        <th scope="row">{{ trans('messages.couponprice') }} ({{ trans('messages.couponcode') }}: {{ $order->promotionCode }} - {{ $order->discount * 100 }}%)</th>
+                        <td><span class="amount">฿{{ round($order->couponAmount) }}</span></td>
+                    </tr>
+                @endif
                     <tr>
                         <th scope="row">{{ trans('messages.total') }}:</th>
-                        <td><span class="amount">฿{{ $order->price }}</span></td>
+                        <td><span class="amount">฿{{ round($order->finalPrice) }}</span></td>
                     </tr>
                 </tfoot>
             </table>
@@ -145,7 +151,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer text-center">
-                                        <button wire:click="payment({{ CARDPAYMENT }})" class="btn bg_own_color text-light">
+                                        <button wire:loading.attr="disabled" wire:click="payment({{ CARD }})" class="btn bg_own_color text-light">
                                             {{ trans('messages.submit') }}
                                         </button>
                                     </div>
@@ -180,7 +186,7 @@
                                                     <th class="dimensions">{{ $photo['dimension'] }}</th>
                                                     <th class="extension">{{ $photo['extension'] }}</th>
                                                     <th class="action">
-                                                        <button type="button" class="btn bg_own_color text-light" wire:click="deleteProofs('{{ $photo['path'] }}')">
+                                                        <button type="button" class="btn bg_own_color text-light" wire:loading.attr="disabled" wire:click="deleteProofs('{{ $photo['path'] }}')">
                                                             {{ trans('messages.delete') }}
                                                         </button>
                                                     </th>
@@ -201,9 +207,9 @@
                                                 @error('proofFiles.*') <span class="text-danger error">{{ $message }}</span> @enderror
                                             </div>
                                             <div class="col-md-6">
-                                                <button type="submit" class="btn bg_own_color text-light">Upload</button>
+                                                <button type="submit" class="btn bg_own_color text-light" wire:loading.attr="disabled">Upload</button>
 
-                                                <button wire:click="payment({{ BANKTRANSFERPAYMENT }})" class="btn bg_own_color text-light" @if (empty($photos) ) disabled @endif>
+                                                <button wire:loading.attr="disabled" wire:click="payment({{ BANKTRANSFER }})" class="btn bg_own_color text-light" @if (empty($photos) ) disabled @endif>
                                                     {{ trans('messages.submit') }}
                                                 </button>
                                             </div>

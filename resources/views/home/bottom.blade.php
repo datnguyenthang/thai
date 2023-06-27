@@ -4,13 +4,13 @@
       Copyright © 2023 
       <a href="#"><strong>SEUDAMGO</strong></a>
       <span>|</span>
-      <a href="#">Privacy Policy</a>
+      <a href="/privacy-policy">{{ trans('messages.privatepolicy') }}</a>
       <span>|</span>
-      <a href="#">About Us</a>
+      <a href="/policy-for-customer">{{ trans('messages.policycustomer') }}</a>
+      <!--
       <span>|</span>
-      <a href="#">FAQ</a>
-      <span>|</span>
-      <a href="#">Contact Support</a>
+      <a href="/about-us">{ trans('aboutus') }</a>
+      -->
     </div>
     <div class="right_side">
       Designed by 

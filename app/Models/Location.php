@@ -15,6 +15,6 @@ class Location extends Model
      * @return response()
      */
     protected $fillable = [
-        'name'
+        'name', 'nameOffice', 'googleMapUrl', 'status'
     ];
 }

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Backend\Manager;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Models\Agent;
 
 class ManagerListUser extends Component
 {
@@ -38,7 +39,9 @@ class ManagerListUser extends Component
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
-            return view('livewire.backend.manager.manager-list-user', compact('users'))
+        $listAgent = Agent::pluck('name', 'id');
+            
+        return view('livewire.backend.manager.manager-list-user', compact('users', 'listAgent'))
                     ->layout('manager.layouts.app');
     }
 }

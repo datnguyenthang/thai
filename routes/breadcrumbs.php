@@ -39,3 +39,9 @@ Breadcrumbs::for('policycustomer', function (BreadcrumbTrail $trail) {
     $trail->parent('home', route('home'));
     $trail->push(trans('messages.nav_policycustomer'), route('policycustomer'));
 });
+
+// Private Policy
+Breadcrumbs::for('privatepolicy', function (BreadcrumbTrail $trail) {
+    $trail->parent('home', route('home'));
+    $trail->push(trans('messages.privatepolicy'), route('privatepolicy'));
+});

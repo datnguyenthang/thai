@@ -7,6 +7,8 @@
         <thead>
             <tr>
                 <th wire:click="sortBy('name')"><i class="fas fa-sort"></i>{{ trans('backend.locationname') }}</th>
+                <th wire:click="sortBy('nameOffice')"><i class="fas fa-sort"></i>{{ trans('backend.locationnameoffice') }}</th>
+                <th wire:click="sortBy('googleMapUrl')"><i class="fas fa-sort"></i>{{ trans('backend.locationgooglemapurl') }}</th>
                 <th wire:click="sortBy('status')"><i class="fas fa-sort"></i>{{ trans('backend.locationstatus') }}</th>
                 <th><i class="fas fa-tasks"></i>{{ trans('backend.action') }}</th>
             </tr>
@@ -15,6 +17,8 @@
             @foreach ($locations as $location)
                 <tr>
                     <td>{{ $location->name }}</td>
+                    <td>{{ $location->nameOffice }}</td>
+                    <td>{{ $location->googleMapUrl }}</td>
                     <td>{{ LOCATIONSTATUS[$location->status] }}</td>
                     <td>
                         <button class="call-btn btn btn-outline-primary btn-floating btn-sm"

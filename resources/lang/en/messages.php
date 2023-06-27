@@ -56,7 +56,10 @@ return [
     'coupon' => 'Coupon',
     'apply' => 'Apply',
     'total' => 'Total',
+    'correctinfo' => 'Please fill in these information correctly. We will verify your identity when you check in at the ticket booth.',
+    'aboutus' => 'About us',
     'policy' => 'I accept Policy for Customer <a href="/policy-for-customer" target="_blank"><strong class="text-danger">(Policy for Customer  *)</strong></a>',
+    'policycustomer' => 'Policy for Customer',
     'policydetail' => '<article class="policy p-3 policy-border text-dark">
                             <div class="entry-content">
                                 <ol>
@@ -77,7 +80,39 @@ return [
                                 </ol>
                             </div>
                         </article>',
+
+    'privatepolicy' => 'Privacy Policy',
+    'privatepolicycontent' => '<article class="policy p-3 policy-border text-dark">
+                                    <div class="entry-content">
+                                        <p>Please read the following statement to learn about our privacy practices. By visiting this website, www.seudamgo.com, you are accepting the practices described herein.</p>
+                                        <h2><strong>WHAT INFORMATION WE COLLECT FROM YOU</strong></h2>
+                                        <p>In General: We receive and store any information you enter on our website or give us in any other way. This includes information that can identify you (“personal information”), such as your first and last name, telephone number and postal and email addresses.</p>
+                                        <p>We automatically collect some information about your computer and your online activity when you visit the Site. For example, we may collect your IP address and information about what web browser software you use to access the Site (such as Google Chrome, Firefox, Safari or Internet Explorer) and referring websites. Our goals in collecting this automatic information include helping to customize your user experience and inhibiting fraud.</p>
+                                        <h2><strong>HOW WE USE YOUR INFORMATION</strong></h2>
+                                        <p>We use information about you for the following general purposes: to provide you with the products and services you request; to communicate with you in general; to respond to your questions and comments; to measure interest in and improve our products, services and the Site; to otherwise customize your experience with this Site; to solicit information from you, including through surveys; to resolve disputes, or troubleshoot problems; to prevent, investigate or take action on potentially prohibited or illegal activities; to enforce the Site’s Terms of Use; for activities related to our business; and as otherwise described to you at the point of collection.</p>
+                                        <h2><strong>WITH WHOM WE SHARE YOUR INFORMATION</strong></h2>
+                                        <p>We may share your information:</p>
+                                        <ul>
+                                            <li>With third-party vendors who provide services or functions on our behalf, including credit card processing, business analytics, customer service, marketing, distribution of surveys or sweepstake programs, and fraud prevention. We may also authorize third-party vendors to collect information on our behalf, including as necessary to operate features of the Site or to facilitate the delivery of online advertising tailored to your interests. Third-party vendors have access to and may collect information only as needed to perform their functions and are not permitted to share or use the information for any other purpose. They are also required to follow the same data security practices that we adhere to.</li>
+                                            <li>In response to subpoenas, court orders, or other legal processes; to establish or exercise our legal rights; to defend against legal claims; or as otherwise required by law. In such cases we reserve the right to raise or waive any legal objection or right available to us.</li>
+                                            <li>When we believe it is appropriate to investigate, prevent or take action regarding illegal or suspected illegal activities; or to protect and defend the rights, property or safety of our company, the Site, our customers or others.</li>
+                                            <li>In connection with a corporate transaction, such as a divestiture, merger, consolidation or asset sale, or in the unlikely event of bankruptcy.</li>
+                                            <li>With your consent.</li>
+                                        </ul>
+                                        <p>We provide appropriate protections for such sharing as required by applicable law to prohibit third parties from using your information for their own purposes, and to address the security and confidentiality of your information. Except as disclosed in this Privacy Policy or as required or permitted by applicable law, we will not disclose your information to third parties without your consent.</p>
+                                        <h2><strong>Protecting Your Information</strong></h2>
+                                        <p>We maintain reasonable physical, electronic, and organizational security measures to protect your information against accidental or unlawful destruction or accidental loss, alteration, or unauthorized disclosure or access. We use Secure Socket Layer technology to encrypt credit card information during transit.</p>
+                                        <p>We will retain your personal data, including Sensitive Personal Information, for as long as necessary to provide and secure our Sites and services, and to exercise our legal rights, protect our or other’s interests, and comply with our legal or regulatory obligations. We decide how long we need information on a case-by-case basis. When SEUDAMGO no longer needs to use your information, we will – unless we need to keep your information to comply with applicable legal or regulatory obligations or the information is required to carry out corporate tasks and conduct our business – remove it from our systems and records where feasible, and/or deactivate it or take other reasonable steps to properly anonymize it so that you can no longer be identified from it.</p>
+                                        <h2><strong>Contacting Us</strong></h2>
+                                        <p>If you have any questions about this Privacy Policy or our privacy practices, please contact our Agoda Data Governance Officer by email at seudamgo@gmail.com or by sending a registered letter to the address at: LEOPARD TRANSPORTATION CO., LTD.</p>
+                                        <p>Address 105 Mu. 6 Nong Hong Subdistrict, Phan Thong District, Chonburi Province 20160.</p>
+                                    </div>
+                                </article>',
     'inputcoupon' => 'Input coupon',
+    'couponprice' => 'Discount Price',
+    'couponcode' => 'Code',
+    'invalidcoupondate' => 'Invalid Coupon Date!',
+    'invalidcouponquantity' => 'This coupon has been used up',
     'contactdetail' => 'Contact details',
     'summary' => 'Sumary',
     'note' => 'Note',

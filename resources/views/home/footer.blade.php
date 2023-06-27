@@ -8,44 +8,51 @@
           </a>
         </div>
         <p>
-          Nam liber tempor cum soluta nobis option congue nihil imperdiet doming id quod mazim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.
+          SEUDAMGO is a new brand of sea passenger transport in Thailand. We have a team of staff who are well-trained in customer service. Along with that, we also bring motor catamarans with new designs and different engine improvements to help customers experience the fastest vessels with unexpected utilities. Our services are fully committed to safety, reliability, and reduced environmental impact. We connect family, friends and make it possible for you to discover new destinations or revisit favorites.
         </p>
+        <!--
         <p>
           <a href="#" class="btn-default btn2">Read More</a>
         </p>
+        -->
       </div>
+      
       <div class="col-md-12 col-lg-4">
+        <div class="bot1_title">NEED HELP?</div>
+        <div class="twits1">
+          <ul class="ul1">
+            <li>Contact us via phone or email:</li>
+            <li>+66 631251421</li>
+            <li>info@seudamgo.com</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-lg-4">
+        <!--
         <div class="bot1_title">Travel Specialists</div>
         <ul class="ul1">
           <li><a href="#">First Class Flights</a></li>
           <li><a href="#">Accessible Travel</a></li>
           <li><a href="#">Amazing Cruises</a></li>
         </ul>
+        -->
+        <div class="bot1_title">FOLLOW US</div>
 
         <div class="social2_wrapper">
           <ul class="social2 clearfix">
             <li class="nav1"><a href="https://www.facebook.com/seudamgo"></a></li>
-            <li class="nav2"><a href="#"></a></li>
-            <li class="nav3"><a href="#"></a></li>
-            <li class="nav4"><a href="#"></a></li>
-            <li class="nav5"><a href="#"></a></li>
-            <li class="nav6"><a href="#"></a></li>
+            <li class="nav2"><a href="https://www.instagram.com/seudamgo"></a></li>
+              <!--
+              <li class="nav2"><a href="#"></a></li>
+              <li class="nav3"><a href="#"></a></li>
+              <li class="nav4"><a href="#"></a></li>
+              <li class="nav5"><a href="#"></a></li>
+              <li class="nav6"><a href="#"></a></li>
+              -->
           </ul>
         </div>
 
-      </div>
-      <div class="col-md-12 col-lg-4">
-        <div class="bot1_title">Our Twitter</div>
-        <div class="twits1">
-          <div class="twit1">
-           <a href="#"> @travel</a> Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-           <div class="date">5 minutes ago</div>
-          </div>
-          <div class="twit1">
-           <a href="#">@leo</a> Nam liber tempor cum soluta nobis option congue nihil imperdiet doming id quod mazim.
-           <div class="date">2 days ago</div>
-          </div>
-        </div>
       </div>
       <!--
       <div class="col-md-12 col-lg-3">

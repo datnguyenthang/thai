@@ -34,6 +34,12 @@
             <i class="fas fa-chart-pie fa-fw me-3"></i>
             <span>{{ trans('backend.agent') }}</span>
           </a>
+
+          <a href="{{ route('managerPromotion') }}" 
+             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'promotion' ? 'active' : '' }}">
+             <i class="fas fa-money-bill fa-fw me-3"></i>
+             <span>{{ trans('backend.promotion') }}</span>
+          </a>
 {{--
           <a href="#" class="list-group-item list-group-item-action py-2 ripple">
             <i class="fas fa-chart-bar fa-fw me-3"></i>

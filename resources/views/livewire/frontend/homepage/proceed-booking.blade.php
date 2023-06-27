@@ -1,30 +1,56 @@
 <div>
     {{ Breadcrumbs::render('proceedbooking') }}
     <form wire:submit.prevent="bookTicket">
-        <div class="row align-items-start d-flex">
-            <div class="col-md-8 col-md-offset-1">
+        <div class="row align-items-start d-flex bookticket">
+            <div class="col-md-12 col-md-offset-1">
                 <div class="border rounded-3 overflow-hidden p-4 mt-3">
                     <h4 class="select-departure-header mb-3" >{{ trans('messages.contactdetail') }}</h4>
                     <!---Customer information--->
                     <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" wire:model="firstName" placeholder="{{ trans('messages.firstname') }}" required />
+                        <div class="col-md-6" x-data="{ openWarningFirstname: false }">
+                            <input type="text" 
+                                wire:model="firstName" 
+                                x-on:focus="openWarningFirstname = true"
+                                x-on:blur="openWarningFirstname = false"
+                                class="form-control"
+                                placeholder="{{ trans('messages.firstname') }}" required />
                             @error('firstName') <span class="text-danger error">{{ $message }}</span> @enderror
+                            <span class="description" x-show="openWarningFirstname">{{ trans('messages.correctinfo') }}</span>
                         </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" wire:model="lastName" placeholder="{{ trans('messages.lastname') }}" required />
+
+                        <div class="col-md-6" x-data="{ openWarningLastname: false }">
+                            <input type="text" 
+                                wire:model="lastName" 
+                                x-on:focus="openWarningLastname = true" 
+                                x-on:blur="openWarningLastname = false" 
+                                class="form-control" placeholder="{{ trans('messages.lastname') }}" required />
                             @error('lastName') <span class="text-danger error">{{ $message }}</span> @enderror
+                            <span class="description" x-show="openWarningLastname">{{ trans('messages.correctinfo') }}</span>
                         </div>
                     </div>
+
                     <div class="row mt-3">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" wire:model="email" placeholder="{{ trans('messages.email') }}" required />
+                        <div class="col-md-6" x-data="{ openWarningEmail: false }">
+                            <input type="text" 
+                                x-on:focus="openWarningEmail = true" 
+                                x-on:blur="openWarningEmail = false" 
+                                wire:model="email" 
+                                class="form-control" placeholder="{{ trans('messages.email') }}" required />
                             @error('email') <span class="text-danger error">{{ $message }}</span> @enderror
+                            <span class="description" aria-hidden="true" x-show="openWarningEmail">{{ trans('messages.correctinfo') }}</span>
                         </div>
-                        <div class="col-md-6">
-                            <input type="tel" class="form-control" wire:model="phone" placeholder="{{ trans('messages.phone') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
+
+                        <div class="col-md-6" x-data="{ openWarningTel: false }">
+                            <input type="tel" 
+                                x-on:focus="openWarningTel = true" 
+                                x-on:blur="openWarningTel = false" 
+                                wire:model="phone" 
+                                class="form-control" placeholder="{{ trans('messages.phone') }}" 
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required />
                             @error('phone') <span class="text-danger error">{{ $message }}</span> @enderror
+                            <span class="description" aria-hidden="true" x-show="openWarningTel">{{ trans('messages.correctinfo') }}</span>
                         </div>
+
                     </div>
 
                     <!---Pickup & dropoff information--->
@@ -55,6 +81,7 @@
                             @if ($pickup == PICKUPANYOTHER)
                                 <div class="form-input row">
                                     <input class="form-control w-75" type="text" name="pickupAnyOther" wire:model="pickupAnyOther">
+                                    @error('pickupAnyOther') <span class="text-danger error">{{ $message }}</span> @enderror
                                 </div>
                             @endif
                         </div>
@@ -85,20 +112,11 @@
                             @if ($dropoff == DROPOFFANYOTHER)
                                 <div class="form-input row">
                                     <input class="form-control w-75" type="text" wire:model="dropoffAnyOther" name="dropoffAnyOther">
+                                    @error('dropoffAnyOther') <span class="text-danger error">{{ $message }}</span> @enderror
                                 </div>
                             @endif
                         </div>
                     </div>
-                    {{--
-                    <div class="row mt-3">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" wire:model="pickup" placeholder="{{ trans('messages.pickup') }}"  />
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" wire:model="dropoff" placeholder="{{ trans('messages.dropoff') }}" />
-                        </div>
-                    </div>
-                    --}}
                     <div class="row mt-3">
                         <div class="col-md-12">
                             <textarea class="form-control" wire:model="note" rows="4" placeholder="{{ trans('messages.note') }}"></textarea>
@@ -128,7 +146,7 @@
                                     </td>
                                     <td class="product-total">
                                         <span class="amount">
-                                            <span>฿</span> {{ $departPrice  }}
+                                            <span>฿</span>{{ $departPrice  }}
                                         </span>
                                     </td>
                                 </tr>
@@ -152,11 +170,19 @@
                             <tfoot>
                                 <tr>
                                     <th scope="row">{{ trans('messages.subtotal') }}</th>
-                                    <td><span class="amount">฿{{ $subPrice }}</span></td>
+                                    <td><span class="amount">฿{{ round($originalPrice) }}</span></td>
                                 </tr>
+
+                            @if ($isValidCoupon)
+                                <tr class="bg-secondary">
+                                    <th scope="row">{{ trans('messages.couponprice') }} ({{ trans('messages.couponcode') }}: {{ $coupon->code }} - {{ $coupon->discount * 100 }}%)</th>
+                                    <td><span class="amount">฿{{ round($couponAmount) }}</span><button class="float-end" wire:loading.attr="disabled" wire:click="removeCoupon">x</button></td>
+                                </tr>
+                            @endif
+
                                 <tr>
                                     <th scope="row">{{ trans('messages.total') }}:</th>
-                                    <td><span class="amount">฿{{ $totalPrice }}</span></td>
+                                    <td><span class="amount">฿{{ round($finalPrice) }}</span></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -165,12 +191,12 @@
                     <hr />
 
                     <div class="row mt-3">
+                        
+                        <div class="col-md-6"></div>
                         <div class="col-md-6">
-                            <button class="btn btn-link text-info" type="button">{{ trans('messages.inputcoupon') }}</button>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" wire:model="coupon" placeholder="{{ trans('messages.coupon') }}" />
-                            <button class="btn btn-danger float-end mt-2" type="button">{{ trans('messages.apply') }}</button>
+                            <input type="text" class="form-control" wire:model="couponCode" placeholder="{{ trans('messages.coupon') }}" />
+                            @error('couponCode') <span class="text-danger error">{{ $message }}</span> @enderror
+                            <button class="btn btn-danger float-end mt-2" type="button" wire:loading.attr="disabled" wire:click="applyCoupon">{{ trans('messages.apply') }}</button>
                         </div>
                     </div>
                     <hr />
@@ -184,13 +210,13 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-danger form-control">
+                            <button type="submit" wire:loading.attr="disabled" class="btn btn-danger form-control">
                                 {{ trans('messages.bookandpay') }}
                             </button>
                         </div>
                     <!--
                         <div class="col-md-12 mt-2">
-                            <button wire:click="saveAndPayLater" class="btn btn-danger form-control">
+                            <button wire:click="saveAndPayLater" wire:loading.attr="disabled" class="btn btn-danger form-control">
                                 {{ trans('messages.saveandpaylater') }}
                             </button>
                         </div>
@@ -200,6 +226,7 @@
             </div>
             
             <!---Customer Orders--->
+            {{--
             <div class="col-md-4 col-md-offset-1 mt-3">
                 <div class="border rounded-3 overflow-hidden depart_trip">
                     <div class="bg_own_color p-3">
@@ -254,6 +281,7 @@
             @endif
 
             </div>
+            --}}
         </div>
     </form>
 

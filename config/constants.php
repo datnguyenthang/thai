@@ -1,24 +1,91 @@
 <?php
+    //LANGUAGE
     define('LANGUAGES', ['en', 'tha']);
 
-    define('USERSTATUS', [0 => 'Active', 1 => 'Deactive']);
-    define('USERTYPE', [0 => 'User', 1 => 'Admin', 2 => 'Manager', 3 => 'Moderator']);
+    define('ACTIVE', 0);
+    define('DEACTIVE', 1);
 
-    define('LOCATIONSTATUS', [0 => "Open", 1 => "Close"]);
-    define('AGENTSTATUS', [0 => "Open", 1 => "Close"]);
+    //USER
+    define('USERSTATUS', [
+                            0 => 'Active', 
+                            1 => 'Deactive'
+                        ]);
+    define('USER', 0);
+    define('ADMIN', 1);
+    define('MANAGER', 2);
+    define('MODERATOR', 3);
+    define('AGENT', 4);
+    define('USERTYPE', [
+                        USER => 'User',
+                        ADMIN => 'Admin', 
+                        MANAGER => 'Manager',
+                        MODERATOR => 'Moderator',
+                        AGENT => 'Agent'
+                    ]);
 
-    define('RIDESTATUS', [0 => "Open", 1 => "Close"]);
+    //LOCATION
+    define('LOCATIONSTATUS', [
+                                0 => "Open",
+                                1 => "Close"
+                            ]);
 
-    define('TRIPTYPE', [1 => "Oneway", 2 => "Roundtrip"]);
+    //PROMOTION
+    define('PROMOTIONSTATUS', [
+                                0 => "Open",
+                                1 => "Close"
+                            ]);
+    
+    //AGENT
+    //define('AGENTTYPE', []);
+    //define('ATYPE', []);
+    define('RESORTAGENT', 1);
+    define('TRAVELAGENT', 2);
+    define('WEBSITEAGENT', 3);
+    define('OTHERSAGENT', 9);
+    define('ATYPE', [ 
+                        RESORTAGENT => "Resort agent",
+                        TRAVELAGENT => "Travel agent",
+                        WEBSITEAGENT => "Website agent",
+                        OTHERSAGENT => "Others",
+                    ]);
+    define('AGENTPAYMENTTYPE', [
+                                    0 => "Cash", 
+                                    1 => "Transfer", 
+                                    2 => "Card"
+                                ]);
+    define('AGENTSTATUS', [
+                            0 => "Open", 
+                            1 => "Close"
+                        ]);
+
+    //CUSTOMER
+    define('CUSTOMERTYPESTATUS', [
+                                    0 => "Open", 
+                                    1 => "Close"
+                                ]);
+    define('CUSTOMERTYPE', [
+                                0 => "Online", 
+                                1 => "Walk-in", 
+                                2 => "Sale",
+                                3 => "Agent"
+                            ]);
+
+    //RIDE
+    define('RIDESTATUS', [
+                            0 => "Open", 
+                            1 => "Close"
+                        ]);
+
+    //ORDER
     define('ONEWAY', 1);
     define('ROUNDTRIP', 2);
+    define('TRIPTYPE', [
+                        ONEWAY => "Oneway", 
+                        ROUNDTRIP => "Roundtrip"
+                    ]);
 
     define('DEPARTURETICKET', 1);
     define('RETURNTICKET', 2);
-
-    define('CUSTOMERTYPE', [0 => "Online", 1 => "Walk-in", 2 => "Admin-Order"]);
-
-    define('PAYMENTTYPE', [0 => "Cash", 1 => "Transfer", 2 => "Card"]);
 
     define('PICKUPDONTUSESERVICE', 0);
     define('PICKUPANY', 1);
@@ -28,18 +95,41 @@
     define('DROPOFFANY', 1);
     define('DROPOFFANYOTHER', 2);
 
-    define('CARDPAYMENT', 0);
-    define('BANKTRANSFERPAYMENT', 1);
-
+    //ORDER STATUS
     define('NEWORDER', 0);
-    define('UPPLOADTRANSFER', 4);
-    define('COMPLETEDORDER', 99);
+    define('UPPLOADTRANSFER', 1);
+    define('CANCELDORDER', 6);
+    define('CONFIRMEDORDER', 4);
+    define('COMPLETEDORDER', 9);
 
-    define('ORDERSTATUS', [NEWORDER => "New Order",
-                            1 => "Waiting for Payment", 
-                            2 => "Partial paid", 
-                            3 => "Wait Approve", 
+    define('ORDERSTATUS', [
+                            NEWORDER => "New Order",
                             UPPLOADTRANSFER => "Upload Transfered", 
-                            5 => "Transfered", 
-                            6 => "Canceled",
-                            COMPLETEDORDER => "Completed"]);
+                            CONFIRMEDORDER => "Confirmed", 
+                            CANCELDORDER => "Canceled",
+                            COMPLETEDORDER => "Completed"
+                        ]);
+
+    //PAYMENT METHOD
+    define('BANKTRANSFER', 1);
+    define('CARD', 2);
+    define('CASH', 3);
+
+    define('PAYMENTMETHOD', [
+                                BANKTRANSFER => "Bank transfer",
+                                CARD => "Card",
+                                CASH => "Cash"
+                            ]
+                        );
+
+    //PAYMENT STATUS
+    define('NOTPAID', 0);
+    define('PAID', 8);
+    define('PAIDBYCASH', 9);
+    define('PAIDBYAGENT', 10);
+    define('PAYMENTSTATUS', [
+                                NOTPAID => "Not paid",
+                                PAID => "Paid",
+                                PAIDBYCASH => "Paid by cash",
+                                PAIDBYAGENT => "Paid by agent"
+                            ]);

@@ -31,10 +31,13 @@
                             <span class="fw-bold fs-5 lh-1 text-dark">{{ $ride->departTime }}</span><br/>
                             <span class="fs-10 text-secondary lh-1-2">{{ $fromLocationName }}</span>
                         </div>
+
                         <div class="col-md-2 pl-0">
+                            <!--
                             <span class="fs-5 text-secondary lh-1-2">
                                 ·· {{ $ride->distanceTime }} ··
                             </span>
+                            -->
                         </div>
                         <div class="col-md-2">
                             <span class="fw-bold fs-5 lh-1 text-dark">{{ $ride->returnTime }}</span><br/>
@@ -45,7 +48,7 @@
                             <span class="fs-10 text-secondary lh-1-2 seatclass">{{ $ride->seatClass }}</span>
                         </div>
                         <div class="col-md-3 justify-content-center text-center">
-                            <span class="fw-bold fs-5 lh-1 text-center text-dark">฿{{ $ride->price }}</span>
+                            <span class="fw-bold fs-5 lh-1 text-center text-dark">฿{{ round($ride->price) }}</span>
                         </div>
                     </div>
                 @endforeach
@@ -84,9 +87,11 @@
                                 <span class="fs-10 text-secondary lh-1-2">{{ $fromLocationName }}</span>
                             </div>
                             <div class="col-md-2 pl-0">
+                                <!--
                                 <span class="fs-5 text-secondary lh-1-2">
                                     ·· {{ $ride->distanceTime }} ··
                                 </span>
+                                -->
                             </div>
                             <div class="col-md-2">
                                 <span class="fw-bold fs-5 lh-1 text-dark">{{ $ride->returnTime }}</span><br/>
@@ -97,7 +102,7 @@
                                 <span class="fs-10 text-secondary lh-1-2">{{ $ride->seatClass }}</span>
                             </div>
                             <div class="col-md-3 justify-content-center text-center">
-                                <span class="fw-bold fs-5 lh-1 text-center text-dark">฿{{ $ride->price }}</span>
+                                <span class="fw-bold fs-5 lh-1 text-center text-dark">฿{{ round($ride->price) }}</span>
                             </div>
                         </div>
                     @endforeach 
@@ -113,6 +118,7 @@
             <form action="{{ route('proceedbooking') }}" method="post">
                 @CSRF 
                 <input type="hidden" name="tripType" wire:model="tripType" value={{ $tripType }}>
+                <input type="hidden" name="countTicketSelected" wire:model="countTicketSelected">
                 <input type="hidden" name="fromLocation" wire:model="fromLocation" value={{ $fromLocation }}>
                 <input type="hidden" name="toLocation" wire:model="toLocation" value={{ $toLocation }}>
                 <input type="hidden" name="departureDate" wire:model="departureDate" value={{ $departureDate }}>
@@ -131,7 +137,7 @@
                     </div>
                     <div class="">
                     @if (isset($departRides[0]))
-                        <div class="p-3 {{ $order_depart_rideId > 0 ? '' : 'd-none' }}"">
+                        <div class="p-3 {{ $order_depart_rideId > 0 ? '' : 'd-none' }}">
                             <div class="d-flex justify-content-between">
                                 <h5 class="text-center fw-bold mt-3" >
                                     {{ $fromLocationName }}
@@ -144,14 +150,14 @@
                             </div>
                             <div class="text-left">
                                 <span><i class="fas fa-chair fa-lg"></i> {{ $departRides[0]->name }} ({{ $departRides[0]->seatClass }})</span>
-                                <span class="float-end">{{ $departRides[0]->price }}$</span>
+                                <span class="float-end">{{ $departRides[0]->price }}฿</span>
                             </div>
                             <span>{{ date('F j, Y', strtotime($departRides[0]->departDate)) }}, {{$departRides[0]->departTime }}</span>
                         </div>
                     @endif
                     @if ($tripType == ROUNDTRIP && $order_return_rideId > 0)
                         @if (isset($returnRides[0]))
-                            <div class="p-3 {{ $order_return_rideId > 0 ? '' : 'd-none' }}"">
+                            <div class="p-3 {{ $order_return_rideId > 0 ? '' : 'd-none' }}">
                                 <hr />
                                 <div class="d-flex justify-content-between">
                                     <h5 class="text-center fw-bold mt-3" >
@@ -165,7 +171,7 @@
                                 </div>
                                 <div class="text-left">
                                     <span><i class="fas fa-chair fa-lg"></i> {{ $returnRides[0]->name }} ({{ $returnRides[0]->seatClass }})</span>
-                                    <span class="float-end">{{ $returnRides[0]->price }}$</span>
+                                    <span class="float-end">{{ $returnRides[0]->price }}฿</span>
                                 </div>
                                 <span>{{ date('F j, Y', strtotime($returnRides[0]->departDate)) }}, {{$returnRides[0]->departTime }}</span>
                             </div>

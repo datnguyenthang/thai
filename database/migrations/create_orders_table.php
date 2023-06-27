@@ -23,15 +23,20 @@ return new class extends Migration
             $table->integer('promotionId')->nullable($value = true);
             $table->string('firstName');
             $table->string('lastName');
-            $table->decimal('phone', $precision = 11, $scale = 0);
+            $table->string('phone');
             $table->string('email');
             $table->string('note')->nullable($value = true);
             $table->string('pickup')->nullable($value = true);
             $table->string('dropoff')->nullable($value = true);
             $table->integer('adultQuantity')->nullable($value = true);
             $table->integer('childrenQuantity')->nullable($value = true);
-            $table->decimal('price', $precision = 10, $scale = 2);
+            $table->decimal('originalPrice', $precision = 10, $scale = 2);/*Original Price */
+            $table->decimal('couponAmount', $precision = 10, $scale = 2)->nullable($value = true);/*Price after applying Coupon*/
+            $table->decimal('finalPrice', $precision = 10, $scale = 2);/*Final price */
+            $table->decimal('extraFee', $precision = 10, $scale = 2)->nullable($value = true);/*Extra fee */
             $table->dateTime('bookingDate', $precision = 0);
+            $table->tinyInteger('paymentMethod')->nullable($value = true);
+            $table->tinyInteger('paymentStatus')->default(0)->nullable($value = true);
             $table->tinyInteger('status')->default(0); /* 0=>Book, 9=>Already paid */
             $table->timestamps();
         });

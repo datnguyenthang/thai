@@ -23,7 +23,7 @@
 					{{ trans('messages.bookingdate') }}	  <strong>{{ date('F j, Y', strtotime($order->bookingDate)) }}</strong>
 				</li>
 				<li class="order_total">
-					{{ trans('messages.bookingtotal') }}	      <strong><span class="order_amount">฿</span>{{ $order->price }}</strong>
+					{{ trans('messages.bookingtotal') }}	      <strong><span class="order_amount">฿</span>{{ $order->finalPrice }}</strong>
 				</li>		
 			</ul>
         </div>
@@ -74,11 +74,19 @@
                 <tfoot>
                     <tr>
                         <th scope="row">{{ trans('messages.subtotal') }}</th>
-                        <td><span class="amount">฿{{ $order->price }}</span></td>
+                        <td><span class="amount">฿{{ round($order->originalPrice) }}</span></td>
                     </tr>
+
+                    @if ($order->couponAmount)
+                        <tr class="bg-secondary">
+                            <th scope="row">{{ trans('messages.couponprice') }} ({{ trans('messages.couponcode') }}: {{ $order->promotionCode }} - {{ $order->discount * 100 }}%)</th>
+                            <td><span class="amount">฿{{ round($order->couponAmount) }}</span></td>
+                        </tr>
+                    @endif
+
                     <tr>
                         <th scope="row">{{ trans('messages.total') }}:</th>
-                        <td><span class="amount">฿{{ $order->price }}</span></td>
+                        <td><span class="amount">฿{{ $order->finalPrice }}</span></td>
                     </tr>
                 </tfoot>
             </table>

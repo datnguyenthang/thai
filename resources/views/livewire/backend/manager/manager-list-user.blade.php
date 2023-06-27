@@ -8,6 +8,7 @@
                 <th wire:click="sortBy('name')"><i class="fas fa-sort"></i>{{ trans('backend.username') }}</th>
                 <th wire:click="sortBy('email')"><i class="fas fa-sort"></i>{{ trans('backend.useremail') }}</th>
                 <th wire:click="sortBy('role')"><i class="fas fa-sort"></i>{{ trans('backend.userrole') }}</th>
+                <th wire:click="sortBy('agentId')"><i class="fas fa-sort"></i>{{ trans('backend.useragent') }}</th>
                 <th><i class="fas fa-sort"></i>{{ trans('backend.userstatus') }}</th>
                 <th><i class="fas fa-tasks"></i>{{ trans('backend.action') }}</th>
             </tr>
@@ -18,6 +19,7 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role }}</td>
+                    <td>@if($user->agentId) {{ $listAgent[$user->agentId] }} @endif</td>
                     <td>{{ $user->status }}</td>
                     <td>
                         <button class="call-btn btn btn-outline-primary btn-floating btn-sm"

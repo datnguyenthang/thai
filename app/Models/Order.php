@@ -12,7 +12,8 @@ class Order extends Model
 
     protected $fillable = [
         'userId', 'agentId', 'code', 'customerType', 'isReturn', 'promotionId', 'firstName', 'lastName', 'phone', 'email', 'note',
-        'pickup', 'dropoff', 'adultQuantity', 'childrenQuantity', 'price', 'bookingDate', 'status'
+        'pickup', 'dropoff', 'adultQuantity', 'childrenQuantity', 'originalPrice', 'couponAmount', 'finalPrice', 'bookingDate',
+        'extraFee', 'paymentMethod', 'paymentStatus', 'status'
     ];
 
     public function orderTickets()
@@ -22,10 +23,15 @@ class Order extends Model
 
     public static function generateCode()
     {
-        $code = Str::random(10);
+        $latestId = self::max('id');
+        $newId = $latestId + 1;
+
+        $code = 'SDG' . str_pad($newId, 8, '0', STR_PAD_LEFT);
         while (self::codeExists($code)) {
-            $code = Str::random(10);
+            $newId++;
+            $code = 'SDG' . str_pad($newId, 8, '0', STR_PAD_LEFT);
         }
+
         return $code;
     }
 

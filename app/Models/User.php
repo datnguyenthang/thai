@@ -22,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'agentId',
         'password',
         'role',
         'status',
@@ -55,7 +56,7 @@ class User extends Authenticatable
     protected function role(): Attribute
     {   
         return new Attribute(
-           get: fn ($value) =>  ["user", "admin", "manager", "moderator"][$value],
+           get: fn ($value) =>  ["user", "admin", "manager", "moderator", "agent"][$value],
         );
     }
 

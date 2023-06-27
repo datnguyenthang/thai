@@ -21,8 +21,8 @@ class Booking extends Component
     public $toLocationList;
     public $departureDate;
     public $returnDate;
-    public $adults;
-    public $children;
+    public $adults = 1;
+    public $children = 0;
 
     public function mount(){
         $locations = Location::get();
@@ -38,6 +38,16 @@ class Booking extends Component
 
         $this->departureDate = now()->addDay()->toDateString();
         $this->returnDate = now()->addDays(2)->toDateString();
+    }
+
+    public function addOne($model){
+        if ($model == 'adults') $this->adults += 1;
+        if ($model == 'children') $this->children += 1;
+    }
+
+    public function minusOne($model){
+        if ($model == 'adults' && $this->adults >= 2) $this->adults -= 1;
+        if ($model == 'children' && $this->children >= 1) $this->children -= 1;
     }
 
     public function chooseTripType($typeTrip = 0){

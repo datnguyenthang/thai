@@ -7,6 +7,7 @@ return [
     'location' => 'Location',
     'ride' => 'Ride',
     'agent' => 'Agent',
+    'promotion' => 'Promotion',
 
     //ORDER
     'listorder' => 'List Order',
@@ -53,7 +54,7 @@ return [
     'coupon' => 'Coupon',
     'apply' => 'Apply', 
     'review' => 'Review', 
-    'foundrides' => 'Rides found',
+    'foundrides' => ':totalride Rides found',
     'nametrip' => 'Trip Name',
     'departtime' => 'Departure time',
     'distancetime' => 'Distance time',
@@ -62,24 +63,52 @@ return [
     'selecttrip' => 'Select Trip',
     'seatclassprice' => 'Seat Class Price',
     'notripmatch' => ' Not found trip!',
+    'name' => 'Name',
+    'next' => 'Next',
+    'back' => 'Back',
+    'areyousure' => 'Are you sure?',
+    'booking' => 'Booking',
+    'cancel' => 'Cancel',
+    'done' => 'Done',
+    'info' => 'Info',
+    'review' => 'Review',
+    'payment' => 'Payment',
+    
 
     'id' => 'ID',
     'save' => 'Save',
     'search' => 'Search',
     'close' => 'Close',
 
+    //Customer
+    'createcustomertype' => 'Create Customer Type',
+    'customertypename' => 'Name',
+    'customertypecode' => 'Code',
+    'customertypeprice' => 'Price',
+    'listcustomertype' => 'List type of customer',
+    'customertypestatus' => 'Status',
+
     //Agent
     'createagent' => 'Create Agent',
     'listagent' => 'List Agent',
     'agentname' => 'Agent Name',
     'agentstatus' => 'Agent Status',
-    
+    'agentcode' => 'Code',
+    'agenttype' => 'Agent type',
+    'atype' => 'Type',
+    'agentmanager' => 'Manager',
+    'agentemail' => 'Email',
+    'agentphone' => 'Phone',
+    'agentline' => 'Line',
+    'agentpaymenttype' => 'Payment Type',
 
     //Location
     'createlocation' => 'Create Location',
     'listlocation' => 'List Location',
     'locationname' => 'Location Name',
     'locationstatus' => 'Location Status',
+    'locationnameoffice' => 'Name of office',
+    'locationgooglemapurl' => 'URL',
 
     //Ride
     'createride' => 'Create Ride',
@@ -108,6 +137,7 @@ return [
     'sunday' => 'Sunday',
     'loopfrom' => 'Loop From',
     'loopto' => 'Loop To',
+    'hoursBeforeBooking' => 'Allow booking before hours',
 
     //USER
     'createuser' => 'Create User',
@@ -116,5 +146,14 @@ return [
     'userpassword' => 'Password',
     'userrole' => 'Role',
     'userstatus' => 'Status',
+    'useragent' => 'Agent',
     
+    //PROMOTION
+    'createpromotion' => 'Create Promotion',
+    'listpromotion' => 'Promotion List',
+    'promotionname' => 'Promotion Name',
+    'promotionstatus' => 'Promotion Status',
+    'promotioncode' => 'Promotion Code',
+    'promotionquantity' => 'Promotion Quantity',
+    'promotiondiscount'=> 'Promotion Discount',
 ];

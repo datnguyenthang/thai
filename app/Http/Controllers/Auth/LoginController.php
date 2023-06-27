@@ -56,6 +56,8 @@ class LoginController extends Controller
                 return redirect('/agent');
             } else if (auth()->user()->role == 'moderator') {
                 return redirect('/moderatororderlist');
+            } else if (auth()->user()->role == 'agent') {
+                return redirect('/agentorder');
             } else {
                 return redirect()->route('home');
             }

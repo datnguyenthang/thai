@@ -20,26 +20,23 @@
   
               <div id="tabs-1" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="false" style="display: block;">
                 <form action="{{ route('trip') }}" class="form1">
+                  
                   <div class="row">
-
-                    <div class="col-lg-1 col-sm-12">
-                        <div class="select1_wrapper">
-                          <label></label>
-                          <div class="form-group">
-                            <div class="form-checkbox">
-                                <label for="roundtrip" class="">
-                                    <input type="radio" class="" id="roundtrip" value="{{ ROUNDTRIP }}" name="tripType" wire:model="tripType" wire:click="chooseTripType(1)">
-                                    <span></span>{{ trans('messages.roundtrip') }}
-                                </label>
-                                <label for="one-way" class="">
-                                    <input type="radio" class="" id="one-way" value="{{ ONEWAY }}" name="tripType" wire:model="tripType" wire:click="chooseTripType(0)">
-                                    <span></span>{{ trans('messages.oneway') }}
-                                </label>
-                            </div>
-                          </div>
-                        </div>
+                    <div class="col-lg-2 col-sm-2">
+                      <div class="rdio rdio-primary">
+                        <input type="radio" class="" id="roundtrip" value="{{ ROUNDTRIP }}" name="tripType" wire:model="tripType" wire:click="chooseTripType(1)">
+                        <label for="roundtrip" class="">{{ trans('messages.roundtrip') }}</label>
+                      </div>
                     </div>
+                    <div class="col-lg-2 col-sm-2">
+                      <div class="rdio rdio-primary">
+                        <input type="radio" class="" id="one-way" value="{{ ONEWAY }}" name="tripType" wire:model="tripType" wire:click="chooseTripType(0)">
+                        <label for="one-way" class="">{{ trans('messages.oneway') }}</label>
+                      </div>
+                    </div>
+                  </div>
 
+                  <div class="row">
                     <div class="col-lg-2 col-sm-12">
                       <div class="select1_wrapper">
                         <label>{{ trans('messages.departure') }}</label>
@@ -50,7 +47,7 @@
                                 <option value="{{ $location->id }}">{{ $location->name }}</option>
                             @endforeach
                           </select>
-                          <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-vflw-container"><span class="select2-selection__rendered" id="select2-vflw-container" title="City or Airport">City or Port</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                          <!--<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-vflw-container"><span class="select2-selection__rendered" id="select2-vflw-container" title="City or Airport">City or Port</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>-->
                         </div>
                       </div>
                     </div>
@@ -64,7 +61,7 @@
                                 <option value="{{ $location->id }}">{{ $location->name }}</option>
                             @endforeach
                           </select>
-                          <span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-65of-container"><span class="select2-selection__rendered" id="select2-65of-container" title="City or Airport">City or Port</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                          <!--<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-65of-container"><span class="select2-selection__rendered" id="select2-65of-container" title="City or Airport">City or Port</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>-->
                         </div>
                       </div>
                     </div>
@@ -87,29 +84,37 @@
                       </div>
                     </div>
                     @endif
-                    
-                    <div class="col-lg-1 col-sm-12">
+                    {{--
+                    <div class="col-lg-2 col-sm-12">
                       <div class="select1_wrapper">
                         <label>{{ trans('messages.adults') }}</label>
                         <div class="">
                           <input type="number" id="adults" name="adults" class="form-control"  min="1" value="1" required/>
-                          <!--
-                          <select class="select2 select select3 select2-hidden-accessible" style="width: 100%" tabindex="-1" aria-hidden="true">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                          </select>
-                          <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-76dl-container"><span class="select2-selection__rendered" id="select2-76dl-container" title="1">1</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-                        -->
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-1 col-sm-12">
+                    --}}
+                    <div class="col-lg-2 col-sm-12">
+                      <div class="select1_wrapper">
+                        <label>{{ trans('messages.adults') }}</label>
+                        <div class="input-group" x-data="{ adults: @entangle('adults') }">
+                          <span class="input-group-btn">
+                              <button type="button" x-on:click="adults > 1 ? adults-- : adults = 1" class="btn bg_own_color btn-number">
+                                <i class="fas fa-minus"></i>
+                              </button>
+                          </span>
+                          <input type="text" wire:model.lazy="adults" id="adults" name="adults" class="form-control input-number" min="1" max="100" required/>
+                          <span class="input-group-btn">
+                              <button type="button" x-on:click="adults++" class="btn bg_own_color btn-number">
+                                <i class="fas fa-plus"></i>
+                              </button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {{--
+                    <div class="col-lg-2 col-sm-12">
                       <div class="select1_wrapper">
                         <label>{{ trans('messages.children') }}</label>
                         <div class="">
@@ -117,6 +122,28 @@
                         </div>
                       </div>
                     </div>
+                    --}}
+                    <div class="col-lg-2 col-sm-12">
+                      <div class="select1_wrapper">
+                        <label>{{ trans('messages.children') }}</label>
+                        <div class="input-group" x-data="{ children: @entangle('children') }">
+                          <span class="input-group-btn">
+                              <button type="button" x-on:click="children >= 1 ? children-- : children = 0" class="btn bg_own_color btn-number">
+                                <i class="fas fa-minus"></i>
+                              </button>
+                          </span>
+                          <input type="text" wire:model.lazy ="children" id="children" name="children" class="form-control input-number" min="1" max="100" required/>
+                          <span class="input-group-btn">
+                              <button type="button" x-on:click="children++" class="btn bg_own_color btn-number">
+                                <i class="fas fa-plus"></i>
+                              </button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
                     <div class="col-lg-1 col-sm-12">
                       <div class="button1_wrapper">
                         <button type="submit" class="btn-default btn-form1-submit">Search</button>
@@ -125,6 +152,30 @@
                   </div>
                 </form>
               </div>
+
+              @once
+                <script>
+                    document.addEventListener('livewire:load', function () {
+                        $('.input-number').keydown(function (e) {
+                            // Allow: backspace, delete, tab, escape, enter and .
+                            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+                                // Allow: Ctrl+A
+                                (e.keyCode == 65 && e.ctrlKey === true) ||
+                                // Allow: home, end, left, right
+                                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                                // let it happen, don't do anything
+                                return;
+                            }
+                            // Ensure that it is a number and stop the keypress
+                            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) &&
+                                (e.keyCode < 96 || e.keyCode > 105)) {
+                                e.preventDefault();
+                            }
+                        });
+                    });
+                </script>
+              @endonce
+
               <!--
               <div id="tabs-2" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom tab-hidden" role="tabpanel" aria-hidden="true" style="display: none;">
                 <form action="javascript:;" class="form1">

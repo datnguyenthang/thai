@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Frontend\Homepage;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 use App\Models\Ride;
 use App\Models\Location;
@@ -12,10 +13,12 @@ use App\Models\SeatClass;
 use App\Models\Order;
 use App\Models\OrderTicket;
 use App\Models\Pickupdropoff;
+use App\Models\Promotion;
 
 class ProceedBooking extends Component
 {
     public $tripType;
+    public $countTicketSelected;
     public $fromLocation;
     public $toLocation;
     public $departureDate;
@@ -38,8 +41,9 @@ class ProceedBooking extends Component
 
     public $departPrice = 0;
     public $returnPrice = 0;
-    public $subPrice;
-    public $totalPrice;
+    public $originalPrice;
+    public $couponAmount;
+    public $finalPrice;
 
     public $firstName;
     public $lastName;
@@ -55,6 +59,11 @@ class ProceedBooking extends Component
     public $promotionId;
     public $agreepolicy;
 
+    public $coupon;
+    public $couponCode;
+    public $isValidCoupon = false;
+    public $discountAmount= null;
+
     public $pickupdropoffs;
 
     protected $rules = [
@@ -62,10 +71,13 @@ class ProceedBooking extends Component
         'lastName' => 'required',
         'phone' => 'numeric|digits_between:8,11',
         'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i',
+        'pickupAnyOther' => 'required_if:pickup,'.PICKUPANYOTHER,
+        'dropoffAnyOther' => 'required_if:dropoff,'.DROPOFFANYOTHER,
     ];
 
     public function mount(Request $request) {
-        $this->tripType = $request->input('tripType');
+        //$this->tripType = $request->input('tripType');
+        $this->tripType = $request->input('countTicketSelected');
         $this->fromLocation = $request->input('fromLocation');
         $this->toLocation = $request->input('toLocation');
         $this->departureDate = $request->input('departureDate');
@@ -73,36 +85,63 @@ class ProceedBooking extends Component
         $this->adults = $request->input('adults');
         $this->children = $request->input('children');
 
-        $this->fromLocationName = Location::find($this->fromLocation)->name;
-        $this->toLocationName = Location::find($this->toLocation)->name;
-
-        $this->order_depart_rideId = $request->input('order_depart_rideId');
-        $this->order_depart_seatClassId = $request->input('order_depart_seatClassId');
+        $this->order_depart_rideId = $request->input('order_depart_rideId') ? $request->input('order_depart_rideId') : $request->input('order_return_rideId');
+        $this->order_depart_seatClassId = $request->input('order_depart_seatClassId') ? $request->input('order_depart_seatClassId') : $request->input('order_return_seatClassId');
+        
         $this->order_return_rideId = $request->input('order_return_rideId');
         $this->order_return_seatClassId = $request->input('order_return_seatClassId');
 
+        //CHECKING VALID PARAMETER
+        if (
+            !$request->has('countTicketSelected') ||
+            !$request->has('fromLocation') ||
+            !$request->has('toLocation') ||
+            !$request->has('departureDate') ||
+            !$request->has('returnDate') ||
+            !$request->has('adults') ||
+            !$request->has('children') ||
+            !$this->order_depart_rideId ||
+            !$this->order_depart_seatClassId
+        ) return redirect()->to('/'); 
+        
+        //Get location name
+        $this->fromLocationName = Location::find($this->fromLocation)->name;
+        $this->toLocationName = Location::find($this->toLocation)->name;
+        
+        //Get departure ticket info
         $this->depart = Ride::find($this->order_depart_rideId);
         $this->seatDepart = SeatClass::find($this->order_depart_seatClassId);
-        
+
         if ($this->tripType == ROUNDTRIP) {
             $this->return = Ride::find($this->order_return_rideId);
             $this->seatReturn = SeatClass::find($this->order_return_seatClassId);
-            $this->returnPrice = $this->seatReturn->price * ($this->adults + $this->children);
+            
+            //currently, price don't include children
+            //$this->returnPrice = $this->seatReturn->price * ($this->adults + $this->children);
+            $this->returnPrice = $this->seatReturn->price * $this->adults;
         }
 
-        $this->departPrice = $this->seatDepart->price * ($this->adults + $this->children);
+        //currently, price don't include children
+        //$this->departPrice = $this->seatDepart->price * ($this->adults + $this->children);
+        $this->departPrice = $this->seatDepart->price * $this->adults;
 
         $this->pickupdropoffs = Pickupdropoff::get();
         $this->pickup = 0;
         $this->dropoff = 0;
 
-        $this->subPrice = $this->departPrice + $this->returnPrice;
-        $this->totalPrice = $this->departPrice + $this->returnPrice;
+        $this->originalPrice = $this->departPrice + $this->returnPrice;
+        $this->finalPrice = $this->departPrice + $this->returnPrice;
+    }
+
+    public function updatedPickup($pickup){
+        if ($this->pickup == PICKUPANY) $this->pickupAny =  $this->pickupdropoffs->first()->name;
+    }
+
+    public function updatedDropoff($dropoff){
+        if ($this->dropoff == DROPOFFANY) $this->dropoffAny =  $this->pickupdropoffs->first()->name;
     }
 
     public function bookTicket(){
-        //$this->validate();
-        //$this->dispatchBrowserEvent('scroll-to-error');
 
         $this->withValidator(function ($validator) {
             if ($validator->fails()) {
@@ -111,7 +150,7 @@ class ProceedBooking extends Component
         })->validate();
         
         //set value for pickup and dropoff
-        if ($this->pickup == PICKUPDONTUSESERVICE) $this->dropoff = "";
+        if ($this->pickup == PICKUPDONTUSESERVICE) $this->pickup = "";
         if ($this->pickup == PICKUPANY) $this->pickup = $this->pickupAny;
         if ($this->pickup == PICKUPANYOTHER) $this->pickup = $this->pickupAnyOther;
 
@@ -119,10 +158,10 @@ class ProceedBooking extends Component
         if ($this->dropoff == DROPOFFANY) $this->dropoff = $this->dropoffAny;
         if ($this->dropoff == DROPOFFANYOTHER) $this->dropoff = $this->dropoffAnyOther;
 
-        $codeDepart = OrderTicket::generateCode();
-        $codeReturn = OrderTicket::generateCode();
 
-        $price = $this->totalPrice;
+        $codeOrder = Order::generateCode();
+        $codeDepart = $codeOrder.'-001';
+        $codeReturn = $codeOrder.'-002';
         
         // MAKE A TRANSACTION TO ENSURE DATA CONSISTENCY
         DB::beginTransaction();
@@ -130,7 +169,7 @@ class ProceedBooking extends Component
         try {
             //SAVE ORDER FIRST
             $order = Order::create([
-                'code' => Order::generateCode(),
+                'code' => $codeOrder,
                 'isReturn' => intVal($this->tripType),
                 'promotionId' => intVal($this->promotionId),
                 'firstName' => $this->firstName,
@@ -142,7 +181,9 @@ class ProceedBooking extends Component
                 'dropoff' => $this->dropoff,
                 'adultQuantity' => intVal($this->adults),
                 'childrenQuantity' => intVal($this->children),
-                'price' => $this->totalPrice,
+                'originalPrice' => $this->originalPrice,
+                'couponAmount' => $this->couponAmount,
+                'finalPrice' => $this->finalPrice,
                 'bookingDate' => date('Y-m-d H:i:s'),
                 'status' => 0,
             ]);
@@ -150,7 +191,7 @@ class ProceedBooking extends Component
             //SAVE ORDER TICKET DEPART FIRST
             OrderTicket::create([
                 'orderId' => intVal($order->id),
-                'code' => OrderTicket::generateCode(),
+                'code' => $codeDepart,
                 'rideId' => intVal($this->order_depart_rideId),
                 'seatClassId' => intVal($this->order_depart_seatClassId),
                 'price' => intVal($this->departPrice), 
@@ -162,7 +203,7 @@ class ProceedBooking extends Component
             if ($this->tripType == ROUNDTRIP) {
                 OrderTicket::create([
                     'orderId' => intVal($order->id),
-                    'code' => OrderTicket::generateCode(),
+                    'code' => $codeReturn,
                     'rideId' => intVal($this->order_return_rideId),
                     'seatClassId' => intVal($this->order_return_seatClassId),
                     'price' => intVal($this->returnPrice),
@@ -178,7 +219,61 @@ class ProceedBooking extends Component
             DB::rollback();
             throw $e;
         }
-        
+    }
+
+    public function removeCoupon() {
+        $this->couponCode = '';
+        $this->isValidCoupon = false;
+        $this->promotionId = null;
+        $this->discountAmount = 0;
+        $this->finalPrice = $this->originalPrice;
+    }
+
+    public function applyCoupon() {
+        //Reset data before applying new coupon code
+        $this->isValidCoupon = false;
+        $this->promotionId = null;
+        $this->discountAmount = 0;
+        $this->finalPrice = $this->originalPrice;
+
+        //applying coupon
+        $this->validate([
+            'couponCode' => 'required|exists:promotions,code'
+        ]);
+
+        $coupon = Promotion::where('code', $this->couponCode)->first();
+
+        //Check valid time of coupon
+        if ($coupon && Carbon::now()->between($coupon->fromDate, $coupon->toDate)) {
+            //check valid quantity of coupon 
+            $ordersWithCoupon = Order::where('promotionId', $coupon->id)
+                                       ->where('status', COMPLETEDORDER)->count();
+
+            if ($coupon->quantity == 0) { // if coupon has unlimited used time
+                $this->isValidCoupon = true;
+            } elseif ($ordersWithCoupon < $coupon->quantity) { // if coupon has less than used time
+                $this->isValidCoupon = true;
+            } else {  // if coupon has greater than used time
+                $this->isValidCoupon = fale;
+                $this->addError('coupon', trans('messages.invalidcouponquantity'));
+            }
+        } else {
+            $this->isValidCoupon = false;
+            $this->addError('coupon', trans('messages.invalidcoupondate'));
+        }
+
+        if ($this->isValidCoupon) {
+            $this->promotionId = $coupon->id;
+            $this->coupon = $coupon;
+
+            // Apply the discount to orginalPrice
+            $this->couponAmount = $this->originalPrice * $coupon->discount;
+            $this->finalPrice = round($this->originalPrice - $this->couponAmount);
+
+            //apply to each ticket 
+            //$this->departPrice = round($this->departPrice - ($this->departPrice * $coupon->discount));
+            //$this->returnPrice = round($this->returnPrice - ($this->returnPrice * $coupon->discount));
+        }
     }
 
     public function render()

@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Models\Ride;
 use App\Models\Location;
 use App\Models\SeatClass;
+use App\Models\Order;
 
 class Trip extends Component
 {
@@ -107,13 +108,27 @@ class Trip extends Component
     }
 
     public function checkEnableSubmit(){
+        /*
         if ($this->tripType == ONEWAY && $this->countTicketSelected == ONEWAY) {
             return $this->enableSubmit = true;
         }
         if ($this->tripType == ROUNDTRIP && $this->countTicketSelected == ROUNDTRIP) {
             return $this->enableSubmit = true;
         }
+        */
+        if ($this->countTicketSelected >= ONEWAY) return $this->enableSubmit = true; //allow go next when selecting only one trip
+
         return $this->enableSubmit = false;
+    }
+
+    function countingSeatBooked($rideId = 0, $seatClassId = 0) {
+        $counting = Order::with(['orderTickets' => function($orderTicket){
+                        $orderTicket->query('order_tickets.rideId', $rideId)
+                                    ->query('order_tickets.seatClassId', $seatClassId);
+                    }])
+                    ->where('status', COMPLETEDORDER)
+                    ->sum('adultQuantity');
+        return $counting;
     }
 
     public function getDepartTrip($rideId = 0, $seatClassId = 0)
@@ -121,7 +136,7 @@ class Trip extends Component
         $this->departRides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 
                                             'tl.name as toLocation', 'rides.departTime', 'rides.returnTime',
                                             'rides.departDate', 'rides.status',
-                                            DB::raw('TIME_FORMAT(TIMEDIFF(rides.returnTime, rides.departTime), "%H:%i") AS distanceTime'),
+                                            //DB::raw('TIME_FORMAT(TIMEDIFF(rides.returnTime, rides.departTime), "%H:%i") AS distanceTime'),
                                             'sc.id as seatClassId', 'sc.name as seatClass', 'sc.capacity', 'sc.price', 'sc.status')
                                     ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
                                     ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
@@ -132,10 +147,11 @@ class Trip extends Component
                                         $query->where('rides.departDate', $this->departureDate);
                                         $query->where('rides.status', 0);
                                         $query->where('sc.status', 0);
+                                        $query->where('sc.capacity', '>=', $this->countingSeatBooked('rides.id', 'sc.id') + $this->adults); //check avaiable seatclasses to show
                                         if ($rideId)
                                             $query->where('rides.id', $rideId);
                                         if ($seatClassId)
-                                            $query->where('sc.id', $seatClassId); 
+                                            $query->where('sc.id', $seatClassId);
                                     })
                                     ->get();
     }
@@ -145,7 +161,7 @@ class Trip extends Component
         $this->returnRides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 
                                             'tl.name as toLocation', 'rides.departTime', 'rides.returnTime',
                                             'rides.departDate', 'rides.status',
-                                            DB::raw('TIME_FORMAT(TIMEDIFF(rides.returnTime, rides.departTime), "%H:%i") AS distanceTime'),
+                                            //DB::raw('TIME_FORMAT(TIMEDIFF(rides.returnTime, rides.departTime), "%H:%i") AS distanceTime'),
                                             'sc.id as seatClassId', 'sc.name as seatClass', 'sc.capacity', 'sc.price', 'sc.status')
                                     ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
                                     ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
@@ -156,6 +172,7 @@ class Trip extends Component
                                         $query->where('rides.departDate', $this->departureDate);
                                         $query->where('rides.status', 0);
                                         $query->where('sc.status', 0);
+                                        $query->where('sc.capacity', '>=', $this->countingSeatBooked('rides.id', 'sc.id') + $this->adults); //check avaiable seatclasses to show
                                         if ($rideId)
                                             $query->where('rides.id', $rideId);
                                         if ($seatClassId)

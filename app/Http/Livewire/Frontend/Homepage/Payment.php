@@ -25,6 +25,9 @@ class Payment extends Component
 {
     use WithFileUploads;
 
+    const GOTOPAY = 0;
+    const PAID = 1;
+
     public $step = 0;
 
     public $code;
@@ -45,25 +48,43 @@ class Payment extends Component
 
         $this->code = $this->folderName = Route::current()->parameter('code');
         $this->order = Order::with(['orderTickets' => function($orderTicket){
-                            $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
-                                        ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
-                                        ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
-                                        ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
-                                        ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId');
-                        }])
-                        ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
-                        ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
-                        ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
-                                DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.price',
-                                'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.pickup', 'orders.dropoff',
-                                'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName')
-                        ->where('orders.code', $this->code)
-                        ->first();
+            $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
+                        ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
+                        ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
+                        ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
+                        ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId');
+        }])
+        ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
+        ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
+        ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
+                DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.originalPrice', 'orders.couponAmount', 'orders.finalPrice',
+                'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.pickup', 'orders.dropoff',
+                'orders.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 'a.name as agentName')
+        ->where('orders.code', $this->code)
+        ->first();
 
         //redirect to homepage if there are no order match code found
         if (!$this->order) redirect('/');
 
         $this->loadProof();
+    }
+
+    public function hydrate(){
+        $this->order = Order::with(['orderTickets' => function($orderTicket){
+                        $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
+                                    ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
+                                    ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
+                                    ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
+                                    ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId');
+                    }])
+                    ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
+                    ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
+                    ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
+                            DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.originalPrice', 'orders.couponAmount', 'orders.finalPrice',
+                            'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.pickup', 'orders.dropoff',
+                            'orders.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 'a.name as agentName')
+                    ->where('orders.code', $this->code)
+                    ->first();
     }
 
     //Loading proof images
@@ -100,7 +121,7 @@ class Payment extends Component
     //Upload proof images
     public function uploadProof() {
         $this->validate([
-           'proofFiles.*' => 'required|mimes:jpeg,jpg,png,gif|max:5120',
+           'proofFiles.*' => 'required|mimes:jpeg,jpg,png,gif,pdf|max:5120',
         ]);
 
         //creating folder inside storage folder
@@ -119,6 +140,7 @@ class Payment extends Component
         }
 
         $this->counting++;
+        $this->proofFiles = null;
 
         //get image upload again
         $this->loadProof();
@@ -126,21 +148,21 @@ class Payment extends Component
 
     public function payment($paymentMethod) {
 
-        if ($paymentMethod == BANKTRANSFERPAYMENT) {
+        if ($paymentMethod == BANKTRANSFER) {
             Order::where('code', $this->code)
-                ->update(['status' => UPPLOADTRANSFER]);
+                ->update(['paymentMethod' => BANKTRANSFER, 'status' => UPPLOADTRANSFER]);
         }
 
-        if ($paymentMethod == CARDPAYMENT) {
+        if ($paymentMethod == CARD) {
             Order::where('code', $this->code)
-                ->update(['status' => COMPLETEDORDER]);
+                ->update(['paymentMethod' => CARD, 'status' => COMPLETEDORDER]);
         }
 
-        $this->step = 1;
+        $this->step = self::PAID;
         //send email after finish
 
-        $order = Order::with(['orderTickets' => function($orderTicket){
-            $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
+        $this->order = Order::with(['orderTickets' => function($orderTicket){
+            $orderTicket->select('order_tickets.*', 'r.*','fl.id as locationId', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'fl.nameOffice', 'fl.googleMapUrl', 'sc.name as seatClassName', 'sc.price as seatClassPrice')//,'sc.name as seatClassName')
                         ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
                         ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
                         ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
@@ -149,15 +171,43 @@ class Payment extends Component
             ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
             ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
             ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
-                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.price',
-                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.pickup', 'orders.dropoff',
-                    'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName')
+                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.originalPrice', 'orders.couponAmount', 'orders.finalPrice',
+                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.childrenQuantity', 'orders.pickup', 'orders.dropoff',
+                    'orders.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 'a.name as agentName')
             ->where('orders.code', $this->code)
             ->first();
 
         $pdfFiles = [];
 
+        //Generate eticket
+        foreach($this->order->orderTickets as $orderTicket) {
+            $orderTicket->fullname = $this->order->fullname;
+            $orderTicket->pickup = $this->order->pickup;
+            $orderTicket->dropoff = $this->order->dropoff;
+            $orderTicket->code = $this->order->code;
+            $orderTicket->adultQuantity = $this->order->adultQuantity;
+            $orderTicket->childrenQuantity = $this->order->childrenQuantity;
+
+            if($orderTicket->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $orderTicket->discount);
+
+            if ($orderTicket->type == DEPARTURETICKET) {
+                $pdfFiles[] = ['content' => $this->generateEticket($orderTicket), 'filename' => 'Departure Ticket.pdf'];
+
+                foreach($this->getLocationFile($orderTicket->locationId) as $value){
+                    $pdfFiles[] = ['content' => $value['content'], 'filename' => $value['filename']];
+                }
+                
+            }
+            if ($orderTicket->type == RETURNTICKET) {
+                $pdfFiles[] = ['content' => $this->generateEticket($orderTicket), 'filename' => 'Return Ticket.pdf'];
+
+                foreach($this->getLocationFile($orderTicket->locationId) as $value){
+                    $pdfFiles[] = ['content' => $value['content'], 'filename' => $value['filename']];
+                }
+            }
+        }
         //Generate ticket
+        /*
         foreach($order->orderTickets as $orderTicket) {
             $orderTicket->fullname = $order->fullname;
             $orderTicket->pickup = $order->pickup;
@@ -166,15 +216,49 @@ class Payment extends Component
             if ($orderTicket->type == DEPARTURETICKET) $pdfFiles[] = ['content' => $this->generateTicket($orderTicket), 'filename' => 'Departure Ticket.pdf'];
             if ($orderTicket->type == RETURNTICKET) $pdfFiles[] = ['content' => $this->generateTicket($orderTicket), 'filename' => 'Return Ticket.pdf'];
         }
+        */
+        Mail::to($this->order->email)->send(new SendTicket($this->order, $pdfFiles));
+    }
 
-        //Mail::to($order->email)->send(new SendTicket($order, $pdfFiles));
+    public function getLocationFile($locationId) {
+        $path = 'location/'.$locationId.'/';
+        $allFiles = Storage::disk('public')->allFiles($path);
+       
+        $files = [];
+
+        foreach ($allFiles as $key => $file) {
+            $files[$key]['content'] = Storage::disk('public')->get($file);
+            $files[$key]['filename'] = basename($file);
+        }
+        return collect($files);
     }
 
     public function render() {
         //$this->testPDF(); // Test ticket PDF file
+        //$this->testEticket(); // Test e-ticket PDF file
 
-        if ($this->step === 0) return view('livewire.frontend.homepage.payment');
-        if ($this->step === 1) return view('livewire.frontend.homepage.success-booking');
+        if ($this->step === self::GOTOPAY) return view('livewire.frontend.homepage.payment');
+        if ($this->step === self::PAID) return view('livewire.frontend.homepage.success-booking');
+    }
+
+    public function generateEticket($orderTicket) {
+        $dompdf = new Dompdf();
+        
+        $logoPath = public_path('img/logo.png');
+        $logoData = File::get($logoPath);
+        $logoBase64 = base64_encode($logoData);
+
+        $bgPath = public_path('img/bg.png');
+        $bgData = File::get($bgPath);
+        $bgBase64 = base64_encode($bgData);
+        
+        $dompdf->loadHTML(View::make('pdf.eTicket', compact('orderTicket', 'bgBase64', 'logoBase64')));
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->set_option('isHtml5ParserEnabled', true);
+        $dompdf->render();
+
+        $pdfData = $dompdf->output();
+        return $pdfData;
     }
 
     public function generateTicket($orderTicket) {
@@ -232,6 +316,60 @@ class Payment extends Component
             $dompdf->setPaper($customPaper, 'portrait');
             $dompdf->set_option('isHtml5ParserEnabled', true);
 
+            $dompdf->render();
+
+            $dompdf->stream('pdf.pdf');
+
+            break;
+            exit;
+        }
+    }
+
+    public function testEticket(){
+        $order = Order::with(['orderTickets' => function($orderTicket){
+            $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'fl.nameOffice', 'fl.googleMapUrl', 'sc.name as seatClassName', 'sc.price as seatClassPrice')//,'sc.name as seatClassName')
+                        ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
+                        ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
+                        ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
+                        ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId');
+            }])
+            ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
+            ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
+            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
+                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.originalPrice', 'orders.couponAmount', 'orders.finalPrice',
+                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.childrenQuantity', 'orders.pickup', 'orders.dropoff',
+                    'orders.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 'a.name as agentName')
+            ->where('orders.code', $this->code)
+            ->first();
+
+        $pdfFiles = [];
+
+        //Generate ticket
+        foreach($order->orderTickets as $orderTicket) {
+            $orderTicket->fullname = $order->fullname;
+            $orderTicket->pickup = $order->pickup;
+            $orderTicket->dropoff = $order->dropoff;
+            $orderTicket->code = $order->code;
+            $orderTicket->adultQuantity = $order->adultQuantity;
+            $orderTicket->childrenQuantity = $order->childrenQuantity;
+            if($orderTicket->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $orderTicket->discount);
+
+            if ($orderTicket->type == DEPARTURETICKET) $pdfFiles[] = ['content' => $this->generateEticket($orderTicket), 'filename' => 'Departure Ticket.pdf'];
+            if ($orderTicket->type == RETURNTICKET) $pdfFiles[] = ['content' => $this->generateEticket($orderTicket), 'filename' => 'Return Ticket.pdf'];
+
+            $dompdf = new Dompdf();
+
+            $bgPath = public_path('img/bg.png');
+            $bgData = File::get($bgPath);
+            $bgBase64 = base64_encode($bgData);
+
+            $logoPath = public_path('img/logo.png');
+            $logoData = File::get($logoPath);
+            $logoBase64 = base64_encode($logoData);
+            
+            $dompdf->loadHTML(View::make('pdf.eTicket', compact('orderTicket', 'bgBase64', 'logoBase64')));
+            $dompdf->setPaper('A4', 'portrait');
+            $dompdf->set_option('isHtml5ParserEnabled', true);
             $dompdf->render();
 
             $dompdf->stream('pdf.pdf');

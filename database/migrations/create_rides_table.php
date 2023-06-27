@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('departTime');
             $table->string('returnTime');
             $table->date('departDate');
+            $table->integer('hoursBeforeBooking')->default(0);/* 0=>Anytime*/
             $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
 
             $table->timestamps();

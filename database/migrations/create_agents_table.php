@@ -16,6 +16,14 @@ return new class extends Migration
         Schema::create('agents', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->tinyInteger('agentType');
+            $table->string('code');
+            $table->tinyInteger('type');
+            $table->string('manager');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('line')->nullable($value = true);;
+            $table->tinyInteger('paymentType');
             $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
             $table->timestamps();
         });

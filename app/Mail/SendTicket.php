@@ -32,7 +32,7 @@ class SendTicket extends Mailable
             $this->attachData($pdfFile['content'], $pdfFile['filename']);
         }
 
-        return $this->view('emails.sendTicket')
+        return $this->view('emails.successTicket')
                     ->with(['order' => $this->order]);
     }
 
@@ -44,7 +44,7 @@ class SendTicket extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Seudamgo INFO',
+            subject: 'Seudamgo CONFIRMATION BOOKING',
         );
     }
 
@@ -56,7 +56,7 @@ class SendTicket extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.sendTicket',
+            view: 'emails.successTicket',
         );
     }
 

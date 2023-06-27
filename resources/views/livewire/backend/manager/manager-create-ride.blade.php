@@ -48,6 +48,12 @@
         </div>
 
         <div class="form-outline mb-4">
+            <label class="form-label" for="hoursBeforeBooking">{{ trans('backend.hoursBeforeBooking') }}</label>
+            <input type="number" class="form-control w-50" id="hoursBeforeBooking" wire:model="hoursBeforeBooking" min="0" />
+            @error('hoursBeforeBooking') <span class="text-danger error">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="form-outline mb-4">
             <label class="form-label" for="status">{{ trans('backend.ridestatus') }}</label>
             <select id="status" class="form-select w-50" wire:model="status">
                 @foreach(RIDESTATUS as $key => $value)
@@ -58,7 +64,7 @@
         </div>
 
         <hr />
-        <h1>{{ trans('backend.createseatclassess') }}</h1>
+        <h1>{{ trans('backend.createseatclasses') }}</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -76,15 +82,15 @@
                         @error('seatClasses.'. $index .'.nameClass') <br /><span class="text-danger error">{{ $message }}</span> @enderror
                     </td>
                     <td>
-                        <input type="number" id="capacity_{{ $index }}" wire:model.defer="seatClasses.{{ $index }}.capacity">
+                        <input type="number" id="capacity_{{ $index }}" wire:model.defer="seatClasses.{{ $index }}.capacity" min="0" />
                         @error('seatClasses.'. $index .'.capacity') <br /><span class="text-danger error">{{ $message }}</span> @enderror
                     </td>
                     </td>
                     <td>
-                        <input type="number" id="price_{{ $index }}" wire:model.defer="seatClasses.{{ $index }}.price">
+                        <input type="number" id="price_{{ $index }}" wire:model.defer="seatClasses.{{ $index }}.price" min="0" />
                         @error('seatClasses.'. $index .'.price') <br /><span class="text-danger error">{{ $message }}</span> @enderror
                     </td>
-                    @if($index  > 0)
+                    @if($index > 0)
                     <td>
                         <button type="button" wire:click="removeSeatClass({{ $index }})">{{ trans('backend.remove') }}</button>
                     </td>

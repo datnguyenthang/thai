@@ -76,7 +76,7 @@ class ModeratorOrderlist extends Component
                             ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
                             ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
                             ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
-                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.price',
+                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.finalPrice',
                                     'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 
                                     'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName')
                             ->where('orders.id', $orderId)
@@ -101,7 +101,7 @@ class ModeratorOrderlist extends Component
                             ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
                             ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
                             ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
-                                     DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.price',
+                                     DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.finalPrice',
                                      'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 
                                      'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName')
                             ->where(function ($query) {

@@ -15,6 +15,6 @@ class Promotion extends Model
      * @return response()
      */
     protected $fillable = [
-        'name', 'discount', 'fromDate', 'toDate', 'status'
+        'name', 'code', 'quantity', 'discount', 'fromDate', 'toDate', 'status'
     ];
 }

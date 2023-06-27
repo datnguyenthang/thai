@@ -2,16 +2,24 @@
 
 namespace App\Http\Livewire\Backend\Moderator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use Livewire\Component;
+use Carbon\Carbon;
+
 use App\Models\Ride;
 use App\Models\Location;
 use App\Models\SeatClass;
 use App\Models\Order;
 use App\Models\OrderTicket;
+use App\Models\CustomerType;
+use App\Models\Promotion;
+use App\Models\Pickupdropoff;
 
 class ModeratorOrder extends Component
 {
+    public $step = 1;
+
     public $tripType;
     public $fromLocation;
     public $toLocation;
@@ -23,6 +31,7 @@ class ModeratorOrder extends Component
 
     public $fromLocationList;
     public $toLocationList;
+    public $customerTypelist;
 
     public $depart;
     public $seatDepart;
@@ -34,18 +43,24 @@ class ModeratorOrder extends Component
     public $order_return_rideId;
     public $order_return_seatClassId;
 
-    public $price = 0;
+    public $departPrice = 0;
+    public $returnPrice = 0;
+    public $originalPrice;
+    public $couponAmount;
+    public $finalPrice;
 
     public $firstName;
     public $lastName;
     public $email;
     public $phone;
     public $pickup;
+    public $pickupAny;
+    public $pickupAnyOther;
     public $dropoff;
+    public $dropoffAny;
+    public $dropoffAnyOther;
     public $note;
     public $promotionId;
-
-    public $search = 0;
 
     public $fromLocationName;
     public $toLocationName;
@@ -55,64 +70,93 @@ class ModeratorOrder extends Component
 
     public $countTicketSelected = 0;
 
-    public $rideId;
-    public $seatClassId;
+    public $coupon;
+    public $couponCode;
+    public $isValidCoupon = false;
+    public $discountAmount= null;
+
+    public $order;
 
     public function mount(){
         $this->adults = 1;
         $this->children = 0;
-        $this->tripType = ROUNDTRIP;
+        $this->tripType = ONEWAY;
 
-        $this->fromLocationList = Location::get();
-        $this->toLocationList = Location::get();
+        $this->customerTypelist = CustomerType::get()->where('status', ACTIVE);
+        $this->customerType = $this->customerTypelist->first()->id;
+
+        $locations = Location::get()->where('status', ACTIVE);
+        $this->fromLocation = $locations->random()->id;
+        $this->toLocation = $locations->filter(function ($location){
+                                                    return $location->id !==  $this->fromLocation;
+                                                })->random()->id;
+
+        $this->departureDate = now()->addDay()->toDateString();
+        $this->returnDate = now()->addDays(2)->toDateString();
+
+        $this->fromLocationList = Location::get()->where('status', ACTIVE);
+        $this->toLocationList = Location::get()->where('status', ACTIVE);
 
         $this->text_ticket_select = trans('messages.ticketselected', ['totalTicket' => $this->countTicketSelected, 'typeTrip'=> $this->tripType]);
-    }
 
-    public function chooseTripType($typeTrip = 0){
-        $this->tripType = $typeTrip;
+        $this->pickupdropoffs = Pickupdropoff::get();
+        $this->pickup = 0;
+        $this->dropoff = 0;
     }
 
     public function chooseFromLocation($location){
-        $this->toLocationList = Location::get()->except($location);
+        $this->toLocationList = Location::get()->where('status', ACTIVE)->except($location);
+        $this->toLocation =  $this->toLocationList->first()->id;
     }
 
     public function chooseToLocation($location){
-        $this->fromLocationList = Location::get()->except($location);
+        $this->fromLocationList = Location::get()->where('status', ACTIVE)->except($location);
+        $this->fromLocation =  $this->fromLocationList->first()->id;
     }
-    
-    public function chooseDepartDate($departDate){
-        $this->returnDate = $departDate;
+
+    public function updatedPickup($pickup){
+        if ($this->pickup == PICKUPANY) $this->pickupAny =  $this->pickupdropoffs->first()->name;
+    }
+
+    public function updatedDropoff($dropoff){
+        if ($this->dropoff == DROPOFFANY) $this->dropoffAny =  $this->pickupdropoffs->first()->name;
+    }
+
+    public function updatePrice(){
+        if ($this->order_depart_rideId) {
+            $this->depart = Ride::find($this->order_depart_rideId);
+            $this->seatDepart = SeatClass::find($this->order_depart_seatClassId);
+            $this->departPrice = $this->seatDepart->price * $this->adults;
+        }
+
+        if ($this->order_return_rideId) {
+            $this->return = Ride::find($this->order_return_rideId);
+            $this->seatReturn = SeatClass::find($this->order_return_seatClassId);
+            $this->returnPrice = $this->seatReturn->price * $this->adults;
+        }
+
+        $this->originalPrice = $this->departPrice + $this->returnPrice;
+        $this->finalPrice = $this->departPrice + $this->returnPrice;
+
+        if ($this->promotionId) $this->applyCoupon();
     }
 
     public function chooseDepartTrip($seatId, $seatClassId){
         $this->countTicketSelected += 1;
         $this->order_depart_rideId = $seatId;
         $this->order_depart_seatClassId = $seatClassId;
-        $this->applyFilter();
+
+        //Update departure ticket info and price
+        $this->updatePrice();
     }
 
     public function chooseReturnTrip($seatId, $seatClassId){
         $this->countTicketSelected += 1;
         $this->order_return_rideId = $seatId;
         $this->order_return_seatClassId = $seatClassId;
-        $this->applyFilter();
-    }
 
-    public function clearDepartTicket(){
-        $this->countTicketSelected -= 1;
-        $this->order_depart_rideId = null;
-        $this->order_depart_seatClassId = null;
-
-        $this->applyFilter();
-    }
-
-    public function clearReturnTicket(){
-        $this->countTicketSelected -= 1;
-        $this->order_return_rideId = null;
-        $this->order_return_seatClassId = null;
-
-        $this->applyFilter();
+        //Update return ticket info and price
+        $this->updatePrice();
     }
 
     public function applyFilter(){
@@ -125,24 +169,40 @@ class ModeratorOrder extends Component
             //'email' => 'required|email|unique:users,email,' . $this->userId,
         ]);
         
-        $this->search = 1;
+        $this->step++;
         $this->text_ticket_select = trans('messages.ticketselected', ['totalTicket' => $this->countTicketSelected, 'typeTrip'=> $this->tripType]);
 
         $this->fromLocationName = Location::find($this->fromLocation)->name;
         $this->toLocationName = Location::find($this->toLocation)->name;
 
+        //Update price
+        $this->updatePrice();
+    }
+
+    function countingSeatBooked($rideId = 0, $seatClassId = 0) {
+        $counting = Order::with(['orderTickets' => function($orderTicket){
+                        $orderTicket->query('order_tickets.rideId', $rideId)
+                                    ->query('order_tickets.seatClassId', $seatClassId);
+                    }])
+                    ->where('status', COMPLETEDORDER)
+                    ->sum('adultQuantity');
+        return $counting;
+    }
+
+    public function hydrate(){
         $this->departRides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 
                                             'tl.name as toLocation', 'rides.departTime', 'rides.returnTime',
                                             'rides.departDate', 'rides.status',
-                                            DB::raw('TIME_FORMAT(TIMEDIFF(rides.returnTime, rides.departTime), "%H:%i") AS distanceTime'),
+                                            //DB::raw('TIME_FORMAT(TIMEDIFF(rides.returnTime, rides.departTime), "%H:%i") AS distanceTime'),
                                             'sc.id as seatClassId', 'sc.name as seatClass', 'sc.capacity', 'sc.price', 'sc.status')
                                     ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
                                     ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
-                                    ->leftJoin('seat_classes as sc', 'sc.rideId', '=', 'rides.id')
-                                    ->where(function ($query){
+                                    ->leftJoin('seat_classes as sc', 'rides.id', '=', 'sc.rideId')
+                                    ->where(function ($query) {
                                         $query->where('rides.fromLocation', $this->fromLocation);
                                         $query->where('rides.toLocation', $this->toLocation);
                                         $query->where('rides.departDate', $this->departureDate);
+                                        $query->where('sc.capacity', '>=', $this->countingSeatBooked('rides.id', 'sc.id') + $this->adults); //check avaiable seatclasses to show
                                         $query->where('rides.status', 0);
                                         $query->where('sc.status', 0);
                                     })
@@ -151,40 +211,46 @@ class ModeratorOrder extends Component
         $this->returnRides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 
                                     'tl.name as toLocation', 'rides.departTime', 'rides.returnTime',
                                     'rides.departDate', 'rides.status',
-                                    DB::raw('TIME_FORMAT(TIMEDIFF(rides.returnTime, rides.departTime), "%H:%i") AS distanceTime'),
+                                    //DB::raw('TIME_FORMAT(TIMEDIFF(rides.returnTime, rides.departTime), "%H:%i") AS distanceTime'),
                                     'sc.id as seatClassId', 'sc.name as seatClass', 'sc.capacity', 'sc.price', 'sc.status')
                             ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
                             ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
-                            ->leftJoin('seat_classes as sc', 'sc.rideId', '=', 'rides.id')
-                            ->where(function ($query){
+                            ->leftJoin('seat_classes as sc', 'rides.id', '=', 'sc.rideId')
+                            ->where(function ($query) {
                                 $query->where('rides.fromLocation', $this->toLocation);
                                 $query->where('rides.toLocation', $this->fromLocation);
                                 $query->where('rides.departDate', $this->departureDate);
+                                $query->where('sc.capacity', '>=', $this->countingSeatBooked('rides.id', 'sc.id') + $this->adults); //check avaiable seatclasses to show
                                 $query->where('rides.status', 0);
                                 $query->where('sc.status', 0);
                             })
                             ->get();
     }
 
-    public function bookTicket(){
-        $codeDepart = OrderTicket::generateCode();
-        $codeReturn = OrderTicket::generateCode();
+    public function checkInfo() {
+        $this->validate([
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'phone' => 'nullable|numeric|digits_between:8,11|required_without:email',
+            'email' => 'nullable|email|regex:/(.+)@(.+)\.(.+)/i|required_without:phone',
+            'pickupAnyOther' => 'required_if:pickup,'.PICKUPANYOTHER,
+            'dropoffAnyOther' => 'required_if:dropoff,'.DROPOFFANYOTHER,
+        ]);
+        $this->step++;
+    }
 
-        $price = $this->price;
+    public function bookTicket(){
+        $codeOrder = Order::generateCode();
+        $codeDepart = $codeOrder.'-001';
+        $codeReturn = $codeOrder.'-002';
         
         // MAKE A TRANSACTION TO ENSURE DATA CONSISTENCY
         DB::beginTransaction();
 
         try {
-            $this->seatDepart = SeatClass::find($this->order_depart_seatClassId);
-            $this->seatReturn = SeatClass::find($this->order_return_seatClassId);
-
-            $totalPrice = $this->seatDepart->price * ($this->adults + $this->children) + 
-                                        $this->seatReturn->price * ($this->adults + $this->children);
-
             //SAVE ORDER FIRST
             $order = Order::create([
-                'code' => Order::generateCode(),
+                'code' => $codeOrder,
                 'customerType' => intVal($this->customerType),
                 'isReturn' => intVal($this->tripType),
                 'promotionId' => intVal($this->promotionId),
@@ -193,20 +259,26 @@ class ModeratorOrder extends Component
                 'phone' => $this->phone,
                 'email' => $this->email,
                 'note' => $this->note,
+                'pickup' => $this->pickup,
+                'dropoff' => $this->dropoff,
                 'adultQuantity' => intVal($this->adults),
                 'childrenQuantity' => intVal($this->children),
-                'price' => $totalPrice,
+                'originalPrice' => $this->originalPrice,
+                'couponAmount' => $this->couponAmount,
+                'finalPrice' => $this->finalPrice,
                 'bookingDate' => date('Y-m-d H:i:s'),
+                'userId' => Auth::id(),
                 'status' => 0,
             ]);
 
             //SAVE ORDER TICKET DEPART FIRST
             OrderTicket::create([
                 'orderId' => intVal($order->id),
-                'code' => OrderTicket::generateCode(),
+                'code' => $codeDepart,
                 'rideId' => intVal($this->order_depart_rideId),
                 'seatClassId' => intVal($this->order_depart_seatClassId),
                 'price' => $this->seatDepart->price * ($this->adults + $this->children),
+                'type' => DEPARTURETICKET,
                 'status' => 0,
             ]);
             
@@ -214,25 +286,95 @@ class ModeratorOrder extends Component
             if ($this->tripType == ROUNDTRIP) {
                 OrderTicket::create([
                     'orderId' => intVal($order->id),
-                    'code' => OrderTicket::generateCode(),
+                    'code' => $codeReturn,
                     'rideId' => intVal($this->order_return_rideId),
                     'seatClassId' => intVal($this->order_return_seatClassId),
                     'price' => $this->seatReturn->price * ($this->adults + $this->children),
+                    'type' => RETURNTICKET,
                     'status' => 0,
                 ]);
             }
             
             DB::commit();
             // Redirect to payment page with booking ID parameter
-            return redirect()->to('moderatororderlist');
+            $this->order = Order::with(['orderTickets' => function($orderTicket){
+                                $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
+                                            ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
+                                            ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
+                                            ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
+                                            ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId');
+                            }])
+                            ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
+                            ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
+                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
+                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.originalPrice', 'orders.couponAmount', 'orders.finalPrice',
+                                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.pickup', 'orders.dropoff',
+                                    'orders.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 'a.name as agentName')
+                            ->where('orders.id', intVal($order->id))
+                            ->first();
+            $this->step++;
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;
         }
     }
 
-    public function render()
-    {
+    public function removeCoupon() {
+        $this->couponCode = '';
+        $this->isValidCoupon = false;
+        $this->promotionId = null;
+        $this->discountAmount = 0;
+        $this->finalPrice = $this->originalPrice;
+    }
+
+    public function applyCoupon() {
+        //Reset data before applying new coupon code
+        $this->isValidCoupon = false;
+        $this->promotionId = null;
+        $this->discountAmount = 0;
+        $this->finalPrice = $this->originalPrice;
+
+        //applying coupon
+        $this->validate([
+            'couponCode' => 'required|exists:promotions,code'
+        ]);
+
+        $coupon = Promotion::where('code', $this->couponCode)->first();
+
+        //Check valid time of coupon
+        if ($coupon && Carbon::now()->between($coupon->fromDate, $coupon->toDate)) {
+            //check valid quantity of coupon 
+            $ordersWithCoupon = Order::where('promotionId', $coupon->id)
+                                       ->where('status', COMPLETEDORDER)->count();
+
+            if ($coupon->quantity == 0) { // if coupon has unlimited used time
+                $this->isValidCoupon = true;
+            } elseif ($ordersWithCoupon < $coupon->quantity) { // if coupon has less than used time
+                $this->isValidCoupon = true;
+            } else { // if coupon has greater than used time
+                $this->isValidCoupon = fale;
+                $this->addError('coupon', trans('messages.invalidcouponquantity'));
+            }
+        } else {
+            $this->isValidCoupon = false;
+            $this->addError('coupon', trans('messages.invalidcoupondate'));
+        }
+
+        if ($this->isValidCoupon) {
+            $this->promotionId = $coupon->id;
+            $this->coupon = $coupon;
+
+            // Apply the discount to orginalPrice
+            $this->couponAmount = $this->originalPrice * $coupon->discount;
+            $this->finalPrice = round($this->originalPrice - $this->couponAmount);
+
+            //apply to each ticket 
+            //$this->departPrice = round($this->departPrice - ($this->departPrice * $coupon->discount));
+            //$this->returnPrice = round($this->returnPrice - ($this->returnPrice * $coupon->discount));
+        }
+    }
+
+    public function render() {
         return view('livewire.backend.moderator.moderator-order')
                 ->layout('moderator.layouts.app');
     }

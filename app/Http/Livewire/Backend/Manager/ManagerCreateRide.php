@@ -18,6 +18,7 @@ class ManagerCreateRide extends Component
     public $departTime;
     public $returnTime;
     public $departDate;
+    public $hoursBeforeBooking = 0;
     public $status;
 
     public $locations;
@@ -89,6 +90,7 @@ class ManagerCreateRide extends Component
             $this->departTime = $ride->departTime;
             $this->returnTime = $ride->returnTime;
             $this->departDate = $ride->departDate;
+            $this->hoursBeforeBooking = $ride->hoursBeforeBooking;
             $this->status = $ride->status;
 
             $this->seatClasses = SeatClass::select('id','rideId', 'name as nameClass', 'capacity', 'price')
@@ -114,6 +116,7 @@ class ManagerCreateRide extends Component
             $ride->departTime = $this->departTime;
             $ride->returnTime = $this->returnTime;
             $ride->departDate = $this->departDate;
+            $ride->hoursBeforeBooking = $this->hoursBeforeBooking;
             $ride->status = intVal($this->status);
             $ride->save();
             
@@ -139,6 +142,7 @@ class ManagerCreateRide extends Component
                 'departTime' => $this->departTime,
                 'returnTime' => $this->returnTime,
                 'departDate' => $this->departDate,
+                'hoursBeforeBooking' => $this->hoursBeforeBooking,
                 'status' => intVal($this->status),
             ]);
 
