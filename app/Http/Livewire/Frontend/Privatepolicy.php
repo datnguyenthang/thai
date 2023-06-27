@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Frontend;
 
 use Livewire\Component;
 
-class Privatepolicy extends Component
+class PrivatePolicy extends Component
 {
     public function render()
     {
