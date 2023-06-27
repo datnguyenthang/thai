@@ -86,10 +86,13 @@ class ModeratorOrder extends Component
         $this->customerType = $this->customerTypelist->first()->id;
 
         $locations = Location::get()->where('status', ACTIVE);
-        $this->fromLocation = $locations->random()->id;
-        $this->toLocation = $locations->filter(function ($location){
+
+        if (count($locations) > 0) {
+            $this->fromLocation = $locations->random()->id;
+            $this->toLocation = $locations->filter(function ($location){
                                                     return $location->id !==  $this->fromLocation;
                                                 })->random()->id;
+        }
 
         $this->departureDate = now()->addDay()->toDateString();
         $this->returnDate = now()->addDays(2)->toDateString();
