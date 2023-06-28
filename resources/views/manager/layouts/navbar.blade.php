@@ -40,37 +40,6 @@
              <i class="fas fa-money-bill fa-fw me-3"></i>
              <span>{{ trans('backend.promotion') }}</span>
           </a>
-{{--
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-            <i class="fas fa-chart-bar fa-fw me-3"></i>
-            <span>Orders</span>
-          </a>
-
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-            <i class="fas fa-globe fa-fw me-3"></i>
-            <span>International</span>
-          </a>
-
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-            <i class="fas fa-building fa-fw me-3"></i>
-            <span>Partners</span>
-          </a>
-
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-            <i class="fas fa-calendar fa-fw me-3"></i>
-            <span>Calendar</span>
-          </a>
-
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-            <i class="fas fa-users fa-fw me-3"></i>
-            <span>Users</span>
-          </a>
-
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-            <i class="fas fa-money-bill fa-fw me-3"></i>
-            <span>Sales</span>
-          </a>
---}}
         </div>
       </div>
     </nav>
@@ -91,18 +60,10 @@
           <img src="/img/logo.png" height="25" alt="MDB Logo"
             loading="lazy" />
         </a>
-        <!-- Search form -->
-        <!--
-        <form class="d-none d-md-flex input-group w-auto my-auto">
-          <input autocomplete="off" type="search" class="form-control rounded"
-            placeholder='Search (ctrl + "/" to focus)' style="min-width: 225px;" />
-          <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
-        </form>
-        -->
   
         <!-- Right links -->
         <ul class="navbar-nav ms-auto d-flex flex-row">
-          <!-- Notification dropdown -->
+          <!-- Notification dropdown
           <li class="nav-item dropdown">
             <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -118,7 +79,7 @@
               </li>
             </ul>
           </li>
-  
+           -->
           <!-- Icon dropdown -->
           @include('lang')
   

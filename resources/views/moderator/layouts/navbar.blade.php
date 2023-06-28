@@ -100,14 +100,7 @@
         <img src="/img/logo.png" height="25" alt="MDB Logo"
           loading="lazy" />
       </a>
-      <!-- Search form -->
-      <!--
-      <form class="d-none d-md-flex input-group w-auto my-auto">
-        <input autocomplete="off" type="search" class="form-control rounded"
-          placeholder='Search (ctrl + "/" to focus)' style="min-width: 225px;" />
-        <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
-      </form>
-      -->
+
       <!-- Left links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -137,7 +130,7 @@
   
       <!-- Right links -->
       <div class="d-flex align-items-center">
-        <!-- Notification dropdown -->
+        <!-- Notification dropdown
         <div class="dropdown">
             <a class="nav-link link-secondary me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -153,6 +146,7 @@
               </li>
             </ul>
         </div>
+         -->
 
         <!-- Icon dropdown -->
         @include('lang')

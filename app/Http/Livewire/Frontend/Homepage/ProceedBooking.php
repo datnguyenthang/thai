@@ -185,6 +185,7 @@ class ProceedBooking extends Component
                 'couponAmount' => $this->couponAmount,
                 'finalPrice' => $this->finalPrice,
                 'bookingDate' => date('Y-m-d H:i:s'),
+                'customerType' => 0,
                 'status' => 0,
             ]);
 

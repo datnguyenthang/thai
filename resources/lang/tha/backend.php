@@ -73,12 +73,12 @@ return [
     'info' => 'Info',
     'review' => 'Review',
     'payment' => 'Payment',
-    
 
     'id' => 'ID',
     'save' => 'Save',
     'search' => 'Search',
     'close' => 'Close',
+    'download' => 'Download',
 
     //Customer
     'createcustomertype' => 'Create Customer Type',

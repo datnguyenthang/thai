@@ -81,6 +81,7 @@ return [
     'save' => 'Save',
     'search' => 'Search',
     'close' => 'Close',
+    'download' => 'Download',
 
     //Customer
     'createcustomertype' => 'Create Customer Type',

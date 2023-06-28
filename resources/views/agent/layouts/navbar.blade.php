@@ -45,7 +45,7 @@
   
       <!-- Right links -->
       <div class="d-flex align-items-center">
-        <!-- Notification dropdown -->
+        <!-- Notification dropdown
         <div class="dropdown">
             <a class="nav-link link-secondary me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
               role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -61,6 +61,7 @@
               </li>
             </ul>
         </div>
+        -->
 
         <!-- Icon dropdown -->
         @include('lang')

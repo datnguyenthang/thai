@@ -34,7 +34,11 @@
 --}}
         @else 
             <div class="container mt-4">
-                {{ $slot }}
+                @if(isset($slot))
+                    {{ $slot }}
+                @else
+                    @yield('content')
+                @endif
             </div>
         @endif
 
