@@ -27,6 +27,8 @@ class ManagerCreateAgent extends Component
         $this->customerType = CustomerType::get()->where('status', 0);
 
         $this->agentId = $agentId;
+        $this->paymentType = 0;
+        $this->status = 0;
 
         if ($agentId > 0) {
             $agent = Agent::find($agentId);
