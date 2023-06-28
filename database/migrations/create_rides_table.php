@@ -25,6 +25,10 @@ return new class extends Migration
             $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
 
             $table->timestamps();
+
+            //ADD Index
+            $table->index('fromLocation');
+            $table->index('toLocation');
         });
     }
 

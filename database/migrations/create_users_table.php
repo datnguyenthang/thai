@@ -25,6 +25,9 @@ return new class extends Migration
 
             $table->rememberToken();
             $table->timestamps();
+
+            //ADD Index
+            $table->index('agentId');
         });
     }
 

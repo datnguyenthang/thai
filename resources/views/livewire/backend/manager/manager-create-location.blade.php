@@ -41,7 +41,7 @@
                         <th class="filename">{{ $file['name'] }}</th>
                         <th class="extension">{{ $file['extension'] }}</th>
                         <th class="action">
-                            <button type="button" class="btn bg_own_color text-light" wire:click="deleteFile('{{ $file['path'] }}')">
+                            <button type="button" class="btn bg_own_color text-light" wire:loading.attr="disabled" wire:click="deleteFile('{{ $file['path'] }}')">
                                 {{ trans('messages.delete') }}
                             </button>
                         </th>
@@ -58,12 +58,12 @@
     <form wire:submit.prevent="uploadFile" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-4">
-                <input type="file" class="form-control" wire:model="files" id="{{ $counting }}-locationFile" accept="*" />
+                <input type="file" class="form-control" wire:loading.attr="disabled" wire:model="files" id="{{ $counting }}-locationFile" accept="*" />
                 @error('files') <span class="text-danger error">{{ $message }}</span> @enderror
             </div>
                 
             <div class="col-md-4">
-                <button type="submit" class="btn bg_own_color text-light">{{ trans('messages.upload') }}</button>
+                <button type="submit" wire:loading.attr="disabled" class="btn bg_own_color text-light">{{ trans('messages.upload') }}</button>
             </div>
         </div>
     </form>
@@ -77,5 +77,5 @@
         </select>
     </div>
 
-    <button wire:click="save" class="btn btn-success">{{ trans('backend.save') }}</button>
+    <button wire:loading.attr="disabled" wire:click="save" class="btn btn-success">{{ trans('backend.save') }}</button>
 </div>

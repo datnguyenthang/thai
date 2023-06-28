@@ -23,6 +23,11 @@ return new class extends Migration
             $table->decimal('price', $precision = 10, $scale = 2);
             $table->tinyInteger('status')->default(0); /* 0=>Book, 9=>Already paid */
             $table->timestamps();
+
+            //ADD Index
+            $table->index('orderId');
+            $table->index('rideId');
+            $table->index('seatClassId');
         });
     }
 

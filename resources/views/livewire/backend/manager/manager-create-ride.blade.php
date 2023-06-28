@@ -103,9 +103,9 @@
 
         <br />
     
-        <button type="button" class="d-flex justify-content-center" wire:click="addSeatClass">{{ trans('backend.addseatclass') }}</button>
+        <button type="button" wire:loading.attr="disabled" class="d-flex justify-content-center" wire:click="addSeatClass">{{ trans('backend.addseatclass') }}</button>
 
         <br />
-        <button type="submit" class="btn btn-primary">{{ trans('backend.save') }}</button>
+        <button type="submit" wire:loading.attr="disabled" class="btn btn-primary">{{ trans('backend.save') }}</button>
     </form>
 </div>

@@ -21,6 +21,9 @@ return new class extends Migration
             $table->decimal('price', $precision = 10, $scale = 2);
             $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
             $table->timestamps();
+
+            //ADD Index
+            $table->index('rideId');
         });
     }
 

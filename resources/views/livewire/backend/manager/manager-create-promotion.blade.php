@@ -53,6 +53,6 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-success">{{ trans('backend.save') }}</button>
+        <button type="submit" wire:loading.attr="disabled" class="btn btn-success">{{ trans('backend.save') }}</button>
     </form>
 </div>

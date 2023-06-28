@@ -39,6 +39,12 @@ return new class extends Migration
             $table->tinyInteger('paymentStatus')->default(0)->nullable($value = true);
             $table->tinyInteger('status')->default(0); /* 0=>Book, 9=>Already paid */
             $table->timestamps();
+
+            //ADD Index
+            $table->index('customerType');
+            $table->index('userId');
+            $table->index('agentId');
+            $table->index('promotionId');
         });
     }
 
