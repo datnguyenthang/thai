@@ -19,7 +19,7 @@ class UserAccess
         if(request()->user()->role == $role){
             return $next($request);
         }
-          
+
         return response()->json(['You do not have permission to access for this page.']);
         /* return response()->view('errors.check-permission'); */
     }

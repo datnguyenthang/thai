@@ -23,7 +23,7 @@
 </head>
 <body>
     <div id="app">
-        @include('home.header')
+        @include('home.login')
 
         
         <main class="py-4">
