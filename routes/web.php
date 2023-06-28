@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
-Route::get('/', [App\Http\Controllers\Home\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Livewire\Frontend\Homepage\Booking::class])->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Auth::routes();
