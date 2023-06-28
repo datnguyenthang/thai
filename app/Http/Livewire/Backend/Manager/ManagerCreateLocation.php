@@ -79,7 +79,7 @@ class ManagerCreateLocation extends Component
     //Upload proof images
     public function uploadFile() {
         $this->validate([
-           'files' => 'required|max:5120',
+           'files' => 'required|file|mimes:png,jpg,pdf,doc,docx,csv|max:5120',
         ]);
 
         //creating folder inside storage folder
