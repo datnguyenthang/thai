@@ -111,6 +111,7 @@ class ModeratorOrderlist extends Component
                                 if ($this->customerName) $query->whereRaw('CONCAT(orders.firstName, " ", orders.lastName) LIKE ?', ['%'.$this->customerName.'%']);
                                 if ($this->customerPhone) $query->where('orders.phone', 'like', '%'.$this->customerPhone.'%');
                                 if ($this->customerType >= 0) $query->where('orders.customerType', $this->customerType);
+                                if ($this->agentId) $query->where('orders.agentId', $this->agentId);
                             })
                             ->orderBy($this->sortField, $this->sortDirection)
                             ->paginate($this->perPage);

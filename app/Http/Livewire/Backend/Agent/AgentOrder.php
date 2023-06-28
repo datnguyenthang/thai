@@ -244,8 +244,8 @@ class AgentOrder extends Component
 
     public function bookTicket(){
         $codeOrder = Order::generateCode();
-        $codeDepart = $codeOrder.'-001';
-        $codeReturn = $codeOrder.'-002';
+        $codeDepart = $codeOrder.'-1';
+        $codeReturn = $codeOrder.'-2';
 
         // MAKE A TRANSACTION TO ENSURE DATA CONSISTENCY
         DB::beginTransaction();

@@ -80,7 +80,7 @@ Route::middleware(['auth', 'user-access:moderator'])->group(function () {
 /*------All Agent Routes List------*/
 
 Route::middleware(['auth', 'user-access:agent'])->group(function () {
-    Route::get('/agent', App\Http\Livewire\Backend\Moderator\ModeratorDashboard::class)->name('agentDashboard');
+    Route::get('/agent', App\Http\Livewire\Backend\Agent\AgentDashboard::class)->name('agentDashboard');
     Route::get('/agentorder', App\Http\Livewire\Backend\Agent\AgentOrder::class)->name('agentOrder');
     Route::get('/agentorderlist', App\Http\Livewire\Backend\Agent\AgentOrderList::class)->name('agentOrderlist');
 });

@@ -100,7 +100,7 @@
         <div class="col-md-2">
             <div class="form-group">
                 <label class="form-control-label"></label>
-                <button class="btn btn-success form-control" wire:click="filter">{{ trans('backend.applysearch') }}</button>
+                <button class="btn bg_own_color text-light form-control" wire:click="filter">{{ trans('backend.applysearch') }}</button>
             </div>
         </div>
     </div>
@@ -185,7 +185,7 @@
      {{--Show modal boostrap to quick view detail order--}}
     <div class="modal fade show" tabindex="-1" 
         style="display: @if($showModal === true) block @else none @endif;" role="dialog" wire:model="viewOrder">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ trans('backend.orderdetail') }}</h5>
@@ -194,6 +194,9 @@
                 <div class="modal-body">
                     
                     @if($showModal === true && $orderDetail)
+                        <div class="row">
+                            <div class="col-md-6"></div>
+                        </div>
                         <p>{{ trans('backend.id') }} : {{ $orderDetail['id'] }}</p>
                         <p>{{ trans('backend.ordercode') }}: {{ $orderDetail['code'] }}</p>
                         <p>{{ trans('backend.agentname') }}: {{ $orderDetail['agentName'] }}</p>
