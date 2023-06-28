@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 use App\Models\Location;
 
@@ -30,10 +31,10 @@ class ManagerCreateLocation extends Component
     public function mount($locationId = 0)
     {
         $this->locationId = $locationId;
-
+        
         if ($locationId > 0) {
             //set folder name
-            $this->folderName = $this->folderName.''.$locationId.'/';
+            //$this->folderName = $this->folderName.''.$locationId.'/';
             $location = Location::find($locationId);
 
             $this->name = $location->name;
@@ -42,15 +43,17 @@ class ManagerCreateLocation extends Component
             $this->status = $location->status;
         } else {
             $this->nextLocationId = Location::max('id') + 1;
-            $this->folderName = $this->folderName.''.$this->nextLocationId.'/';
+            //$this->folderName = $this->folderName.''.$this->nextLocationId.'/';
 
         }
+
         $this->loadFiles();
     }
 
     //Loading photo images
     public function loadFiles() {
         $this->locationFiles = null;
+        if(!$this->locationId) return $this->locationFiles = null;
 
         $files = Storage::disk('public')->allFiles($this->folderName);
 
@@ -67,7 +70,7 @@ class ManagerCreateLocation extends Component
         }
     }
 
-    //Delete files
+    //Delete files -- NOT USE
     public function deleteFile($filePath) {
 
         if (Storage::disk('public')->exists($filePath)) {
@@ -76,14 +79,15 @@ class ManagerCreateLocation extends Component
         $this->loadFiles();
     }
 
-    //Upload proof images
-    public function uploadFile() {
+    //Upload proof images -- NOT USE
+    public function uploadFile($locationId) {
         $this->validate([
            'files' => 'required|file|mimes:png,jpg,pdf,doc,docx,csv|max:5120',
         ]);
 
         //creating folder inside storage folder
         $disk = 'public';
+        $this->folderName = $this->folderName.''.$locationId.'/';
 
         if (!Storage::exists($this->folderName)) {
             Storage::disk($disk)->makeDirectory($this->folderName, 0777, true, true);
@@ -100,12 +104,43 @@ class ManagerCreateLocation extends Component
         $this->loadFiles();
     }
 
+    public function upload($locationId) {
+        if (!empty($this->locationFiles)){
+            foreach ($this->locationFiles as $file){
+                if (Storage::disk('public')->exists($file['path'])) {
+                    Storage::disk('public')->delete($file['path']);
+                }
+            }
+        }
+        //creating folder inside storage folder
+        $disk = 'public';
+        $this->folderName = $this->folderName.''.$locationId.'/';
+
+        if (!Storage::exists($this->folderName)) {
+            Storage::disk($disk)->makeDirectory($this->folderName, 0777, true, true);
+        }
+
+        if ($this->files) {
+            $this->files->storeAs($this->folderName, $this->files->getClientOriginalName(), 'public');
+        }
+    }
+
     public function save()
     {
         $this->validate([
             'name' => 'required|unique:locations,name,' . $this->locationId,
             'nameOffice' => 'required',
             'googleMapUrl' => 'required|url',
+            'files' => ['nullable',
+                        'file',
+                        'mimes:png,jpg,pdf,xlsx,docx,csv',
+                        'max:5120',
+                                Rule::requiredIf(function () {
+                                    if (empty($this->locationFiles) && $this->locationId) return true;
+                                    if (!$this->locationId) return true;
+                                    return false;
+                                }),
+                        ],
         ]);
 
         if ($this->locationId > 0){ // update location
@@ -121,7 +156,7 @@ class ManagerCreateLocation extends Component
             
         } else { // create location
            
-            Location::create([
+            $location = Location::create([
                 'name' => $this->name,
                 'nameOffice' => $this->nameOffice,
                 'googleMapUrl' => $this->googleMapUrl,
@@ -130,6 +165,9 @@ class ManagerCreateLocation extends Component
 
             session()->flash('success', 'Location created successfully!');
         }
+
+        if ($this->files) $this->upload($location->id);
+
         // Reset input fields
         $this->name = '';
         return redirect()->route('managerLocation');
