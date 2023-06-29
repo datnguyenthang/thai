@@ -68,7 +68,7 @@ class ModeratorOrderlist extends Component
     }
 
     public function downnloadTicket($orderTicketId){
-        $orderTicket = OrderTicket::select('order_tickets.*', 'r.name', 'r.departtime', 'r.returnTime', 'r.departTime',
+        $orderTicket = OrderTicket::select('order_tickets.*', 'r.name', 'r.departTime', 'r.returnTime', 'r.departDate',
                                 'fl.id as locationId', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'fl.nameOffice', 'fl.googleMapUrl', 
                                 'sc.name as seatClassName', 'sc.price as seatClassPrice',
                                 DB::raw('CONCAT(o.firstName, " ",o.lastName) as fullname'), 'o.phone', 'o.originalPrice', 'o.couponAmount', 'o.finalPrice',
@@ -96,7 +96,7 @@ class ModeratorOrderlist extends Component
 
     public function viewOrder($orderId) {
         $this->orderDetail = Order::with(['orderTickets' => function($orderTicket){
-                                $orderTicket->select('order_tickets.*', 'r.name', 'r.departtime', 'r.returnTime', 'r.departTime',
+                                $orderTicket->select('order_tickets.*', 'r.name', 'r.departTime', 'r.returnTime', 'r.departDate',
                                                     'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')
                                             ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
                                             ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
