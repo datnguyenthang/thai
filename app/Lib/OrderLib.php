@@ -5,10 +5,54 @@ namespace App\Lib;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
+
+use App\Models\Order;
+use App\Models\OrderTicket;
 
 class OrderLib
 {
-    public function generateEticket($orderTicket) {
+    public static function getOrderDetail($orderId) {
+        $order = Order::with(['orderTickets' => function($orderTicket){
+                                $orderTicket->select('order_tickets.*', 'r.name', 'r.departTime', 'r.returnTime', 'r.departDate',
+                                                    'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')
+                                            ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
+                                            ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
+                                            ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
+                                            ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId');
+                            }])
+                            ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
+                            ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
+                            ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
+                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.status',
+                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.finalPrice',
+                                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 
+                                    'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName', 'ct.name as customerTypeName')
+                            ->where('orders.id', $orderId)
+                            ->first();
+        return $order;
+    }
+
+    public static function getOrderTicket($orderTicketId) {
+        $orderDetail = OrderTicket::select('order_tickets.*', 'r.name', 'r.departTime', 'r.returnTime', 'r.departDate',
+                                'fl.id as locationId', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'fl.nameOffice', 'fl.googleMapUrl', 
+                                'sc.name as seatClassName', 'sc.price as seatClassPrice',
+                                DB::raw('CONCAT(o.firstName, " ",o.lastName) as fullname'), 'o.phone', 'o.originalPrice', 'o.couponAmount', 'o.finalPrice',
+                                'o.code', 'o.email', 'o.bookingDate', 'o.note', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff',
+                                'o.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 'a.name as agentName')
+                        ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
+                        ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
+                        ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
+                        ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId')
+                        ->leftJoin('orders as o', 'o.id', '=', 'order_tickets.orderId')
+                        ->leftJoin('promotions as p', 'p.id', '=', 'o.promotionId')
+                        ->leftJoin('agents as a', 'a.id', '=', 'o.agentId')
+                        ->where('order_tickets.id', $orderTicketId)
+                        ->first();
+        return $orderDetail;
+    }
+
+    public static function generateEticket($orderTicket) {
         $dompdf = new Dompdf();
         
         $logoPath = public_path('img/logo.png');
@@ -28,7 +72,7 @@ class OrderLib
         return $pdfData;
     }
 
-    public function generateTicket($orderTicket) {
+    public static function generateTicket($orderTicket) {
         $customPaper = array(0,0,302,378);
 
         $logoPath = public_path('img/logo.png');

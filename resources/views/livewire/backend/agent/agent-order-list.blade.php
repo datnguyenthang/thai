@@ -135,18 +135,27 @@
                 <div class="modal-body">
                     
                     @if($showModal === true && $orderDetail)
-                        <p>{{ trans('backend.id') }} : {{ $orderDetail['id'] }}</p>
-                        <p>{{ trans('backend.ordercode') }}: {{ $orderDetail['code'] }}</p>
-                        <p>{{ trans('backend.agentname') }}: {{ $orderDetail['agentName'] }}</p>
-                        <p>{{ trans('backend.fullname') }}: {{ $orderDetail['fullname'] }}</p>
-                        <p>{{ trans('backend.phone') }}: {{ $orderDetail['phone'] }}</p>
-                        <p>{{ trans('backend.email') }}: {{ $orderDetail['email'] }}</p>
-                        <p>{{ trans('backend.bookingdate') }}: {{ $orderDetail['bookingDate'] }}</p>
-                        <p>{{ trans('backend.note') }}: {{ $orderDetail['note'] }}</p>
-                        <p>{{ trans('backend.adults') }}: {{ $orderDetail['adultQuantity'] }}</p>
-                        <p>{{ trans('backend.children') }}: {{ $orderDetail['childrenQuantity'] }}</p>
-                        <p>{{ trans('backend.customerType') }}: {{ $orderDetail->customerTypeName ? $orderDetail->customerTypeName : 'ONLINE' }}</p>
-                        <p>{{ trans('backend.orderstatus') }}: {{ ORDERSTATUS[$orderDetail->status] }}</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>{{ trans('backend.ordercode') }}: {{ $orderDetail['code'] }}</p>
+                                <p>{{ trans('backend.agentname') }}: {{ $orderDetail['agentName'] }}</p>
+                                <p>{{ trans('backend.fullname') }}: {{ $orderDetail['fullname'] }}</p>
+                                <p>{{ trans('backend.phone') }}: {{ $orderDetail['phone'] }}</p>
+                                <p>{{ trans('backend.email') }}: {{ $orderDetail['email'] }}</p>
+                                <p>{{ trans('backend.bookingdate') }}: {{ $orderDetail['bookingDate'] }}</p>
+                                <p>{{ trans('backend.pickup') }}: {{ $orderDetail['pickup'] }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <!--<p>{{ trans('backend.id') }} : {{ $orderDetail['id'] }}</p>-->
+                                <p>{{ trans('backend.id') }} : {{ TRIPTYPE[$orderDetail['isReturn']] }}</p>
+                                <p>{{ trans('backend.customerType') }}: {{ $orderDetail->customerTypeName ? $orderDetail->customerTypeName : 'ONLINE' }}</p>
+                                <p>{{ trans('backend.adults') }}: {{ $orderDetail['adultQuantity'] }}</p>
+                                <p>{{ trans('backend.children') }}: {{ $orderDetail['childrenQuantity'] }}</p>
+                                <p>{{ trans('backend.note') }}: {{ $orderDetail['note'] }}</p>
+                                <p>{{ trans('backend.orderstatus') }}: {{ ORDERSTATUS[$orderDetail->status] }}</p>
+                                <p>{{ trans('backend.dropoff') }}: {{ $orderDetail['dropoff'] }}</p>
+                            </div>
+                        </div>
 
                         <!-- Other details -->
                         <div class="row">

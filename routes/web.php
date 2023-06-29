@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\Moderator\ModeratorController;
@@ -22,6 +22,7 @@ Route::get('/', function () {
 */
 Route::get('/', App\Http\Livewire\Frontend\Homepage\Booking::class)->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/login', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Auth::routes();
 

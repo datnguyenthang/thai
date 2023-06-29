@@ -189,7 +189,7 @@ class Payment extends Component
             $orderTicket->adultQuantity = $this->order->adultQuantity;
             $orderTicket->childrenQuantity = $this->order->childrenQuantity;
 
-            //if ($this->order->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $this->order->discount);
+            if ($this->order->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $this->order->discount);
                 
             $orderLib = new OrderLib();
 

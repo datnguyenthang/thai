@@ -247,7 +247,7 @@ class AgentOrder extends Component
         $codeDepart = $codeOrder.'-1';
         $codeReturn = $codeOrder.'-2';
 
-        // MAKE A TRANSACTION TO ENSURE DATA CONSISTENCY
+        // MAKE A TRANSACTION HERE TO ENSURE DATA CONSISTENCY
         DB::beginTransaction();
 
         try {

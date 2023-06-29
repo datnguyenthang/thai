@@ -25,7 +25,7 @@ class Booking extends Component
     public $children = 0;
 
     public function mount(){
-        $locations = Location::get();
+        $locations = Location::get()->where('status', ACTIVE);
         $this->fromLocationList = $this->toLocationList = $locations;
 
         $this->tripType = ROUNDTRIP;

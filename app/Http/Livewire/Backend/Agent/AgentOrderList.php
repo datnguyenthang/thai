@@ -65,26 +65,10 @@ class AgentOrderList extends Component
     }
 
     public function downnloadTicket($orderTicketId){
-        $orderTicket = OrderTicket::select('order_tickets.*', 'r.name', 'r.departtime', 'r.returnTime', 'r.departTime',
-                                'fl.id as locationId', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'fl.nameOffice', 'fl.googleMapUrl', 
-                                'sc.name as seatClassName', 'sc.price as seatClassPrice',
-                                DB::raw('CONCAT(o.firstName, " ",o.lastName) as fullname'), 'o.phone', 'o.originalPrice', 'o.couponAmount', 'o.finalPrice',
-                                'o.code', 'o.email', 'o.bookingDate', 'o.note', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff',
-                                'o.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 'a.name as agentName')
-                        ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
-                        ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
-                        ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
-                        ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId')
-                        ->leftJoin('orders as o', 'o.id', '=', 'order_tickets.orderId')
-                        ->leftJoin('promotions as p', 'p.id', '=', 'o.promotionId')
-                        ->leftJoin('agents as a', 'a.id', '=', 'o.agentId')
-                        ->where('order_tickets.id', $orderTicketId)
-                        ->where('o.agentId', Auth::user()->agentId)
-                        ->first();
+        $orderTicket = OrderLib::getOrderTicket($orderTicketId);
+        $this->orderDetail = OrderLib::getOrderDetail($orderTicket->orderId); // dirty fill up data
 
-        $orderLib = new OrderLib();
-
-        $content = $orderLib->generateEticket($orderTicket); 
+        $content = OrderLib::generateEticket($orderTicket); 
         $fileName = $orderTicket->type == ONEWAY ? 'Departure Ticket.pdf' : 'Return Ticket.pdf';
 
         return response()->streamDownload(function () use ($content) {
@@ -93,24 +77,7 @@ class AgentOrderList extends Component
     }
 
     public function viewOrder($orderId) {
-        $this->orderDetail = Order::with(['orderTickets' => function($orderTicket){
-                                $orderTicket->select('order_tickets.*', 'r.name', 'r.departtime', 'r.returnTime', 'r.departTime',
-                                                    'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
-                                            ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
-                                            ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
-                                            ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
-                                            ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId');
-                            }])
-                            ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
-                            ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
-                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.status',
-                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.finalPrice',
-                                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 
-                                    'orders.childrenQuantity', 'p.name as promotionName',  'ct.name as customerTypeName')
-                            ->where('orders.id', $orderId)
-                            ->where('orders.agentId', Auth::user()->agentId)
-                            ->first();
-
+        $this->orderDetail = OrderLib::getOrderDetail($orderId);
         $this->showModal = true;
     }
 

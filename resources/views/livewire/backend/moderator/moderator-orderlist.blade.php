@@ -206,6 +206,7 @@
                             </div>
                             <div class="col-md-6">
                                 <!--<p>{{ trans('backend.id') }} : {{ $orderDetail['id'] }}</p>-->
+                                <p>{{ trans('backend.id') }} : {{ TRIPTYPE[$orderDetail['isReturn']] }}</p>
                                 <p>{{ trans('backend.customerType') }}: {{ $orderDetail->customerTypeName ? $orderDetail->customerTypeName : 'ONLINE' }}</p>
                                 <p>{{ trans('backend.adults') }}: {{ $orderDetail['adultQuantity'] }}</p>
                                 <p>{{ trans('backend.children') }}: {{ $orderDetail['childrenQuantity'] }}</p>

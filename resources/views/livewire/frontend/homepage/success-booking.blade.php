@@ -57,8 +57,8 @@
                         @if ($orderTicket->type == RETURNTICKET)
                             <tr class="order_item">
                                 <td class="">
-                                    {!! trans('messages.detailorder', ['fromlocation' => $orderTicket->toLocationName, 
-                                                                    'tolocation' => $orderTicket->fromLocationName, 
+                                    {!! trans('messages.detailorder', ['fromlocation' => $orderTicket->fromLocationName, 
+                                                                    'tolocation' => $orderTicket->toLocationName, 
                                                                     'ride' => $orderTicket->name,
                                                                     'departdate' => date('F j, Y', strtotime($orderTicket->departDate)),
                                                                     'departtime' =>  $orderTicket->departTime]) !!}
