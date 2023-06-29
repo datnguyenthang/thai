@@ -55,6 +55,8 @@ class ManagerCreateLocation extends Component
         $this->locationFiles = null;
         if(!$this->locationId) return $this->locationFiles = null;
 
+        $this->folderName = $this->folderName.''.$locationId.'/';
+
         $files = Storage::disk('public')->allFiles($this->folderName);
 
         foreach ($files as $file) { 
