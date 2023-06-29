@@ -23,7 +23,7 @@
 					{{ trans('messages.bookingdate') }}	  <strong>{{ date('F j, Y', strtotime($order->bookingDate)) }}</strong>
 				</li>
 				<li class="order_total">
-					{{ trans('messages.bookingtotal') }}	      <strong><span class="order_amount">฿</span>{{ $order->finalPrice }}</strong>
+					{{ trans('messages.bookingtotal') }}	      <strong><span class="order_amount">฿</span>{{ round($order->finalPrice) }}</strong>
 				</li>		
 			</ul>
         </div>
@@ -49,7 +49,7 @@
                                 </td>
                                 <td class="product-total">
                                     <span class="amount">
-                                        <span>฿</span>{{ $orderTicket->price }}
+                                        <span>฿</span>{{ round($orderTicket->price) }}
                                     </span>
                                 </td>
                             </tr>
@@ -65,7 +65,7 @@
                                     <br>{{ trans('messages.people') }}: {{ $order->adultQuantity + $order->childrenQuantity }} <strong class="product-quantity">×{{ $order->adultQuantity + $order->childrenQuantity }}</strong>	</td>
                 
                                 <td class="product-total">
-                                    <span class="amount">฿</span>{{ $orderTicket->price }}
+                                    <span class="amount">฿</span>{{ round($orderTicket->price) }}
                                 </td>
                             </tr>
                         @endif
@@ -86,7 +86,7 @@
 
                     <tr>
                         <th scope="row">{{ trans('messages.total') }}:</th>
-                        <td><span class="amount">฿{{ $order->finalPrice }}</span></td>
+                        <td><span class="amount">฿{{ round($order->finalPrice) }}</span></td>
                     </tr>
                 </tfoot>
             </table>

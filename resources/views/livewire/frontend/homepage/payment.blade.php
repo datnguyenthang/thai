@@ -207,9 +207,9 @@
                                                 @error('proofFiles.*') <span class="text-danger error">{{ $message }}</span> @enderror
                                             </div>
                                             <div class="col-md-6">
-                                                <button type="submit" class="btn bg_own_color text-light" wire:loading.attr="disabled">Upload</button>
+                                                <button type="submit" class="btn bg_own_color text-light" wire:loading.attr="disabled">{{ trans('messages.upload') }}</button>
 
-                                                <button wire:loading.attr="disabled" wire:click="payment({{ BANKTRANSFER }})" class="btn bg_own_color text-light" @if (empty($photos) ) disabled @endif>
+                                                <button wire:loading.attr="disabled" wire:click="payment({{ BANKTRANSFER }})" class="btn bg_own_color text-light" @if (empty($photos)) disabled @endif>
                                                     {{ trans('messages.submit') }}
                                                 </button>
                                             </div>

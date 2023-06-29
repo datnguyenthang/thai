@@ -272,8 +272,8 @@ class ProceedBooking extends Component
             $this->finalPrice = round($this->originalPrice - $this->couponAmount);
 
             //apply to each ticket 
-            //$this->departPrice = round($this->departPrice - ($this->departPrice * $coupon->discount));
-            //$this->returnPrice = round($this->returnPrice - ($this->returnPrice * $coupon->discount));
+            $this->departPrice = round($this->departPrice - ($this->departPrice * $coupon->discount));
+            $this->returnPrice = round($this->returnPrice - ($this->returnPrice * $coupon->discount));
         }
     }
 

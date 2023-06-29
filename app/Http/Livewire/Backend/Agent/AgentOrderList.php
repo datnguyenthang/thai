@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Response;
+use App\Lib\OrderLib;
 
 use Livewire\Component;
 
@@ -62,9 +64,38 @@ class AgentOrderList extends Component
         $this->resetPage();
     }
 
+    public function downnloadTicket($orderTicketId){
+        $orderTicket = OrderTicket::select('order_tickets.*', 'r.name', 'r.departtime', 'r.returnTime', 'r.departTime',
+                                'fl.id as locationId', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'fl.nameOffice', 'fl.googleMapUrl', 
+                                'sc.name as seatClassName', 'sc.price as seatClassPrice',
+                                DB::raw('CONCAT(o.firstName, " ",o.lastName) as fullname'), 'o.phone', 'o.originalPrice', 'o.couponAmount', 'o.finalPrice',
+                                'o.code', 'o.email', 'o.bookingDate', 'o.note', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff',
+                                'o.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 'a.name as agentName')
+                        ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
+                        ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
+                        ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
+                        ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId')
+                        ->leftJoin('orders as o', 'o.id', '=', 'order_tickets.orderId')
+                        ->leftJoin('promotions as p', 'p.id', '=', 'o.promotionId')
+                        ->leftJoin('agents as a', 'a.id', '=', 'o.agentId')
+                        ->where('order_tickets.id', $orderTicketId)
+                        ->where('o.agentId', Auth::user()->agentId)
+                        ->first();
+
+        $orderLib = new OrderLib();
+
+        $content = $orderLib->generateEticket($orderTicket); 
+        $fileName = $orderTicket->type == ONEWAY ? 'Departure Ticket.pdf' : 'Return Ticket.pdf';
+
+        return response()->streamDownload(function () use ($content) {
+            echo $content;
+        }, $fileName);
+    }
+
     public function viewOrder($orderId) {
         $this->orderDetail = Order::with(['orderTickets' => function($orderTicket){
-                                $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
+                                $orderTicket->select('order_tickets.*', 'r.name', 'r.departtime', 'r.returnTime', 'r.departTime',
+                                                    'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
                                             ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
                                             ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
                                             ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
