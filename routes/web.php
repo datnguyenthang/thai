@@ -76,6 +76,7 @@ Route::middleware(['auth', 'user-access:moderator'])->group(function () {
     Route::get('/moderator', App\Http\Livewire\Backend\Moderator\ModeratorDashboard::class)->name('moderatorDashboard');
     Route::get('/moderatororder', App\Http\Livewire\Backend\Moderator\ModeratorOrder::class)->name('moderatorOrder');
     Route::get('/moderatororderlist', App\Http\Livewire\Backend\Moderator\ModeratorOrderlist::class)->name('moderatorOrderlist');
+    Route::get('/moderatorprocessorder/{orderId}', App\Http\Livewire\Backend\Moderator\ModeratorProcessOrder::class)->name('moderatorprocessorder');
 });
 
 /*------All Agent Routes List------*/
