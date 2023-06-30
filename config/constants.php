@@ -99,7 +99,8 @@
     define('NEWORDER', 0);
     define('UPPLOADTRANSFER', 1);
     define('CANCELDORDER', 6);
-    define('CONFIRMEDORDER', 4);
+    define('DECLINEDORDER', 7);
+    define('CONFIRMEDORDER', 8);
     define('COMPLETEDORDER', 9);
 
     define('ORDERSTATUS', [

@@ -73,6 +73,9 @@ return [
     'info' => 'Info',
     'review' => 'Review',
     'payment' => 'Payment',
+    'approval' => 'Approval',
+    'decline' => 'Decline',
+    'reasondecline' => 'Reason',
 
     'id' => 'ID',
     'save' => 'Save',

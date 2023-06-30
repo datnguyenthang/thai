@@ -15,7 +15,7 @@ class OrderLib
     public static function getOrderDetail($orderId) {
         $order = Order::with(['orderTickets' => function($orderTicket){
                                 $orderTicket->select('order_tickets.*', 'r.name', 'r.departTime', 'r.returnTime', 'r.departDate',
-                                                    'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')
+                                                    'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName', 'sc.price as seatPrice')
                                             ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
                                             ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
                                             ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
@@ -24,10 +24,10 @@ class OrderLib
                             ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
                             ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
                             ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
-                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.status',
-                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.finalPrice',
-                                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 
-                                    'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName', 'ct.name as customerTypeName')
+                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.status', 'orders.phone', 'orders.finalPrice',
+                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.originalPrice', 'orders.couponAmount', 'orders.paymentStatus',
+                                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.childrenQuantity', 'orders.paymentMethod',
+                                    'p.name as promotionName', 'p.code as promotionCode', 'p.discount as discount', 'a.name as agentName', 'ct.name as customerTypeName')
                             ->where('orders.id', $orderId)
                             ->first();
         return $order;
@@ -37,7 +37,8 @@ class OrderLib
         $orderDetail = OrderTicket::select('order_tickets.*', 'r.name', 'r.departTime', 'r.returnTime', 'r.departDate',
                                 'fl.id as locationId', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'fl.nameOffice', 'fl.googleMapUrl', 
                                 'sc.name as seatClassName', 'sc.price as seatClassPrice',
-                                DB::raw('CONCAT(o.firstName, " ",o.lastName) as fullname'), 'o.phone', 'o.originalPrice', 'o.couponAmount', 'o.finalPrice',
+                                DB::raw('CONCAT(o.firstName, " ",o.lastName) as fullname'), 'o.customerType',
+                                'o.phone', 'o.originalPrice', 'o.couponAmount', 'o.finalPrice', 'o.agentId',
                                 'o.code', 'o.email', 'o.bookingDate', 'o.note', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff',
                                 'o.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 'a.name as agentName')
                         ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')

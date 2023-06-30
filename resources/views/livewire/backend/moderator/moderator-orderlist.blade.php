@@ -163,11 +163,11 @@
                                     <!--<i class="fa fa-edit"></i>-->
                                     {{ trans('backend.editorder') }}
                             </button>
-                            <button class="call-btn btn btn-outline-warning btn-floating btn-sm"
-                                wire:click="processOrder({{ $order->id }})">
+                            <a class="call-btn btn btn-outline-warning btn-floating btn-sm"
+                                href="/moderatorprocessorder/{{ $order->id }}">
                                     <!--<i class="fa fa-process"></i>-->
                                     {{ trans('backend.processorder') }}
-                            </button>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
