@@ -59,7 +59,7 @@
                         {{ trans('backend.dropoff') }}: <strong>{{ $order->dropoff }}</strong>
                     </li>
                     <li>
-                        {{ trans('backend.note') }}: <strong>{{ $order->dropoff }}</strong>
+                        {{ trans('backend.note') }}: <strong>{{ $order->note }}</strong>
                     </li>
                 </ul>
             </div>
