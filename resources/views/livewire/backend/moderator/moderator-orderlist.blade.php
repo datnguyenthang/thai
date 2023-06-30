@@ -158,11 +158,6 @@
                                     <!--<i class="fa fa-eye"></i>-->
                                     {{ trans('backend.vieworder') }}
                             </button>
-                            <button class="call-btn btn btn-outline-info btn-floating btn-sm"
-                                wire:click="editOrder({{ $order->id }})">
-                                    <!--<i class="fa fa-edit"></i>-->
-                                    {{ trans('backend.editorder') }}
-                            </button>
                             <a class="call-btn btn btn-outline-warning btn-floating btn-sm"
                                 href="/moderatorprocessorder/{{ $order->id }}">
                                     <!--<i class="fa fa-process"></i>-->
