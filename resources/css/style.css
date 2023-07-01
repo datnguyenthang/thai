@@ -71,7 +71,7 @@ transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -webkit-trans
 .lang1{float: right; border-right: 1px solid #ebebeb; border-left: 1px solid #ebebeb; width: 150px; margin-right: 20px;}
 .lang1 .dropdown-toggle {border: none; padding: 0; background: none!important; outline: none;display: block; width: 100%; padding-left: 30px; text-align: left; font-size: 13px; line-height: 20px; color: #acacac;}
 .lang1 .dropdown-toggle:focus, .lang1 .dropdown-toggle:active{background: none; outline: none; box-shadow: none;}
-.lang1 .dropdown-toggle:before{content: ''; display: inline-block; width: 18px; height: 12px; background: url(../images/flag_en.png) 0 0 no-repeat; vertical-align: top; margin-top: 3px; margin-right: 5px;}
+.lang1 .dropdown-toggle:before{content: ''; display: inline-block; width: 18px; height: 12px;/* background: url(../images/flag_en.png) 0 0 no-repeat;*/ vertical-align: top; margin-top: 3px; margin-right: 5px;}
 .lang1 .dropdown-toggle .caret{display: inline-block; width: 10px; height: 6px; border: none; background: url(../images/arr0.png); margin-left: 10px;}
 
 
@@ -482,7 +482,7 @@ transition: background 0.3s ease-out; -moz-transition: background 0.3s ease-out;
 
 #why1{position: relative; padding-top: 20px; padding-bottom: 30px;}
 
-#popular_cruises1{position: relative; padding-top: 20px; padding-bottom: 70px;}
+#popular_cruises1{position: relative; padding-top: 20px; /*padding-bottom: 70px;*/}
 
 /* ============================= popular ====================== */
 #popular_wrapper{ position: relative; padding-top: 0px; padding-bottom: 0px;}
@@ -640,7 +640,7 @@ transition: color 0.3s ease-out; -moz-transition: color 0.3s ease-out; -webkit-t
 }
 .navbar .navbar-nav > li > a em{display: inline-block; width: 8px; height: 5px; background: url(../images/caret.png); margin-left: 5px;}
 
-.navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus, .navbar .navbar-nav > li.sfHover > a, .navbar .navbar-nav > li.sfHover > a:hover{color: ##9d474a; text-decoration: none; background: none; box-shadow: none; moz-box-shadow: none; -webkit-box-shadow: none; border-color: #9d474a; }
+.navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus, .navbar .navbar-nav > li.sfHover > a, .navbar .navbar-nav > li.sfHover > a:hover{color: #9d474a; text-decoration: none; background: none; box-shadow: none; moz-box-shadow: none; -webkit-box-shadow: none; border-color: #9d474a; }
 .navbar .navbar-nav > li.active > a, .navbar .navbar-nav > li.active > a:hover, .navbar .navbar-nav > li.active > a:focus{color: #9d474a; text-decoration: none; background: none; box-shadow: none; moz-box-shadow: none; -webkit-box-shadow: none; border-color: #9d474a;}
 
 .sub-menu ul{ position: absolute; display: none; left: -25px; top: 75px;  list-style: none; zoom: 1; z-index: 10; margin: 0; padding:15px 25px; background: #fff; text-align: left;margin-top: -6px; min-width: 180px; box-shadow: 0 0 25px rgba(0, 0, 0, 0.08); moz-box-shadow: 0 0 25px rgba(0, 0, 0, 0.08); -webkit-box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);}

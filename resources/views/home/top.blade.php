@@ -15,7 +15,9 @@
         <div class="lang1">
           <div class="dropdown">
             <a class="btn btn-default dropdown-toggle {{ app()->getLocale() == 'en' ? 'en' : 'tha' }}" href="{{ route('home', ['lang' => app()->getLocale() == 'en' ? 'tha' : 'en']) }}"
-            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="/img/lang/{{ app()->getLocale() == 'en' ? 'en' : 'tha' }}.png" 
+                  height="20" alt="Language Logo" loading="lazy" />
               {{ app()->getLocale() == 'en' ? 'English' : 'Thailand' }}
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
