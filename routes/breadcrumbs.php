@@ -45,3 +45,16 @@ Breadcrumbs::for('privatepolicy', function (BreadcrumbTrail $trail) {
     $trail->parent('home', route('home'));
     $trail->push(trans('messages.privatepolicy'), route('privatepolicy'));
 });
+
+//BACKEND
+/*
+Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
+    $trail->push(trans('messages.nav_home'), route('home'));
+});
+
+// Process Order
+Breadcrumbs::for('processorder', function (BreadcrumbTrail $trail) {
+    $trail->parent('proceedbooking', route('proceedbooking'));
+    $trail->push(trans('messages.nav_payment'), route('payment', 'code'));
+});
+*/
