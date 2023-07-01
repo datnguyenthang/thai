@@ -33,6 +33,7 @@
             @include('home.partner')
 --}}
             @include('home.carousel')
+            @include('home.advertising')
         @else 
             <div class="container mt-4">
                 @if(isset($slot))

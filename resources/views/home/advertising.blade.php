@@ -1,8 +1,7 @@
 <div id="popular_cruises1">
     <div class="container">
   
-      <h2 class="animated fadeInUp visible" data-bs-animation="fadeInUp" data-bs-delay="100">POPULAR CRUISES</h2>
-      <div class="title1 animated fadeInUp visible" data-bs-animation="fadeInUp" data-bs-delay="200">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod <br>tincidunt ut laoreet dolore magna aliquam erat volutpat.</div>  
+      <h2 class="animated fadeInUp visible" data-bs-animation="fadeInUp" data-bs-delay="100">Our Transportation Services</h2>
       <br><br>
 
       <div id="popular_wrapper" class="animated fadeIn visible" data-bs-animation="fadeIn" data-bs-delay="300">
@@ -19,15 +18,14 @@
                           <div class="popular">
                             <div class="popular_inner">
                               <figure>
-                                <img src="/img/popular01.jpg" alt="" class="img-responsive">
-                                <div class="over">
-                                  <div class="v1">Bahamas <span>17 Deal Offers</span></div>
-                                  <div class="v2">Lorem ipsum dolor sit amet, concateus.</div>
+                                <img src="https://seudamgo.com/wp-content/uploads/2023/02/ferry.jpg" alt="" class="img-responsive">
+                                <div class="over bg_own_color">
+                                  <div class="v1">Ferry</div>
+                                  <div class="v2">Laem Sok Pier</div>
+                                  <div class="v3">Ao Salad Pier</div>
                                 </div>
                               </figure>
                               <div class="caption">
-                                <div class="txt1"><span>Bahamas</span> 7 Night Tour</div>
-                                <div class="txt2">Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming.</div>
                                 <div class="txt3 clearfix">
                                   <div class="left_side">
                                     <div class="stars1">
@@ -35,28 +33,27 @@
                                       <img src="/img/star1.png" alt="">
                                       <img src="/img/star1.png" alt="">
                                       <img src="/img/star1.png" alt="">
-                                      <img src="/img/star2.png" alt="">
+                                      <img src="/img/star1.png" alt="">
                                     </div>
                                     <div class="nums">- 18 Reviews</div>
                                   </div>
-                                  <div class="right_side"><a href="#" class="btn-default btn1">See All</a></div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </li><li style="width: 390px;">
+                        </li>
+                        <li style="width: 390px;">
                           <div class="popular">
                             <div class="popular_inner">
                               <figure>
-                                <img src="/img/popular02.jpg" alt="" class="img-responsive">
-                                <div class="over">
-                                  <div class="v1">Mediterranean <span>17 Deal Offers</span></div>
-                                  <div class="v2">Lorem ipsum dolor sit amet, concateus.</div>
+                                <img src="https://seudamgo.com/wp-content/uploads/2023/04/Private-Speedboad.jpg" alt="" class="img-responsive">
+                                <div class="over bg_own_color">
+                                  <div class="v1">Private Speedboad</div>
+                                  <div class="v2">Laem Sok Pier</div>
+                                  <div class="v3">Ao Salad Pier</div>
                                 </div>
                               </figure>
                               <div class="caption">
-                                <div class="txt1"><span>Mediterranean</span> 18 Night Tour</div>
-                                <div class="txt2">Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming.</div>
                                 <div class="txt3 clearfix">
                                   <div class="left_side">
                                     <div class="stars1">
@@ -66,9 +63,13 @@
                                       <img src="/img/star1.png" alt="">
                                       <img src="/img/star1.png" alt="">
                                     </div>
-                                    <div class="nums">- 168 Reviews</div>
+                                    <div class="nums">- 22 Reviews</div>
                                   </div>
-                                  <div class="right_side"><a href="#" class="btn-default btn1">See All</a></div>
+                                  <!--
+                                  <div class="right_side">
+                                    <a href="#" class="btn-default btn1">See All</a>
+                                  </div>
+                                  -->
                                 </div>
                               </div>
                             </div>
@@ -77,73 +78,14 @@
                           <div class="popular">
                             <div class="popular_inner">
                               <figure>
-                                <img src="/img/popular03.jpg" alt="" class="img-responsive">
-                                <div class="over">
-                                  <div class="v1">Greece <span>17 Deal Offers</span></div>
-                                  <div class="v2">Lorem ipsum dolor sit amet, concateus.</div>
+                                <img src="https://seudamgo.com/wp-content/uploads/2023/02/bus-seudamgo.jpg" alt="" class="img-responsive">
+                                <div class="over bg_own_color">
+                                  <div class="v1">Bus</div>
+                                  <div class="v2">Bangkok Depot</div>
+                                  <div class="v3">Laem Sok Pier</div>
                                 </div>
                               </figure>
                               <div class="caption">
-                                <div class="txt1"><span>Greece</span> 6 Night Tour</div>
-                                <div class="txt2">Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming.</div>
-                                <div class="txt3 clearfix">
-                                  <div class="left_side">
-                                    <div class="stars1">
-                                      <img src="/img/star1.png" alt="">
-                                      <img src="/img/star1.png" alt="">
-                                      <img src="/img/star1.png" alt="">
-                                      <img src="/img/star1.png" alt="">
-                                      <img src="/img/star2.png" alt="">
-                                    </div>
-                                    <div class="nums">- 16 Reviews</div>
-                                  </div>
-                                  <div class="right_side"><a href="#" class="btn-default btn1">See All</a></div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </li><li style="width: 390px;">
-                          <div class="popular">
-                            <div class="popular_inner">
-                              <figure>
-                                <img src="/img/popular01.jpg" alt="" class="img-responsive">
-                                <div class="over">
-                                  <div class="v1">Bahamas <span>17 Deal Offers</span></div>
-                                  <div class="v2">Lorem ipsum dolor sit amet, concateus.</div>
-                                </div>
-                              </figure>
-                              <div class="caption">
-                                <div class="txt1"><span>Bahamas</span> 7 Night Tour</div>
-                                <div class="txt2">Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming.</div>
-                                <div class="txt3 clearfix">
-                                  <div class="left_side">
-                                    <div class="stars1">
-                                      <img src="/img/star1.png" alt="">
-                                      <img src="/img/star1.png" alt="">
-                                      <img src="/img/star1.png" alt="">
-                                      <img src="/img/star1.png" alt="">
-                                      <img src="/img/star2.png" alt="">
-                                    </div>
-                                    <div class="nums">- 18 Reviews</div>
-                                  </div>
-                                  <div class="right_side"><a href="#" class="btn-default btn1">See All</a></div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </li><li style="width: 390px;">
-                          <div class="popular">
-                            <div class="popular_inner">
-                              <figure>
-                                <img src="/img/popular02.jpg" alt="" class="img-responsive">
-                                <div class="over">
-                                  <div class="v1">Mediterranean <span>17 Deal Offers</span></div>
-                                  <div class="v2">Lorem ipsum dolor sit amet, concateus.</div>
-                                </div>
-                              </figure>
-                              <div class="caption">
-                                <div class="txt1"><span>Mediterranean</span> 18 Night Tour</div>
-                                <div class="txt2">Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming.</div>
                                 <div class="txt3 clearfix">
                                   <div class="left_side">
                                     <div class="stars1">
@@ -153,48 +95,25 @@
                                       <img src="/img/star1.png" alt="">
                                       <img src="/img/star1.png" alt="">
                                     </div>
-                                    <div class="nums">- 168 Reviews</div>
+                                    <div class="nums">- 25 Reviews</div>
                                   </div>
-                                  <div class="right_side"><a href="#" class="btn-default btn1">See All</a></div>
+                                  <!--
+                                  <div class="right_side">
+                                    <a href="#" class="btn-default btn1">See All</a>
+                                  </div>
+                                  -->
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </li><li style="width: 390px;">
-                          <div class="popular">
-                            <div class="popular_inner">
-                              <figure>
-                                <img src="/img/popular03.jpg" alt="" class="img-responsive">
-                                <div class="over">
-                                  <div class="v1">Greece <span>17 Deal Offers</span></div>
-                                  <div class="v2">Lorem ipsum dolor sit amet, concateus.</div>
-                                </div>
-                              </figure>
-                              <div class="caption">
-                                <div class="txt1"><span>Greece</span> 6 Night Tour</div>
-                                <div class="txt2">Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming.</div>
-                                <div class="txt3 clearfix">
-                                  <div class="left_side">
-                                    <div class="stars1">
-                                      <img src="/img/star1.png" alt="">
-                                      <img src="/img/star1.png" alt="">
-                                      <img src="/img/star1.png" alt="">
-                                      <img src="/img/star1.png" alt="">
-                                      <img src="/img/star2.png" alt="">
-                                    </div>
-                                    <div class="nums">- 16 Reviews</div>
-                                  </div>
-                                  <div class="right_side"><a href="#" class="btn-default btn1">See All</a></div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </li></ul></div>
+                        </li>
+                      </ul>
+                    </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="popular_pagination" style="display: block;"><a href="#" class="selected"><span>1</span></a><a href="#" class=""><span>2</span></a><a href="#" class=""><span>3</span></a><a href="#" class=""><span>4</span></a><a href="#" class=""><span>5</span></a><a href="#" class=""><span>6</span></a></div>
+
             </div>
           </div>
         </div>
