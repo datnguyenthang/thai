@@ -60,7 +60,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.departuredate') }}</span>
-                <input id="departureDate" wire:model="departureDate" name="departureDate" class="form-control" type="date" wire:change="chooseDepartDate($event.target.value)" min="{{ date('Y-m-d') }}" required>
+                <input id="departureDate" wire:model="departureDate" name="departureDate" class="form-control" type="date" min="{{ date('Y-m-d') }}" required>
                 @error('departureDate') <span class="text-danger error">{{ $message }}</span> @enderror
             </div>
         </div>

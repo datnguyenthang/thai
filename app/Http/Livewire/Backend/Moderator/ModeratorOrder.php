@@ -107,6 +107,10 @@ class ModeratorOrder extends Component
         $this->dropoff = 0;
     }
 
+    public function updatedDepartureDate(){
+        $this->returnDate = Carbon::create($this->departureDate)->addDay()->toDateString();
+    }
+
     public function chooseFromLocation($location){
         $this->toLocationList = Location::get()->where('status', ACTIVE)->except($location);
         $this->toLocation =  $this->toLocationList->first()->id;
@@ -117,11 +121,11 @@ class ModeratorOrder extends Component
         $this->fromLocation =  $this->fromLocationList->first()->id;
     }
 
-    public function updatedPickup($pickup){
+    public function updatedPickup(){
         if ($this->pickup == PICKUPANY) $this->pickupAny =  $this->pickupdropoffs->first()->name;
     }
 
-    public function updatedDropoff($dropoff){
+    public function updatedDropoff(){
         if ($this->dropoff == DROPOFFANY) $this->dropoffAny =  $this->pickupdropoffs->first()->name;
     }
 
