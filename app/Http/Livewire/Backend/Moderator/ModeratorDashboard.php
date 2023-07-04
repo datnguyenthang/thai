@@ -17,7 +17,7 @@ class ModeratorDashboard extends Component
 {
     public $page = 'moderatorDashboard';
     public $listRides = [];
-    public $revenue;
+    public $revenue = [];
     public $pendingComfirmation;
     public $totalAmountThisDay;
     public $totalOrderThisDay;
