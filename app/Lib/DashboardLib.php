@@ -72,10 +72,10 @@ class DashboardLib {
                     ->first();
 
         if (!$revenue) {
-            $revenue = (object)[
+            $revenue = collect([
                 'priceConfirmed' => 0,
                 'priceNotConfirmed' => 0,
-            ];
+            ]);
         }
         return $revenue;
     }
