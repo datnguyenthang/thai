@@ -38,8 +38,11 @@ class ModeratorDashboard extends Component
         $this->listRides = DashboardLib::ridesInDay($this->fromDate, $this->toDate);
         $this->revenue = DashboardLib::revenueInDay();
 
-        $this->revenue->priceConfirmed = isset($this->revenue) ? $this->revenue->priceConfirmed : 0;
-        $this->revenue->priceNotConfirmed = isset($this->revenue) ? $this->revenue->priceNotConfirmed : 0;
+        if(!$this->revenue){
+            $this->revenue = new stdClass;
+            $this->revenue->priceConfirmed = isset($this->revenue) ? $this->revenue->priceConfirmed : 0;
+            $this->revenue->priceNotConfirmed = isset($this->revenue) ? $this->revenue->priceNotConfirmed : 0;
+        }
 
         $this->totalAmountThisDay = $this->revenue->priceConfirmed + $this->revenue->priceNotConfirmed;
 
