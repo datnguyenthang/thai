@@ -39,7 +39,7 @@ class ModeratorDashboard extends Component
         $this->revenue = DashboardLib::revenueInDay();
 
         if(!$this->revenue){
-            $this->revenue = new stdClass;
+            $this->revenue = new \stdClass;
             $this->revenue->priceConfirmed = isset($this->revenue) ? $this->revenue->priceConfirmed : 0;
             $this->revenue->priceNotConfirmed = isset($this->revenue) ? $this->revenue->priceNotConfirmed : 0;
         }
