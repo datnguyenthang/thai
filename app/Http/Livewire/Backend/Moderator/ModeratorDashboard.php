@@ -37,7 +37,7 @@ class ModeratorDashboard extends Component
 
         $this->listRides = DashboardLib::ridesInDay($this->fromDate, $this->toDate);
         $this->revenue = DashboardLib::revenueInDay();
-        $this->totalAmountThisDay = $this->revenue->priceConfirmed + $this->revenue->priceNotConfirmed;
+        $this->totalAmountThisDay = $this->revenue ? $this->revenue->priceConfirmed + $this->revenue->priceNotConfirmed : 0;
         $this->pendingComfirmation = Order::where('status', UPPLOADTRANSFER)->count();
         $this->totalOrderThisDay = Order::where('bookingDate', now()->toDateString())->count();
     }
