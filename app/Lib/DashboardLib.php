@@ -77,7 +77,7 @@ class DashboardLib {
         $passengers = Ride::select('rides.id', 'rides.name as Ridename', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
                                    'o.code', 'o.phone', 'o.email', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff',
                                    DB::raw('CONCAT(o.firstName, " ", o.lastName) as fullname'),
-                                   DB::raw('CASE WHEN ct.name <> 0 THEN ct.name ELSE "Online" END AS CustomerType'), 'u.name',
+                                   DB::raw('CASE WHEN o.customerType <> 0 THEN ct.name ELSE "Online" END AS CustomerType'), 'u.name',
                                    DB::raw('CASE WHEN ot.type = '.ONEWAY.' THEN "Departure" ELSE "Return" END AS Ticket'),
                                    DB::raw('CASE WHEN o.status = '.CONFIRMEDORDER.' THEN "Confirm" ELSE "Not Confirm" END AS Status')
                                 )
