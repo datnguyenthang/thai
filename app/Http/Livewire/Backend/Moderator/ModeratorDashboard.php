@@ -40,8 +40,8 @@ class ModeratorDashboard extends Component
 
         if(!$this->revenue){
             $this->revenue = new \stdClass;
-            $this->revenue->priceConfirmed = isset($this->revenue) ? $this->revenue->priceConfirmed : 0;
-            $this->revenue->priceNotConfirmed = isset($this->revenue) ? $this->revenue->priceNotConfirmed : 0;
+            $this->revenue->priceConfirmed = $this->revenue->priceConfirmed ?? 0;
+            $this->revenue->priceNotConfirmed = $this->revenue->priceNotConfirmed ?? 0;
         }
 
         $this->totalAmountThisDay = $this->revenue->priceConfirmed + $this->revenue->priceNotConfirmed;
