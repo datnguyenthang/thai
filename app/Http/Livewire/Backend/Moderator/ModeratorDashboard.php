@@ -16,7 +16,7 @@ use Carbon\Carbon;
 class ModeratorDashboard extends Component
 {
     public $page = 'moderatorDashboard';
-    public $listRides;
+    protected $listRides;
     public $revenue;
     public $pendingComfirmation;
     public $totalAmountThisDay;
