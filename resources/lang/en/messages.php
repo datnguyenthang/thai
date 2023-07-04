@@ -108,6 +108,15 @@ return [
                                         <p>Address 105 Mu. 6 Nong Hong Subdistrict, Phan Thong District, Chonburi Province 20160.</p>
                                     </div>
                                 </article>',
+    'aboutuscontent' => '<article class="policy p-3 policy-border text-dark">
+                    <div class="entry-content">
+                        <h2>Our catamaran</h2>
+                        <p>A new type catamaran design in terms of both appearance and mechanics, which can accommodate 84 -100 passengers with spacious space, comfortable seats. The vessel is equipped with air conditioner, toilet, full life jackets to meet safety requirements as well as create the most convenience and comfort for customers. Moreover, the new engine technology helps customers save time from Trat to Koh Kooh with the fastest time and there is no smell of fuel during the journey.</p>
+                        <h2>About us</h2>
+                        <p>SEUDAMGO is a new brand of sea passenger transport in Thailand. We have a team of staff who are well-trained in customer service. Along with that, we also bring motor catamarans with new designs and different engine improvements to help customers experience the fastest vessels with unexpected utilities. Our services are fully committed to safety, reliability, and reduced environmental impact. We connect family, friends and make it possible for you to discover new destinations or revisit favorites.</p>
+                    </div>
+                </article>',
+    'aboutus' => 'About us',
     'inputcoupon' => 'Input coupon',
     'couponprice' => 'Discount Price',
     'couponcode' => 'Code',

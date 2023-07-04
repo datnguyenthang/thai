@@ -33,6 +33,7 @@ Route::get('/payment/{code}', App\Http\Livewire\Frontend\Homepage\Payment::class
 
 Route::get('/policy-for-customer', App\Http\Livewire\Frontend\Policy::class)->name('policycustomer');
 Route::get('/privacy-policy', App\Http\Livewire\Frontend\PrivatePolicy::class)->name('privatepolicy');
+Route::get('/aboutus', App\Http\Livewire\Frontend\Aboutus::class)->name('aboutus');
 /*
 Route::get('/admin', [AdminController::class,'index'])->name('dashboard');
 Route::get('/manager', [ManagerController::class,'index'])->name('dashboard');

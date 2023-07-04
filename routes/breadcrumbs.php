@@ -46,6 +46,11 @@ Breadcrumbs::for('privatepolicy', function (BreadcrumbTrail $trail) {
     $trail->push(trans('messages.privatepolicy'), route('privatepolicy'));
 });
 
+//About us
+Breadcrumbs::for('aboutus', function (BreadcrumbTrail $trail) {
+    $trail->parent('home', route('home'));
+    $trail->push(trans('messages.aboutus'), route('aboutus'));
+});
 //BACKEND
 /*
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
