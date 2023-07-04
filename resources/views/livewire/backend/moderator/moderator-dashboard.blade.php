@@ -195,8 +195,7 @@
             datasets: [{
                 label: 'Revenue in day',
                 data: [
-                        {{ $revenue->priceConfirmed ? $revenue->priceConfirmed : 0}}, 
-                        {{ $revenue->priceNotConfirmed ? $revenue->priceNotConfirmed: 0}}
+                        
                     ],
 
                 hoverOffset: 4
