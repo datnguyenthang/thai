@@ -44,7 +44,7 @@ class DashboardLib {
                     ->orderBy('rides.departDate', 'asc')
                     ->orderBy('rides.departTime', 'asc')
                     ->get();
-
+dd($rides);
         return $rides;
     }
 
@@ -70,13 +70,6 @@ class DashboardLib {
                     ->where('rides.departDate', '=', Carbon::now()->toDateString())
                     ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate')
                     ->first();
-
-        if (!$revenue) {
-            $revenue = collect([
-                'priceConfirmed' => 0,
-                'priceNotConfirmed' => 0,
-            ]);
-        }
         return $revenue;
     }
 
