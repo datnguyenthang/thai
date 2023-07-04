@@ -71,6 +71,12 @@ class DashboardLib {
                     ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate')
                     ->first();
 
+        if (!$revenue) {
+            $revenue = (object)[
+                'priceConfirmed' => 0,
+                'priceNotConfirmed' => 0,
+            ];
+        }
         return $revenue;
     }
 

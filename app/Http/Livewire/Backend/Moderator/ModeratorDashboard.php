@@ -17,7 +17,7 @@ class ModeratorDashboard extends Component
 {
     public $page = 'moderatorDashboard';
     public $listRides = [];
-    public $revenue = [];
+    public $revenue;
     public $pendingComfirmation;
     public $totalAmountThisDay;
     public $totalOrderThisDay;
@@ -37,13 +37,6 @@ class ModeratorDashboard extends Component
 
         $this->listRides = DashboardLib::ridesInDay($this->fromDate, $this->toDate);
         $this->revenue = DashboardLib::revenueInDay();
-
-        if(!$this->revenue){
-            $this->revenue = (object)[
-                'priceConfirmed' => 0,
-                'priceNotConfirmed' => 0,
-            ];
-        }
 
         $this->totalAmountThisDay = $this->revenue->priceConfirmed + $this->revenue->priceNotConfirmed;
 
