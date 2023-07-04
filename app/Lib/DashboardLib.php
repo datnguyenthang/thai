@@ -44,7 +44,7 @@ class DashboardLib {
                     ->orderBy('rides.departDate', 'asc')
                     ->orderBy('rides.departTime', 'asc')
                     ->get();
-dd($rides);
+
         return $rides;
     }
 
