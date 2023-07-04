@@ -39,7 +39,7 @@ class ModeratorDashboard extends Component
         $this->revenue = DashboardLib::revenueInDay();
 
         if(!$this->revenue){
-            $this->revenue = [
+            $this->revenue = (object)[
                 'priceConfirmed' => 0,
                 'priceNotConfirmed' => 0,
             ];
