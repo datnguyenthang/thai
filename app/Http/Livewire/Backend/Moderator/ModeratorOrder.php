@@ -31,7 +31,7 @@ class ModeratorOrder extends Component
     public $children;
     public $customerType;
     public $customerTypePrice;
-    public $agent = null;
+    public $agent;
 
     public $fromLocationList;
     public $toLocationList;
