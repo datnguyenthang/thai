@@ -69,12 +69,15 @@
                                 2 => "Sale",
                                 3 => "Agent"
                             ]);
-    define('PRICEONLINE', 0);
-    define('PRICEAGENT', 1);
-    define('CUSTOMERTYPEPRICE', [
-                                PRICEONLINE => "Online", 
-                                PRICEAGENT => "Agent"
-                            ]);
+    define('LOCALTYPE', 0);
+    define('AGENTTYPE', 1);
+    define('SPECIALTYPE', 2);
+
+    define('AGENTLOCAL', [
+        LOCALTYPE => "Local", 
+        AGENTTYPE => "Agent",
+        SPECIALTYPE => "Special",
+    ]);
 
     //RIDE
     define('RIDESTATUS', [

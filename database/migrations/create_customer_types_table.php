@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('code');
+            $table->tinyInteger('type')->default(0);
             $table->integer('price');
             $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
             $table->timestamps();

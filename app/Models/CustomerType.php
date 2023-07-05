@@ -15,6 +15,6 @@ class CustomerType extends Model
      * @return response()
      */
     protected $fillable = [
-        'name', 'code', 'price', 'status'
+        'name', 'code', 'price', 'type', 'status'
     ];
 }

@@ -10,12 +10,15 @@ class ManagerCreateCustomerType extends Component
     public $customerTypeId;
     public $name;
     public $code;
+    public $type;
     public $price;
     public $status;
 
     public function mount($customerTypeId = 0)
     {
         $this->customerTypeId = $customerTypeId;
+        $this->type = 0;
+        $this->status = 0;
 
         if ($customerTypeId > 0) {
             $customerType = CustomerType::find($customerTypeId);
@@ -23,6 +26,7 @@ class ManagerCreateCustomerType extends Component
             $this->name = $customerType->name;
             $this->code = $customerType->code;
             $this->price = $customerType->price;
+            $this->type = $customerType->type;
             $this->status = $customerType->status;
         }
     }
@@ -42,6 +46,7 @@ class ManagerCreateCustomerType extends Component
             $customerType->code = $this->code;
             $customerType->price = intVal($this->price);
             $customerType->status = intVal($this->status);
+            $customerType->type = intVal($this->type);
             $customerType->save();
 
             session()->flash('success', 'Customer Type updated successfully!');
@@ -52,6 +57,7 @@ class ManagerCreateCustomerType extends Component
                 'name' => $this->name,
                 'code' => $this->code,
                 'price' => intVal($this->price),
+                'type' => intVal($this->type),
                 'status' => intVal($this->status)
             ]);
 

@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('dropoff')->nullable($value = true);
             $table->integer('adultQuantity')->nullable($value = true);
             $table->integer('childrenQuantity')->nullable($value = true);
+            $table->decimal('onlinePrice', $precision = 10, $scale = 2);/*Online price */
             $table->decimal('originalPrice', $precision = 10, $scale = 2);/*Original Price */
             $table->decimal('couponAmount', $precision = 10, $scale = 2)->nullable($value = true);/*Price after applying Coupon*/
             $table->decimal('finalPrice', $precision = 10, $scale = 2);/*Final price */

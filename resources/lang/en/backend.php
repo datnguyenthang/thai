@@ -95,6 +95,7 @@ return [
     'customertypeprice' => 'Price',
     'listcustomertype' => 'List type of customer',
     'customertypestatus' => 'Status',
+    'customertypetype' => 'Type',
 
     //Agent
     'createagent' => 'Create Agent',
