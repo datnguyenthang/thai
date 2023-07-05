@@ -344,7 +344,7 @@ class ModeratorOrder extends Component
                 'agentId' => $this->agentId ?? null,
                 'paymentMethod' => $this->paymentMethod,
                 'transactionCode' => $this->transactionCode,
-                'status' => COMPLETEDORDER,
+                'status' => CONFIRMEDORDER,
             ]);
 
             //SAVE ORDER TICKET DEPART FIRST
