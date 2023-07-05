@@ -17,21 +17,21 @@
     </div>
 
     <div class="row mt-3">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.adults') }}</span>
                 <input type="number" id="adults" wire:model="adults" name="adults" class="form-control"  min="1" required/>
             </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.children') }}</span>
                 <input type="number" id="children" wire:model="children" name="children" class="form-control" min="0" required/>
             </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.departure') }}</span>
                 <select id="fromLocation" name="fromLocation" class="form-select" wire:model="fromLocation" wire:change="chooseFromLocation($event.target.value)" required placeholder="{{ trans('messages.pickup') }}">
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.destination') }}</span>
                 <select id="toLocation" name="toLocation" class="form-select" wire:model="toLocation" wire:change="chooseToLocation($event.target.value)" required placeholder="{{ trans('messages.dropoff') }}">
@@ -54,6 +54,9 @@
                 @error('toLocation') <span class="text-danger error">{{ $message }}</span> @enderror
             </div>
         </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('backend.agent') }}</span>
@@ -66,10 +69,8 @@
                 @error('agent') <span class="text-danger error">{{ $message }}</span> @enderror
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.departuredate') }}</span>
                 <input id="departureDate" wire:model="departureDate" name="departureDate" class="form-control" type="date" min="{{ date('Y-m-d') }}" required>
@@ -78,7 +79,7 @@
         </div>
 
         @if($tripType == ROUNDTRIP)
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.returndate') }}</span>
                 <input id="returnDate" wire:model="returnDate" name="returnDate" class="form-control" type="date" min="{{ $returnDate }}" required="">
@@ -87,7 +88,7 @@
         </div>
         @endif
 
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('backend.customertype') }}</span>
                 <select id="customerType" name="customerType" class="form-select" type="date" wire:model="customerType" @if($agent) disabled @endif>
@@ -96,18 +97,6 @@
                     @endforeach
                 </select>
                 @error('customerType') <span class="text-danger error">{{ $message }}</span> @enderror
-            </div>
-        </div>
-
-        <div class="col-md-2">
-            <div class="form-group">
-                <span class="form-label">{{ trans('backend.customertypeprice') }}</span>
-                <select id="customerTypePrice" name="customerTypePrice" class="form-select" type="date" wire:model="customerTypePrice" @if($agent) disabled @endif>
-                    @foreach(CUSTOMERTYPEPRICE as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
-                    @endforeach
-                </select>
-                @error('customerTypePrice') <span class="text-danger error">{{ $message }}</span> @enderror
             </div>
         </div>
 

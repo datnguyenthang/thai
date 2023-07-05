@@ -26,7 +26,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($customerTypePrice == PRICEONLINE)
+                                @if($agentPriceType == LOCALTYPE)
                                     @foreach ($departRides as $ride)
                                         <tr>
                                             <td>{{ $ride->name }}</td>
@@ -49,7 +49,7 @@
                                     @endforeach
                                 @endif
 
-                                @if($customerTypePrice == PRICEAGENT)
+                                @if($agentPriceType != LOCALTYPE)
                                     @foreach ($departRides as $ride)
                                         <tr class="table-secondary">
                                             <td>{{ $ride->name }}</td>
@@ -102,7 +102,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($customerTypePrice == PRICEONLINE)
+                                    @if($agentPriceType == LOCALTYPE)
                                         @foreach ($returnRides as $ride)
                                             <tr>
                                                 <td>{{ $ride->name }}</td>
@@ -125,7 +125,7 @@
                                         @endforeach
                                     @endif
 
-                                    @if($customerTypePrice == PRICEAGENT)
+                                    @if($agentPriceType != LOCALTYPE)
                                         @foreach ($returnRides as $ride)
                                             <tr class="table-secondary">
                                                 <td>{{ $ride->name }}</td>
