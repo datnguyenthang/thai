@@ -161,10 +161,10 @@ class ModeratorOrder extends Component
         })->type;
     }
 
-    public function updatedAgent(){
-        if($this->agent) {
+    public function updatedAgentId(){
+        if($this->agentId) {
             $agent = $this->agentList->first(function($item) {
-                return $item->id == $this->agent;
+                return $item->id == $this->agentId;
             });
             $customerType = $this->customerTypelist->first(function($item) use ($agent) {
                 return $item->id == $agent->agentType;

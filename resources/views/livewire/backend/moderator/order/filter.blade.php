@@ -60,7 +60,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('backend.agent') }}</span>
-                <select id="agent" name="agent" class="form-select" wire:model="agent">
+                <select id="agentId" name="agentId" class="form-select" wire:model="agentId">
                     <option value=""></option>
                 @foreach($agentList as $agency)
                     <option value="{{ $agency->id }}">{{ $agency->name }}</option>
