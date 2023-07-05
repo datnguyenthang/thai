@@ -77,8 +77,8 @@ class ManagerDashboard extends Component
 
     public function render()
     {
-        return view('livewire.backend.moderator.moderator-dashboard')
-              ->layout('moderator.layouts.app');
+        return view('livewire.backend.manager.manager-dashboard')
+              ->layout('manager.layouts.app');
     }
     
 }

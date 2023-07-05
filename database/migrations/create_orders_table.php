@@ -23,8 +23,8 @@ return new class extends Migration
             $table->integer('promotionId')->nullable($value = true);
             $table->string('firstName');
             $table->string('lastName');
-            $table->string('phone');
-            $table->string('email');
+            $table->string('phone')->nullable($value = true);
+            $table->string('email')->nullable($value = true);
             $table->string('note')->nullable($value = true);
             $table->string('pickup')->nullable($value = true);
             $table->string('dropoff')->nullable($value = true);
@@ -37,6 +37,7 @@ return new class extends Migration
             $table->dateTime('bookingDate', $precision = 0);
             $table->tinyInteger('paymentMethod')->nullable($value = true);
             $table->tinyInteger('paymentStatus')->default(0)->nullable($value = true);
+            $table->string('transactionCode')->nullable($value = true);
             $table->tinyInteger('status')->default(0); /* 0=>Book, 9=>Already paid */
             $table->timestamps();
 

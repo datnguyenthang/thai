@@ -69,6 +69,12 @@
                                 2 => "Sale",
                                 3 => "Agent"
                             ]);
+    define('PRICEONLINE', 0);
+    define('PRICEAGENT', 1);
+    define('CUSTOMERTYPEPRICE', [
+                                PRICEONLINE => "Online", 
+                                PRICEAGENT => "Agent"
+                            ]);
 
     //RIDE
     define('RIDESTATUS', [
@@ -112,6 +118,10 @@
                         ]);
 
     //PAYMENT METHOD
+    define('PAYMENTMETHODSTATUS', [
+                                        0 => "Open",
+                                        1 => "Close"
+                                    ]);
     define('BANKTRANSFER', 1);
     define('CARD', 2);
     define('CASH', 3);
@@ -134,3 +144,4 @@
                                 PAIDBYCASH => "Paid by cash",
                                 PAIDBYAGENT => "Paid by agent"
                             ]);
+    

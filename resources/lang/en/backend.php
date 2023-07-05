@@ -45,6 +45,8 @@ return [
     'adults' => 'Adults',
     'children' => 'Children',
     'fullname' => 'Full Name',
+    'onlineprice' => 'Online Price',
+    'agentprice' => 'Agent Price',
 
     'firstname' => 'First Name',
     'lastname' => 'Last Name',
@@ -163,4 +165,11 @@ return [
     'promotionquantity' => 'Promotion Quantity',
     'promotiondiscount'=> 'Promotion Discount',
 
+    //PAYMENT METHOD
+    'paymentmethod' => 'Payment Method',
+    'transactioncode' => 'Transaction Code',
+    'paymentmethodname' => 'Payment Method',
+    'paymentmethoddescription' => 'Fescription',
+    'paymentmethodistransaction' => 'Is Transaction?',
+    'paymentmethodstatus' => 'Status',
 ];

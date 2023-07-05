@@ -177,4 +177,5 @@ return [
     'seatclass' => 'Seat Class',
     'selecttrip' => 'Select Trip',
     'seatclassprice' => 'Price',
+    'fullname' => 'Full name',
 ];
