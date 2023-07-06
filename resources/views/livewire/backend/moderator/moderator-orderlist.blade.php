@@ -159,7 +159,7 @@
                                     {{ trans('backend.vieworder') }}
                             </button>
                             <a class="call-btn btn btn-outline-warning btn-floating btn-sm"
-                                href="/moderatorprocessorder/{{ $order->id }}">
+                                href="/{{ auth()->user()->role}}processorder/{{ $order->id }}">
                                     <!--<i class="fa fa-process"></i>-->
                                     {{ trans('backend.processorder') }}
                             </a>

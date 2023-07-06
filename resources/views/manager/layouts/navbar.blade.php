@@ -11,6 +11,18 @@
             <span>{{ trans('backend.dashboard') }}</span>
           </a>
 
+          <a href="{{ route('managerOrder') }}" 
+            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerOrder' ? 'active' : '' }}">
+            <i class="fas fa-cart-plus fa-fw me-3"></i>
+            <span>{{ trans('backend.order') }}</span>
+          </a>
+
+          <a href="{{ route('managerOrderlist') }}" 
+            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerOrderlist' ? 'active' : '' }}">
+            <i class="fas fa-clipboard-list fa-fw me-3"></i>
+            <span>{{ trans('backend.orderlist') }}</span>
+          </a>
+
           <a href="{{ route('managerListUser') }}" 
             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerListUser' ? 'active' : '' }}">
             <i class="fas fa-chart-area fa-fw me-3"></i>

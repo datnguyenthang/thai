@@ -1,4 +1,4 @@
 <div>
     {{-- The whole world belongs to you. --}}
-    @livewire($moderatorDashboard)
+    @livewire($moderatorOrder)
 </div>
