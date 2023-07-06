@@ -11,7 +11,7 @@ class ManagerCreateAgent extends Component
     public $agentId;
     public $name;
     public $code;
-    public $agentType;
+    public $agentType = [];
     public $type;
     public $manager;
     public $email;
@@ -35,7 +35,7 @@ class ManagerCreateAgent extends Component
 
             $this->name = $agent->name;
             $this->code = $agent->code;
-            $this->agentType = $agent->agentType;
+            $this->agentType = explode(',', $agent->agentType);
             $this->type = $agent->type;
             $this->manager = $agent->manager;
             $this->email = $agent->email;
@@ -64,7 +64,7 @@ class ManagerCreateAgent extends Component
             $agent = Agent::find($this->agentId);
             $agent->name = $this->name;
             $agent->code = $this->code;
-            $agent->agentType = intVal($this->agentType);
+            $agent->agentType = implode(',', $this->agentType);
             $agent->type = intVal($this->type);
             $agent->manager = $this->manager;
             $agent->email = $this->email;
@@ -81,7 +81,7 @@ class ManagerCreateAgent extends Component
             Agent::create([
                 'name' => $this->name,
                 'code' => $this->code,
-                'agentType' => intVal($this->agentType),
+                'agentType' => implode(',', $this->agentType),
                 'type' => intVal($this->type),
                 'manager' => $this->manager,
                 'email' => $this->email,

@@ -24,7 +24,16 @@
                 <tr>
                     <td>{{ $agent->name }}</td>
                     <td>{{ $agent->code }}</td>
-                    <td>{{ $customerType[$agent->agentType] }}</td>
+                    <td>
+                        <ul>
+                            @php
+                                $agentType = explode(',', $agent->agentType)
+                            @endphp
+                            @foreach ($agentType as $type)
+                                <li>{{ $customerType[$type] }}</li>
+                            @endforeach
+                        </ul>
+                    </td>
                     <td>{{ ATYPE[$agent->type] }}</td>
                     <td>{{ $agent->manager }}</td>
                     <td>{{ $agent->email }}</td>

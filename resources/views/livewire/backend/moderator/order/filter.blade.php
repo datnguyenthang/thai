@@ -90,7 +90,7 @@
 
         <div class="col-md-3">
             <div class="form-group">
-                <span class="form-label">{{ trans('backend.customertype') }}</span>
+                <span class="form-label">{{ trans('backend.customerType') }}</span>
                 <select id="customerType" name="customerType" class="form-select" type="date" wire:model="customerType" @if($agent) disabled @endif>
                     @foreach($customerTypelist as $value)
                         <option value="{{ $value->id }}">{{ $value->name }}</option>

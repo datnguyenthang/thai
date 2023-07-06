@@ -17,7 +17,7 @@
 
         <div class="form-outline mb-4">
             <label class="form-label">{{ trans('backend.agenttype') }}</label>
-            <select id="agentType" class="form-select w-50" wire:model="agentType">
+            <select id="agentType" class="form-select w-50" wire:model="agentType" multiple>
                 @foreach($customerType as $value)
                     <option value="{{ $value->id }}">{{ $value->name }}</option>
                 @endforeach

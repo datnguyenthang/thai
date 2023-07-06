@@ -170,17 +170,24 @@ class ModeratorOrder extends Component
                 return $item->id == $agent->agentType;
             });
 
-            $this->customerType = $customerType->id;
-            $this->agentPriceType = $customerType->type;
-            
+            //$this->customerType = $customerType->id;
+            //$this->agentPriceType = $customerType->type;
+            $this->customerTypelist = CustomerType::whereIn('id', explode(',',$agent->agentType))
+                                                    ->where('status', ACTIVE)
+                                                    ->get();
+
+            $this->customerType = $this->customerTypelist->first()->id;
+            $this->agentPriceType = $this->customerTypelist->first()->type;
+
             $this->email = $agent->email;
             $this->phone = $agent->phone;
             
         } else {
+            $this->customerTypelist = CustomerType::get()->where('status', ACTIVE);
             $this->customerType = $this->customerTypelist->first()->id;
+            $this->agentPriceType = $this->customerTypelist->first()->type;
             $this->email = null;
             $this->phone = null;
-            $this->agentPriceType = LOCALTYPE;
         }
     }
 

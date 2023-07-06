@@ -50,7 +50,7 @@ class OrderLib
                         ->leftJoin('orders as o', 'o.id', '=', 'order_tickets.orderId')
                         ->leftJoin('promotions as p', 'p.id', '=', 'o.promotionId')
                         ->leftJoin('agents as a', 'a.id', '=', 'o.agentId')
-                        ->leftJoin('customer_types as ct', 'ct.id', '=', 'a.agentType')
+                        ->leftJoin('customer_types as ct', 'o.customerType', '=', 'a.agentType')
                         ->where('order_tickets.id', $orderTicketId)
                         ->first();
         return $orderDetail;
