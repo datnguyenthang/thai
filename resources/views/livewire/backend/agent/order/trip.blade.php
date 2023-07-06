@@ -26,26 +26,51 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($departRides as $ride)
-                                    <tr>
-                                        <td>{{ $ride->name }}</td>
-                                        <td>{{ $ride->departTime }}</td>
-                                        <td>{{ $ride->returnTime }}</td>
-                                        <td>{{ $ride->seatClass }}</td>
-                                        <th>฿{{ round($ride->price) }}</th>
-                                        <td>
-                                            <input type="radio" name="departRadio" 
-                                                    value="{{ $ride->seatClassId }}"
-                                                    wire:key="{{ $ride->seatClassId }}"
-                                                    wire:click="chooseDepartTrip({{ $ride->id }}, {{ $ride->seatClassId }})"
-                                                    @if (!$order_depart_seatClassId && $loop->first)
-                                                        wire:init="chooseDepartTrip({{ $ride->id }}, {{ $ride->seatClassId }})" 
-                                                    @endif
-                                                    @if ($ride->seatClassId ===$order_depart_seatClassId) checked @endif
-                                            >
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                @if($agentPriceType == LOCALTYPE)
+                                    @foreach ($departRides as $ride)
+                                        <tr>
+                                            <td>{{ $ride->name }}</td>
+                                            <td>{{ $ride->departTime }}</td>
+                                            <td>{{ $ride->returnTime }}</td>
+                                            <td>{{ $ride->seatClass }}</td>
+                                            <th>฿{{ round($ride->price) }} ({{ trans('backend.onlineprice') }})</th>
+                                            <td>
+                                                <input type="radio" name="departRadio" 
+                                                        value="{{ $ride->seatClassId }}"
+                                                        wire:key="{{ $ride->seatClassId }}"
+                                                        wire:click="chooseDepartTrip({{ $ride->id }}, {{ $ride->seatClassId }})"
+                                                        @if (!$order_depart_seatClassId && $loop->first)
+                                                            wire:init="chooseDepartTrip({{ $ride->id }}, {{ $ride->seatClassId }})" 
+                                                        @endif
+                                                        @if ($ride->seatClassId === $order_depart_seatClassId) checked @endif
+                                                >
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+
+                                @if($agentPriceType != LOCALTYPE)
+                                    @foreach ($departRides as $ride)
+                                        <tr class="table-secondary">
+                                            <td>{{ $ride->name }}</td>
+                                            <td>{{ $ride->departTime }}</td>
+                                            <td>{{ $ride->returnTime }}</td>
+                                            <td>{{ $ride->seatClass }}</td>
+                                            <th>฿{{ round($agentPrice) }} ({{ trans('backend.agentprice') }})</th>
+                                            <td>
+                                                <input type="radio" name="departRadio" 
+                                                        value="{{ $ride->seatClassId }}"
+                                                        wire:key="{{ $ride->seatClassId }}"
+                                                        wire:click="chooseDepartTrip({{ $ride->id }}, {{ $ride->seatClassId }})"
+                                                        @if (!$order_depart_seatClassId && $loop->first)
+                                                            wire:init="chooseDepartTrip({{ $ride->id }}, {{ $ride->seatClassId }})" 
+                                                        @endif
+                                                        @if ($ride->seatClassId === $order_depart_seatClassId) checked @endif
+                                                >
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     @else
@@ -77,26 +102,51 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($returnRides as $ride)
-                                        <tr>
-                                            <td>{{ $ride->name }}</td>
-                                            <td>{{ $ride->departTime }}</td>
-                                            <td>{{ $ride->returnTime }}</td>
-                                            <td>{{ $ride->seatClass }}</td>
-                                            <th>฿{{ round($ride->price) }}</th>
-                                            <td>
-                                                <input type="radio" name="returnRadio"
-                                                        value="{{ $ride->seatClassId }}"
-                                                        wire:key="{{ $ride->seatClassId }}"
-                                                        wire:click="chooseReturnTrip({{ $ride->id }}, {{ $ride->seatClassId }})"
-                                                        @if (!$order_return_seatClassId && $loop->first)
-                                                            wire:init="chooseReturnTrip({{ $ride->id }}, {{ $ride->seatClassId }})"
-                                                        @endif
-                                                        @if ($ride->seatClassId === $order_return_seatClassId) checked @endif
-                                                >
-                                        </td>
-                                        </tr>
-                                    @endforeach
+                                    @if($agentPriceType == LOCALTYPE)
+                                        @foreach ($returnRides as $ride)
+                                            <tr>
+                                                <td>{{ $ride->name }}</td>
+                                                <td>{{ $ride->departTime }}</td>
+                                                <td>{{ $ride->returnTime }}</td>
+                                                <td>{{ $ride->seatClass }}</td>
+                                                <th>฿{{ round($ride->price) }} ({{ trans('backend.onlineprice') }})</th>
+                                                <td>
+                                                    <input type="radio" name="returnRadio"
+                                                            value="{{ $ride->seatClassId }}"
+                                                            wire:key="{{ $ride->seatClassId }}"
+                                                            wire:click="chooseReturnTrip({{ $ride->id }}, {{ $ride->seatClassId }})"
+                                                            @if (!$order_return_seatClassId && $loop->first)
+                                                                wire:init="chooseReturnTrip({{ $ride->id }}, {{ $ride->seatClassId }})"
+                                                            @endif
+                                                            @if ($ride->seatClassId === $order_return_seatClassId) checked @endif
+                                                    >
+                                            </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+
+                                    @if($agentPriceType != LOCALTYPE)
+                                        @foreach ($returnRides as $ride)
+                                            <tr class="table-secondary">
+                                                <td>{{ $ride->name }}</td>
+                                                <td>{{ $ride->departTime }}</td>
+                                                <td>{{ $ride->returnTime }}</td>
+                                                <td>{{ $ride->seatClass }}</td>
+                                                <th>฿{{ round($agentPrice) }} ({{ trans('backend.agentprice') }})</th>
+                                                <td>
+                                                    <input type="radio" name="returnRadio"
+                                                            value="{{ $ride->seatClassId }}"
+                                                            wire:key="{{ $ride->seatClassId }}"
+                                                            wire:click="chooseReturnTrip({{ $ride->id }}, {{ $ride->seatClassId }})"
+                                                            @if (!$order_return_seatClassId && $loop->first)
+                                                                wire:init="chooseReturnTrip({{ $ride->id }}, {{ $ride->seatClassId }})"
+                                                            @endif
+                                                            @if ($ride->seatClassId === $order_return_seatClassId) checked @endif
+                                                    >
+                                            </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
             

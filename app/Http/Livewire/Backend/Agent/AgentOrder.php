@@ -15,6 +15,8 @@ use App\Models\OrderTicket;
 use App\Models\CustomerType;
 use App\Models\Promotion;
 use App\Models\Pickupdropoff;
+use App\Models\PaymentMethod;
+use App\Models\Agent;
 
 class AgentOrder extends Component
 {
@@ -29,6 +31,25 @@ class AgentOrder extends Component
     public $children;
     public $customerType;
 
+    public $firstName;
+    public $lastName;
+    public $email;
+    public $phone;
+    public $pickup;
+    public $pickupAny;
+    public $pickupAnyOther;
+    public $dropoff;
+    public $dropoffAny;
+    public $dropoffAnyOther;
+    public $note;
+    public $promotionId;
+    public $paymentMethod;
+    public $transactionCode;
+    public $agentId;
+
+    public $agent;
+    public $agentPriceType;
+
     public $fromLocationList;
     public $toLocationList;
     public $customerTypelist;
@@ -42,25 +63,14 @@ class AgentOrder extends Component
     public $order_depart_seatClassId;
     public $order_return_rideId;
     public $order_return_seatClassId;
+    public $agentPrice;
 
     public $departPrice = 0;
     public $returnPrice = 0;
+    public $onlinePrice;
     public $originalPrice;
     public $couponAmount;
     public $finalPrice;
-
-    public $firstName;
-    public $lastName;
-    public $email;
-    public $phone;
-    public $pickup;
-    public $pickupAny;
-    public $pickupAnyOther;
-    public $dropoff;
-    public $dropoffAny;
-    public $dropoffAnyOther;
-    public $note;
-    public $promotionId;
 
     public $fromLocationName;
     public $toLocationName;
@@ -81,9 +91,13 @@ class AgentOrder extends Component
         $this->adults = 1;
         $this->children = 0;
         $this->tripType = ONEWAY;
-
-        $this->customerTypelist = CustomerType::get()->where('status', ACTIVE);
+       
+        $this->agent = Agent::find( Auth::user()->agentId);
+        $this->customerTypelist = CustomerType::whereIn('id', explode(',', $this->agent->agentType))
+                                        ->where('status', ACTIVE)
+                                        ->get();
         $this->customerType = $this->customerTypelist->first()->id;
+        $this->agentPriceType = $this->customerTypelist->first()->type;
 
         $locations = Location::get()->where('status', ACTIVE);
 
@@ -125,19 +139,41 @@ class AgentOrder extends Component
         if ($this->dropoff == DROPOFFANY) $this->dropoffAny =  $this->pickupdropoffs->first()->name;
     }
 
+    public function updatedCustomerType(){
+        $this->agentPriceType = $this->customerTypelist->first(function($item){
+            return $item->id == $this->customerType;
+        })->type;
+    }
+
     public function updatePrice(){
+        $departOnlinePrice = $returnOnlinePrice = 0;
         if ($this->order_depart_rideId) {
             $this->depart = Ride::find($this->order_depart_rideId);
             $this->seatDepart = SeatClass::find($this->order_depart_seatClassId);
-            $this->departPrice = $this->seatDepart->price * $this->adults;
+            $departOnlinePrice = $this->seatDepart->price * $this->adults;
+            
+            //CHECK TYPE OF PRICE
+            if($this->agentPriceType == LOCALTYPE)
+                $this->departPrice = $this->seatDepart->price * $this->adults;
+
+            if($this->agentPriceType != LOCALTYPE)
+                $this->departPrice = $this->agentPrice * $this->adults;
         }
 
         if ($this->order_return_rideId) {
             $this->return = Ride::find($this->order_return_rideId);
             $this->seatReturn = SeatClass::find($this->order_return_seatClassId);
-            $this->returnPrice = $this->seatReturn->price * $this->adults;
+            $returnOnlinePrice = $this->seatReturn->price * $this->adults;
+            
+            //CHECK TYPE OF PRICE
+            if($this->agentPriceType == LOCALTYPE)
+                $this->returnPrice = $this->seatReturn->price * $this->adults;
+            
+            if($this->agentPriceType != LOCALTYPE)
+                $this->returnPrice = $this->agentPrice * $this->adults;
         }
 
+        $this->onlinePrice = $departOnlinePrice + $returnOnlinePrice;
         $this->originalPrice = $this->departPrice + $this->returnPrice;
         $this->finalPrice = $this->departPrice + $this->returnPrice;
 
@@ -177,6 +213,8 @@ class AgentOrder extends Component
 
         $this->fromLocationName = Location::find($this->fromLocation)->name;
         $this->toLocationName = Location::find($this->toLocation)->name;
+
+        $this->agentPrice = CustomerType::find($this->customerType)->price;
 
         //Update price
         $this->updatePrice();
@@ -243,6 +281,16 @@ class AgentOrder extends Component
     }
 
     public function bookTicket(){
+
+        //set value for pickup and dropoff
+        if ($this->pickup == PICKUPDONTUSESERVICE) $this->pickup = "";
+        if ($this->pickup == PICKUPANY) $this->pickup = $this->pickupAny;
+        if ($this->pickup == PICKUPANYOTHER) $this->pickup = $this->pickupAnyOther;
+
+        if ($this->dropoff == DROPOFFDONTUSESERVICE) $this->dropoff = "";
+        if ($this->dropoff == DROPOFFANY) $this->dropoff = $this->dropoffAny;
+        if ($this->dropoff == DROPOFFANYOTHER) $this->dropoff = $this->dropoffAnyOther;
+
         $codeOrder = Order::generateCode();
         $codeDepart = $codeOrder.'-1';
         $codeReturn = $codeOrder.'-2';
@@ -266,14 +314,16 @@ class AgentOrder extends Component
                 'dropoff' => $this->dropoff,
                 'adultQuantity' => intVal($this->adults),
                 'childrenQuantity' => intVal($this->children),
+                'onlinePrice' => $this->onlinePrice,
                 'originalPrice' => $this->originalPrice,
                 'couponAmount' => $this->couponAmount,
                 'finalPrice' => $this->finalPrice,
                 'bookingDate' => date('Y-m-d H:i:s'),
                 'userId' => Auth::id(),
                 'agentId' => Auth::user()->agentId,
+                'paymentStatus' => PAID,
                 
-                'status' => COMPLETEDORDER,
+                'status' => CONFIRMEDORDER,
             ]);
 
             //SAVE ORDER TICKET DEPART FIRST

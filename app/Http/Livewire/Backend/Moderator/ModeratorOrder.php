@@ -99,6 +99,7 @@ class ModeratorOrder extends Component
 
         $this->customerTypelist = CustomerType::get()->where('status', ACTIVE);
         $this->customerType = $this->customerTypelist->first()->id;
+        $this->agentPriceType = $this->customerTypelist->first()->type;
 
         $locations = Location::get()->where('status', ACTIVE);
         if (count($locations) > 0) {
@@ -126,7 +127,6 @@ class ModeratorOrder extends Component
         $this->agentList = Agent::get()->where('status', ACTIVE);
         //$this->agent = $this->agentList->first()->id;
 
-        $this->agentPriceType = LOCALTYPE;
     }
 
     public function updatedDepartureDate(){
@@ -192,10 +192,11 @@ class ModeratorOrder extends Component
     }
 
     public function updatePrice(){
+        $departOnlinePrice = $returnOnlinePrice = 0;
         if ($this->order_depart_rideId) {
             $this->depart = Ride::find($this->order_depart_rideId);
             $this->seatDepart = SeatClass::find($this->order_depart_seatClassId);
-            $this->onlinePrice += $this->seatDepart->price * $this->adults;
+            $departOnlinePrice = $this->seatDepart->price * $this->adults;
             
             //CHECK TYPE OF PRICE
             if($this->agentPriceType == LOCALTYPE)
@@ -208,7 +209,7 @@ class ModeratorOrder extends Component
         if ($this->order_return_rideId) {
             $this->return = Ride::find($this->order_return_rideId);
             $this->seatReturn = SeatClass::find($this->order_return_seatClassId);
-            $this->onlinePrice += $this->seatReturn->price * $this->adults;
+            $returnOnlinePrice = $this->seatReturn->price * $this->adults;
             
             //CHECK TYPE OF PRICE
             if($this->agentPriceType == LOCALTYPE)
@@ -218,6 +219,7 @@ class ModeratorOrder extends Component
                 $this->returnPrice = $this->agentPrice * $this->adults;
         }
 
+        $this->onlinePrice = $departOnlinePrice + $returnOnlinePrice;
         $this->originalPrice = $this->departPrice + $this->returnPrice;
         $this->finalPrice = $this->departPrice + $this->returnPrice;
 
@@ -334,6 +336,15 @@ class ModeratorOrder extends Component
             ],
         ]);
 
+        //set value for pickup and dropoff
+        if ($this->pickup == PICKUPDONTUSESERVICE) $this->pickup = "";
+        if ($this->pickup == PICKUPANY) $this->pickup = $this->pickupAny;
+        if ($this->pickup == PICKUPANYOTHER) $this->pickup = $this->pickupAnyOther;
+
+        if ($this->dropoff == DROPOFFDONTUSESERVICE) $this->dropoff = "";
+        if ($this->dropoff == DROPOFFANY) $this->dropoff = $this->dropoffAny;
+        if ($this->dropoff == DROPOFFANYOTHER) $this->dropoff = $this->dropoffAnyOther;
+
         $codeOrder = Order::generateCode();
         $codeDepart = $codeOrder.'-1';
         $codeReturn = $codeOrder.'-2';
@@ -364,8 +375,10 @@ class ModeratorOrder extends Component
                 'bookingDate' => date('Y-m-d H:i:s'),
                 'userId' => Auth::id(),
                 'agentId' => $this->agentId ?? null,
+                'paymentStatus' => PAID,
                 'paymentMethod' => $this->paymentMethod,
                 'transactionCode' => $this->transactionCode,
+
                 'status' => CONFIRMEDORDER,
             ]);
 

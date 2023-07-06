@@ -158,7 +158,6 @@ class ProceedBooking extends Component
         if ($this->dropoff == DROPOFFANY) $this->dropoff = $this->dropoffAny;
         if ($this->dropoff == DROPOFFANYOTHER) $this->dropoff = $this->dropoffAnyOther;
 
-
         $codeOrder = Order::generateCode();
         $codeDepart = $codeOrder.'-1';
         $codeReturn = $codeOrder.'-2';

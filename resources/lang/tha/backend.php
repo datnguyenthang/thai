@@ -170,7 +170,7 @@ return [
     'paymentmethod' => 'Payment Method',
     'transactioncode' => 'Transaction Code',
     'paymentmethodname' => 'Payment Method',
-    'paymentmethoddescription' => 'Fescription',
+    'paymentmethoddescription' => 'Description',
     'paymentmethodistransaction' => 'Is Transaction?',
-    'paymentmethodstatus' => 'Status',
+    'paymentmethodstatus' => 'Payment status',
 ];
