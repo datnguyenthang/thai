@@ -332,7 +332,7 @@ class AgentOrder extends Component
                 'code' => $codeDepart,
                 'rideId' => intVal($this->order_depart_rideId),
                 'seatClassId' => intVal($this->order_depart_seatClassId),
-                'price' => $this->seatDepart->price * ($this->adults + $this->children),
+                'price' => $this->departPrice,
                 'type' => DEPARTURETICKET,
                 'status' => 0,
             ]);
@@ -344,7 +344,7 @@ class AgentOrder extends Component
                     'code' => $codeReturn,
                     'rideId' => intVal($this->order_return_rideId),
                     'seatClassId' => intVal($this->order_return_seatClassId),
-                    'price' => $this->seatReturn->price * ($this->adults + $this->children),
+                    'price' => $this->returnPrice,
                     'type' => RETURNTICKET,
                     'status' => 0,
                 ]);
@@ -422,6 +422,10 @@ class AgentOrder extends Component
             // Apply the discount to orginalPrice
             $this->couponAmount = $this->originalPrice * $coupon->discount;
             $this->finalPrice = round($this->originalPrice - $this->couponAmount);
+
+            //apply to each ticket 
+            $this->departPrice = round($this->departPrice - ($this->departPrice * $coupon->discount));
+            $this->returnPrice = round($this->returnPrice - ($this->returnPrice * $coupon->discount));
         }
     }
 

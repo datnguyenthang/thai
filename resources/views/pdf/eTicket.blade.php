@@ -69,15 +69,15 @@
 					<td>Pax</td>
 					<td colspan="2">Total</td>
 				</tr>
-				<tr style="text-align: center;"">
+				<tr style="text-align: center;">
 					<td>1</td>
 					<td colspan="5">{{ $orderTicket->fullname }}(CHILDREN {{ $orderTicket->childrenQuantity }})</td>
 					<td>{{ $orderTicket->childrenQuantity + $orderTicket->adultQuantity }}</td>
-					<td colspan="2">{{ round($orderTicket->seatClassPrice) }}</td>
+					<td colspan="2">{{ round($orderTicket->price / $orderTicket->adultQuantity) }}</td>
 				</tr>
 				<tr style="text-align: center;">
 					<td colspan="7">Total</td>
-					<td colspan="2">{{ round($orderTicket->seatClassPrice * $orderTicket->adultQuantity) }}</td>
+					<td colspan="2">{{ round($orderTicket->price) }}</td>
 				</tr>
 			</tbody>
 		</table>
