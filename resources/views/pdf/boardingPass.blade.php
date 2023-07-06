@@ -88,9 +88,16 @@
                 <div style="position:absolute; left:20pt; width:192pt;">
                     <h3>AGENT</h3>
                 </div>
-                <div style="margin-left:170pt; margin-top: 13pt;">
-                    <span>Price</span> <strong style="font-size: 20px;">฿{{ $orderTicket->price }}</strong>
-                </div>
+                @if($orderTicket->agentType == LOCALTYPE)
+                    <div style="margin-left:170pt; margin-top: 13pt;">
+                        <span>Price</span> <strong style="font-size: 20px;">฿{{ $orderTicket->price }}</strong>
+                    </div>
+                @endif
+                @if($orderTicket->agentType != LOCALTYPE)
+                    <div style="margin-left:170pt; margin-top: 13pt;">
+                        <strong style="font-size: 20px;">{{ $orderTicket->agentName }}</strong>
+                    </div>
+                @endif
             </div>
         </div>
     </body>

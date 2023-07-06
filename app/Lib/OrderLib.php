@@ -41,7 +41,8 @@ class OrderLib
                                 DB::raw('CONCAT(o.firstName, " ",o.lastName) as fullname'), 'o.customerType',
                                 'o.phone', 'o.originalPrice', 'o.couponAmount', 'o.finalPrice', 'o.agentId',
                                 'o.code', 'o.email', 'o.bookingDate', 'o.note', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff',
-                                'o.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 'a.name as agentName')
+                                'o.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 
+                                'a.name as agentName', 'ct.type as agentType')
                         ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
                         ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
                         ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
@@ -49,6 +50,7 @@ class OrderLib
                         ->leftJoin('orders as o', 'o.id', '=', 'order_tickets.orderId')
                         ->leftJoin('promotions as p', 'p.id', '=', 'o.promotionId')
                         ->leftJoin('agents as a', 'a.id', '=', 'o.agentId')
+                        ->leftJoin('customer_types as ct', 'ct.id', '=', 'a.agentType')
                         ->where('order_tickets.id', $orderTicketId)
                         ->first();
         return $orderDetail;
