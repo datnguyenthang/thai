@@ -40,7 +40,7 @@
                         {{ trans('backend.orderstatus') }}: <strong>{{ ORDERSTATUS[$order->status] }}</strong>
                     </li>
                     <li>
-                        {{ trans('backend.agent') }}: <strong>{{ $order->agentId }}</strong>
+                        {{ trans('backend.agent') }}: <strong>{{ $order->agentName }}</strong>
                     </li>
                 </ul>
             </div>
