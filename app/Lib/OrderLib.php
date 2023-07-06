@@ -74,7 +74,7 @@ class OrderLib
         return $pdfData;
     }
 
-    public static function generateTicket($orderTicket) {
+    public static function generateBoardingPass($orderTicket) {
         $customPaper = array(0,0,302,378);
 
         $logoPath = public_path('img/logo.png');

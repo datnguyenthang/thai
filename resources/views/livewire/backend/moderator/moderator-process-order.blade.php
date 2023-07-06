@@ -86,7 +86,7 @@
                                                                     'departtime' =>  $orderTicket->departTime]) !!}
                                     <br>{{ trans('messages.people') }}: {{ $order->adultQuantity + $order->childrenQuantity }} <strong class="product-quantity">×{{ $order->adultQuantity + $order->childrenQuantity }}</strong>
                                     @if($order->status == CONFIRMEDORDER)
-                                        <button class="btn bg_own_color text-light" wire:click="downloadTicket({{ $orderTicket->id }})">Download Ticket</button>
+                                        <button class="btn bg_own_color text-light" wire:click="downloadBoardingPass({{ $orderTicket->id }})">Download Boarding Pass</button>
                                     @endif
                                 </td>
                                 <td class="product-total">
@@ -111,7 +111,7 @@
                                                                     'departtime' =>  $orderTicket->departTime]) !!}
                                     <br>{{ trans('messages.people') }}: {{ $order->adultQuantity + $order->childrenQuantity }} <strong class="product-quantity">×{{ $order->adultQuantity + $order->childrenQuantity }}</strong>
                                     @if($order->status == CONFIRMEDORDER)
-                                        <button class="btn bg_own_color text-light" wire:click="downloadTicket({{ $orderTicket->id }})">Download Ticket</button>
+                                        <button class="btn bg_own_color text-light" wire:click="downloadBoardingPass({{ $orderTicket->id }})">Download Boarding Pass</button>
                                     @endif
                                 </td>
                                 <td class="product-total">

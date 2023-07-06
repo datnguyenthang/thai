@@ -48,7 +48,7 @@ class ModeratorProcessOrder extends Component
         }
     }
 
-    public function downloadTicket($orderTicketId){
+    public function downloadBoardingPass($orderTicketId){
         
         $orderTicket = OrderLib::getOrderTicket($orderTicketId);
         //$this->orderDetail = OrderLib::getOrderDetail($orderTicket->orderId); // dirty fill up data
@@ -56,7 +56,7 @@ class ModeratorProcessOrder extends Component
         //if exist promo, change seat price
         if ($orderTicket->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $orderTicket->discount);
 
-        $content = OrderLib::generateTicket($orderTicket); 
+        $content = OrderLib::generateBoardingPass($orderTicket); 
         $fileName = $orderTicket->type == ONEWAY ? 'Departure Ticket.pdf' : 'Return Ticket.pdf';
 
         return response()->streamDownload(function () use ($content) {
