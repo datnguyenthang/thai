@@ -64,6 +64,59 @@
         </section>
     </div>
 
+    <!---Payment--->
+    <div class="row align-items-start d-flex">
+        <div class="col-md-12 col-md-offset-1">
+            <div class="border rounded-3 overflow-hidden p-4 mt-3 bg_own_color">
+                <h2 class="select-departure-header mb-3" >{{ trans('backend.payment') }}</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="form-label">{{ trans('backend.orderstatus') }}</span>
+                            <select id="status" name="status" class="form-select" wire:model="status">
+                                @foreach($orderStatusList as $key => $value)
+                                    <option value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
+                            </select>
+                            @error('status') <span class="text-danger error">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    @if($status == UPPLOADTRANSFER)
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span class="form-label">{{ trans('backend.paymentmethodname') }}</span>
+                                <select id="paymentMethod" name="paymentMethod" class="form-select" wire:model="paymentMethod">
+                                    @foreach($paymentMethodList as $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('paymentMethod') <span class="text-danger error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        
+                        @if($isTransaction)
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span class="form-label">{{ trans('backend.transactioncode') }}</span>
+                                    <input id="transactionCode" type="text" class="form-control" name="transactionCode" class="form-input" wire:model="transactionCode" />
+                                    @error('transactionCode') <span class="text-light error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span class="form-label">{{ trans('backend.transactiondate') }}</span>
+                                    <input id="transactionDate" type="datetime-local" step="1" class="form-control" name="transactionDate" class="form-input" wire:model="transactionDate" />
+                                    @error('transactionDate') <span class="text-light error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        @endif
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row align-items-start d-flex">
         <div class="col-md-12 col-md-offset-1">
             <div class="border rounded-3 overflow-hidden p-4 mt-3">

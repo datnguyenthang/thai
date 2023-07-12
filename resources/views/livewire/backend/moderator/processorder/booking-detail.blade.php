@@ -18,7 +18,7 @@
                     {{ trans('backend.triptype') }}: <strong>{{ TRIPTYPE[$order->isReturn] }}</strong>
                 </li>
                 <li>
-                    {{ trans('backend.customerType') }}: <strong>{{ $order->customerType ?  $order->customerTypeName : 'Online'}}</strong>
+                    {{ trans('backend.customerType') }}: <strong>{{ $order->customerType > 0 ? $order->customerTypeName : 'Online'}}</strong>
                 </li>
             </ul>
         </div>

@@ -98,124 +98,43 @@
                                     </a> 
                                 </li>
                                 <li class="nav-item">
-                                    <a data-bs-toggle="pill" href="#credit-card" class="creditcard nav-link">
-                                        <i class="fas fa-credit-card mr-2"></i> {{ trans('messages.creditcard') }}
-                                    </a>
+                                    <a data-bs-toggle="pill" href="#alipay" class="alipay nav-link">
+                                        <i class="fab fa-alipay mr-2"></i> {{ trans('messages.alipay') }}
+                                    </a> 
                                 </li>
+                                <li class="nav-item">
+                                    <a data-bs-toggle="pill" href="#wechat" class="wechat nav-link">
+                                        <i class="fab fa-wechat mr-2"></i> {{ trans('messages.wechat') }}
+                                    </a> 
+                                </li>
+                                <li class="nav-item">
+                                    <a data-bs-toggle="pill" href="#promptpay" class="promptpay nav-link">
+                                        <i class="fab fa-promptpay mr-2"></i> {{ trans('messages.promptpay') }}
+                                    </a> 
+                                </li>  
                             </ul>
                         </div> <!-- End -->
                         <!-- Credit card form content -->
                         <div class="tab-content">
-                            <!-- credit card info-->
-                                <div id="credit-card" class="tab-pane fade pt-3">
-                                    <div class="form-group"> 
-                                        <label for="username">
-                                            <h6>{{ trans('messages.cardholdername') }}</h6>
-                                        </label>
-                                        <input type="text" class="form-control" wire:model="cardHolder" placeholder="{{ trans('messages.entercardholdername') }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="cardNumber">
-                                            <h6>{{ trans('messages.cardnumber') }}</h6>
-                                        </label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" wire:model="cardNumber" placeholder="{{ trans('messages.enteryourcardnumber') }}" required>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text text-muted">
-                                                    <i class="fab fa-cc-visa mx-1"></i>
-                                                    <i class="fab fa-cc-mastercard mx-1"></i>
-                                                    <i class="fab fa-cc-amex mx-1"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-8">
-                                            <div class="form-group">
-                                                <label>
-                                                    <span class="hidden-xs">
-                                                        <h6>{{ trans('messages.expirationdate') }}</h6>
-                                                    </span>
-                                                </label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" wire:model="expirationDate" placeholder="MM/YY" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group mb-4">
-                                                <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
-                                                    <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
-                                                </label>
-                                                <input type="text" class="form-control" wire:model="cvv" placeholder="{{ trans('messages.entercvvcode') }}" required>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer text-center">
-                                        <button wire:loading.attr="disabled" wire:click="payment({{ CARD }})" class="btn bg_own_color text-light">
-                                            {{ trans('messages.submit') }}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End -->
                             <!-- Bank transfer info -->
                             <div id="bank-tranfer" class="tab-pane fade show active pt-3">
-                                <div class="payment_box text-dark">
-                                    {!! trans('messages.transferinfomation') !!}
-                                </div>
-                                <table class="table table-bordered">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th>{{ trans('messages.file') }}</th>
-                                            <th>{{ trans('messages.filename') }}</th>
-                                            <th>{{ trans('messages.dimensions') }}</th>
-                                            <th>{{ trans('messages.extension') }}</th>
-                                            <th>{{ trans('messages.action') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if ($photos)
-                                            @foreach ($photos as $photo)
-                                                <tr>
-                                                    <th class="file">
-                                                        <a href={{ $photo['url'] }} target="_blank">
-                                                            <img src="{{ $photo['url'] }}" width="75" height="75" alt="Proof image" />
-                                                        </a>
-                                                    </th>
-                                                    <th class="filename">{{ $photo['name'] }}</th>
-                                                    <th class="dimensions">{{ $photo['dimension'] }}</th>
-                                                    <th class="extension">{{ $photo['extension'] }}</th>
-                                                    <th class="action">
-                                                        <button type="button" class="btn bg_own_color text-light" wire:loading.attr="disabled" wire:click="deleteProofs('{{ $photo['path'] }}')">
-                                                            {{ trans('messages.delete') }}
-                                                        </button>
-                                                    </th>
-                                                </tr>
-                                            @endforeach
-                                        @else
-                                            <tr>
-                                                <td>{{ trans('messages.nofile') }}</td>
-                                            </tr>
-                                        @endif
-                                    <tbody>
-                                </table>
-                                <div class="card-footer text-center">
-                                    <form wire:submit.prevent="uploadProof" enctype="multipart/form-data">
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <input type="file" class="form-control" wire:model="proofFiles" id="{{ $counting }}-proofFiles" accept="image/*" multiple />
-                                                @error('proofFiles.*') <span class="text-danger error">{{ $message }}</span> @enderror
-                                            </div>
-                                            <div class="col-md-6">
-                                                <button type="submit" class="btn bg_own_color text-light" wire:loading.attr="disabled">{{ trans('messages.upload') }}</button>
+                                <livewire:frontend.homepage.payment.banktransfer :orderId="$order->id" />
+                            </div>
 
-                                                <button wire:loading.attr="disabled" wire:click="payment({{ BANKTRANSFER }})" class="btn bg_own_color text-light" @if (empty($photos)) disabled @endif>
-                                                    {{ trans('messages.submit') }}
-                                                </button>
-                                            </div>
-                                    </form>
-                                </div>
-                            </div> <!-- End -->
+                            <!-- Alipay payment -->
+                            <div id="alipay" class="tab-pane fade pt-3">
+                                <livewire:frontend.homepage.payment.alipay :orderId="$order->id" />
+                            </div>
+
+                            <!-- Wechat payment -->
+                            <div id="wechat" class="tab-pane fade pt-3">
+                                <livewire:frontend.homepage.payment.wechat :orderId="$order->id" />
+                            </div>
+
+                            <!-- Promptpay payment -->
+                            <div id="promptpay" class="tab-pane fade pt-3">
+                                <livewire:frontend.homepage.payment.promptpay :orderId="$order->id" />
+                            </div>
                         </div>
                     </div>
                 </div>

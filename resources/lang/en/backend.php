@@ -47,6 +47,13 @@ return [
     'fullname' => 'Full Name',
     'onlineprice' => 'Online Price',
     'agentprice' => 'Agent Price',
+    'orderstatus' => 'Order Status',
+    'transactiondate' => 'Transaction Date',
+    'updatepayment' => 'Update Payment',
+    'updateorderpayment' => 'Update Payment',
+    'updateorderstatus' => 'Update Order Status',
+    'changeDate' => 'Change Date',
+    'paymentimages' => 'Payment Upload Image',
 
     'firstname' => 'First Name',
     'lastname' => 'Last Name',
@@ -84,6 +91,7 @@ return [
 
     'id' => 'ID',
     'save' => 'Save',
+    'update' => 'Update',
     'search' => 'Search',
     'close' => 'Close',
     'download' => 'Download',

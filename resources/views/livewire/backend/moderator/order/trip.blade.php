@@ -26,7 +26,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($agentPriceType == LOCALTYPE)
+                                @if($customerTypeType == ONLINEPRICE)
                                     @foreach ($departRides as $ride)
                                         <tr>
                                             <td>{{ $ride->name }}</td>
@@ -49,14 +49,14 @@
                                     @endforeach
                                 @endif
 
-                                @if($agentPriceType != LOCALTYPE)
+                                @if($customerTypeType != ONLINEPRICE)
                                     @foreach ($departRides as $ride)
                                         <tr class="table-secondary">
                                             <td>{{ $ride->name }}</td>
                                             <td>{{ $ride->departTime }}</td>
                                             <td>{{ $ride->returnTime }}</td>
                                             <td>{{ $ride->seatClass }}</td>
-                                            <th>฿{{ round($agentPrice) }} ({{ trans('backend.agentprice') }})</th>
+                                            <th>฿{{ round($customerTypePrice) }} ({{ trans('backend.agentprice') }})</th>
                                             <td>
                                                 <input type="radio" name="departRadio" 
                                                         value="{{ $ride->seatClassId }}"
@@ -102,7 +102,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if($agentPriceType == LOCALTYPE)
+                                    @if($customerTypeType == ONLINEPRICE)
                                         @foreach ($returnRides as $ride)
                                             <tr>
                                                 <td>{{ $ride->name }}</td>
@@ -125,14 +125,14 @@
                                         @endforeach
                                     @endif
 
-                                    @if($agentPriceType != LOCALTYPE)
+                                    @if($customerTypeType != ONLINEPRICE)
                                         @foreach ($returnRides as $ride)
                                             <tr class="table-secondary">
                                                 <td>{{ $ride->name }}</td>
                                                 <td>{{ $ride->departTime }}</td>
                                                 <td>{{ $ride->returnTime }}</td>
                                                 <td>{{ $ride->seatClass }}</td>
-                                                <th>฿{{ round($agentPrice) }} ({{ trans('backend.agentprice') }})</th>
+                                                <th>฿{{ round($customerTypePrice) }} ({{ trans('backend.agentprice') }})</th>
                                                 <td>
                                                     <input type="radio" name="returnRadio"
                                                             value="{{ $ride->seatClassId }}"

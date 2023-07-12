@@ -3,40 +3,28 @@
     <section class="">
         <h4 class="select-departure-header mb-3" >{{ trans('messages.payment') }}</h4>
         <div class="col-lg-12 mx-auto">
-            
             <!-- Bank transfer info -->
-            <div id="bank-tranfer" class="tab-pane fade show active pt-3">
+            <div class="tab-pane fade show active pt-3">
                 <table class="table table-bordered">
-                    <thead class="table-dark">
+                    <thead class="table-secondary">
                         <tr>
-                            <th>{{ trans('messages.file') }}</th>
-                            <th>{{ trans('messages.filename') }}</th>
-                            <th>{{ trans('messages.dimensions') }}</th>
-                            <th>{{ trans('messages.extension') }}</th>
+                            <th>{{ trans('backend.paymentmethod') }}</th>
+                            <th>{{ trans('backend.transactioncode') }}</th>
+                            <th>{{ trans('backend.paymentmethodstatus') }}</th>
+                            <th>{{ trans('backend.transactiondate') }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($photos)
-                            @foreach ($photos as $photo)
-                                <tr>
-                                    <th class="file">
-                                        <a href={{ $photo['url'] }} target="_blank">
-                                            <img src="{{ $photo['url'] }}" width="75" height="75" alt="Proof image" />
-                                        </a>
-                                    </th>
-                                    <th class="filename">{{ $photo['name'] }}</th>
-                                    <th class="dimensions">{{ $photo['dimension'] }}</th>
-                                    <th class="extension">{{ $photo['extension'] }}</th>
-                                </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td>{{ trans('messages.nofile') }}</td>
-                            </tr>
-                        @endif
+                        <tr>
+                            <th>{{ $order->paymentMethod ? $paymentMethodList[$order->paymentMethod]->name : '' }}</th>
+                            <th>{{ $order->transactionCode ?? '' }}</th>
+                            <th>{{ $order->paymentStatus ? PAYMENTSTATUS[$order->paymentStatus] : '' }}</th>
+                            <th>{{ $order->transactionDate ? date('Y-m-d H:i:s', strtotime($order->transactionDate)) : '' }}</th>
+                        </tr>
                     <tbody>
                 </table>
-            </div> <!-- End -->
+            </div>
+            <!-- End -->
         </div>
     </section>
 </div>

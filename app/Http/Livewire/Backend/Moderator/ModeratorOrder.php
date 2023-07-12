@@ -11,6 +11,7 @@ use App\Models\Ride;
 use App\Models\Location;
 use App\Models\SeatClass;
 use App\Models\Order;
+use App\Models\OrderStatus;
 use App\Models\OrderTicket;
 use App\Models\CustomerType;
 use App\Models\Promotion;
@@ -44,16 +45,19 @@ class ModeratorOrder extends Component
     public $note;
     public $promotionId;
     public $paymentMethod;
+    public $paymentStatus;
     public $transactionCode;
+    public $transactionDate;
     public $agentId;
+    public $status;
 
     public $agent;
-    public $agentPriceType;
 
     public $fromLocationList;
     public $toLocationList;
     public $customerTypelist;
     public $paymentMethodList;
+    public $orderStatusList;
     public $agentList;
 
     public $depart;
@@ -66,7 +70,8 @@ class ModeratorOrder extends Component
     public $order_depart_price;
     public $order_return_rideId;
     public $order_return_seatClassId;
-    public $agentPrice;
+    public $customerTypeType;
+    public $customerTypePrice;
 
     public $departPrice = 0;
     public $returnPrice = 0;
@@ -99,7 +104,7 @@ class ModeratorOrder extends Component
 
         $this->customerTypelist = CustomerType::get()->where('status', ACTIVE);
         $this->customerType = $this->customerTypelist->first()->id;
-        $this->agentPriceType = $this->customerTypelist->first()->type;
+        $this->customerTypeType = $this->customerTypelist->first()->type;
 
         $locations = Location::get()->where('status', ACTIVE);
         if (count($locations) > 0) {
@@ -122,11 +127,12 @@ class ModeratorOrder extends Component
         $this->dropoff = 0;
 
         $this->paymentMethodList = PaymentMethod::get()->where('status', ACTIVE);
-        $this->paymentMethod = $this->paymentMethodList->first()->id;
+        //$this->paymentMethod = $this->paymentMethodList->first()->id;
         
         $this->agentList = Agent::get()->where('status', ACTIVE);
-        //$this->agent = $this->agentList->first()->id;
-
+        
+        $this->orderStatusList = array_intersect_key(ORDERSTATUS, array_flip([RESERVATION, CONFIRMEDORDER]));
+        $this->status = RESERVATION;
     }
 
     public function updatedDepartureDate(){
@@ -151,12 +157,25 @@ class ModeratorOrder extends Component
         if ($this->dropoff == DROPOFFANY) $this->dropoffAny =  $this->pickupdropoffs->first()->name;
     }
 
+    public function updatedStatus(){
+        if ($this->status == RESERVATION) {
+            $this->paymentMethod = null;
+            $this->transactionCode = null;
+            $this->transactionDate = null;
+            $this->paymentStatus = null;
+        }
+        if ($this->status == CONFIRMEDORDER){
+            $this->paymentMethod = $this->paymentMethodList->first()->id;
+            $this->paymentStatus = PAID;
+        }
+    }
+
     public function updatedPaymentMethod(){
         $this->isTransaction = PaymentMethod::find($this->paymentMethod)->isTransaction;
     }
 
     public function updatedCustomerType(){
-        $this->agentPriceType = $this->customerTypelist->first(function($item){
+        $this->customerTypeType = $this->customerTypelist->first(function($item){
             return $item->id == $this->customerType;
         })->type;
     }
@@ -170,14 +189,12 @@ class ModeratorOrder extends Component
                 return $item->id == $agent->agentType;
             });
 
-            //$this->customerType = $customerType->id;
-            //$this->agentPriceType = $customerType->type;
             $this->customerTypelist = CustomerType::whereIn('id', explode(',',$agent->agentType))
                                                     ->where('status', ACTIVE)
                                                     ->get();
 
             $this->customerType = $this->customerTypelist->first()->id;
-            $this->agentPriceType = $this->customerTypelist->first()->type;
+            $this->customerTypeType = $this->customerTypelist->first()->type;
 
             $this->email = $agent->email;
             $this->phone = $agent->phone;
@@ -185,7 +202,7 @@ class ModeratorOrder extends Component
         } else {
             $this->customerTypelist = CustomerType::get()->where('status', ACTIVE);
             $this->customerType = $this->customerTypelist->first()->id;
-            $this->agentPriceType = $this->customerTypelist->first()->type;
+            $this->customerTypeType = $this->customerTypelist->first()->type;
             $this->email = null;
             $this->phone = null;
         }
@@ -199,11 +216,11 @@ class ModeratorOrder extends Component
             $departOnlinePrice = $this->seatDepart->price * $this->adults;
             
             //CHECK TYPE OF PRICE
-            if($this->agentPriceType == LOCALTYPE)
+            if($this->customerTypeType == ONLINEPRICE)
                 $this->departPrice = $this->seatDepart->price * $this->adults;
 
-            if($this->agentPriceType != LOCALTYPE)
-                $this->departPrice = $this->agentPrice * $this->adults;
+            if($this->customerTypeType != ONLINEPRICE)
+                $this->departPrice = $this->customerTypePrice * $this->adults;
         }
 
         if ($this->order_return_rideId) {
@@ -212,11 +229,11 @@ class ModeratorOrder extends Component
             $returnOnlinePrice = $this->seatReturn->price * $this->adults;
             
             //CHECK TYPE OF PRICE
-            if($this->agentPriceType == LOCALTYPE)
+            if($this->customerTypeType == ONLINEPRICE)
                 $this->returnPrice = $this->seatReturn->price * $this->adults;
             
-            if($this->agentPriceType != LOCALTYPE)
-                $this->returnPrice = $this->agentPrice * $this->adults;
+            if($this->customerTypeType != ONLINEPRICE)
+                $this->returnPrice = $this->customerTypePrice * $this->adults;
         }
 
         $this->onlinePrice = $departOnlinePrice + $returnOnlinePrice;
@@ -260,7 +277,7 @@ class ModeratorOrder extends Component
         $this->fromLocationName = Location::find($this->fromLocation)->name;
         $this->toLocationName = Location::find($this->toLocation)->name;
         
-        $this->agentPrice = CustomerType::find($this->customerType)->price;
+        $this->customerTypePrice = CustomerType::find($this->customerType)->price;
 
         //Update price
         $this->updatePrice();
@@ -328,11 +345,13 @@ class ModeratorOrder extends Component
 
     public function bookTicket(){
         $this->validate([
-            'paymentMethod' => 'required',
             'transactionCode' => [
                 'required_if:isTransaction,1',
                 $this->isTransaction == 1 ? 'min:4' : '',
                 $this->isTransaction == 1 ? 'max:15' : '',
+            ],
+            'transactionDate' => [
+                'required_if:isTransaction,1',
             ],
         ]);
 
@@ -348,7 +367,7 @@ class ModeratorOrder extends Component
         $codeOrder = Order::generateCode();
         $codeDepart = $codeOrder.'-1';
         $codeReturn = $codeOrder.'-2';
-        
+
         // MAKE A TRANSACTION TO ENSURE DATA CONSISTENCY
         DB::beginTransaction();
 
@@ -375,11 +394,21 @@ class ModeratorOrder extends Component
                 'bookingDate' => date('Y-m-d H:i:s'),
                 'userId' => Auth::id(),
                 'agentId' => $this->agentId ?? null,
-                'paymentStatus' => PAID,
+                'paymentStatus' => $this->paymentStatus,
                 'paymentMethod' => $this->paymentMethod,
                 'transactionCode' => $this->transactionCode,
+                'transactionDate' => $this->transactionDate,
 
-                'status' => CONFIRMEDORDER,
+                'status' => $this->status,
+            ]);
+
+            //SAVE first status of this order
+            OrderStatus::create([
+                'orderId' => intVal($order->id),
+                'status' => $this->status,
+                //'note' => $this->note,
+                'changeDate' => date('Y-m-d H:i:s'),
+                'userId' => Auth::id(),
             ]);
 
             //SAVE ORDER TICKET DEPART FIRST

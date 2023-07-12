@@ -11,6 +11,7 @@ use App\Models\Ride;
 use App\Models\Location;
 use App\Models\SeatClass;
 use App\Models\Order;
+use App\Models\OrderStatus;
 use App\Models\OrderTicket;
 use App\Models\CustomerType;
 use App\Models\Promotion;
@@ -44,15 +45,19 @@ class AgentOrder extends Component
     public $note;
     public $promotionId;
     public $paymentMethod;
+    public $paymentStatus;
     public $transactionCode;
+    public $transactionDate;
     public $agentId;
+    public $status;
 
     public $agent;
-    public $agentPriceType;
 
     public $fromLocationList;
     public $toLocationList;
     public $customerTypelist;
+    public $paymentMethodList;
+    public $orderStatusList;
 
     public $depart;
     public $seatDepart;
@@ -63,7 +68,8 @@ class AgentOrder extends Component
     public $order_depart_seatClassId;
     public $order_return_rideId;
     public $order_return_seatClassId;
-    public $agentPrice;
+    public $customerTypeType;
+    public $customerTypePrice;
 
     public $departPrice = 0;
     public $returnPrice = 0;
@@ -71,6 +77,8 @@ class AgentOrder extends Component
     public $originalPrice;
     public $couponAmount;
     public $finalPrice;
+
+    public $isTransaction = false;
 
     public $fromLocationName;
     public $toLocationName;
@@ -97,7 +105,7 @@ class AgentOrder extends Component
                                         ->where('status', ACTIVE)
                                         ->get();
         $this->customerType = $this->customerTypelist->first()->id;
-        $this->agentPriceType = $this->customerTypelist->first()->type;
+        $this->customerTypeType = $this->customerTypelist->first()->type;
 
         $locations = Location::get()->where('status', ACTIVE);
 
@@ -119,6 +127,12 @@ class AgentOrder extends Component
         $this->pickupdropoffs = Pickupdropoff::get();
         $this->pickup = 0;
         $this->dropoff = 0;
+
+        $this->paymentMethodList = PaymentMethod::get()->where('status', ACTIVE);
+        //$this->paymentMethod = $this->paymentMethodList->first()->id;
+
+        $this->orderStatusList = array_intersect_key(ORDERSTATUS, array_flip([RESERVATION, UPPLOADTRANSFER]));
+        $this->status = RESERVATION;
     }
 
     public function chooseFromLocation($location){
@@ -139,8 +153,25 @@ class AgentOrder extends Component
         if ($this->dropoff == DROPOFFANY) $this->dropoffAny =  $this->pickupdropoffs->first()->name;
     }
 
+    public function updatedStatus(){
+        if ($this->status == RESERVATION) {
+            $this->paymentMethod = null;
+            $this->transactionCode = null;
+            $this->transactionDate = null;
+            $this->paymentStatus = null;
+        }
+        if ($this->status == CONFIRMEDORDER){
+            $this->paymentMethod = $this->paymentMethodList->first()->id;
+            $this->paymentStatus = PAID;
+        }
+    }
+
+    public function updatedPaymentMethod(){
+        $this->isTransaction = PaymentMethod::find($this->paymentMethod)->isTransaction;
+    }
+
     public function updatedCustomerType(){
-        $this->agentPriceType = $this->customerTypelist->first(function($item){
+        $this->customerTypeType = $this->customerTypelist->first(function($item){
             return $item->id == $this->customerType;
         })->type;
     }
@@ -153,11 +184,11 @@ class AgentOrder extends Component
             $departOnlinePrice = $this->seatDepart->price * $this->adults;
             
             //CHECK TYPE OF PRICE
-            if($this->agentPriceType == LOCALTYPE)
+            if($this->customerTypeType == ONLINEPRICE)
                 $this->departPrice = $this->seatDepart->price * $this->adults;
 
-            if($this->agentPriceType != LOCALTYPE)
-                $this->departPrice = $this->agentPrice * $this->adults;
+            if($this->customerTypeType != ONLINEPRICE)
+                $this->departPrice = $this->customerTypePrice * $this->adults;
         }
 
         if ($this->order_return_rideId) {
@@ -166,11 +197,11 @@ class AgentOrder extends Component
             $returnOnlinePrice = $this->seatReturn->price * $this->adults;
             
             //CHECK TYPE OF PRICE
-            if($this->agentPriceType == LOCALTYPE)
+            if($this->customerTypeType == ONLINEPRICE)
                 $this->returnPrice = $this->seatReturn->price * $this->adults;
             
-            if($this->agentPriceType != LOCALTYPE)
-                $this->returnPrice = $this->agentPrice * $this->adults;
+            if($this->customerTypeType != ONLINEPRICE)
+                $this->returnPrice = $this->customerTypePrice * $this->adults;
         }
 
         $this->onlinePrice = $departOnlinePrice + $returnOnlinePrice;
@@ -214,7 +245,7 @@ class AgentOrder extends Component
         $this->fromLocationName = Location::find($this->fromLocation)->name;
         $this->toLocationName = Location::find($this->toLocation)->name;
 
-        $this->agentPrice = CustomerType::find($this->customerType)->price;
+        $this->customerTypePrice = CustomerType::find($this->customerType)->price;
 
         //Update price
         $this->updatePrice();
@@ -281,6 +312,16 @@ class AgentOrder extends Component
     }
 
     public function bookTicket(){
+        $this->validate([
+            'transactionCode' => [
+                'required_if:isTransaction,1',
+                $this->isTransaction == 1 ? 'min:4' : '',
+                $this->isTransaction == 1 ? 'max:15' : '',
+            ],
+            'transactionDate' => [
+                'required_if:isTransaction,1',
+            ],
+        ]);
 
         //set value for pickup and dropoff
         if ($this->pickup == PICKUPDONTUSESERVICE) $this->pickup = "";
@@ -321,9 +362,21 @@ class AgentOrder extends Component
                 'bookingDate' => date('Y-m-d H:i:s'),
                 'userId' => Auth::id(),
                 'agentId' => Auth::user()->agentId,
-                'paymentStatus' => PAID,
-                
-                'status' => CONFIRMEDORDER,
+                'paymentStatus' => $this->paymentStatus,
+                'paymentMethod' => $this->paymentMethod,
+                'transactionCode' => $this->transactionCode,
+                'transactionDate' => $this->transactionDate,
+
+                'status' => $this->status,
+            ]);
+
+            //SAVE first status of this order
+            OrderStatus::create([
+                'orderId' => intVal($order->id),
+                'status' => $this->status,
+                //'note' => $this->note,
+                'changeDate' => date('Y-m-d H:i:s'),
+                'userId' => Auth::id(),
             ]);
 
             //SAVE ORDER TICKET DEPART FIRST

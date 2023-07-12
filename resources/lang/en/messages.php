@@ -162,6 +162,9 @@ return [
     'savechange' => 'Save Change',
     'thankyou' => 'Thank you for your booking',
     'emailconfirm' => 'An email confirmation has been sent to :email',
+    'alipay' => 'Alipay',
+    'wechat' => 'Wechat',
+    'promptpay' => 'Promptpay',
 
     //MODERATOR
     'nametrip' => 'Trip Name',

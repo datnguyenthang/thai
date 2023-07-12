@@ -3,16 +3,19 @@
 
     @include('livewire.backend.moderator.processorder.booking-detail')
 
-    @if($order->paymentMethod == BANKTRANSFER && !$order->userId)
-        @include('livewire.backend.moderator.processorder.banktransfer-detail')
+    {{-- SHOW IMAGES BANK TRANSFER FOR ONLINE CUSTOMER --}}
+    @if (!empty($photos))
+        @include('livewire.backend.moderator.processorder.banktransfer-image-detail')
     @endif
 
-    {{-- Only process order by image when custers has been uploaded images and people don't --}}
-    @if($order->status == UPPLOADTRANSFER) 
-        @include('livewire.backend.moderator.processorder.process-payment')
-    @endif
+    {{-- SHOW PROCESS PAYMENT INFORMATION --}}
+    @include('livewire.backend.moderator.processorder.process-payment')
 
-    @if($order->status == CONFIRMEDORDER || $order->status == CANCELDORDER)
-        @include('livewire.backend.moderator.processorder.payment-detail')
-    @endif
+    {{-- PROCESS ORDER--}}
+    @include('livewire.backend.moderator.processorder.process-order')
+
+    <!-- Let's also add the backdrop / overlay here -->
+    <div class="modal-backdrop fade show" id="backdrop"
+        style="display: @if($showModalStatus === true || $showModalPayment === true) block @else none @endif;"></div>
+    </div>
 </div>

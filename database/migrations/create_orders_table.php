@@ -39,6 +39,7 @@ return new class extends Migration
             $table->tinyInteger('paymentMethod')->nullable($value = true);
             $table->tinyInteger('paymentStatus')->default(0)->nullable($value = true);
             $table->string('transactionCode')->nullable($value = true);
+            $table->dateTime('transactionDate', $precision = 0)->nullable($value = true);
             $table->tinyInteger('status')->default(0); /* 0=>Book, 9=>Already paid */
             $table->timestamps();
 

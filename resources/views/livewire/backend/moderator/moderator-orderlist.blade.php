@@ -177,7 +177,7 @@
         {{ $orderList->links() }}
     </div>
 
-     {{--Show modal boostrap to quick view detail order--}}
+    {{--Show modal boostrap to quick view detail order--}}
     <div class="modal fade show" tabindex="-1" 
         style="display: @if($showModal === true) block @else none @endif;" role="dialog" wire:model="viewOrder">
         <div class="modal-dialog modal-lg">

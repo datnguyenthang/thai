@@ -11,6 +11,7 @@ use App\Models\Ride;
 use App\Models\Location;
 use App\Models\SeatClass;
 use App\Models\Order;
+use App\Models\OrderStatus;
 use App\Models\OrderTicket;
 use App\Models\Pickupdropoff;
 use App\Models\Promotion;
@@ -186,6 +187,15 @@ class ProceedBooking extends Component
                 'bookingDate' => date('Y-m-d H:i:s'),
                 'customerType' => 0,
                 'status' => 0,
+            ]);
+
+            //SAVE first status of this order
+            OrderStatus::create([
+                'orderId' => intVal($order->id),
+                'status' => 0,
+                //'note' => $this->note,
+                'changeDate' => date('Y-m-d H:i:s'),
+                //'userId' => Auth::id(),
             ]);
 
             //SAVE ORDER TICKET DEPART FIRST

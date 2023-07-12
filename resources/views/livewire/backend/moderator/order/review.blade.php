@@ -72,24 +72,45 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <span class="form-label">{{ trans('backend.paymentmethodname') }}</span>
-                            <select id="paymentMethod" name="paymentMethod" class="form-select" wire:model="paymentMethod">
-                                @foreach($paymentMethodList as $value)
-                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                            <span class="form-label">{{ trans('backend.orderstatus') }}</span>
+                            <select id="status" name="status" class="form-select" wire:model="status">
+                                @foreach($orderStatusList as $key => $value)
+                                    <option value="{{ $key }}">{{ $value }}</option>
                                 @endforeach
                             </select>
-                            @error('paymentMethod') <span class="text-danger error">{{ $message }}</span> @enderror
+                            @error('status') <span class="text-danger error">{{ $message }}</span> @enderror
                         </div>
                     </div>
-                    
-                    @if($isTransaction)
+
+                    @if($status == CONFIRMEDORDER)
                         <div class="col-md-4">
                             <div class="form-group">
-                                <span class="form-label">{{ trans('backend.transactioncode') }}</span>
-                                <input id="transactionCode" class="form-control" name="transactionCode" class="form-input" wire:model="transactionCode" />
-                                @error('transactionCode') <span class="text-light error">{{ $message }}</span> @enderror
+                                <span class="form-label">{{ trans('backend.paymentmethodname') }}</span>
+                                <select id="paymentMethod" name="paymentMethod" class="form-select" wire:model="paymentMethod">
+                                    @foreach($paymentMethodList as $value)
+                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('paymentMethod') <span class="text-danger error">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        
+                        @if($isTransaction)
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span class="form-label">{{ trans('backend.transactioncode') }}</span>
+                                    <input id="transactionCode" type="text" class="form-control" name="transactionCode" class="form-input" wire:model="transactionCode" />
+                                    @error('transactionCode') <span class="text-light error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span class="form-label">{{ trans('backend.transactiondate') }}</span>
+                                    <input id="transactionDate" type="datetime-local" step="1" class="form-control" name="transactionDate" class="form-input" wire:model="transactionDate" />
+                                    @error('transactionDate') <span class="text-light error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        @endif
                     @endif
                 </div>
             </div>
