@@ -1,6 +1,8 @@
 <?php
     //LANGUAGE
     define('LANGUAGES', ['en', 'tha']);
+    define('OMISE_PUBLIC_KEY', env('OMISE_PUBLIC_KEY'));
+    define('OMISE_SECRET_KEY', env('OMISE_SECRET_KEY'));
 
     define('ACTIVE', 0);
     define('DEACTIVE', 1);
@@ -69,11 +71,13 @@
                                 2 => "Sale",
                                 3 => "Agent"
                             ]);
-    define('LOCALTYPE', 0);
-    define('AGENTTYPE', 1);
-    define('SPECIALTYPE', 2);
+    define('ONLINEPRICE', 0);
+    define('LOCALTYPE', 1);
+    define('AGENTTYPE', 2);
+    define('SPECIALTYPE', 3);
 
     define('AGENTLOCAL', [
+        ONLINEPRICE => "Online Price",
         LOCALTYPE => "Local", 
         AGENTTYPE => "Agent",
         SPECIALTYPE => "Special",
@@ -107,6 +111,7 @@
     //ORDER STATUS
     define('NEWORDER', 0);
     define('UPPLOADTRANSFER', 1);
+    define('RESERVATION', 2);
     define('CANCELDORDER', 6);
     define('DECLINEDORDER', 7);
     define('CONFIRMEDORDER', 8);
@@ -115,6 +120,7 @@
     define('ORDERSTATUS', [
                             NEWORDER => "New Order",
                             UPPLOADTRANSFER => "Upload Transfered", 
+                            RESERVATION => "Reserve",
                             CONFIRMEDORDER => "Confirmed", 
                             CANCELDORDER => "Canceled",
                             COMPLETEDORDER => "Completed"
@@ -128,6 +134,9 @@
     define('BANKTRANSFER', 1);
     define('CARD', 2);
     define('CASH', 3);
+    define('ALIPAY', 4);
+    define('WECHAT', 5);
+    define('PROMPTPAY', 6);
 
     define('PAYMENTMETHOD', [
                                 BANKTRANSFER => "Bank transfer",
@@ -144,7 +153,7 @@
     define('PAYMENTSTATUS', [
                                 NOTPAID => "Not paid",
                                 PAID => "Paid",
-                                PAIDBYCASH => "Paid by cash",
-                                PAIDBYAGENT => "Paid by agent"
+                                //PAIDBYCASH => "Paid by cash",
+                                //PAIDBYAGENT => "Paid by agent"
                             ]);
     
