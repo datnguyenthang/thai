@@ -42,6 +42,7 @@ class ProceedBooking extends Component
 
     public $departPrice = 0;
     public $returnPrice = 0;
+    public $onlinePrice;
     public $originalPrice;
     public $couponAmount;
     public $finalPrice;
@@ -130,7 +131,7 @@ class ProceedBooking extends Component
         $this->pickup = 0;
         $this->dropoff = 0;
 
-        $this->originalPrice = $this->departPrice + $this->returnPrice;
+        $this->originalPrice = $this->onlinePrice = $this->departPrice + $this->returnPrice;
         $this->finalPrice = $this->departPrice + $this->returnPrice;
     }
 
@@ -181,6 +182,7 @@ class ProceedBooking extends Component
                 'dropoff' => $this->dropoff,
                 'adultQuantity' => intVal($this->adults),
                 'childrenQuantity' => intVal($this->children),
+                'onlinePrice' => $this->onlinePrice, 
                 'originalPrice' => $this->originalPrice,
                 'couponAmount' => $this->couponAmount,
                 'finalPrice' => $this->finalPrice,

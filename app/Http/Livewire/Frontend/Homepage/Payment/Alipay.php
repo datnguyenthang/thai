@@ -39,8 +39,7 @@ class Alipay extends Component
         $this->alipayRedirectUrl = $source['authorize_uri'];
     }
 
-    public function processPayment()
-    {dd($_POST);
+    public function processPayment(){
         $charge = OmiseCharge::create([
             'amount' => $this->order->finalPrice,
             'currency' => 'thb',
@@ -48,11 +47,8 @@ class Alipay extends Component
         ]);
 
         if ($charge['status'] === 'successful') {
-            // Payment successful
-            // You can perform additional actions here
-            
-            
-            //$this->emit('paymentSuccess');
+            // Adding to database and send mail
+            $this->emitUp('updatePayment', PAID);
         } else {
             // Payment failed
             // You can perform additional actions here

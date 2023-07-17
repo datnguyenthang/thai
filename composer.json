@@ -16,7 +16,10 @@
         "laravel/ui": "^4.2",
         "livewire/livewire": "^2.12",
         "maatwebsite/excel": "^3.1",
-        "rappasoft/laravel-livewire-tables": "^2.12"
+        "msa/laravel-grapes": "^1.0",
+        "omise/omise-php": "^2.16",
+        "rappasoft/laravel-livewire-tables": "^2.12",
+        "simplehtmldom/simplehtmldom": "dev-master"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
