@@ -58,6 +58,18 @@
              <i class="fas fa-street-view fa-fw me-3"></i>
              <span>{{ trans('backend.customerType') }}</span>
           </a>
+
+          <a href="{{ route('managerMenu') }}" 
+             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerMenu' ? 'active' : '' }}">
+             <i class="fas fa-bars fa-fw me-3"></i>
+             <span>{{ trans('backend.menu') }}</span>
+          </a>
+
+          <a href="{{ route('managerCms') }}" 
+             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerCms' ? 'active' : '' }}">
+             <i class="fas fa-newspaper fa-fw me-3"></i>
+             <span>{{ trans('backend.cms') }}</span>
+          </a>
         </div>
       </div>
     </nav>

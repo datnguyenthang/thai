@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     /*------All Manager Routes List------*/
     Route::middleware(['user-access:manager'])->group(function () {
         Route::get('/manager', App\Http\Livewire\Backend\Manager\ManagerDashboard::class)->name('managerDashboard');
+        Route::get('/managercms', App\Http\Livewire\Backend\Manager\ManagerCms::class)->name('managerCms');
 
         Route::get('/managerorder', App\Http\Livewire\Backend\Manager\ManagerOrder::class)->name('managerOrder');
         Route::get('/managerorderlist', App\Http\Livewire\Backend\Manager\ManagerOrderlist::class)->name('managerOrderlist');
@@ -70,6 +71,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/customertype', App\Http\Livewire\Backend\Manager\ManagerListCustomerType::class)->name('managerCustomerType');
         Route::get('/customertype/create/{customerTypeId}', App\Http\Livewire\Backend\Manager\ManagerCreateCustomerType::class)->name('managerCreateCustomerType');
+
+        Route::get('/menu', App\Http\Livewire\Backend\Manager\ManagerListMenu::class)->name('managerMenu');
+        Route::get('/menu/create/{menuId}', App\Http\Livewire\Backend\Manager\ManagerCreateMenu::class)->name('managerCreateMenu');
     });
 
     /*------All Moderator Routes List------*/

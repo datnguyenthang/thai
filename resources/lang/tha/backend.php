@@ -181,4 +181,14 @@ return [
     'paymentmethoddescription' => 'Description',
     'paymentmethodistransaction' => 'Is Transaction?',
     'paymentmethodstatus' => 'Payment status',
+
+     //MENU
+     'menu' => 'Menu',
+     'menuname' => 'Name',
+     'menuurl' => 'Url',
+     'parentname' => 'Parent Menu',
+     'createmenu' => 'Create Menu',
+     'listmenu' => 'List Menu',
+     'menustatus' => 'menustatus',
+     'cms' => 'Management Page',
 ];

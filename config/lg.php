@@ -9,6 +9,9 @@ return [
     'frontend_prefix' => '', // prefix for frontend
 
     /* Define additional translation languages. */
-    'languages' => [],
+    'languages' => [
+                    'en',
+                    'tl',
+                    ],
 
 ];

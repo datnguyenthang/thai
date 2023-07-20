@@ -24,6 +24,11 @@
                         MODERATOR => 'Moderator',
                         AGENT => 'Agent'
                     ]);
+    //MENU
+    define('MENUSTATUS', [
+        0 => "Open",
+        1 => "Close"
+    ]);
 
     //LOCATION
     define('LOCATIONSTATUS', [
