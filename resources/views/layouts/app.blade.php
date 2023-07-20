@@ -20,12 +20,12 @@
 </head>
 <body class="front">
     <div id="main">
-        @include('home.top')
-        @include('home.header')
+        <livewire:frontend.layout.top  />
+        <livewire:frontend.layout.header  />
 
         @if(Request::is('/'))
-            @include('home.slider-wrapper')
-            @livewire('frontend.homepage.booking')
+            <livewire:frontend.layout.slide-wrapper  />
+            <livewire:frontend.homepage.booking  />
 {{--
             @include('home.category')
             @include('home.parallax')
@@ -45,9 +45,9 @@
             </div>
         @endif
 
-        @include('home.footer')
-        @include('home.bottom')
-        @include('home.chat')
+        <livewire:frontend.layout.footer  />
+        <livewire:frontend.layout.bottom  />
+        <livewire:frontend.layout.chat  />
     </div>
 
     <!--<a href="#" id="toTop" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span></a>-->

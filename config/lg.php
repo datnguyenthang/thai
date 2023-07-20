@@ -11,7 +11,7 @@ return [
     /* Define additional translation languages. */
     'languages' => [
                     'en',
-                    'tl',
+                    'tha',
                     ],
 
 ];
