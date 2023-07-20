@@ -13,18 +13,20 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($pages as $page)
-                <tr>
-                    <td>{{ $page['id'] }}</td>
-                    <td>{{ $page['name'] }}</td>
-                    <td>{{ $page['slug'] }}</td>
-                    <td>
-                        <a class="call-btn btn btn-outline-primary btn-floating btn-sm" href='{{ $url }}'>                     
-                            <i class="fa fa-eye"></i>
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
+            @if(!empty($pages))
+                @foreach ($pages as $page)
+                    <tr>
+                        <td>{{ $page['id'] }}</td>
+                        <td>{{ $page['name'] }}</td>
+                        <td>{{ $page['slug'] }}</td>
+                        <td>
+                            <a class="call-btn btn btn-outline-primary btn-floating btn-sm" href='{{ $url }}'>                     
+                                <i class="fa fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
         </tbody>
     </table>
     <div>
