@@ -10,8 +10,8 @@
         </li>
         
         @foreach ($menuItems as $key => $menuItem)
-            <li class="nav-item">
-                @if ($menuItem->subMenus->count() > 0)
+            @if ($menuItem->subMenus->count() > 0)
+                <li class="nav-item sub-menu">
                     <a class="nav-link dropdown-toggle" href="{{ $menuItem->url }}" id="navbarDropdown{{ $key }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ $menuItem->name }}
                     </a>
@@ -22,10 +22,12 @@
                             </li>
                         @endforeach
                     </ul>
-                @else
-                <a href="{{ $menuItem->url }}">{{ $menuItem->name }}</a>
-                @endif
-            </li>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a href="{{ $menuItem->url }}">{{ $menuItem->name }}</a>
+                </li>
+            @endif
         @endforeach
 
         <li class="nav-item sub-menu {{ Route::currentRouteName() == 'policycustomer' || Route::currentRouteName() == 'privatepolicy' ? 'active' : '' }}">
