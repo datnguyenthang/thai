@@ -51,6 +51,18 @@ Breadcrumbs::for('aboutus', function (BreadcrumbTrail $trail) {
     $trail->parent('home', route('home'));
     $trail->push(trans('messages.aboutus'), route('aboutus'));
 });
+
+//Contact us
+Breadcrumbs::for('contactus', function (BreadcrumbTrail $trail) {
+    $trail->parent('home', route('home'));
+    $trail->push(trans('messages.contactus'), route('contactus'));
+});
+
+//timetable
+Breadcrumbs::for('timetable', function (BreadcrumbTrail $trail) {
+    $trail->parent('home', route('home'));
+    $trail->push(trans('messages.timetable'), route('timetable'));
+});
 //BACKEND
 /*
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {

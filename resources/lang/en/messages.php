@@ -1,5 +1,18 @@
 <?php
 return [
+    //Menu
+    'home' => 'Home',
+    'timetable' => 'Timetable',
+    'account' => 'Account',
+    'contactus' => 'Contact us',
+
+    //Contact
+    'contactformtitle' => 'Contact form',
+    'contactname' => 'Name and surname',
+    'contactemail' => 'Email',
+    'contactmessage' => 'Message',
+    'thankyoucontactmessage' => 'Thank you for contact to us, we will contact to you soon!',
+
     //Navigation
     'nav_home' => 'Home',
     'nav_trip' => 'Trip',

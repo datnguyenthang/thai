@@ -25,6 +25,9 @@ Route::get('/', App\Http\Livewire\Frontend\Homepage\Booking::class)->name('home'
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/login', '\App\Http\Controllers\Auth\LoginController@logout');
 
+//OLD PAGE
+Route::get('/timetable', '\App\Http\Controllers\Home\HomeController@timetable')->name('timetable');
+
 Auth::routes();
 
 Route::get('/trip', App\Http\Livewire\Frontend\Homepage\Trip::class)->name('trip');
@@ -35,6 +38,7 @@ Route::get('/payment/{code}', App\Http\Livewire\Frontend\Homepage\Payment::class
 Route::get('/policy-for-customer', App\Http\Livewire\Frontend\Policy::class)->name('policycustomer');
 Route::get('/privacy-policy', App\Http\Livewire\Frontend\PrivatePolicy::class)->name('privatepolicy');
 Route::get('/aboutus', App\Http\Livewire\Frontend\Aboutus::class)->name('aboutus');
+Route::get('/contactus', App\Http\Livewire\Frontend\Contactus::class)->name('contactus');
 
 
 Route::middleware(['auth'])->group(function () {

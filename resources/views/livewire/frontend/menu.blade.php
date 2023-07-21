@@ -1,8 +1,16 @@
 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
     {{-- In work, do what you enjoy. --}}
     <ul class="navbar-nav">
-        <li class="nav-item active">
-            <a class="nav-link" href="/">Home</a>
+        <li class="nav-item {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">
+            <a class="nav-link" href="/">{{ trans('messages.home') }}</a>
+        </li>
+
+        <li class="nav-item {{ Route::currentRouteName() == 'timetable' ? 'active' : '' }}">
+            <a class="nav-link" href="/timetable">{{ trans('messages.timetable') }}</a>
+        </li>
+
+        <li class="nav-item  {{ Route::currentRouteName() == 'login' ? 'active' : '' }}">
+            <a class="nav-link" href="/login">{{ trans('messages.account') }}</a>
         </li>
         
         @foreach ($menuItems as $key => $menuItem)
@@ -24,8 +32,12 @@
             </li>
         @endforeach
 
-        <li class="nav-item">
-            <a class="nav-link" href="/aboutus">About</a>
+        <li class="nav-item {{ Route::currentRouteName() == 'contactus' ? 'active' : '' }}">
+            <a class="nav-link" href="/contactus">{{ trans('messages.contactus') }}</a>
+        </li>
+
+        <li class="nav-item {{ Route::currentRouteName() == 'aboutus' ? 'active' : '' }}">
+            <a class="nav-link" href="/aboutus">{{ trans('messages.aboutus') }}</a>
         </li>
     </ul>
 </div>
