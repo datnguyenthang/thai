@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('userId')->nullable($value = true);
             $table->tinyInteger('isReturn')->default(0); /* 0=>NO Return, 9=>Already Return */
             $table->integer('agentId')->nullable($value = true);
+            $table->tinyInteger('channel')->nullable($value = true);
             $table->integer('promotionId')->nullable($value = true);
             $table->string('firstName');
             $table->string('lastName');

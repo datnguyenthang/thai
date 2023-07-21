@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8201b95b6414022d81d7578625b8c0a1",
+    "content-hash": "169f525ab1aa47616a4ca3f64aa70bf2",
     "packages": [
         {
             "name": "brick/math",
@@ -2659,6 +2659,55 @@
             "time": "2023-02-06T13:44:46+00:00"
         },
         {
+            "name": "msa/laravel-grapes",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/allamo123/laravel-grapes.git",
+                "reference": "179f27c70ed851277fd765378bfdb67114f71b68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/allamo123/laravel-grapes/zipball/179f27c70ed851277fd765378bfdb67114f71b68",
+                "reference": "179f27c70ed851277fd765378bfdb67114f71b68",
+                "shasum": ""
+            },
+            "require": {
+                "simplehtmldom/simplehtmldom": "*",
+                "tightenco/ziggy": "*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MSA\\LaravelGrapes\\LaravelGrapesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MSA\\LaravelGrapes\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "mohamed allam",
+                    "email": "55511778+allamo123@users.noreply.github.com",
+                    "role": "Fullstack Developer"
+                }
+            ],
+            "description": "laravel grapes is a cms drag and drop page builder",
+            "support": {
+                "issues": "https://github.com/allamo123/laravel-grapes/issues",
+                "source": "https://github.com/allamo123/laravel-grapes/tree/v1.0.1"
+            },
+            "time": "2023-01-02T17:56:59+00:00"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "2.68.1",
             "source": {
@@ -3050,6 +3099,62 @@
                 }
             ],
             "time": "2023-02-08T01:06:31+00:00"
+        },
+        {
+            "name": "omise/omise-php",
+            "version": "v2.16.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/omise/omise-php.git",
+                "reference": "9a5d33dd809592b89c41685cfd1a05031f9aed0c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/omise/omise-php/zipball/9a5d33dd809592b89c41685cfd1a05031f9aed0c",
+                "reference": "9a5d33dd809592b89c41685cfd1a05031f9aed0c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.19.3 || ^3.9.5",
+                "phpstan/phpstan": "1.2",
+                "phpunit/phpunit": "^5.7 || ^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/omise/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Omise and contributors",
+                    "homepage": "https://github.com/omise/omise-php/graphs/contributors"
+                }
+            ],
+            "description": "A PHP library designed specifically to connect with Omise API.",
+            "homepage": "https://www.omise.co",
+            "keywords": [
+                "alipay payment",
+                "credit card payment",
+                "internet banking payment",
+                "konbini payment",
+                "omise",
+                "payment",
+                "payment processing"
+            ],
+            "support": {
+                "email": "support@omise.co",
+                "issues": "https://github.com/omise/omise-php/issues",
+                "source": "https://github.com/omise/omise-php/tree/v2.16.1"
+            },
+            "time": "2023-04-20T07:40:01+00:00"
         },
         {
             "name": "phenx/php-font-lib",
@@ -4110,6 +4215,84 @@
                 "source": "https://github.com/sabberworm/PHP-CSS-Parser/tree/8.4.0"
             },
             "time": "2021-12-11T13:40:54+00:00"
+        },
+        {
+            "name": "simplehtmldom/simplehtmldom",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/simplehtmldom/simplehtmldom.git",
+                "reference": "b8d048e46b7f1964c28ea041d39ccb1d05f9a0ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/simplehtmldom/simplehtmldom/zipball/b8d048e46b7f1964c28ea041d39ccb1d05f9a0ed",
+                "reference": "b8d048e46b7f1964c28ea041d39ccb1d05f9a0ed",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "*",
+                "phpcompatibility/php-compatibility": "^9",
+                "phpunit/phpunit": "^6 || ^7",
+                "squizlabs/php_codesniffer": "^2"
+            },
+            "suggest": {
+                "ext-curl": "Needed to support cURL downloads in class HtmlWeb",
+                "ext-mbstring": "Allows better decoding for multi-byte documents",
+                "ext-openssl": "Allows loading HTTPS pages when using cURL"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "./"
+                ],
+                "exclude-from-classmap": [
+                    "/example/",
+                    "/docs/",
+                    "/tests/",
+                    "simple_html_dom.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "S.C. Chen",
+                    "role": "Developer"
+                },
+                {
+                    "name": "John Schlick",
+                    "role": "Developer"
+                },
+                {
+                    "name": "logmanoriginal",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A fast, simple and reliable HTML document parser for PHP.",
+            "homepage": "https://simplehtmldom.sourceforge.io/",
+            "keywords": [
+                "Simple",
+                "dom",
+                "html",
+                "parser",
+                "php",
+                "simplehtmldom"
+            ],
+            "support": {
+                "issues": "https://sourceforge.net/p/simplehtmldom/bugs/",
+                "rss": "https://sourceforge.net/p/simplehtmldom/news/feed.rss",
+                "source": "https://sourceforge.net/p/simplehtmldom/repository/",
+                "wiki": "https://simplehtmldom.sourceforge.io/docs/"
+            },
+            "time": "2022-04-25T19:21:05+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -6413,6 +6596,73 @@
                 }
             ],
             "time": "2023-06-21T12:08:28+00:00"
+        },
+        {
+            "name": "tightenco/ziggy",
+            "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tighten/ziggy.git",
+                "reference": "3beb080be60b1eadad043f3773a160df13fa215f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tighten/ziggy/zipball/3beb080be60b1eadad043f3773a160df13fa215f",
+                "reference": "3beb080be60b1eadad043f3773a160df13fa215f",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": ">=5.4@dev"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0",
+                "phpunit/phpunit": "^6.0 || ^7.0 || ^8.0 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Tightenco\\Ziggy\\ZiggyServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Tightenco\\Ziggy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Coulbourne",
+                    "email": "daniel@tighten.co"
+                },
+                {
+                    "name": "Jake Bathman",
+                    "email": "jake@tighten.co"
+                },
+                {
+                    "name": "Jacob Baker-Kretzmar",
+                    "email": "jacob@tighten.co"
+                }
+            ],
+            "description": "Generates a Blade directive exporting all of your named Laravel routes. Also provides a nice route() helper function in JavaScript.",
+            "homepage": "https://github.com/tighten/ziggy",
+            "keywords": [
+                "Ziggy",
+                "javascript",
+                "laravel",
+                "routes"
+            ],
+            "support": {
+                "issues": "https://github.com/tighten/ziggy/issues",
+                "source": "https://github.com/tighten/ziggy/tree/v1.6.0"
+            },
+            "time": "2023-05-12T20:08:56+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -9226,7 +9476,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "simplehtmldom/simplehtmldom": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -13,6 +13,10 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/css/app.css',
                 'resources/js/app.js',
+
+                'resources/sass/app_backend.scss',
+                'resources/css/app_backend.css',
+                'resources/js/app_backend.js',
             ],
             refresh: true,
         }),

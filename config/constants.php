@@ -24,6 +24,11 @@
                         MODERATOR => 'Moderator',
                         AGENT => 'Agent'
                     ]);
+                    
+    //CUSTOMER CHANNEL
+    define('FACEBOOK', 1);
+    define('GOOGLE', 2);
+
     //MENU
     define('MENUSTATUS', [
         0 => "Open",
