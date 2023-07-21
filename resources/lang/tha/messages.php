@@ -5,6 +5,7 @@ return [
     'timetable' => 'Timetable',
     'account' => 'Account',
     'contactus' => 'Contact us',
+    'menu_policy' => 'Policy',
 
     //Contact
     'contactformtitle' => 'Contact form',
