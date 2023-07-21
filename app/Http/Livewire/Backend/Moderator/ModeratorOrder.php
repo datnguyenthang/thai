@@ -3,9 +3,15 @@
 namespace App\Http\Livewire\Backend\Moderator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+
+use App\Mail\SendTicket;
 
 use Livewire\Component;
 use Carbon\Carbon;
+
+use App\Lib\OrderLib;
 
 use App\Models\Ride;
 use App\Models\Location;
@@ -436,27 +442,59 @@ class ModeratorOrder extends Component
             }
             
             DB::commit();
+
             // Redirect to payment page with booking ID parameter
-            $this->order = Order::with(['orderTickets' => function($orderTicket){
-                                $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
-                                            ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
-                                            ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
-                                            ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
-                                            ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId');
-                            }])
-                            ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
-                            ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
-                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
-                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.originalPrice', 'orders.couponAmount', 'orders.finalPrice',
-                                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.pickup', 'orders.dropoff',
-                                    'orders.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 'a.name as agentName')
-                            ->where('orders.id', intVal($order->id))
-                            ->first();
+            $this->order = OrderLib::getOrderDetailbByCode($codeOrder);
+
+            //Make up data and files to sendmail
+            foreach($this->order->orderTickets as $orderTicket) {
+                $orderTicket->fullname = $this->order->fullname;
+                $orderTicket->pickup = $this->order->pickup;
+                $orderTicket->dropoff = $this->order->dropoff;
+                $orderTicket->code = $this->order->code;
+                $orderTicket->adultQuantity = $this->order->adultQuantity;
+                $orderTicket->childrenQuantity = $this->order->childrenQuantity;
+    
+                if ($this->order->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $this->order->discount);
+    
+                if ($orderTicket->type == DEPARTURETICKET) {
+                    $pdfFiles[] = ['content' => OrderLib::generateEticket($orderTicket), 'filename' => 'Departure Ticket.pdf'];
+    
+                    foreach($this->getLocationFile($orderTicket->locationId) as $value){
+                        $pdfFiles[] = ['content' => $value['content'], 'filename' => $value['filename']];
+                    }
+                    
+                }
+                if ($orderTicket->type == RETURNTICKET) {
+                    $pdfFiles[] = ['content' => OrderLib::generateEticket($orderTicket), 'filename' => 'Return Ticket.pdf'];
+    
+                    foreach($this->getLocationFile($orderTicket->locationId) as $value){
+                        $pdfFiles[] = ['content' => $value['content'], 'filename' => $value['filename']];
+                    }
+                }
+            }
+
+            //Send Email
+            Mail::to($this->order->email)->send(new SendTicket($this->order, $pdfFiles));
+
             $this->step++;
         } catch (\Exception $e) {
             DB::rollback();
             throw $e;
         }
+    }
+
+    public function getLocationFile($locationId) {
+        $path = 'location/'.$locationId.'/';
+        $allFiles = Storage::disk('public')->allFiles($path);
+       
+        $files = [];
+
+        foreach ($allFiles as $key => $file) {
+            $files[$key]['content'] = Storage::disk('public')->get($file);
+            $files[$key]['filename'] = basename($file);
+        }
+        return collect($files);
     }
 
     public function removeCoupon() {
