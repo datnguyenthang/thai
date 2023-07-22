@@ -10,9 +10,6 @@ use App\Lib\OrderLib;
 use App\Mail\SendTicket;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -95,19 +92,6 @@ class Banktransfer extends Component
         $this->loadProof();
     }
 
-    public function getLocationFile($locationId) {
-        $path = 'location/'.$locationId.'/';
-        $allFiles = Storage::disk('public')->allFiles($path);
-       
-        $files = [];
-
-        foreach ($allFiles as $key => $file) {
-            $files[$key]['content'] = Storage::disk('public')->get($file);
-            $files[$key]['filename'] = basename($file);
-        }
-        return collect($files);
-    }
-
     public function payment($paymentMethod) {
         //Update status of this order
         OrderStatus::create([
@@ -117,38 +101,8 @@ class Banktransfer extends Component
             'changeDate' => date('Y-m-d H:i:s'),
             //'userId' => Auth::id(),
         ]);
-
-        $this->order = OrderLib::getOrderDetailbByCode($this->code);
-
-        foreach($this->order->orderTickets as $orderTicket) {
-            $orderTicket->fullname = $this->order->fullname;
-            $orderTicket->pickup = $this->order->pickup;
-            $orderTicket->dropoff = $this->order->dropoff;
-            $orderTicket->code = $this->order->code;
-            $orderTicket->adultQuantity = $this->order->adultQuantity;
-            $orderTicket->childrenQuantity = $this->order->childrenQuantity;
-
-            if ($this->order->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $this->order->discount);
-
-            if ($orderTicket->type == DEPARTURETICKET) {
-                $pdfFiles[] = ['content' => OrderLib::generateEticket($orderTicket), 'filename' => 'Departure Ticket.pdf'];
-
-                foreach($this->getLocationFile($orderTicket->locationId) as $value){
-                    $pdfFiles[] = ['content' => $value['content'], 'filename' => $value['filename']];
-                }
-                
-            }
-            if ($orderTicket->type == RETURNTICKET) {
-                $pdfFiles[] = ['content' => OrderLib::generateEticket($orderTicket), 'filename' => 'Return Ticket.pdf'];
-
-                foreach($this->getLocationFile($orderTicket->locationId) as $value){
-                    $pdfFiles[] = ['content' => $value['content'], 'filename' => $value['filename']];
-                }
-            }
-        }
-
-        Mail::to($this->order->email)->send(new SendTicket($this->order, $pdfFiles));
         
+        //dispatch event to Payment component
         $this->emitUp('updatePayment', UPPLOADTRANSFER);
     }
 

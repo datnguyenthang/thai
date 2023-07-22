@@ -19,7 +19,8 @@
         "msa/laravel-grapes": "^1.0",
         "omise/omise-php": "^2.16",
         "rappasoft/laravel-livewire-tables": "^2.12",
-        "simplehtmldom/simplehtmldom": "dev-master"
+        "simplehtmldom/simplehtmldom": "dev-master",
+        "webklex/laravel-pdfmerger": "^1.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

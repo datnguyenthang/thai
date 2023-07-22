@@ -24,8 +24,8 @@
         <table class="table table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th>{{ trans('messages.file') }}</th>
                     <th>{{ trans('messages.filename') }}</th>
+                    <th>{{ trans('messages.filesize') }}</th>
                     <th>{{ trans('messages.extension') }}</th>
                     <!--<th>{{ trans('messages.action') }}</th>-->
                 </tr>
@@ -34,13 +34,10 @@
                 @if ($locationFiles)
                     @foreach ($locationFiles as $file)
                         <tr>
-                            <th class="file">
-                                <a href={{ $file['url'] }} target="_blank">
-                                    <img src="{{ $file['url'] }}" width="75" height="75" alt="Proof image" />
-                                </a>
-                            </th>
                             <th class="filename">{{ $file['name'] }}</th>
+                            <th class="filename">{{ round($file['size'] / (1024 * 1024), 2) }}MB</th>
                             <th class="extension">{{ $file['extension'] }}</th>
+                            
                             <!--
                             <th class="action">
                                 <button type="button" class="btn bg_own_color text-light" wire:loading.attr="disabled" wire:click="deleteFile('{{ $file['path'] }}')">

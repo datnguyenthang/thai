@@ -11,13 +11,7 @@ use Livewire\WithFileUploads;
 use App\Lib\OrderLib;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-
-use App\Mail\SendTicket;
 
 use App\Models\Ride;
 use App\Models\Location;
@@ -54,6 +48,10 @@ class Payment extends Component
 
     public function updatePayment($step){
         $this->step = $step;
+           
+        //SEND MAIL
+        OrderLib::sendMailConfirmTicket($this->code);
+
     }
 
     public function hydrate(){

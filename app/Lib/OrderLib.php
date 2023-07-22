@@ -3,9 +3,16 @@
 namespace App\Lib;
 
 use Dompdf\Dompdf;
+use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
+
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\SendTicket;
 
 use App\Models\Order;
 use App\Models\OrderTicket;
@@ -37,7 +44,7 @@ class OrderLib
     public static function getOrderDetailbByCode($code) {
         $order = Order::with(['orderTickets' => function($orderTicket){
                                 $orderTicket->select('order_tickets.*', 'r.name', 'r.departTime', 'r.returnTime', 'r.departDate',
-                                                    'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName', 'sc.price as seatPrice')
+                                                    'fl.id as locationId', 'fl.name as fromLocationName', 'fl.nameOffice', 'fl.googleMapUrl', 'tl.name as toLocationName', 'sc.name as seatClassName', 'sc.price as seatPrice')
                                             ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
                                             ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
                                             ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
@@ -78,7 +85,54 @@ class OrderLib
         return $orderDetail;
     }
 
-    public static function generateEticket($orderTicket) {
+    public static function sendMailConfirmTicket($code){
+        $order = self::getOrderDetailbByCode($code);
+
+        foreach($order->orderTickets as $orderTicket) {
+            $orderTicket->fullname = $order->fullname;
+            $orderTicket->pickup = $order->pickup;
+            $orderTicket->dropoff = $order->dropoff;
+            $orderTicket->code = $order->code;
+            $orderTicket->adultQuantity = $order->adultQuantity;
+            $orderTicket->childrenQuantity = $order->childrenQuantity;
+
+            if ($order->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $order->discount);
+
+            if ($orderTicket->type == DEPARTURETICKET) {
+                foreach(self::getLocationFile($orderTicket->locationId) as $value){
+                    $locationFiles[] = ['path' => $value['path'], 'filename' => $value['filename']];
+                }
+                //$locationFiles[] = self::getLocationFile($orderTicket->locationId);
+                $pdfFiles[] = ['content' => self::generateEticket($orderTicket, $locationFiles), 'filename' => 'Departure Ticket.pdf'];
+            }
+
+            if ($orderTicket->type == RETURNTICKET) {
+                foreach(self::getLocationFile($orderTicket->locationId) as $value){
+                    $locationFiles[] = ['path' => $value['path'], 'filename' => $value['filename']];
+                }
+                //$locationFiles[] = self::getLocationFile($orderTicket->locationId);
+                $pdfFiles[] = ['content' => self::generateEticket($orderTicket, $locationFiles), 'filename' => 'Return Ticket.pdf'];                
+            }
+        }
+
+        Mail::to($order->email)->send(new SendTicket($order, $pdfFiles));
+    }
+
+    public static function getLocationFile($locationId) {
+        $path = 'location/'.$locationId.'/';
+        $allFiles = Storage::disk('public')->allFiles($path);
+
+        $files = [];
+
+        foreach ($allFiles as $key => $file) {
+            //$files[$key]['content'] = Storage::disk('public')->get($file);
+            $files[$key]['filename'] = basename($file);
+            $files[$key]['path'] = $file;
+        }
+        return collect($files);
+    }
+
+    public static function generateEticket($orderTicket, $locationFiles = []) {
         $dompdf = new Dompdf();
         
         $logoPath = public_path('img/logo.png');
@@ -93,9 +147,27 @@ class OrderLib
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->set_option('isHtml5ParserEnabled', true);
         $dompdf->render();
-
         $pdfData = $dompdf->output();
-        return $pdfData;
+
+        //Save in temp file
+        $tempPdfPath = sys_get_temp_dir() . '/' . uniqid('temp_pdf_') . '.pdf';
+        file_put_contents($tempPdfPath, $pdfData);
+
+        //merge with location pdf file
+        $pdfMerger = PDFMerger::init();
+        $pdfMerger->addPDF($tempPdfPath, 'all'); //eTicket file
+
+        //merge to location pdf file, only one 1 file
+        if(Storage::disk('public')->exists($locationFiles[0]['path'])) {
+            $pdfMerger->addPDF(Storage::disk('public')->path($locationFiles[0]['path']), 'all');
+        }
+       
+        $pdfMerger->merge();
+
+        //unlink temporary file
+        unlink($tempPdfPath);
+
+        return $pdfMerger->output();
     }
 
     public static function generateBoardingPass($orderTicket) {

@@ -67,6 +67,7 @@ class ManagerCreateLocation extends Component
                 'url' => $url,
                 'path' => $file,
                 'name' => basename($file),
+                'size' => Storage::disk('public')->size($file),
                 'extension' => Storage::disk('public')->mimeType($file),
             ];
         }
@@ -107,15 +108,20 @@ class ManagerCreateLocation extends Component
     }
 
     public function upload($locationId) {
+        //use disk
+        $disk = 'public';
+
         if (!empty($this->locationFiles)){
+            
+            //Delete exist files, allow 1 file only
             foreach ($this->locationFiles as $file){
-                if (Storage::disk('public')->exists($file['path'])) {
-                    Storage::disk('public')->delete($file['path']);
+                if (Storage::disk($disk)->exists($file['path'])) {
+                    Storage::disk($disk)->delete($file['path']);
                 }
             }
         }
+        
         //creating folder inside storage folder
-        $disk = 'public';
         $this->folderName = $this->folderName.''.$locationId.'/';
 
         if (!Storage::exists($this->folderName)) {
@@ -123,19 +129,18 @@ class ManagerCreateLocation extends Component
         }
 
         if ($this->files) {
-            $this->files->storeAs($this->folderName, $this->files->getClientOriginalName(), 'public');
+            $this->files->storeAs($this->folderName, $this->files->getClientOriginalName(), $disk);
         }
     }
 
-    public function save()
-    {
+    public function save(){
         $this->validate([
             'name' => 'required|unique:locations,name,' . $this->locationId,
             'nameOffice' => 'required',
             'googleMapUrl' => 'required|url',
             'files' => ['nullable',
                         'file',
-                        'mimes:png,jpg,pdf,xlsx,docx,csv',
+                        'mimes:pdf',
                         'max:5120',
                                 Rule::requiredIf(function () {
                                     if (empty($this->locationFiles) && $this->locationId) return true;
@@ -175,8 +180,7 @@ class ManagerCreateLocation extends Component
         return redirect()->route('managerLocation');
     }
 
-    public function render()
-    {
+    public function render(){
         return view('livewire.backend.manager.manager-create-location')
         ->layout('manager.layouts.app');
     }

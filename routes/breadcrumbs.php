@@ -17,7 +17,7 @@ Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
 // Trip
 Breadcrumbs::for('trip', function (BreadcrumbTrail $trail) {
     $trail->parent('home', route('home'));
-    $trail->push(trans('messages.nav_trip'), route('trip'));
+    $trail->push(trans('messages.nav_trip'));
 });
 
 // Booking
