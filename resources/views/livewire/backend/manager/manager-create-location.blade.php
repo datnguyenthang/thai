@@ -34,7 +34,7 @@
                 @if ($locationFiles)
                     @foreach ($locationFiles as $file)
                         <tr>
-                            <th class="filename">{{ $file['name'] }}</th>
+                            <th class="filename"><a href='{{ $file['url'] }}' target='_blank' >{{ $file['name'] }}</a></th>
                             <th class="filename">{{ round($file['size'] / (1024 * 1024), 2) }}MB</th>
                             <th class="extension">{{ $file['extension'] }}</th>
                             

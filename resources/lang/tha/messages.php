@@ -177,6 +177,7 @@ return [
     'filename'=> 'Filename',
     'dimensions'=> 'Dimensions',
     'extension'=> 'Extension',
+    'filesize' => 'File size',
     'action'=> 'Action',
     'nofile'=> 'No files have been uploaded to this order.',
     'upload' => 'Upload',

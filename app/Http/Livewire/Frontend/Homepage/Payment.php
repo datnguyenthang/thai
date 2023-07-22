@@ -48,10 +48,9 @@ class Payment extends Component
 
     public function updatePayment($step){
         $this->step = $step;
-           
+
         //SEND MAIL
         OrderLib::sendMailConfirmTicket($this->code);
-
     }
 
     public function hydrate(){
