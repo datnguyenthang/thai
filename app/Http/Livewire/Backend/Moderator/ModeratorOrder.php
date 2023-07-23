@@ -445,6 +445,7 @@ class ModeratorOrder extends Component
 
             //SEND MAIL
             OrderLib::sendMailConfirmTicket($codeOrder);
+            $this->order = OrderLib::getOrderDetailByCode($codeOrder);
 
             $this->step++;
         } catch (\Exception $e) {
