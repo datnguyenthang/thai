@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Carbon\Carbon;
 
+use App\Lib\OrderLib;
+
 use App\Models\Ride;
 use App\Models\Location;
 use App\Models\SeatClass;
@@ -404,22 +406,11 @@ class AgentOrder extends Component
             }
             
             DB::commit();
-            // Redirect to payment page with booking ID parameter
-            $this->order = Order::with(['orderTickets' => function($orderTicket){
-                                $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
-                                            ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
-                                            ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
-                                            ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
-                                            ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId');
-                            }])
-                            ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
-                            ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
-                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType','orders.status',
-                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.originalPrice', 'orders.couponAmount', 'orders.finalPrice',
-                                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.pickup', 'orders.dropoff',
-                                    'orders.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 'a.name as agentName')
-                            ->where('orders.id', intVal($order->id))
-                            ->first();
+
+            //SEND MAIL
+            OrderLib::sendMailConfirmTicket($codeOrder);
+            $this->order = OrderLib::getOrderDetailByCode($codeOrder);
+
             $this->step++;
         } catch (\Exception $e) {
             DB::rollback();
