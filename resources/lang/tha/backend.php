@@ -54,6 +54,7 @@ return [
     'updateorderstatus' => 'Update Order Status',
     'changeDate' => 'Change Date',
     'paymentimages' => 'Payment Upload Image',
+    'processingorder' => 'Processing Order...',
 
     'firstname' => 'First Name',
     'lastname' => 'Last Name',

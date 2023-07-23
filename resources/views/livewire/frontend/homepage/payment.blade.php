@@ -146,6 +146,6 @@
     <div id="overlay" wire:loading>
         <div class="spinner-grow text-danger"></div>
         <br/>
-        <span>Processing Payment...</span>
+        <span>{{ trans('messages.processingpayment') }}</span>
     </div>
 </div>

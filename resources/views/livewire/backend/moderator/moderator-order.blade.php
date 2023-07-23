@@ -125,5 +125,13 @@
             </div>
 
         </div>
-    </div>    
+    </div>
+    
+    <!-- Loading Overlay, show loading to lock user action-->
+    <div id="overlay" wire:loading>
+        <div class="spinner-grow text-danger"></div>
+        <br/>
+        <span>{{ trans('backend.processingorder') }}</span>
+    </div>
+
 </div>

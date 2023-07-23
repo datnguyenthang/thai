@@ -70,6 +70,7 @@ return [
     'coupon' => 'Coupon',
     'apply' => 'Apply',
     'total' => 'Total',
+    'processingpayment' => 'Processing Payment...',
     'correctinfo' => 'Please fill in these information correctly. We will verify your identity when you check in at the ticket booth.',
     'aboutus' => 'About us',
     'policy' => 'ฉันยอมรับนโยบายสำหรับลูกค้า <a href="/policy-for-customer" target="_blank"><strong class="text-danger">(นโยบายสำหรับลูกค้า  *)</strong></a>',
