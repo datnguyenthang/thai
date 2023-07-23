@@ -101,9 +101,10 @@ class OrderLib
             //$orderTicket->type == RETURNTICKET
             $fileName = $orderTicket->type == DEPARTURETICKET ? 'Departure Ticket.pdf' : 'Return Ticket.pdf';
 
-            foreach(self::getLocationFile($orderTicket->locationId) as $value){
-                $locationFiles[] = ['path' => $value['path'], 'filename' => $value['filename']];
-            }
+            //foreach(self::getLocationFile($orderTicket->locationId) as $value){
+            //    $locationFiles[] = ['path' => $value['path'], 'filename' => $value['filename']];
+            //}
+            $locationFiles = self::getLocationFile($orderTicket->locationId);
             $pdfFiles[] = ['content' => self::generateEticket($orderTicket, $locationFiles), 'filename' => $fileName];
         }
 
