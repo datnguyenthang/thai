@@ -57,7 +57,8 @@ class OrderLib
                                     DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.originalPrice', 'orders.couponAmount', 'orders.customerType',
                                     'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.childrenQuantity', 'orders.paymentMethod',
                                     'orders.pickup','orders.dropoff', 'orders.transactionCode', 'orders.transactionDate', 'orders.paymentStatus',
-                                    'p.name as promotionName', 'p.code as promotionCode', 'p.discount as discount', 'a.name as agentName', 'ct.name as customerTypeName')
+                                    'p.name as promotionName', 'p.code as promotionCode', 'p.discount as discount', 
+                                    'a.name as agentName', 'a.email as agentEmail', 'ct.name as customerTypeName')
                             ->where('orders.code', $code)
                             ->first();
         return $order;
@@ -107,6 +108,9 @@ class OrderLib
             $locationFiles = self::getLocationFile($orderTicket->locationId);
             $pdfFiles[] = ['content' => self::generateEticket($orderTicket, $locationFiles), 'filename' => $fileName];
         }
+        
+        //if there are no email of customer, sending mail to agent instead.
+        if (!$order->email) $order->email = $order->agentEmail;
 
         Mail::to($order->email)->send(new SendTicket($order, $pdfFiles));
     }

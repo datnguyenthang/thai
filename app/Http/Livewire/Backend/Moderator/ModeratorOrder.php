@@ -443,39 +443,8 @@ class ModeratorOrder extends Component
             
             DB::commit();
 
-            // Redirect to payment page with booking ID parameter
-            $this->order = OrderLib::getOrderDetailbByCode($codeOrder);
-
-            //Make up data and files to sendmail
-            foreach($this->order->orderTickets as $orderTicket) {
-                $orderTicket->fullname = $this->order->fullname;
-                $orderTicket->pickup = $this->order->pickup;
-                $orderTicket->dropoff = $this->order->dropoff;
-                $orderTicket->code = $this->order->code;
-                $orderTicket->adultQuantity = $this->order->adultQuantity;
-                $orderTicket->childrenQuantity = $this->order->childrenQuantity;
-    
-                if ($this->order->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $this->order->discount);
-    
-                if ($orderTicket->type == DEPARTURETICKET) {
-                    $pdfFiles[] = ['content' => OrderLib::generateEticket($orderTicket), 'filename' => 'Departure Ticket.pdf'];
-    
-                    foreach($this->getLocationFile($orderTicket->locationId) as $value){
-                        $pdfFiles[] = ['content' => $value['content'], 'filename' => $value['filename']];
-                    }
-                    
-                }
-                if ($orderTicket->type == RETURNTICKET) {
-                    $pdfFiles[] = ['content' => OrderLib::generateEticket($orderTicket), 'filename' => 'Return Ticket.pdf'];
-    
-                    foreach($this->getLocationFile($orderTicket->locationId) as $value){
-                        $pdfFiles[] = ['content' => $value['content'], 'filename' => $value['filename']];
-                    }
-                }
-            }
-
-            //Send Email
-            Mail::to($this->order->email)->send(new SendTicket($this->order, $pdfFiles));
+            //SEND MAIL
+            OrderLib::sendMailConfirmTicket($codeOrder);
 
             $this->step++;
         } catch (\Exception $e) {
