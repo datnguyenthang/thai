@@ -41,7 +41,7 @@ class OrderLib
         return $order;
     }
 
-    public static function getOrderDetailbByCode($code) {
+    public static function getOrderDetailByCode($code) {
         $order = Order::with(['orderTickets' => function($orderTicket){
                                 $orderTicket->select('order_tickets.*', 'r.name', 'r.departTime', 'r.returnTime', 'r.departDate',
                                                     'fl.id as locationId', 'fl.name as fromLocationName', 'fl.nameOffice', 'fl.googleMapUrl', 'tl.name as toLocationName', 'sc.name as seatClassName', 'sc.price as seatPrice')
@@ -86,7 +86,7 @@ class OrderLib
     }
 
     public static function sendMailConfirmTicket($code){
-        $order = self::getOrderDetailbByCode($code);
+        $order = self::getOrderDetailByCode($code);
 
         foreach($order->orderTickets as $orderTicket) {
             $orderTicket->fullname = $order->fullname;
@@ -98,21 +98,13 @@ class OrderLib
 
             if ($order->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $order->discount);
 
-            if ($orderTicket->type == DEPARTURETICKET) {
-                foreach(self::getLocationFile($orderTicket->locationId) as $value){
-                    $locationFiles[] = ['path' => $value['path'], 'filename' => $value['filename']];
-                }
-                //$locationFiles[] = self::getLocationFile($orderTicket->locationId);
-                $pdfFiles[] = ['content' => self::generateEticket($orderTicket, $locationFiles), 'filename' => 'Departure Ticket.pdf'];
-            }
+            //$orderTicket->type == RETURNTICKET
+            $fileName = $orderTicket->type == DEPARTURETICKET ? 'Departure Ticket.pdf' : 'Return Ticket.pdf';
 
-            if ($orderTicket->type == RETURNTICKET) {
-                foreach(self::getLocationFile($orderTicket->locationId) as $value){
-                    $locationFiles[] = ['path' => $value['path'], 'filename' => $value['filename']];
-                }
-                //$locationFiles[] = self::getLocationFile($orderTicket->locationId);
-                $pdfFiles[] = ['content' => self::generateEticket($orderTicket, $locationFiles), 'filename' => 'Return Ticket.pdf'];                
+            foreach(self::getLocationFile($orderTicket->locationId) as $value){
+                $locationFiles[] = ['path' => $value['path'], 'filename' => $value['filename']];
             }
+            $pdfFiles[] = ['content' => self::generateEticket($orderTicket, $locationFiles), 'filename' => $fileName];
         }
 
         Mail::to($order->email)->send(new SendTicket($order, $pdfFiles));
