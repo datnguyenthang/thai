@@ -56,7 +56,7 @@
                                             <td>{{ $ride->departTime }}</td>
                                             <td>{{ $ride->returnTime }}</td>
                                             <td>{{ $ride->seatClass }}</td>
-                                            <th>฿{{ round($customerTypePrice) }} ({{ trans('backend.agentprice') }})</th>
+                                            <th>฿{{ round($customerTypePrice) }} ({{ $customerType[$customerTypeType] }})</th>
                                             <td>
                                                 <input type="radio" name="departRadio" 
                                                         value="{{ $ride->seatClassId }}"
@@ -109,7 +109,7 @@
                                                 <td>{{ $ride->departTime }}</td>
                                                 <td>{{ $ride->returnTime }}</td>
                                                 <td>{{ $ride->seatClass }}</td>
-                                                <th>฿{{ round($ride->price) }} ({{ trans('backend.onlineprice') }})</th>
+                                                <th>฿{{ round($ride->price) }} ({{ $customerType[$customerTypeType] }})</th>
                                                 <td>
                                                     <input type="radio" name="returnRadio"
                                                             value="{{ $ride->seatClassId }}"
