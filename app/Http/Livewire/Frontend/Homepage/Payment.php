@@ -40,7 +40,7 @@ class Payment extends Component
     public function mount() {
 
         $this->code = $this->folderName = Route::current()->parameter('code');
-        $this->order = OrderLib::getOrderDetailbByCode($this->code);
+        $this->order = OrderLib::getOrderDetailByCode($this->code);
 
         //redirect to homepage if there are no order match code found
         if (!$this->order) redirect('/');
@@ -54,7 +54,7 @@ class Payment extends Component
     }
 
     public function hydrate(){
-        $this->order = OrderLib::getOrderDetailbByCode($this->code);
+        $this->order = OrderLib::getOrderDetailByCode($this->code);
     }
 
     public function render() {
