@@ -5,11 +5,14 @@
             <div class="phone1">+66 631251421</div>
             <div class="social_wrapper">
                 <ul class="social clearfix">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.facebook.com/seudamgo" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.instagram.com/seudamgo/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+
+                    <!--
                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                     <li><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+                    -->
                 </ul>
             </div>
             <div class="lang1">
