@@ -31,6 +31,10 @@ class ManagerCreateCustomerType extends Component
         }
     }
 
+    public function updatedType(){
+        if ($this->type == ONLINEPRICE)  $this->price = 0;
+    }
+
     public function save()
     {
         $this->validate([

@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{ $customertype->name }}</td>
                     <td>{{ $customertype->code }}</td>
-                    <td>{{ $customertype->price }}</td>
+                    <td>{{ $customertype->type != ONLINEPRICE ? $customertype->price : '-' }}</td>
                     <td>{{ AGENTLOCAL[$customertype->type] }}</td>
                     <td>{{ CUSTOMERTYPESTATUS[$customertype->status] }}</td>
                     <td>
