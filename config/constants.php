@@ -110,6 +110,12 @@
     define('DEPARTURETICKET', 1);
     define('RETURNTICKET', 2);
 
+    //PAYMENT METHOD
+    define('PICKUPDROPOFFSTATUS', [
+        0 => "Open",
+        1 => "Close"
+    ]);
+
     define('PICKUPDONTUSESERVICE', 0);
     define('PICKUPANY', 1);
     define('PICKUPANYOTHER', 2);
@@ -164,6 +170,6 @@
                                 NOTPAID => "Not paid",
                                 PAID => "Paid",
                                 //PAIDBYCASH => "Paid by cash",
-                                //PAIDBYAGENT => "Paid by agent"
+                                PAIDBYAGENT => "Paid by agent"
                             ]);
     

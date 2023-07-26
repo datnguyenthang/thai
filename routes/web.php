@@ -78,6 +78,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/menu', App\Http\Livewire\Backend\Manager\ManagerListMenu::class)->name('managerMenu');
         Route::get('/menu/create/{menuId}', App\Http\Livewire\Backend\Manager\ManagerCreateMenu::class)->name('managerCreateMenu');
+
+        Route::get('/pkdp', App\Http\Livewire\Backend\Manager\ManagerListPickupDropoff::class)->name('managerPkdp');
+        Route::get('/pkdp/create/{pkdpId}', App\Http\Livewire\Backend\Manager\ManagerCreatePickupDropoff::class)->name('managerCreatePkdp');
     });
 
     /*------All Moderator Routes List------*/
