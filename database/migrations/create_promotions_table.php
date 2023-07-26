@@ -13,17 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('promotions', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('code');
-            $table->integer('quantity')->default(0)->nullable($value = true);
-            $table->decimal('discount', $precision = 5, $scale = 2);
-            $table->date('fromDate');
-            $table->date('toDate');
-            $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('promotions')){
+            Schema::create('promotions', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->string('code');
+                $table->integer('quantity')->default(0)->nullable($value = true);
+                $table->decimal('discount', $precision = 5, $scale = 2);
+                $table->date('fromDate');
+                $table->date('toDate');
+                $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
+                $table->timestamps();
+            });
+        }
     }
 
     /**

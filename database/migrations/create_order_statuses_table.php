@@ -13,20 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('order_statuses', function (Blueprint $table) {
-            $table->id();
-            $table->integer('orderId');
-            $table->integer('status');
-            $table->text('note')->nullable($value = true);
-            $table->dateTime('changeDate', $precision = 0);
-            $table->integer('userId')->nullable($value = true);
-            
-            $table->timestamps();
+        if(!Schema::hasTable('order_statuses')){
+            Schema::create('order_statuses', function (Blueprint $table) {
+                $table->id();
+                $table->integer('orderId');
+                $table->integer('status');
+                $table->text('note')->nullable($value = true);
+                $table->dateTime('changeDate', $precision = 0);
+                $table->integer('userId')->nullable($value = true);
+                
+                $table->timestamps();
 
-            //ADD Index
-            $table->index('orderId');
-            $table->index('userId');
-        });
+                //ADD Index
+                $table->index('orderId');
+                $table->index('userId');
+            });
+        }
     }
 
     /**

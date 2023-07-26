@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payment_methods', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->tinyInteger('isTransaction')->default(0)->nullable($value = true);
-            $table->tinyInteger('status')->default(0)->nullable($value = true); /*0: Active, 1: Inactive*/
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('payment_methods')){
+            Schema::create('payment_methods', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->text('description');
+                $table->tinyInteger('isTransaction')->default(0)->nullable($value = true);
+                $table->tinyInteger('status')->default(0)->nullable($value = true); /*0: Active, 1: Inactive*/
+                $table->timestamps();
+            });
+        }
     }
 
     /**

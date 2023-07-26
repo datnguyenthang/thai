@@ -70,6 +70,12 @@ return [
             'days' => 14,
         ],
 
+        'emails' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/emails/' . \Illuminate\Support\Str::uuid() . '.eml'),
+            'level' => 'debug',
+        ],
+
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),

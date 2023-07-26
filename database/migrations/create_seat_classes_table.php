@@ -13,18 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('seat_classes', function (Blueprint $table) {
-            $table->id();
-            $table->integer('rideId');
-            $table->string('name');
-            $table->integer('capacity');
-            $table->decimal('price', $precision = 10, $scale = 2);
-            $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
-            $table->timestamps();
+        if(!Schema::hasTable('seat_classes')){
+            Schema::create('seat_classes', function (Blueprint $table) {
+                $table->id();
+                $table->integer('rideId');
+                $table->string('name');
+                $table->integer('capacity');
+                $table->decimal('price', $precision = 10, $scale = 2);
+                $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
+                $table->timestamps();
 
-            //ADD Index
-            $table->index('rideId');
-        });
+                //ADD Index
+                $table->index('rideId');
+            });
+        }
     }
 
     /**

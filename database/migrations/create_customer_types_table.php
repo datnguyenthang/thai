@@ -13,15 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customer_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('code');
-            $table->tinyInteger('type')->default(0);
-            $table->integer('price');
-            $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
-            $table->timestamps();
-        });
+        if(!Schema::hasTable('customer_types')){
+            Schema::create('customer_types', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->string('code');
+                $table->tinyInteger('type')->default(0);
+                $table->integer('price');
+                $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
+                $table->timestamps();
+            });
+        }
     }
 
     /**
