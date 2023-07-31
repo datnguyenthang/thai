@@ -25,6 +25,16 @@ Route::get('/', App\Http\Livewire\Frontend\Homepage\Booking::class)->name('home'
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/login', '\App\Http\Controllers\Auth\LoginController@logout');
 
+//404 and 500 page
+
+Route::get('/404', function () {
+    return response()->view('errors.404', [], 404);
+});
+
+Route::get('/500', function () {
+    return response()->view('errors.500', [], 500);
+});
+
 //OLD PAGE
 Route::get('/timetable', '\App\Http\Controllers\Home\HomeController@timetable')->name('timetable');
 
