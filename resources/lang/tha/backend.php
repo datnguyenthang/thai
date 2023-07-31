@@ -192,12 +192,17 @@ return [
      'listmenu' => 'List Menu',
      'menustatus' => 'menustatus',
 
-     'cms' => 'Management Page',
-
      // PICK UP/DROP OFF
     'pkdp' => 'Pick up/Drop off',
     'pkdpname' => 'Pick up/Drop off Name',
     'createpkdp' => 'Create Pick up/Drop off',
     'listpkdp' => 'List Pick up/Drop off',
     'pkdpstatus' => 'status',
+
+    //CMS
+    'cms' => 'Management Page',
+    'createpage' => 'Create Page',
+    'pageid' => 'Page ID',
+    'pagename' => 'Name',
+    'pageslug' => 'Slug',
 ];
