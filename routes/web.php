@@ -61,7 +61,9 @@ Route::middleware(['auth'])->group(function () {
     /*------All Manager Routes List------*/
     Route::middleware(['user-access:manager'])->group(function () {
         Route::get('/manager', App\Http\Livewire\Backend\Manager\ManagerDashboard::class)->name('managerDashboard');
+
         Route::get('/managercms', App\Http\Livewire\Backend\Manager\ManagerCms::class)->name('managerCms');
+        Route::get('/cms/create/{pageId}', App\Http\Livewire\Backend\Manager\ManagerCreateCms::class)->name('managerCreateCms');
 
         Route::get('/managerorder', App\Http\Livewire\Backend\Manager\ManagerOrder::class)->name('managerOrder');
         Route::get('/managerorderlist', App\Http\Livewire\Backend\Manager\ManagerOrderlist::class)->name('managerOrderlist');

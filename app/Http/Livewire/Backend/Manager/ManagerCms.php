@@ -2,10 +2,8 @@
 
 namespace App\Http\Livewire\Backend\Manager;
 
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Route;
+use MSA\LaravelGrapes\Models\Page;
+use MSA\LaravelGrapes\Services\GenerateFrontEndService;
 
 use Livewire\Component;
 
@@ -15,17 +13,17 @@ class ManagerCms extends Component
     public $url;
 
     public function mount(){
-        $builderPrefix = Config::get('lg.builder_prefix');
+        $this->pages = Page::select('id', 'name', 'slug')->get();
+    }
 
-        $currentUrl = Request::root().'/';
+    public function deletePage($pageId){
+        $generate_frontend_service = new GenerateFrontEndService();
 
-        $this->url = $currentUrl .= $builderPrefix ? $builderPrefix.'/front-end-builder' : '/front-end-builder';
-   
-        $endpoint = $this->url.'/all-pages';
+        $page = Page::findOrFail($pageId);
+        $page->delete();
+        $generate_frontend_service->destroyPage($page);
 
-        $request = Request::create($endpoint, 'GET');
-        $response = Route::dispatch($request);
-        $this->pages = json_decode($response->getContent(), true);
+        session()->flash('success', 'Page deleted successfully!');
     }
 
     public function render(){

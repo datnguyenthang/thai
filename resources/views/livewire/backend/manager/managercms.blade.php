@@ -1,7 +1,7 @@
 <div>
     <h1>{{ trans('backend.listcustomertype') }}</h1>
     <input type="text" wire:model.debounce.500ms="search" placeholder="{{ trans('backend.search') }}...">
-    <a href="{{ $url.'/create-page' }}" class="btn btn-info">{{ trans('backend.createpage') }}</a>
+    <a href="/cms/create/0" class="btn btn-info">{{ trans('backend.createpage') }}</a>
     
     <table class="table datatable-table">
         <thead>
@@ -22,6 +22,12 @@
                         <td>
                             <a class="call-btn btn btn-outline-primary btn-floating btn-sm" href='{{ $url }}'>                     
                                 <i class="fa fa-eye"></i>
+                            </a>
+                            <a class="call-btn btn btn-outline-primary btn-floating btn-sm" href='/cms/create/{{ $page['id'] }}'>                     
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a class="call-btn btn btn-outline-primary btn-floating btn-sm" href="#" wire:click="deletePage({{ $page['id'] }})">
+                                <i class="fa fa-trash"></i>
                             </a>
                         </td>
                     </tr>
