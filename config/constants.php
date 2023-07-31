@@ -148,16 +148,16 @@
                                         1 => "Close"
                                     ]);
     define('BANKTRANSFER', 1);
-    define('CARD', 2);
-    define('CASH', 3);
+    define('CASH', 2);
+    define('CARD', 3);
     define('ALIPAY', 4);
     define('WECHAT', 5);
     define('PROMPTPAY', 6);
 
     define('PAYMENTMETHOD', [
                                 BANKTRANSFER => "Bank transfer",
-                                CARD => "Card",
-                                CASH => "Cash"
+                                CASH => "Cash",
+                                CARD => "Card"
                             ]
                         );
 

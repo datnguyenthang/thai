@@ -122,19 +122,23 @@
                             </div>
 
                             <!-- Alipay payment -->
+                            {{--
                             <div id="alipay" class="tab-pane fade pt-3">
                                 <livewire:frontend.homepage.payment.alipay :orderId="$order->id" />
                             </div>
-
+                            --}}
                             <!-- Wechat payment -->
+                            {{--
                             <div id="wechat" class="tab-pane fade pt-3">
                                 <livewire:frontend.homepage.payment.wechat :orderId="$order->id" />
                             </div>
-
+                            --}}
                             <!-- Promptpay payment -->
+                            {{--
                             <div id="promptpay" class="tab-pane fade pt-3">
                                 <livewire:frontend.homepage.payment.promptpay :orderId="$order->id" />
                             </div>
+                            --}}
                         </div>
                     </div>
                 </div>
