@@ -103,7 +103,7 @@
                                 <i class="fas fa-minus"></i>
                               </button>
                           </span>
-                          <input type="text" wire:model.lazy="adults" id="adults" name="adults" class="form-control input-number" min="1" max="100" required/>
+                          <input type="text" wire:model.lazy="adults" id="adults" name="adults" class="form-control input-number text-center" min="1" max="100" required/>
                           <span class="input-group-btn">
                               <button type="button" x-on:click="adults++" class="btn bg_own_color btn-number">
                                 <i class="fas fa-plus"></i>
@@ -132,7 +132,7 @@
                                 <i class="fas fa-minus"></i>
                               </button>
                           </span>
-                          <input type="text" wire:model.lazy ="children" id="children" name="children" class="form-control input-number" min="1" max="100" required/>
+                          <input type="text" wire:model.lazy ="children" id="children" name="children" class="form-control input-number text-center" min="1" max="100" required/>
                           <span class="input-group-btn">
                               <button type="button" x-on:click="children++" class="btn bg_own_color btn-number">
                                 <i class="fas fa-plus"></i>

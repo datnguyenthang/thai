@@ -174,7 +174,7 @@ transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -webkit-trans
 /* ============================= sl1 end ====================== */
 
 /* ============================= tabs end ====================== */
-#front_tabs{position: relative; margin-top: -176px;}
+/* #front_tabs{position: relative; margin-top: -176px;} */
 .tabs_wrapper{position: relative;}
 
 .tabs{padding: 0; background: none; border-radius: 0; border: none; font-family: inherit;}
@@ -478,7 +478,7 @@ transition: background 0.3s ease-out; -moz-transition: background 0.3s ease-out;
 
 
 
-#slider_wrapper{padding-bottom: 180px; padding-top: 208px; background: url(../images/slider.jpg) center center no-repeat; background-size: contain;}
+#slider_wrapper{margin-bottom: -100px; padding-bottom: 180px; padding-top: 208px; background: url(../images/slider.jpg) center center no-repeat; background-size: contain;}
 
 #why1{position: relative; padding-top: 20px; padding-bottom: 30px;}
 
