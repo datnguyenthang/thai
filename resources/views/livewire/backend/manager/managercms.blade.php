@@ -1,4 +1,12 @@
 <div>
+    <div>
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+    </div>
+
     <h1>{{ trans('backend.listcustomertype') }}</h1>
     <input type="text" wire:model.debounce.500ms="search" placeholder="{{ trans('backend.search') }}...">
     <a href="/cms/create/0" class="btn btn-info">{{ trans('backend.createpage') }}</a>
@@ -20,7 +28,7 @@
                         <td>{{ $page['name'] }}</td>
                         <td>{{ $page['slug'] }}</td>
                         <td>
-                            <a class="call-btn btn btn-outline-primary btn-floating btn-sm" target="_blank" href='cms/front-end-builder/page-content/{{ $page['id'] }}'>
+                            <a class="call-btn btn btn-outline-primary btn-floating btn-sm" target="_blank" href='/cms/front-end-builder/page-content/{{ $page['id'] }}'>
                                 <i class="fas fa-pencil-ruler"></i>
                             </a>
                             <a class="call-btn btn btn-outline-primary btn-floating btn-sm" target="_blank" href='/{{ $page['slug'] }}'>                     
