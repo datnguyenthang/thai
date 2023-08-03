@@ -1,13 +1,13 @@
 <div>
     <div>
-        @if (session()->has('message'))
+        @if (session()->has('success'))
             <div class="alert alert-success">
-                {{ session('message') }}
+                {{ session('success') }}
             </div>
         @endif
     </div>
 
-    <h1>{{ trans('backend.listcustomertype') }}</h1>
+    <h1>{{ trans('backend.cms') }}</h1>
     <input type="text" wire:model.debounce.500ms="search" placeholder="{{ trans('backend.search') }}...">
     <a href="/cms/create/0" class="btn btn-info">{{ trans('backend.createpage') }}</a>
     
