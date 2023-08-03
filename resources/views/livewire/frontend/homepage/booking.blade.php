@@ -144,7 +144,7 @@
 
                   </div>
                   <div class="row">
-                    <div class="col-lg-1 col-sm-12">
+                    <div class="col-lg-12 col-sm-12">
                       <div class="button1_wrapper">
                         <button type="submit" class="btn-default btn-form1-submit">Search</button>
                       </div>
