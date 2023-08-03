@@ -25,7 +25,7 @@ class ManagerCms extends Component
 
         $this->pages = Page::select('id', 'name', 'slug')->get();
 
-        session()->flash('success', 'Page deleted successfully!');
+        session()->flash('deletePage', 'Page deleted successfully!');
     }
 
     public function render(){

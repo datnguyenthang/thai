@@ -1,8 +1,8 @@
 <div>
     <div>
-        @if (session()->has('success'))
+        @if (session()->has('deletePage'))
             <div class="alert alert-success">
-                {{ session('success') }}
+                {{ session('deletePage') }}
             </div>
         @endif
     </div>
