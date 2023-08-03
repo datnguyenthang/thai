@@ -20,10 +20,10 @@
                         <td>{{ $page['name'] }}</td>
                         <td>{{ $page['slug'] }}</td>
                         <td>
-                            <a class="call-btn btn btn-outline-primary btn-floating btn-sm" href='cms/front-end-builder/page-content/{{ $page['id'] }}'>
+                            <a class="call-btn btn btn-outline-primary btn-floating btn-sm" target="_blank" href='cms/front-end-builder/page-content/{{ $page['id'] }}'>
                                 <i class="fas fa-pencil-ruler"></i>
                             </a>
-                            <a class="call-btn btn btn-outline-primary btn-floating btn-sm" href='/{{ $page['slug'] }}'>                     
+                            <a class="call-btn btn btn-outline-primary btn-floating btn-sm" target="_blank" href='/{{ $page['slug'] }}'>                     
                                 <i class="fa fa-eye"></i>
                             </a>
                             <a class="call-btn btn btn-outline-primary btn-floating btn-sm" href='/cms/create/{{ $page['id'] }}'>                     
