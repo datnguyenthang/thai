@@ -23,9 +23,7 @@ class ManagerCms extends Component
         $page->delete();
         $generate_frontend_service->destroyPage($page);
 
-        $this->pages = array_filter($this->pages, function ($page) use ($pageId) {
-            return $page['id'] !== $pageId;
-        });
+        $this->pages = Page::select('id', 'name', 'slug')->get();
 
         session()->flash('success', 'Page deleted successfully!');
     }
