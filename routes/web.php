@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\Moderator\ModeratorController;
 use Illuminate\Support\Facades\DB;
+use MSA\LaravelGrapes\Controllers\FrontendController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
