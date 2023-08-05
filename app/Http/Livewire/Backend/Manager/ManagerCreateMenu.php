@@ -27,7 +27,7 @@ class ManagerCreateMenu extends Component
             $menu = MenuItem::find($menuId);
 
             $this->name = $menu->name;
-            $this->url = $this->getControllerMethodName($menu->url);
+            $this->url = $menu->url;
             $this->parent_id = $menu->parent_id;
             $this->status = $menu->status;
         }
@@ -56,7 +56,7 @@ class ManagerCreateMenu extends Component
 
             $menu = MenuItem::find($this->menuId);
             $menu->name = $this->name;
-            $menu->url = $this->url;
+            $menu->url = $this->getControllerMethodName($this->url);
             $menu->parent_id = intVal($this->parent_id);
             $menu->status = intVal($this->status);
             $menu->save();
@@ -67,7 +67,7 @@ class ManagerCreateMenu extends Component
 
             MenuItem::create([
                 'name' => $this->name,
-                'url' => $this->url,
+                'url' => $this->getControllerMethodName($this->url),
                 'parent_id' => isset($this->parent_id) ? intVal($this->parent_id) : null,
                 'status' => intVal($this->status)
             ]);
