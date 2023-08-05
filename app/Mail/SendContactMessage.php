@@ -42,7 +42,7 @@ class SendContactMessage extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Seudamgo CONTACT MESSAGE',
+            subject: 'SEUDAMGO - CONTACT MESSAGE',
         );
     }
 

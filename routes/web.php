@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\Moderator\ModeratorController;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 */
-Route::get('/', App\Http\Livewire\Frontend\Homepage\Booking::class)->name('home');
+
+$page = DB::table('menu_items')->where('name', 'home')->where('status', ACTIVE)->first();
+
+if ($page && isset($page->url)) {
+    redirect($page->url);
+} else {
+    Route::get('/', App\Http\Livewire\Frontend\Homepage\Booking::class)->name('home');
+}
+
+
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/login', '\App\Http\Controllers\Auth\LoginController@logout');
 

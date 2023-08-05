@@ -9,17 +9,19 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SendTicket extends Mailable
+class SendCancelationUnpaid extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $name;
+    public $email;
     public $order;
-    public $pdfFiles;
 
-    public function __construct($order, array $pdfFiles)
+    public function __construct($name, $email, $order)
     {
-        $this->order = $order;
-        $this->pdfFiles = $pdfFiles;
+        $this->name = $name;
+        $this->email = $email;
+        $this->order  = $order;
     }
     /**
      * Create a new message instance.
@@ -28,12 +30,8 @@ class SendTicket extends Mailable
      */
     public function build()
     {
-        foreach ($this->pdfFiles as $pdfFile) {
-            $this->attachData($pdfFile['content'], $pdfFile['filename']);
-        }
-
-        return $this->view('emails.successTicket')
-                    ->with(['order' => $this->order]);
+        return $this->view('emails.sendCancelationUnpaid')
+                    ->with(['name' => $this->name, 'email' => $this->email, 'order' => $this->order]);
     }
 
     /**
@@ -44,7 +42,7 @@ class SendTicket extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'SEUDAMGO - CONFIRMATION BOOKING',
+            subject: 'SEUDAMGO - CANCELATION',
         );
     }
 
@@ -56,7 +54,7 @@ class SendTicket extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.successTicket',
+            view: 'emails.sendCancelationUnpaid',
         );
     }
 

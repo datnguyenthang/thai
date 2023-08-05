@@ -183,7 +183,7 @@ transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -webkit-trans
 .tabs_tabs .ui-tabs-nav{padding: 0; display: inline-block; vertical-align: top; font-family: 'Raleway'; font-weight: 700; font-size: 14px; line-height: 20px; text-transform: none; border: none; border-radius: 0; background: none; background: #9d474a;}
 .tabs_tabs .ui-tabs-nav li{margin: 0 0 0 1px!important; border: none; background: none; font-weight: 700;}
 .tabs_tabs .ui-tabs-nav li:first-child {margin-left: 0!important;}
-.tabs_tabs .ui-tabs-nav li.ui-tabs-active{margin: 0;padding: 0;}
+.tabs_tabs .ui-tabs-nav li.ui-tabs-active{margin: 0;padding: 0;box-shadow: 0px -3px 4px -1px #b79b9b;z-index: 9999;}
 .tabs_tabs .ui-tabs-nav .ui-tabs-anchor{color: #ffffff; padding: 13px 30px 14px 60px; background: #9d474a; float: none; display: block;}
 .tabs_tabs .ui-tabs-nav .ui-tabs-anchor:focus{outline: none;}
 .tabs_tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor{ background-color: #fafafa; color: #9d474a;}
@@ -208,7 +208,7 @@ transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -webkit-trans
 .tabs2 .tabs_content .ui-tabs-panel.tab-hidden{position: absolute; width: 100%; clip: rect(1px 1px 1px 1px); clip: rect(1px, 1px, 1px, 1px); overflow: hidden; height: 1px;}
 
 .form1{display: block; background: #fafafa;padding: 30px; border-bottom: 3px solid #9d474a; margin-bottom: 20px;}
-.front .form1{margin-bottom: 0;}
+.front .form1{margin-bottom: 0; box-shadow: 0px 0px 5px 1px #b79b9b; -moz-box-shadow: 0px 0px 5px 1px #b79b9b; -webkit-box-shadow: 0px 0px 5px 1px #b79b9b;}
 
 .form1 label{font-family: 'Raleway'; font-size: 14px; color: #636363; line-height: 1; padding-bottom: 10px; /*display: block;*/ font-weight: 600; margin-bottom: 0; white-space: nowrap;}
 
