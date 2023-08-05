@@ -34,7 +34,7 @@ class ManagerCreateMenu extends Component
     {
         $this->validate([
             'name' => 'required|unique:menu_items,name,' . $this->menuId,
-            'url' => 'required|url',
+            'url' => 'required',
         ]);
 
         if ($this->menuId > 0){ // update location
