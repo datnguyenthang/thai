@@ -11,7 +11,12 @@
 
         <div class="form-outline mb-4">
             <label class="form-label">{{ trans('backend.menuurl') }}</label>
-            <input type="text" class="form-control w-50" wire:model="url">
+            <select id="parent_id" class="form-select w-50" wire:model="url">
+                <option value=""></option>
+                @foreach($pageList as $value)
+                    <option value="{{ $value->slug }}">{{ $value->name }}</option>
+                @endforeach
+            </select>
             @error('url') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 

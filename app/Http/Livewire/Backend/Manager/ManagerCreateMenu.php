@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Backend\Manager;
 
 use Livewire\Component;
 use App\Models\MenuItem;
+use MSA\LaravelGrapes\Models\Page;
 
 class ManagerCreateMenu extends Component
 {
@@ -14,20 +15,34 @@ class ManagerCreateMenu extends Component
     public $status;
 
     public $menuList;
+    public $pageList;
 
     public function mount($menuId = 0){
         $this->menuId = $menuId;        
         $this->status = 0;
         $this->menuList = MenuItem::get()->except($menuId);
+        $this->pageList = Page::get();
         
         if ($menuId > 0) {
             $menu = MenuItem::find($menuId);
 
             $this->name = $menu->name;
-            $this->url = $menu->url;
+            $this->url = $this->getControllerMethodName($menu->url);
             $this->parent_id = $menu->parent_id;
             $this->status = $menu->status;
         }
+    }
+
+    public function getControllerMethodName($slug){
+        $method = $slug === '/' ? 'home-page' : $slug;
+
+        $slug_remove_dash = explode('-', $method);
+
+        foreach ($slug_remove_dash as $key => $value) {
+            $slug_remove_dash[$key] = ucwords($value);
+        }
+
+        return $method_name = implode($slug_remove_dash);
     }
 
     public function save()
