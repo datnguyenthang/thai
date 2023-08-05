@@ -21,8 +21,12 @@ class ManagerCreateMenu extends Component
         $this->menuId = $menuId;        
         $this->status = 0;
         $this->menuList = MenuItem::get()->except($menuId);
-        $this->pageList = Page::get();
-        
+
+        $this->pageList = Page::get()->map(function ($page) {
+            $page->slug = $this->getControllerMethodName($page->slug);
+            return $page;
+        });
+
         if ($menuId > 0) {
             $menu = MenuItem::find($menuId);
 

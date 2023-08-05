@@ -30,7 +30,7 @@
             </select>
             @error('parent_id') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
-        
+
         <div class="form-outline mt-3 mb-4">
             <label class="form-label">{{ trans('backend.locationstatus') }}</label>
             <select id="status" class="form-select w-50" wire:model="status">
