@@ -26,7 +26,7 @@ Route::get('/', function () {
 $page = DB::table('menu_items')->where('name', 'home')->where('status', ACTIVE)->first();
 
 if ($page && isset($page->url)) {
-    redirect($page->url);
+    Route::get('/', $page->url)->name('home');
 } else {
     Route::get('/', App\Http\Livewire\Frontend\Homepage\Booking::class)->name('home');
 }
