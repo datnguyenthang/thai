@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\Moderator\ModeratorController;
 use Illuminate\Support\Facades\DB;
-use MSA\LaravelGrapes\Controllers\FrontendController;
+use MSA\LaravelGrapes\Http\Controllers\FrontendController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +27,7 @@ Route::get('/', function () {
 $page = DB::table('menu_items')->where('name', 'home')->where('status', ACTIVE)->first();
 
 if ($page && isset($page->url)) {
-    Route::get('/', [FrontendController::class, '".$page->url."'])->name('home');
+    Route::get('/', [FrontendController::class, ''.$page->url.''])->name('home');
 } else {
     Route::get('/', App\Http\Livewire\Frontend\Homepage\Booking::class)->name('home');
 }
