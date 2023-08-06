@@ -28,8 +28,8 @@ $page = DB::table('menu_items')
 if ($page) {
     if($page->url) Route::get('/', '/'.$page->url.'')->name('home');
 
-    $method_name = implode(' ', array_map('ucwords', explode('-', $page->slug)));
-    if($page->page_id) Route::get('/', [FrontendController::class, ''.$method_name.''])->name('home');
+    $methodName = implode('', array_map('ucwords', explode('-', $page->slug)));
+    if($page->page_id) Route::get('/', [FrontendController::class, ''.$methodName.''])->name('home');
 } else {
     Route::get('/', App\Http\Livewire\Frontend\Homepage\Booking::class)->name('home');
 }
