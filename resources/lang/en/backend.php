@@ -190,7 +190,10 @@ return [
     'parentname' => 'Parent Menu',
     'createmenu' => 'Create Menu',
     'listmenu' => 'List Menu',
-    'menustatus' => 'menustatus',
+    'menustatus' => 'Status',
+    'menupageid' => 'CMS page',
+    'menuopennewtab' => 'Is open new tab?',
+    'menusortorder' => 'Sort Order',
 
     // PICK UP/DROP OFF
     'pkdp' => 'Pick up/Drop off',

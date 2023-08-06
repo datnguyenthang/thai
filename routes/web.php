@@ -18,16 +18,18 @@ use MSA\LaravelGrapes\Http\Controllers\FrontendController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
 
-$page = DB::table('menu_items')->where('name', 'home')->where('status', ACTIVE)->first();
+$page = DB::table('menu_items')
+    ->join('pages', 'menu_items.page_id', '=', 'pages.id')
+    ->where('menu_items.name', '=', 'home')
+    ->where('menu_items.status', ACTIVE)
+    ->first();
 
-if ($page && isset($page->url)) {
-    Route::get('/', [FrontendController::class, ''.$page->url.''])->name('home');
+if ($page) {
+    if($page->url) Route::get('/', '/'.$page->url.'')->name('home');
+
+    $method_name = implode(' ', array_map('ucwords', explode('-', $page->slug)));
+    if($page->page_id) Route::get('/', [FrontendController::class, ''.$method_name.''])->name('home');
 } else {
     Route::get('/', App\Http\Livewire\Frontend\Homepage\Booking::class)->name('home');
 }

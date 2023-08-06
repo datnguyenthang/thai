@@ -59,13 +59,11 @@
              <span>{{ trans('backend.customerType') }}</span>
           </a>
 
-          <!-- 
           <a href="{{ route('managerMenu') }}" 
              class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerMenu' ? 'active' : '' }}">
              <i class="fas fa-bars fa-fw me-3"></i>
              <span>{{ trans('backend.menu') }}</span>
           </a>
-          -->
 
           <a href="{{ route('managerPkdp') }}" 
              class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerPkdp' ? 'active' : '' }}">

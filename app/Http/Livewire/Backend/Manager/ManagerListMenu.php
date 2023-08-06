@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Backend\Manager;
 
 use Livewire\Component;
 use App\Models\MenuItem;
+use MSA\LaravelGrapes\Models\Page;
 
 class ManagerListMenu extends Component
 {
@@ -16,9 +17,11 @@ class ManagerListMenu extends Component
     public $name;
 
     public $menuList;
+    public $pageList;
 
     public function mount(){
         $this->menuList = MenuItem::pluck('name', 'id');
+        $this->pageList = Page::pluck('name', 'id');
     }
 
     public function createMenu($menuId = 0){

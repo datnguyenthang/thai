@@ -14,7 +14,7 @@ class MenuItem extends Model
      * @return response()
      */
     protected $fillable = [
-        'name', 'url', 'parent_id', 'status'
+        'name', 'url', 'page_id', 'parent_id', 'isOpenNewTab', 'status'
     ];
 
     public function subMenus(){

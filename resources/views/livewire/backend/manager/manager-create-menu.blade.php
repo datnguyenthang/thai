@@ -11,13 +11,19 @@
 
         <div class="form-outline mb-4">
             <label class="form-label">{{ trans('backend.menuurl') }}</label>
-            <select id="parent_id" class="form-select w-50" wire:model="url">
+            <input type="text" class="form-control w-50" wire:model="url"  @if($page_id) disabled @endif>
+            @error('url') <span class="text-danger error">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="form-outline mb-4">
+            <label class="form-label">{{ trans('backend.menupageid') }}</label>
+            <select id="page_id" class="form-select w-50" wire:model="page_id" @if($url) disabled @endif>
                 <option value=""></option>
                 @foreach($pageList as $value)
-                    <option value="{{ $value->slug }}">{{ $value->name }}</option>
+                    <option value="{{ $value->id }}">{{ $value->name }}</option>
                 @endforeach
             </select>
-            @error('url') <span class="text-danger error">{{ $message }}</span> @enderror
+            @error('page_id') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
@@ -29,6 +35,16 @@
                 @endforeach
             </select>
             @error('parent_id') <span class="text-danger error">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="form-outline mb-4">
+            <label class="form-label">{{ trans('backend.menuopennewtab') }}</label>
+            <input type="checkbox" class="form-checkbox ml-4" wire:model.defer="isOpenNewTab" value="1" @if($isOpenNewTab) checked @endif>
+        </div>
+
+        <div class="form-outline mb-4">
+            <label class="form-label">{{ trans('backend.menusortorder') }}</label>
+            <input type="number" class="form-control form-imput w-50" wire:model="sortOrder" min="0" value="0">
         </div>
 
         <div class="form-outline mt-3 mb-4">

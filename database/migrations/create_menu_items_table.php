@@ -18,7 +18,10 @@ return new class extends Migration
                 $table->id();
                 $table->string('name');
                 $table->string('url');
+                $table->unsignedBigInteger('page_id')->nullable();
                 $table->unsignedBigInteger('parent_id')->nullable();
+                $table->tinyInteger('isOpenNewTab')->default(0);
+                $table->unsignedBigInteger('sortOrder')->nullable();
                 $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
                 $table->timestamps();
 

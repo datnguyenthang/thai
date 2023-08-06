@@ -184,13 +184,16 @@ return [
     'paymentmethodstatus' => 'Payment status',
 
      //MENU
-     'menu' => 'Menu',
-     'menuname' => 'Name',
-     'menuurl' => 'Url',
-     'parentname' => 'Parent Menu',
-     'createmenu' => 'Create Menu',
-     'listmenu' => 'List Menu',
-     'menustatus' => 'menustatus',
+    'menu' => 'Menu',
+    'menuname' => 'Name',
+    'menuurl' => 'Url',
+    'parentname' => 'Parent Menu',
+    'createmenu' => 'Create Menu',
+    'listmenu' => 'List Menu',
+    'menustatus' => 'Status',
+    'menupageid' => 'CMS page',
+    'menuopennewtab' => 'Is open new tab?',
+    'menusortorder' => 'Sort Order',
 
      // PICK UP/DROP OFF
     'pkdp' => 'Pick up/Drop off',
