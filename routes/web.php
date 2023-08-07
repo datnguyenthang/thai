@@ -34,16 +34,14 @@ if ($page) {
     Route::get('/', App\Http\Livewire\Frontend\Homepage\Booking::class)->name('home');
 }
 
-
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/login', '\App\Http\Controllers\Auth\LoginController@logout');
 
-//404 and 500 page
-
+//404 page
 Route::get('/404', function () {
     return response()->view('errors.404', [], 404);
 });
-
+//500 page
 Route::get('/500', function () {
     return response()->view('errors.500', [], 500);
 });
@@ -65,6 +63,9 @@ Route::get('/contactus', App\Http\Livewire\Frontend\Contactus::class)->name('con
 
 
 Route::middleware(['auth'])->group(function () {
+    //User profile
+    Route::get('/user/profile',  App\Http\Livewire\Component\User\Profile::class)->name('userprofile');
+    Route::get('/user/edit',  App\Http\Livewire\Component\User\Edit::class)->name('useredit');
 
     /*---All Admin Routes List----*/
     Route::middleware(['user-access:admin'])->group(function () {

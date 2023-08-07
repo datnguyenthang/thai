@@ -28,8 +28,12 @@
                     <td>{{ MENUSTATUS[$menu->status] }}</td>
                     <td>
                         <button class="call-btn btn btn-outline-primary btn-floating btn-sm"
-                        wire:click="createMenu({{ $menu->id }})">
-                            <i class="fa fa-edit"></i>
+                            wire:click="createMenu({{ $menu->id }})">
+                                <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="call-btn btn btn-danger btn-floating btn-sm"
+                            wire:click="deleteMenu({{ $menu->id }})">
+                                <i class="fa fa-trash"></i>
                         </button>
                     </td>
                 </tr>

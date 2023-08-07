@@ -37,6 +37,13 @@ class ManagerListMenu extends Component
         }
     }
 
+    public function deleteMenu($menuId){
+        $menu = MenuItem::findOrFail($menuId);
+        $menu->delete();
+
+        session()->flash('success', 'Menu deleted successfully!');
+    }
+
     public function render(){
         $menus = MenuItem::query()
             ->when($this->search, function ($query) {
