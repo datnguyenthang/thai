@@ -368,3 +368,7 @@ footer {
 .profile-list strong {
   font-weight: bold;
 }
+.list-group-item.active {
+  background-color: #9d474a;
+  border-color: #9d474a;
+}

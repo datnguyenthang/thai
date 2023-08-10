@@ -23,6 +23,6 @@
             <label class="form-label">Confirm New Password:</label>
             <input type="password" wire:model="password_confirmation" class="form-control w-50">
         </div>
-        <button type="submit">Update Profile</button>
+        <button type="submit" class="btn btn-success">Update Profile</button>
     </form>
 </div>

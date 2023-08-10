@@ -14,7 +14,16 @@ class Profile extends Component
         $user = auth()->user();
         $listAgent = Agent::pluck('name', 'id');
 
-        return view('livewire.component.user.profile', compact('user', 'listAgent'))
-                ->layout('manager.layouts.app');
+        switch ($user->role) {
+            case 'manager':
+                return view('livewire.component.user.profile', compact('user', 'listAgent'))->layout('manager.layouts.app');
+                break;
+            case 'moderator':
+                return view('livewire.component.user.profile', compact('user', 'listAgent'))->layout('moderator.layouts.app');
+                break;
+            case 'agent':
+                return view('livewire.component.user.profile', compact('user', 'listAgent'))->layout('agent.layouts.app');
+                break;
+        }
     }
 }

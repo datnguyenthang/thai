@@ -41,7 +41,18 @@ class Edit extends Component
     }
 
     public function render() {
-        return view('livewire.component.user.edit')
-                ->layout('manager.layouts.app');
+        $user = auth()->user();
+
+        switch ($user->role) {
+            case 'manager':
+                return view('livewire.component.user.edit')->layout('manager.layouts.app');
+                break;
+            case 'moderator':
+                return view('livewire.component.user.edit')->layout('moderator.layouts.app');
+                break;
+            case 'agent':
+                return view('livewire.component.user.edit')->layout('agent.layouts.app');
+                break;
+        }
     }
 }

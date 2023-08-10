@@ -97,19 +97,26 @@
                                         <i class="fas fa-mobile-alt mr-2"></i> {{ trans('messages.banktranfer') }}
                                     </a> 
                                 </li>
+                                    <!--
+                                    <li class="nav-item">
+                                        <a data-bs-toggle="pill" href="#alipay" class="alipay nav-link">
+                                            <i class="fab fa-alipay mr-2"></i> {{ trans('messages.alipay') }}
+                                        </a> 
+                                    </li>
+                                    <li class="nav-item">
+                                        <a data-bs-toggle="pill" href="#wechat" class="wechat nav-link">
+                                            <i class="fab fa-wechat mr-2"></i> {{ trans('messages.wechat') }}
+                                        </a> 
+                                    </li>
+                                    <li class="nav-item">
+                                        <a data-bs-toggle="pill" href="#promptpay" class="promptpay nav-link">
+                                            <i class="fab fa-promptpay mr-2"></i> {{ trans('messages.promptpay') }}
+                                        </a> 
+                                    </li>
+                                    -->
                                 <li class="nav-item">
-                                    <a data-bs-toggle="pill" href="#alipay" class="alipay nav-link">
-                                        <i class="fab fa-alipay mr-2"></i> {{ trans('messages.alipay') }}
-                                    </a> 
-                                </li>
-                                <li class="nav-item">
-                                    <a data-bs-toggle="pill" href="#wechat" class="wechat nav-link">
-                                        <i class="fab fa-wechat mr-2"></i> {{ trans('messages.wechat') }}
-                                    </a> 
-                                </li>
-                                <li class="nav-item">
-                                    <a data-bs-toggle="pill" href="#promptpay" class="promptpay nav-link">
-                                        <i class="fab fa-promptpay mr-2"></i> {{ trans('messages.promptpay') }}
+                                    <a data-bs-toggle="pill" href="#omisepay" class="omisepay nav-link">
+                                        <i class="fas fa-money-check-alt"></i> {{ trans('messages.paymentonline') }}
                                     </a> 
                                 </li>  
                             </ul>
@@ -120,7 +127,6 @@
                             <div id="bank-tranfer" class="tab-pane fade show active pt-3">
                                 <livewire:frontend.homepage.payment.banktransfer :orderId="$order->id" />
                             </div>
-
                             <!-- Alipay payment -->
                             {{--
                             <div id="alipay" class="tab-pane fade pt-3">
@@ -139,6 +145,9 @@
                                 <livewire:frontend.homepage.payment.promptpay :orderId="$order->id" />
                             </div>
                             --}}
+                            <div id="omisepay" class="tab-pane fade pt-3">
+                                <livewire:frontend.homepage.payment.omisepay :orderId="$order->id" />
+                            </div>
                         </div>
                     </div>
                 </div>

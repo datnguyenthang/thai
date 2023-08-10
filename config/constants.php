@@ -1,6 +1,7 @@
 <?php
     //LANGUAGE
     define('LANGUAGES', ['en', 'tha']);
+    define('OMISE_API_VERSION', '2020-11-25');
     define('OMISE_PUBLIC_KEY', env('OMISE_PUBLIC_KEY'));
     define('OMISE_SECRET_KEY', env('OMISE_SECRET_KEY'));
 
@@ -128,6 +129,7 @@
     define('NEWORDER', 0);
     define('UPPLOADTRANSFER', 1);
     define('RESERVATION', 2);
+    define('PAIDORDER', 3);
     define('CANCELDORDER', 6);
     define('DECLINEDORDER', 7);
     define('CONFIRMEDORDER', 8);

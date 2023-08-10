@@ -181,6 +181,16 @@ return [
     'alipay' => 'Alipay',
     'wechat' => 'Wechat',
     'promptpay' => 'Promptpay',
+    'paymentonline' => 'Payment Online',
+    'omiseinfomation'=> '<div class="payment-method-guide">
+                            <p><strong>How to Make a Payment:</strong></p>
+                            <ul>
+                                <li><strong>Choose Method:</strong> Select your preferred payment method during checkout.</li>
+                                <li><strong>Enter Details:</strong> Provide the necessary payment information securely.</li>
+                                <li><strong>Confirm Payment:</strong> Review your details and confirm the payment.</li>
+                                <li><strong>Confirmation:</strong> Receive a confirmation message and receipt upon successful payment.</li>
+                            </ul>
+                        </div> ',
 
     //MODERATOR
     'nametrip' => 'Trip Name',
