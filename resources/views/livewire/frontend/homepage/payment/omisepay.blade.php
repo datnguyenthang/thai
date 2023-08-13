@@ -19,7 +19,7 @@
                 amount: {{ $amount }},
                 currency: "THB",
                 defaultPaymentMethod: "credit_card",
-                onCreateTokenSuccess: (nonce) => {
+                onCreateTokenSuccess: (nonce) => { console.log(nonce);
                     if (nonce.startsWith("tokn_")) {
                         form.omiseToken.value = nonce;
                         //$set('token', nonce);
