@@ -29,7 +29,7 @@ class LogSentMessage
      * @return void
      */
     public function handle(MessageSent  $event){
-        if ($event->data['order']['code']) {
+        if (isset($event->data['order']['code'])) {
             Storage::disk('emails')->put(
                 sprintf('%s_%s_%s.eml', $event->data['order']['code'], now()->format('Y-m-d H-i-s'), ORDERSTATUS[$event->data['order']['status']]),
                 $event->message->toString()
