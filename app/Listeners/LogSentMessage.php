@@ -29,10 +29,17 @@ class LogSentMessage
      * @return void
      */
     public function handle(MessageSent  $event){
-        //$messageId = $event->data['__laravel_notification_id'] ?? Str::uuid();
-        Storage::disk('emails')->put(
-            sprintf('%s_%s_%s.eml', $event->data['order']['code'], now()->format('Y-m-d H-i-s'), ORDERSTATUS[$event->data['order']['status']]),
-            $event->message->toString()
-        );
+        if ($event->data['order']['code']) {
+            Storage::disk('emails')->put(
+                sprintf('%s_%s_%s.eml', $event->data['order']['code'], now()->format('Y-m-d H-i-s'), ORDERSTATUS[$event->data['order']['status']]),
+                $event->message->toString()
+            );
+        } else {
+            $messageId = $event->data['__laravel_notification_id'] ?? Str::uuid();
+            Storage::disk('emails')->put(
+                sprintf('%s_%s.eml', $messageId, now()->format('Y-m-d H-i-s')),
+                $event->message->toString()
+            );
+        }
     }
 }

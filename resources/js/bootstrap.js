@@ -1,8 +1,10 @@
 import _ from 'lodash';
 window._ = _;
 
+//load bootstrap library into app
 import 'bootstrap';
-
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -18,6 +20,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import $ from 'jquery';
 window.jQuery = $;
 window.$ = $;
+
+
 
 //loading Alpine library into app
 import Alpine from 'alpinejs';

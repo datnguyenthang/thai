@@ -28,15 +28,14 @@ class Omisepay extends Component
     }
 
     public function pay(){
-
         // Create a charge
-        //try {
+        try {
             $charge = \OmiseCharge::create([
                 'amount' => $this->amount * 100, // Amount in cents
                 'currency' => 'THB', // Change to your desired currency
                 'card' => $this->token,
             ]);
-dd($charge);
+
             if ($charge['status'] == 'successful'){
                 //Update order status
                 OrderStatus::create([
@@ -54,16 +53,15 @@ dd($charge);
                 $order->transactionDate = date('Y-m-d H:i:s', strtotime($charge['created_at']));
 
                 $order->save();
-                
+
                 //dispatch event to Payment component
-                
                 $this->emitUp('updatePayment', UPPLOADTRANSFER);
             }
 
-        //} catch (\Exception $e) {
+        } catch (\Exception $e) {
             // Handle payment error
             // Display an error message to the user
-        //}
+        }
     }
 
     public function render(){

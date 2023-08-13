@@ -92,40 +92,48 @@
                         <div class="shadow-sm pt-4 pl-2 pr-2 pb-2">
                             <!-- Credit card form tabs -->
                             <ul role="tablist" class="nav bg-light nav-tabs nav-pills rounded nav-fill mb-3">
-                                <li class="nav-item">
-                                    <a data-bs-toggle="pill" href="#bank-tranfer" class="banktransfer nav-link active">
+                                <li class="nav-item" wire:click="$set('tab', 'manual')">
+                                    <a data-bs-toggle="pill" href="#bank-tranfer" class="banktransfer nav-link {{ $tab == 'manual' ? 'active' : '' }}">
                                         <i class="fas fa-mobile-alt mr-2"></i> {{ trans('messages.banktranfer') }}
                                     </a> 
                                 </li>
-                                    <!--
-                                    <li class="nav-item">
-                                        <a data-bs-toggle="pill" href="#alipay" class="alipay nav-link">
-                                            <i class="fab fa-alipay mr-2"></i> {{ trans('messages.alipay') }}
-                                        </a> 
-                                    </li>
-                                    <li class="nav-item">
-                                        <a data-bs-toggle="pill" href="#wechat" class="wechat nav-link">
-                                            <i class="fab fa-wechat mr-2"></i> {{ trans('messages.wechat') }}
-                                        </a> 
-                                    </li>
-                                    <li class="nav-item">
-                                        <a data-bs-toggle="pill" href="#promptpay" class="promptpay nav-link">
-                                            <i class="fab fa-promptpay mr-2"></i> {{ trans('messages.promptpay') }}
-                                        </a> 
-                                    </li>
-                                    -->
-                                <li class="nav-item">
-                                    <a data-bs-toggle="pill" href="#omisepay" class="omisepay nav-link">
+                                <li class="nav-item" wire:click="$set('tab', 'omise')">
+                                    <a data-bs-toggle="pill" href="#omisepay" class="omisepay nav-link {{ $tab == 'omise' ? 'active' : '' }}">
                                         <i class="fas fa-money-check-alt"></i> {{ trans('messages.paymentonline') }}
                                     </a> 
                                 </li>  
+                                <!--
+                                <li class="nav-item">
+                                    <a data-bs-toggle="pill" href="#alipay" class="alipay nav-link">
+                                        <i class="fab fa-alipay mr-2"></i> {{ trans('messages.alipay') }}
+                                    </a> 
+                                </li>
+                                <li class="nav-item">
+                                    <a data-bs-toggle="pill" href="#wechat" class="wechat nav-link">
+                                        <i class="fab fa-wechat mr-2"></i> {{ trans('messages.wechat') }}
+                                    </a> 
+                                </li>
+                                <li class="nav-item">
+                                    <a data-bs-toggle="pill" href="#promptpay" class="promptpay nav-link">
+                                        <i class="fab fa-promptpay mr-2"></i> {{ trans('messages.promptpay') }}
+                                    </a> 
+                                </li>
+                                -->
                             </ul>
                         </div> <!-- End -->
                         <!-- Credit card form content -->
                         <div class="tab-content">
                             <!-- Bank transfer info -->
-                            <div id="bank-tranfer" class="tab-pane fade show active pt-3">
+                            <div id="bank-tranfer" class="tab-pane fade pt-3 {{ $tab == 'manual' ? 'show active' : '' }}">
                                 <livewire:frontend.homepage.payment.banktransfer :orderId="$order->id" />
+                            </div>
+                            <div id="omisepay" class="tab-pane fade pt-3 {{ $tab == 'omise' ? 'show active' : '' }}">
+                                <div class="payment_box text-dark">
+                                    {!! trans('messages.omiseinfomation') !!}
+                                </div>
+                                <script type="text/javascript" src="https://cdn.omise.co/omise.js"></script>
+                                <livewire:frontend.homepage.payment.omisepay :orderId="$order->id" />
+                                <livewire:frontend.homepage.payment.promptpay :orderId="$order->id" />
                             </div>
                             <!-- Alipay payment -->
                             {{--
@@ -145,9 +153,7 @@
                                 <livewire:frontend.homepage.payment.promptpay :orderId="$order->id" />
                             </div>
                             --}}
-                            <div id="omisepay" class="tab-pane fade pt-3">
-                                <livewire:frontend.homepage.payment.omisepay :orderId="$order->id" />
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

@@ -30,6 +30,8 @@ class Payment extends Component
 
     public $step = 0;
 
+    public $tab = 'manual';
+
     public $code;
     public $order;
 
