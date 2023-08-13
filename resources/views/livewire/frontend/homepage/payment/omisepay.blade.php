@@ -10,10 +10,10 @@
             publicKey: "{{ $publicKey }}"
         });
 
-        var button = document.querySelector("#checkoutCardButton");
-        var form = document.querySelector("#checkoutCardForm");
+        var buttonCard = document.querySelector("#checkoutCardButton");
+        var formCard = document.querySelector("#checkoutCardForm");
 
-        button.addEventListener("click", (event) => {
+        buttonCard.addEventListener("click", (event) => {
             event.preventDefault();
             OmiseCard.open({
                 amount: {{ $amount }},
@@ -21,11 +21,11 @@
                 defaultPaymentMethod: "credit_card",
                 onCreateTokenSuccess: (nonce) => {
                     if (nonce.startsWith("tokn_")) {
-                        form.omiseToken.value = nonce;
+                        formCard.omiseToken.value = nonce;
                         //$set('token', nonce);
                         @this.set('token', nonce);
                     } else {
-                        form.omiseSource.value = nonce;
+                        formCard.omiseSource.value = nonce;
                         //$set('source', nonce);
                         @this.set('source', nonce);
                     };

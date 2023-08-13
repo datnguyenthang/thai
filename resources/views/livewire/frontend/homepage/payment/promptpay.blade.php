@@ -6,10 +6,10 @@
         </form>
 
         <script>
-            var button = document.querySelector("#checkoutPromptpayButton");
-            var form = document.querySelector("#checkoutPromptpayForm");
+            var buttonPromptpay = document.querySelector("#checkoutPromptpayButton");
+            var formPromptpay = document.querySelector("#checkoutPromptpayForm");
 
-            button.addEventListener("click", (event) => {
+            buttonPromptpay.addEventListener("click", (event) => {
                 event.preventDefault();
 
                 Omise.setPublicKey("{{ $publicKey }}");
@@ -18,7 +18,7 @@
                     "currency": "THB"
                 }, function(statusCode, response) {
                     if (statusCode == '200'){
-                        form.omiseSource.value = response.id;
+                        formPromptpay.omiseSource.value = response.id;
                         @this.set('source', response.id);
                     }
                     window.livewire.emit('promptpay');
