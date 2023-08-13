@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Frontend\Homepage\Payment;
 
 use Livewire\Component;
-use Livewire\WithEvents;
 use Carbon\Carbon;
 
 use Omise\Omise;
@@ -14,8 +13,6 @@ use App\Models\OrderStatus;
 
 class Promptpay extends Component
 {
-    use WithEvents;
-
     public $order;
     public $source;
     public $publicKey;
