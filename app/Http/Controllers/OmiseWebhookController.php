@@ -3,17 +3,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Omise\OmiseEvent;
-use Livewire\Facades\LiveWire;
+use Livewire\LiveWire;
+use Illuminate\Support\Facades\Log;
 
 class OmiseWebhookController extends Controller
 {
     public function handleWebhook(Request $request) {
-        $payload = $request->getContent();
+        $payload = $request->getContent();Log::notice($payload);
         $signature = $request->header('Omise-Signature');
         $secretKey = OMISE_SECRET_KEY;
 
         // Verify the signature
-        $event = OmiseEvent::retrieve($signature, [], $secretKey);
+        $event = \OmiseEvent::retrieve($signature, [], $secretKey);
 
         if (!$event) {
             return response()->json(['message' => 'Event not found.'], 404);
