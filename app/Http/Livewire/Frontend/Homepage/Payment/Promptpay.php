@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Frontend\Homepage\Payment;
 
 use Livewire\Component;
+use Livewire\WithEvents;
 use Carbon\Carbon;
 
 use Omise\Omise;
@@ -13,13 +14,16 @@ use App\Models\OrderStatus;
 
 class Promptpay extends Component
 {
+    use WithEvents;
+
     public $order;
     public $source;
     public $publicKey;
     public $secretKey;
     public $charge = [];
+    public $webhookEventData = null;
 
-    protected $listeners = ['promptpay' => 'promptpay', 'refresh' => 'refresh'];
+    protected $listeners = ['promptpay' => 'promptpay', 'refresh' => 'refresh', 'webhookEventReceived' => 'handleWebhookEvent'];
 
     public function mount($orderId) {
         $this->order = OrderLib::getOrderDetail($orderId);
@@ -31,6 +35,10 @@ class Promptpay extends Component
 
     public function refresh() {
         $this->reset(['charge']);
+    }
+
+    public function handleWebhookEvent($eventData){ dd($eventData);
+        $this->webhookEventData = $eventData;
     }
 
     public function promptpay() {

@@ -8,6 +8,7 @@ use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\Moderator\ModeratorController;
 use Illuminate\Support\Facades\DB;
 use MSA\LaravelGrapes\Http\Controllers\FrontendController;
+use App\Http\Controllers\OmiseWebhookController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,11 +56,14 @@ Route::get('/trip', App\Http\Livewire\Frontend\Homepage\Trip::class)->name('trip
 Route::post('/proceedbooking', App\Http\Livewire\Frontend\Homepage\ProceedBooking::class)->name('proceedbooking');
 Route::get('/payment/{code}', App\Http\Livewire\Frontend\Homepage\Payment::class)->name('payment');
 
-
 Route::get('/policy-for-customer', App\Http\Livewire\Frontend\Policy::class)->name('policycustomer');
 Route::get('/privacy-policy', App\Http\Livewire\Frontend\PrivatePolicy::class)->name('privatepolicy');
 Route::get('/aboutus', App\Http\Livewire\Frontend\Aboutus::class)->name('aboutus');
 Route::get('/contactus', App\Http\Livewire\Frontend\Contactus::class)->name('contactus');
+
+//handle event from Omise
+Route::post('/omise-webhook', [OmiseWebhookController::class, 'handleWebhook']);
+
 
 
 Route::middleware(['auth'])->group(function () {
