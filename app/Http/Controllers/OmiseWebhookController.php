@@ -2,9 +2,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Omise\SignatureVerifier;
+use Omise\OmiseEvent;
 use Livewire\Facades\LiveWire;
-use App\Http\Livewire\OmiseWebhookHandler;
 
 class OmiseWebhookController extends Controller
 {
@@ -13,15 +12,16 @@ class OmiseWebhookController extends Controller
         $signature = $request->header('Omise-Signature');
         $secretKey = OMISE_SECRET_KEY;
 
-        $verifier = new SignatureVerifier($secretKey);
-        if (!$verifier->verify($signature, $payload)) {
-            return response()->json(['message' => 'Signature verification failed.'], 400);
+        // Verify the signature
+        $event = OmiseEvent::retrieve($signature, [], $secretKey);
+
+        if (!$event) {
+            return response()->json(['message' => 'Event not found.'], 404);
         }
 
-        $eventData = json_decode($payload, true);
+        $eventData = $event->data;
 
         // Emit a Livewire event to notify the component
-        LiveWire::component('omise-webhook-handler', OmiseWebhookHandler::class);
         LiveWire::emit('webhookEventReceived', $eventData);
 
         return response()->json(['message' => 'Webhook event received.']);
