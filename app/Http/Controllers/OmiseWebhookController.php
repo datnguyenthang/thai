@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 class OmiseWebhookController extends Controller
 {
     public function handleWebhook(Request $request) {
-        $payload = $request->getContent();Log::info($payload);
+        $payload = $request->getContent();Log::info('Webhook request received');
         $signature = $request->header('Omise-Signature');
         $secretKey = OMISE_SECRET_KEY;
 
