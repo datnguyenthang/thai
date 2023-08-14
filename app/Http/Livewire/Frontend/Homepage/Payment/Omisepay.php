@@ -17,7 +17,7 @@ class Omisepay extends Component
     public $publicKey;
     public $secretKey;
 
-    protected $listeners = ['pay' => 'pay'];
+    protected $listeners = ['payByCard' => 'payByCard'];
 
     public function mount($orderId) {
         $this->order = OrderLib::getOrderDetail($orderId);
@@ -27,7 +27,7 @@ class Omisepay extends Component
         $this->amount = $this->order->finalPrice * 100;
     }
 
-    public function pay(){
+    public function payByCard(){
         // Create a charge
         try {
             $charge = \OmiseCharge::create([

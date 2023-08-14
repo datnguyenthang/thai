@@ -21,7 +21,7 @@
                         formPromptpay.omiseSource.value = response.id;
                         @this.set('source', response.id);
                     }
-                    window.livewire.emit('promptpay');
+                    window.livewire.emit('promptpayCreateCharge');
                 });
             });
         </script>

@@ -30,7 +30,7 @@
                         @this.set('source', nonce);
                     };
                     //button.click();
-                    Livewire.emit('pay');
+                    Livewire.emit('payByCard');
                 }
             });
         });
