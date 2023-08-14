@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Omise\OmiseEvent;
+use Omise\Omise;
 use Livewire\LiveWire;
 use Illuminate\Support\Facades\Log;
 
