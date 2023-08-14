@@ -61,11 +61,6 @@ Route::get('/privacy-policy', App\Http\Livewire\Frontend\PrivatePolicy::class)->
 Route::get('/aboutus', App\Http\Livewire\Frontend\Aboutus::class)->name('aboutus');
 Route::get('/contactus', App\Http\Livewire\Frontend\Contactus::class)->name('contactus');
 
-//handle event from Omise
-Route::post('/omise-webhook', [OmiseWebhookController::class, 'handleWebhook']);
-
-
-
 Route::middleware(['auth'])->group(function () {
     //User profile
     Route::get('/user/profile',  App\Http\Livewire\Component\User\Profile::class)->name('userprofile');
