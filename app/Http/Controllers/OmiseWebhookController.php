@@ -8,16 +8,14 @@ use Livewire\Component;
 class OmiseWebhookController extends Component
 {
     public function handleWebhook(Request $request) {
-        if (!$request->data) {
-            return response()->json(['message' => 'Event not found.'], 404);
-        }
+        //if (!$request->data) {
+        //    return response()->json(['message' => 'Event not found.'], 404);
+        //}
 
         $eventData = $request->data;
 
         // Emit a Livewire event to notify the component
         
         $this->emit('webhookEventReceived', $eventData);
-
-        return response()->json(['message' => 'Webhook event received.']);
     }
 }
