@@ -2,17 +2,17 @@
   <div class="carousel-inner">
     <div class="carousel-item active">
       <div class="col-sm-4">
-        <img src="https://seudamgo.com/wp-content/uploads/2023/04/1-1.jpg" class="d-block w-100" alt="Slide 1">
+        <img src="./img/1-1.jpg" class="d-block w-100" alt="Slide 1">
       </div>
     </div>
     <div class="carousel-item">
       <div class="col-sm-4">
-        <img src="https://seudamgo.com/wp-content/uploads/2023/04/2-1.jpg" class="d-block w-100" alt="Slide 2">
+        <img src="./img/2-1.jpg" class="d-block w-100" alt="Slide 2">
       </div>\
     </div>
     <div class="carousel-item">
       <div class="col-sm-4">
-        <img src="https://seudamgo.com/wp-content/uploads/2023/04/3-1.jpg" class="d-block w-100" alt="Slide 3">
+        <img src="./img/3-1.jpg" class="d-block w-100" alt="Slide 3">
       </div>
     </div>
   </div>

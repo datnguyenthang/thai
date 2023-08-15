@@ -10,6 +10,7 @@ use App\Lib\OrderLib;
 
 use App\Models\Order;
 use App\Models\OrderStatus;
+use App\Models\OmiseWebhookEvent;
 
 class Promptpay extends Component
 {
@@ -35,8 +36,21 @@ class Promptpay extends Component
         $this->reset(['charge']);
     }
 
-    public function handleWebhookEvent($eventData) {
-        $this->webhookEventData = $eventData;
+    public function pollForPaymentUpdates(){
+        while (true) {
+            sleep(2); // Poll every 10 seconds
+            
+            $latestEventData = OmiseWebhookEvent::where('event_type', 'promptpay')
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            if ($latestEventData) {
+                $this->latestPaymentEventData = $latestEventData;
+            }
+            
+            // Livewire will handle the re-rendering of the component
+            $this->emitSelf('paymentUpdateReceived', $this->latestPaymentEventData);
+        }
     }
 
     public function promptpayCreateCharge() {
@@ -50,6 +64,7 @@ class Promptpay extends Component
         );
         $charge = \OmiseCharge::create($charge_array);
         $this->charge = $charge['source'];
+        $this->pollForPaymentUpdates();
     }
 
     public function payByPromptpay(){

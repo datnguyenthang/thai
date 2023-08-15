@@ -18,7 +18,7 @@
                           <div class="popular">
                             <div class="popular_inner">
                               <figure>
-                                <img src="https://seudamgo.com/wp-content/uploads/2023/02/ferry.jpg" alt="" class="img-responsive">
+                                <img src="./img/ferry.jpg" alt="" class="img-responsive">
                                 <div class="over bg_own_color">
                                   <div class="v1">Ferry</div>
                                   <div class="v2">Laem Sok Pier</div>
@@ -46,7 +46,7 @@
                           <div class="popular">
                             <div class="popular_inner">
                               <figure>
-                                <img src="https://seudamgo.com/wp-content/uploads/2023/04/Private-Speedboad.jpg" alt="" class="img-responsive">
+                                <img src="./img/private.jpg" alt="" class="img-responsive">
                                 <div class="over bg_own_color">
                                   <div class="v1">Private Speedboad</div>
                                   <div class="v2">Laem Sok Pier</div>
@@ -78,7 +78,7 @@
                           <div class="popular">
                             <div class="popular_inner">
                               <figure>
-                                <img src="https://seudamgo.com/wp-content/uploads/2023/02/bus-seudamgo.jpg" alt="" class="img-responsive">
+                                <img src="./img/bus.jpg" alt="" class="img-responsive">
                                 <div class="over bg_own_color">
                                   <div class="v1">Bus</div>
                                   <div class="v2">Bangkok Depot</div>
