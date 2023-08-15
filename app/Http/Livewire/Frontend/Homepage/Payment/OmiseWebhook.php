@@ -9,14 +9,13 @@ use App\Models\OmiseWebhookEvent;
 class OmiseWebhook extends Component
 {
     public function handle(Request $request) {
-        $eventData = $request->data;
-		$eventType = $request->header('Omise-Event-Type');
+        $eventData = $request->getContent(); // Assuming the data is in JSON format
+        $eventType = $request->header('Omise-Event-Type'); // Replace with the actual header name
 
-		if (isset($eventData['source']['type']) && $eventData['source']['type'] == 'promptpay') {
-			OmiseWebhookEvent::create([
-										'event_type' => $eventType,
-										'event_data' => $eventData,
-									]);
-		}
+        // Save the event data into the database
+        OmiseWebhookEvent::create([
+            'event_type' => $eventType,
+            'event_data' => $eventData,
+        ]);
     }
 }
