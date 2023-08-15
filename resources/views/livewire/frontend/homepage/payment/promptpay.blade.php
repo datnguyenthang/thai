@@ -61,7 +61,7 @@
                 var qrpromptpay = new bootstrap.Modal(document.getElementById('qrpromptpay'));
                 qrpromptpay.show();
                 $('#qrpromptpay').on('hidden.bs.modal', function() {
-                    window.livewire.emit('refresh');
+                    window.livewire.emit('promptpayRefresh');
                 });
             });
         </script>

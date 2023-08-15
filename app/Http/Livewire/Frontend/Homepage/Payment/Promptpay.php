@@ -22,7 +22,7 @@ class Promptpay extends Component
     public $webhookEventData = null;
 
     protected $listeners = ['promptpayCreateCharge' => 'promptpayCreateCharge',
-						    'refresh' => 'refresh', 
+						    'promptpayRefresh' => 'promptpayRefresh', 
 							'webhookEventPromptpayReceived' => 'handleWebhookEvent'];
 
     public function mount($orderId) {
@@ -33,7 +33,7 @@ class Promptpay extends Component
         $this->amount = $this->order->finalPrice * 100;
     }
 
-    public function refresh() {
+    public function promptpayRefresh() {
         $this->reset(['charge']);
     }
 

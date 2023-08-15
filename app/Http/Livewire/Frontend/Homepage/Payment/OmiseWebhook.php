@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Livewire\Frontend\Homepage\Payment;
 
 use Illuminate\Http\Request;
 use Omise\Omise;
