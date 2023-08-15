@@ -13,7 +13,7 @@ class WebhookOmiseController extends Controller
         $eventData = $request->data;
 
 		if (isset($eventData['source']['type']) && $eventData['source']['type'] == 'promptpay') {
-            Livewire::component('promptpay')->emit('webhookEventPromptpayReceived', $eventData);
+            Livewire::emit('frontend.homepage.payment.promptpay.webhookEventPromptpayReceived', $eventData);
 		}        
 
         return response()->json(['message' => 'Webhook processed'], 200);
