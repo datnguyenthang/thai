@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Omise\Omise;
 use Livewire\Component;
+use Illuminate\Support\Facades\Log;
 
-class OmiseWebhookController extends Component
+class OmiseWebhook extends Component
 {
     public function handleWebhook(Request $request) {
         $eventData = $request->data;
 
 		if (isset($eventData['source']['type']) && $eventData['source']['type'] == 'promptpay') {
-			$this->emitTo('promptpay', 'webhookEventReceived', $eventData);
-			//$this->dispatchBrowserEvent('promptpay-update', ['eventData' => $eventData]);
+			$this->emitTo('frontend.homepage.payment.promptpay', 'webhookEventPromptpayReceived', $eventData);
+			Log::debug('Emited to Promptpay');
 		}
     }
 }

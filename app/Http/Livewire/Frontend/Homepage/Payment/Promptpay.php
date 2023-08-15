@@ -10,6 +10,7 @@ use App\Lib\OrderLib;
 
 use App\Models\Order;
 use App\Models\OrderStatus;
+use Illuminate\Support\Facades\Log;
 
 class Promptpay extends Component
 {
@@ -20,7 +21,9 @@ class Promptpay extends Component
     public $charge = [];
     public $webhookEventData = null;
 
-    protected $listeners = ['promptpayCreateCharge' => 'promptpayCreateCharge', 'refresh' => 'refresh', 'webhookEventReceived' => 'handleWebhookEvent'];
+    protected $listeners = ['promptpayCreateCharge' => 'promptpayCreateCharge',
+						    'refresh' => 'refresh', 
+							'webhookEventPromptpayReceived' => 'handleWebhookEvent'];
 
     public function mount($orderId) {
         $this->order = OrderLib::getOrderDetail($orderId);
@@ -34,7 +37,8 @@ class Promptpay extends Component
         $this->reset(['charge']);
     }
 
-    public function handleWebhookEvent($eventData){ dd($eventData);
+    public function handleWebhookEvent($eventData) {
+        Log::debug('Received to Promptpay');
         $this->webhookEventData = $eventData;
     }
 
@@ -49,6 +53,38 @@ class Promptpay extends Component
         );
         $charge = \OmiseCharge::create($charge_array);
         $this->charge = $charge['source'];
+    }
+
+    public function payByPromptpay(){
+        // Create a charge
+        try {
+
+            if ($charge['status'] == 'successful'){
+                //Update order status
+                OrderStatus::create([
+                    'orderId' => intVal($this->order->id),
+                    'status' => PAIDORDER,
+                    //'note' => $this->note,
+                    'changeDate' => date('Y-m-d H:i:s'),
+                    //'userId' => Auth::id(),
+                ]);
+
+                $order = Order::findOrFail($this->order->id);
+                $order->paymentMethod = PROMPTPAY;
+                $order->paymentStatus = PAID;
+                $order->transactionCode = $charge['transaction'];
+                $order->transactionDate = date('Y-m-d H:i:s', strtotime($charge['created_at']));
+
+                $order->save();
+
+                //dispatch event to Payment component
+                $this->emitUp('updatePayment', UPPLOADTRANSFER);
+            }
+
+        } catch (\Exception $e) {
+            // Handle payment error
+            // Display an error message to the user
+        }
     }
 
     public function render() {

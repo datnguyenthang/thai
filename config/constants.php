@@ -152,14 +152,16 @@
     define('BANKTRANSFER', 1);
     define('CASH', 2);
     define('CARD', 3);
-    define('ALIPAY', 4);
-    define('WECHAT', 5);
-    define('PROMPTPAY', 6);
+    define('PROMPTPAY', 4);
+    define('ALIPAY', 5);
+    define('WECHAT', 6);
+    
 
     define('PAYMENTMETHOD', [
                                 BANKTRANSFER => "Bank transfer",
                                 CASH => "Cash",
-                                CARD => "Card"
+                                CARD => "Card",
+                                PROMPTPAY => 'Promptpay',
                             ]
                         );
 
