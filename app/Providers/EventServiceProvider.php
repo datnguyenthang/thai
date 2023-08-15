@@ -8,6 +8,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Listeners\LogSentMessage;
 use Illuminate\Mail\Events\MessageSent;
+use App\Events\WebhookOmiseEvent;
+use App\Listeners\WebhookOmisetEventListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         MessageSent::class => [
             LogSentMessage::class,
+        ],
+        WebhookOmiseEvent::class => [
+            WebhookOmisetEventListener::class,
         ],
     ];
 

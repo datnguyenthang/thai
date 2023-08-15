@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Livewire\Livewire;
-use App\Http\Livewire\Frontend\Homepage\Payment\Promptpay;
+use App\Events\WebhookOmiseEvent;
 
 class WebhookOmiseController extends Controller
 {
@@ -12,9 +11,9 @@ class WebhookOmiseController extends Controller
     {
         $eventData = $request->data;
 
-		if (isset($eventData['source']['type']) && $eventData['source']['type'] == 'promptpay') {
-            Livewire::emit('frontend.homepage.payment.promptpay.webhookEventPromptpayReceived', $eventData);
-		}        
+        if (isset($eventData['source']['type']) && $eventData['source']['type'] == 'promptpay') {
+            event(new WebhookOmiseEvent($eventData)); // Emit the event
+        }
 
         return response()->json(['message' => 'Webhook processed'], 200);
     }
