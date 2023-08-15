@@ -24,7 +24,7 @@ class Promptpay extends Component
 
     protected $listeners = ['promptpayCreateCharge' => 'promptpayCreateCharge',
 						    'promptpayRefresh' => 'promptpayRefresh',
-                            WebhookOmiseEvent::class => 'handleWebhookEvent',];
+                            WebhookOmiseEvent::class => 'handleWebhookEvent'];
 
     public function mount($orderId) {
         $this->order = OrderLib::getOrderDetail($orderId);

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class WebhookOmisetEventListener implements ShouldQueue
+class WebhookOmiseEventListener implements ShouldQueue
 {
     use InteractsWithQueue;
 
