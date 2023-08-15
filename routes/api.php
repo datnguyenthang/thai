@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Frontend\Homepage\Payment\OmiseWebhook;
+use App\Http\Controllers\WebhookOmiseController;
 
 /*
 |--------------------------------------------------------------------------
