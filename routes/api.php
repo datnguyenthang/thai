@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WebhookOmiseController;
+use App\Http\Livewire\Frontend\Homepage\Payment\OmiseWebhook;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //handle event from Omise
-Route::post('/omise-webhook', [WebhookOmiseController::class, 'handle']);
+Route::post('/omise-webhook', [OmiseWebhook::class, 'handleWebhook']);

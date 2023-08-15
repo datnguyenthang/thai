@@ -12,8 +12,13 @@ class OmiseWebhook extends Component
         $eventData = $request->data;
 
 		if (isset($eventData['source']['type']) && $eventData['source']['type'] == 'promptpay') {
-			$this->emitTo('frontend.homepage.payment.promptpay', 'webhookEventPromptpayReceived', $eventData);
+			//$this->emitTo('frontend.homepage.payment.promptpay', 'webhookEventPromptpayReceived', $eventData);
+			$this->emitSelf('test');
 			Log::debug('Emited to Promptpay');
 		}
     }
+	public function test(){
+		Log::debug('test');
+	}
+
 }
