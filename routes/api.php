@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //handle event from Omise
-Route::post('/omise-webhook', [App\Http\Livewire\Frontend\Homepage\Payment\OmiseWebhook::class, 'handleWebhook']);
+Route::post('/omise-webhook', [WebhookOmiseController::class, 'handle']);
