@@ -71,8 +71,6 @@ class Promptpay extends Component
                     //$this->paidByPromptpay();           
                     //$this->chargeTransaction = $omisePayment;
                     $this->emit('paymentStatusUpdated', SUCCESSFUL);
-                } else {
-                    $this->paymentStatus = PENDING;
                 }
             }
         }

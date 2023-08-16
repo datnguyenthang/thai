@@ -27,7 +27,7 @@
         </script>
     @endif
 
-    @if (!empty($imageQR))
+    @if ($chargeId && $imageQR)
         {{--Show modal boostrap to quick view detail order--}}
         <div class="modal fade show" id="qrpromptpay" tabindex="-1">
             <div class="modal-dialog">
