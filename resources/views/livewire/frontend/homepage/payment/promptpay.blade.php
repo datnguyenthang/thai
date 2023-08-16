@@ -50,6 +50,7 @@
                                 <div class="card-footer bg-white border border-primary text-primary mt-2">* สแกน QR Code เพื่อชำระพร้อมเพย์</div>
                             </div>
                         </div>
+                        <div>Payment Status: {{ $paymentStatus }}</div>
                     </div>
                 </div>
             </div>
@@ -67,9 +68,9 @@
                 //add listener to check payment status
                 var checkPaymentInterval = setInterval(function() {
                     window.livewire.emit('checkPaymentStatus');
-                }, 5000); // 5000 milliseconds = 5 seconds
+                }, 5000);
 
-                window.livewire.on('paymentStatusUpdated', function(paymentStatus) {
+                window.livewire.on('paymentStatusUpdated', function(paymentStatus) { 
                     if (paymentStatus === '{{ SUCCESSFUL }}') {
                         clearInterval(checkPaymentInterval);
                         window.livewire.emit('paidByPromptpay');
