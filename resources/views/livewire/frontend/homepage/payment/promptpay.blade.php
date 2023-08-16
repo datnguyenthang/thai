@@ -71,7 +71,7 @@
                     }, 5000); // 5000 milliseconds = 5 seconds
 
                     window.livewire.on('paymentStatusUpdated', function (paymentStatus) {
-                        if (paymentStatus === {{ SUCCESSFUL }}) {
+                        if (paymentStatus === '{{ SUCCESSFUL }}') {
                             clearInterval(checkPaymentInterval);
                             window.livewire.emit('paidByPromptpay');
                         }
