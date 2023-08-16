@@ -20,6 +20,7 @@ class Promptpay extends Component
     public $secretKey;
     protected $charge;
 	public $imageQR;
+	public $chargeId;
 	
     public $webhookEventData = null;
 
@@ -48,16 +49,17 @@ class Promptpay extends Component
             'expires_at'  => Carbon::now()->addMinutes(15)->toIso8601String(),
         );
 		$this->charge = \OmiseCharge::create($charge_array);
+		$this->chargeId = $this->charge['id'];
 		$this->imageQR = $this->charge['source']['scannable_code']['image']['download_uri'];
     }
 	
 	public function getPromptpayData(){
 		//check payment status in Omise server
-		$payment = \OmiseCharge::retrieve($this->charge['id']);
+		$payment = \OmiseCharge::retrieve($this->chargeId);
 		
 		//if successful checking in database to be sure
 		if (!empty($payment) && $payment['status'] == SUCCESSFUL) {
-			$payment_webhook = OmiseWebhookEvent::where('eventChargeid', $this->charge['id'])
+			$payment_webhook = OmiseWebhookEvent::where('eventChargeid', $this->chargeId)
                                                 ->where('eventStatus', SUCCESSFUL)
                                                 ->first();
             if ($payment_webhook) echo 'Payment Successfull';
