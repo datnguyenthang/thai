@@ -18,14 +18,17 @@ class Promptpay extends Component
     public $source;
     public $publicKey;
     public $secretKey;
-    protected $charge;
+    protected $chargeCreate;
 	public $imageQR;
 	public $chargeId;
-	
+	public $paymentStatus = PENDING;
     public $webhookEventData = null;
+    public $chargeTransaction;
 
     protected $listeners = ['promptpayCreateCharge' => 'promptpayCreateCharge',
-						    'promptpayRefresh' => 'promptpayRefresh'];
+						    'promptpayRefresh' => 'promptpayRefresh',
+                            'checkPaymentStatus' => 'checkPaymentStatus',
+                            'paidByPromptpay' => 'paidByPromptpay'];
 
     public function mount($orderId) {
         $this->order = OrderLib::getOrderDetail($orderId);
@@ -36,7 +39,7 @@ class Promptpay extends Component
     }
 
     public function promptpayRefresh() {
-        $this->reset(['charge']);
+        $this->reset(['chargeCreate']);
     }
 
     public function promptpayCreateCharge() {
@@ -48,30 +51,34 @@ class Promptpay extends Component
             'description' => $this->order->code,
             'expires_at'  => Carbon::now()->addMinutes(15)->toIso8601String(),
         );
-		$this->charge = \OmiseCharge::create($charge_array);
-		$this->chargeId = $this->charge['id'];
-		$this->imageQR = $this->charge['source']['scannable_code']['image']['download_uri'];
+		$this->chargeCreate = \OmiseCharge::create($charge_array);
+		$this->chargeId = $this->chargeCreate['id'];
+		$this->imageQR = $this->chargeCreate['source']['scannable_code']['image']['download_uri'];
     }
 	
-	public function getPromptpayData(){
-		//check payment status in Omise server
-		$payment = \OmiseCharge::retrieve($this->chargeId);
-		
-		//if successful checking in database to be sure
-		if (!empty($payment) && $payment['status'] == SUCCESSFUL) {
-			$payment_webhook = OmiseWebhookEvent::where('eventChargeid', $this->chargeId)
-                                                ->where('eventStatus', SUCCESSFUL)
-                                                ->first();
-            if ($payment_webhook) echo 'Payment Successfull';
-		}
-		
+	public function checkPaymentStatus(){
+        if ($this->chargeId) {
+            //check payment status in Omise server
+            $omisePayment = \OmiseCharge::retrieve($this->chargeId);
+
+            //verify transaction again in webhook
+            if (!empty($omisePayment) && $omisePayment['status'] == SUCCESSFUL) {
+                $webhookPayment = OmiseWebhookEvent::where('eventChargeid', $this->chargeId)
+                                                    ->where('eventStatus', SUCCESSFUL)
+                                                    ->first();
+                if ($webhookPayment) {
+                    $this->paymentStatus = SUCCESSFUL;
+                    $this->chargeTransaction = $omisePayment;
+                } else {
+                    $this->paymentStatus = PENDING;
+                }
+            }
+        }
     }
 
-    public function payByPromptpay(){
-        // Create a charge
+    public function paidByPromptpay(){
         try {
-
-            if ($charge['status'] == SUCCESSFUL){
+            if ($this->chargeTransaction['status'] == SUCCESSFUL){
                 //Update order status
                 OrderStatus::create([
                     'orderId' => intVal($this->order->id),

@@ -50,7 +50,6 @@
                                 <div class="card-footer bg-white border border-primary text-primary mt-2">* สแกน QR Code เพื่อชำระพร้อมเพย์</div>
                             </div>
                         </div>
-						<div wire:poll.5s="getPromptpayData"></div>
                     </div>
                 </div>
             </div>
@@ -63,6 +62,20 @@
                 qrpromptpay.show();
                 $('#qrpromptpay').on('hidden.bs.modal', function() {
                     window.livewire.emit('promptpayRefresh');
+                });
+            });
+            
+            //add listener to check payment status
+            document.addEventListener("livewire:load", function () {
+                var checkPaymentInterval = setInterval(function () {
+                    Livewire.emit('checkPaymentStatus');
+                }, 5000); // 5000 milliseconds = 5 seconds
+
+                Livewire.on('paymentStatusUpdated', function (paymentStatus) {
+                    if (paymentStatus === {{ SUCCESSFUL }}) {
+                        clearInterval(checkPaymentInterval);
+                        Livewire.emit('paidByPromptpay');
+                    }
                 });
             });
         </script>
