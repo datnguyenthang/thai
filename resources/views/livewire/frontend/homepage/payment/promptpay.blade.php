@@ -71,10 +71,10 @@
                     Livewire.emit('checkPaymentStatus');
                 }, 5000); // 5000 milliseconds = 5 seconds
 
-                Livewire.on('paymentStatusUpdated', function (paymentStatus) {
+                window.livewire.on('paymentStatusUpdated', function (paymentStatus) {
                     if (paymentStatus === {{ SUCCESSFUL }}) {
                         clearInterval(checkPaymentInterval);
-                        Livewire.emit('paidByPromptpay');
+                        window.livewire.emit('paidByPromptpay');
                     }
                 });
             });
