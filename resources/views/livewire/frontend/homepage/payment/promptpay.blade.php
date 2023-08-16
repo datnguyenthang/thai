@@ -1,5 +1,5 @@
 <div>
-    @if (empty($charge)) 
+    @if (empty($chargeCreate)) 
         <form id="checkoutPromptpayForm" wire:submit.prevent="promptpay">
             <input type="hidden" name="omiseSource" wire:model.defer="source">
             <button type="submit" wire:loading.attr="disabled" class="form-control bg_own_color" wire:loading.attr="disabled" id="checkoutPromptpayButton">Pay with Promptpay</button>
@@ -50,7 +50,9 @@
                                 <div class="card-footer bg-white border border-primary text-primary mt-2">* สแกน QR Code เพื่อชำระพร้อมเพย์</div>
                             </div>
                         </div>
-                        <div>Payment Status: {{ $paymentStatus }}</div>
+                        <div wire:poll.750ms>
+                            Current time: {{ now() }}
+                         </div>
                     </div>
                 </div>
             </div>
