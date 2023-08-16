@@ -63,19 +63,19 @@
                 $('#qrpromptpay').on('hidden.bs.modal', function() {
                     window.livewire.emit('promptpayRefresh');
                 });
-            });
-            
-            //add listener to check payment status
-            document.addEventListener("livewire:load", function () {
-                var checkPaymentInterval = setInterval(function () {
-                    Livewire.emit('checkPaymentStatus');
-                }, 5000); // 5000 milliseconds = 5 seconds
 
-                window.livewire.on('paymentStatusUpdated', function (paymentStatus) {
-                    if (paymentStatus === {{ SUCCESSFUL }}) {
-                        clearInterval(checkPaymentInterval);
-                        window.livewire.emit('paidByPromptpay');
-                    }
+                //add listener to check payment status
+                document.addEventListener("livewire:load", function () {
+                    var checkPaymentInterval = setInterval(function () {
+                        Livewire.emit('checkPaymentStatus');
+                    }, 5000); // 5000 milliseconds = 5 seconds
+
+                    window.livewire.on('paymentStatusUpdated', function (paymentStatus) {
+                        if (paymentStatus === {{ SUCCESSFUL }}) {
+                            clearInterval(checkPaymentInterval);
+                            window.livewire.emit('paidByPromptpay');
+                        }
+                    });
                 });
             });
         </script>

@@ -67,8 +67,9 @@ class Promptpay extends Component
                                                     ->where('eventStatus', SUCCESSFUL)
                                                     ->first();
                 if ($webhookPayment) {
-                    $this->paymentStatus = SUCCESSFUL;
+                    $this->paymentStatus = SUCCESSFUL;                    
                     $this->chargeTransaction = $omisePayment;
+                    $this->emit('paymentStatusUpdated', SUCCESSFUL);
                 } else {
                     $this->paymentStatus = PENDING;
                 }
