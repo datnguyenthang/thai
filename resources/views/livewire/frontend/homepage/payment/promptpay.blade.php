@@ -67,7 +67,7 @@
                 //add listener to check payment status
                 document.addEventListener("livewire:load", function () {
                     var checkPaymentInterval = setInterval(function () {
-                        Livewire.emit('checkPaymentStatus');
+                        window.livewire.emit('checkPaymentStatus');
                     }, 5000); // 5000 milliseconds = 5 seconds
 
                     window.livewire.on('paymentStatusUpdated', function (paymentStatus) {
