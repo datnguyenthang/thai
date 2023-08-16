@@ -18,7 +18,9 @@ class Promptpay extends Component
     public $source;
     public $publicKey;
     public $secretKey;
-    public $charge = [];
+    protected $charge;
+	public $imageQR;
+	
     public $webhookEventData = null;
 
     protected $listeners = ['promptpayCreateCharge' => 'promptpayCreateCharge',
@@ -36,23 +38,6 @@ class Promptpay extends Component
         $this->reset(['charge']);
     }
 
-    public function pollForPaymentUpdates(){
-        while (true) {
-            sleep(2); // Poll every 10 seconds
-            
-            $latestEventData = OmiseWebhookEvent::where('event_type', 'promptpay')
-                ->orderBy('created_at', 'desc')
-                ->first();
-
-            if ($latestEventData) {
-                $this->latestPaymentEventData = $latestEventData;
-            }
-            
-            // Livewire will handle the re-rendering of the component
-            $this->emitSelf('paymentUpdateReceived', $this->latestPaymentEventData);
-        }
-    }
-
     public function promptpayCreateCharge() {
         $charge_array = array(
             'amount'      => $this->amount,
@@ -62,16 +47,29 @@ class Promptpay extends Component
             'description' => $this->order->code,
             'expires_at'  => Carbon::now()->addMinutes(15)->toIso8601String(),
         );
-        $charge = \OmiseCharge::create($charge_array);
-        $this->charge = $charge['source'];
-        $this->pollForPaymentUpdates();
+		$this->charge = \OmiseCharge::create($charge_array);
+		$this->imageQR = $this->charge['source']['scannable_code']['image']['download_uri'];
+    }
+	
+	public function getPromptpayData(){
+		//check payment status in Omise server
+		$payment = \OmiseCharge::retrieve($this->charge['id']);
+		
+		//if successful checking in database to be sure
+		if (!empty($payment) && $payment['status'] == SUCCESSFUL) {
+			$payment_webhook = OmiseWebhookEvent::where('eventChargeid', $this->charge['id'])
+                                                ->where('eventStatus', SUCCESSFUL)
+                                                ->first();
+            if ($payment_webhook) echo 'Payment Successfull';
+		}
+		
     }
 
     public function payByPromptpay(){
         // Create a charge
         try {
 
-            if ($charge['status'] == 'successful'){
+            if ($charge['status'] == SUCCESSFUL){
                 //Update order status
                 OrderStatus::create([
                     'orderId' => intVal($this->order->id),

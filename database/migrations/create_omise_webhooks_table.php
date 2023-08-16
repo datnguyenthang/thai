@@ -16,8 +16,10 @@ return new class extends Migration
         if(!Schema::hasTable('omise_webhook_events')){
             Schema::create('omise_webhook_events', function (Blueprint $table) {
                 $table->id();
-                $table->string('event_type')->nullable();
-                $table->json('event_data')->nullable();
+                $table->string('eventType')->nullable();
+                $table->string('eventChargeid')->nullable();
+                $table->string('eventStatus')->nullable();
+                $table->json('eventData')->nullable();
                 $table->timestamps();
             });
         }

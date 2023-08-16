@@ -27,7 +27,7 @@
         </script>
     @endif
 
-    @if (!empty($charge))
+    @if (!empty($imageQR))
         {{--Show modal boostrap to quick view detail order--}}
         <div class="modal fade show" id="qrpromptpay" tabindex="-1">
             <div class="modal-dialog">
@@ -41,15 +41,16 @@
                             <div class="card border border-primary">
                                 <div class="card-body border border-primary border-top-0 border-bottom-0">
                                     <div class="d-flex justify-content-center">
-                                        <img src="{{ $charge['scannable_code']['image']['download_uri']; }}" alt="PromtPay QR Code" />
+                                        <img src="{{ $imageQR; }}" alt="PromtPay QR Code" />
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <span><a href="{{ $charge['scannable_code']['image']['download_uri']; }}" >Download QR Code <br>(ดาวน์โหลด  คิวอาร์โค๊ด)</a></span>
+                                    <span><a href="{{ $imageQR; }}" >Download QR Code <br>(ดาวน์โหลด  คิวอาร์โค๊ด)</a></span>
                                 </div>
                                 <div class="card-footer bg-white border border-primary text-primary mt-2">* สแกน QR Code เพื่อชำระพร้อมเพย์</div>
                             </div>
                         </div>
+						<div wire:poll.5s="getPromptpayData"></div>
                     </div>
                 </div>
             </div>

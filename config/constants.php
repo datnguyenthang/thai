@@ -176,4 +176,6 @@
                                 //PAIDBYCASH => "Paid by cash",
                                 PAIDBYAGENT => "Paid by agent"
                             ]);
-    
+    //OMISE 
+    define('SUCCESSFUL', 'successful');
+    define('PENDING', 'pending');

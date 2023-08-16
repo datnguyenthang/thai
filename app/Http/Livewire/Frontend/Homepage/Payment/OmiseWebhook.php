@@ -9,13 +9,20 @@ use App\Models\OmiseWebhookEvent;
 class OmiseWebhook extends Component
 {
     public function handle(Request $request) {
-        $eventData = $request->getContent(); // Assuming the data is in JSON format
-        $eventType = $request->header('Omise-Event-Type'); // Replace with the actual header name
 
-        // Save the event data into the database
-        OmiseWebhookEvent::create([
-            'event_type' => $eventType,
-            'event_data' => $eventData,
-        ]);
+        $eventData = $request->getContent();
+        if ($eventData['source']['charge_status'] == SUCCESSFUL) {
+            $eventType = isset($eventData['source']['type']) ? $eventData['source']['type'] : '';
+            $eventChargeId = isset($eventData['id']) ? $eventData['id'] : '';
+            $eventStatus = isset($eventData['source']['charge_status']) ? $eventData['source']['charge_status'] : '';
+
+            // Save the event data into the database
+            OmiseWebhookEvent::create([
+                'eventType' => $eventType,
+                'eventChargeid' => $eventChargeId,
+                'eventStatus' => $eventStatus,
+                'eventData' => $eventData,
+            ]);
+        }
     }
 }
