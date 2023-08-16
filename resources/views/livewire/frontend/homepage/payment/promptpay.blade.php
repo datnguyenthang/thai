@@ -50,9 +50,6 @@
                                 <div class="card-footer bg-white border border-primary text-primary mt-2">* สแกน QR Code เพื่อชำระพร้อมเพย์</div>
                             </div>
                         </div>
-                        <div wire:poll.750ms>
-                            Current time: {{ now() }}
-                         </div>
                     </div>
                 </div>
             </div>
