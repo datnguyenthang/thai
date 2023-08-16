@@ -11,10 +11,11 @@ class OmiseWebhook extends Component
     public function handle(Request $request) {
 
         $eventData = $request->getContent();
-        if ($eventData['source']['charge_status'] == SUCCESSFUL) {
-            $eventType = isset($eventData['source']['type']) ? $eventData['source']['type'] : '';
-            $eventChargeId = isset($eventData['id']) ? $eventData['id'] : '';
-            $eventStatus = isset($eventData['source']['charge_status']) ? $eventData['source']['charge_status'] : '';
+        
+        if ($eventData['data']['source']['charge_status'] == SUCCESSFUL) {
+            $eventType = isset($eventData['data']['source']['type']) ? $eventData['data']['source']['type'] : '';
+            $eventChargeId = isset($eventData['data']['id']) ? $eventData['data']['id'] : '';
+            $eventStatus = isset($eventData['data']['source']['charge_status']) ? $eventData['data']['source']['charge_status'] : '';
 
             // Save the event data into the database
             OmiseWebhookEvent::create([
