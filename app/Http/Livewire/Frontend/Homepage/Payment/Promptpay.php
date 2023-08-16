@@ -39,7 +39,7 @@ class Promptpay extends Component
     }
 
     public function promptpayRefresh() {
-        $this->reset(['chargeCreate']);
+        $this->reset(['chargeCreate', 'chargeId', 'imageQR']);
     }
 
     public function promptpayCreateCharge() {
@@ -69,7 +69,7 @@ class Promptpay extends Component
                 if ($webhookPayment) {
                     $this->paymentStatus = SUCCESSFUL;         
                     //$this->paidByPromptpay();           
-                    //$this->chargeTransaction = $omisePayment;
+                    $this->chargeTransaction = $omisePayment;
                     $this->emit('paymentStatusUpdated', SUCCESSFUL);
                 }
             }
