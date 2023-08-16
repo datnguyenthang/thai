@@ -41,11 +41,11 @@
                             <div class="card border border-primary">
                                 <div class="card-body border border-primary border-top-0 border-bottom-0">
                                     <div class="d-flex justify-content-center">
-                                        <img src="{{ $imageQR; }}" alt="PromtPay QR Code" />
+                                        <img src="{{ $imageQR }}" alt="PromtPay QR Code" />
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <span><a href="{{ $imageQR; }}" >Download QR Code <br>(ดาวน์โหลด  คิวอาร์โค๊ด)</a></span>
+                                    <span><a href="{{ $imageQR }}" >Download QR Code <br>(ดาวน์โหลด  คิวอาร์โค๊ด)</a></span>
                                 </div>
                                 <div class="card-footer bg-white border border-primary text-primary mt-2">* สแกน QR Code เพื่อชำระพร้อมเพย์</div>
                             </div>
@@ -65,17 +65,15 @@
                 });
 
                 //add listener to check payment status
-                document.addEventListener("livewire:load", function () {
-                    var checkPaymentInterval = setInterval(function () {
-                        window.livewire.emit('checkPaymentStatus');
-                    }, 5000); // 5000 milliseconds = 5 seconds
+                var checkPaymentInterval = setInterval(function() {
+                    window.livewire.emit('checkPaymentStatus');
+                }, 5000); // 5000 milliseconds = 5 seconds
 
-                    window.livewire.on('paymentStatusUpdated', function (paymentStatus) {
-                        if (paymentStatus === '{{ SUCCESSFUL }}') {
-                            clearInterval(checkPaymentInterval);
-                            window.livewire.emit('paidByPromptpay');
-                        }
-                    });
+                window.livewire.on('paymentStatusUpdated', function(paymentStatus) {
+                    if (paymentStatus === '{{ imageQR }}') {
+                        clearInterval(checkPaymentInterval);
+                        window.livewire.emit('paidByPromptpay');
+                    }
                 });
             });
         </script>
