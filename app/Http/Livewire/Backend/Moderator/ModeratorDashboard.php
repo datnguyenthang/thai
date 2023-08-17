@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Backend\Moderator;
 use Livewire\Component;
 
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Storage;
 use App\Exports\RidesExport;
 use App\Lib\DashboardLib;
 use App\Lib\OrderLib;
@@ -48,6 +47,10 @@ class ModeratorDashboard extends Component
         $this->totalOrderThisDay = Order::where('bookingDate', now()->toDateString())->count();
     }
 
+    public function showDashboard(){
+        $this->page = $page;
+    }
+
     public function updatedFromDate(){
         $this->listRides = DashboardLib::ridesInDay($this->fromDate, $this->toDate, $this->fromLocation, $this->toLocation);
     }
@@ -62,10 +65,6 @@ class ModeratorDashboard extends Component
 
     public function updatedToLocation(){
         $this->listRides = DashboardLib::ridesInDay($this->fromDate, $this->toDate, $this->fromLocation, $this->toLocation);
-    }
-
-    public function showDashboard(){
-        $this->page = $page;
     }
 
     public function hydrate(){
@@ -90,18 +89,7 @@ class ModeratorDashboard extends Component
     public function boardingPass($rideId = 0, $orderTicketId = 0){
         $this->listPassengers = DashboardLib::detailRides($rideId);
 
-        $orderTicket = OrderLib::getOrderTicket($orderTicketId);
-        //$this->orderDetail = OrderLib::getOrderDetail($orderTicket->orderId); // dirty fill up data
-
-        //if exist promo, change seat price
-        if ($orderTicket->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $orderTicket->discount);
-
-        $content = OrderLib::generateBoardingPass($orderTicket); 
-        $fileName = $orderTicket->type == ONEWAY ? 'Departure Ticket.pdf' : 'Return Ticket.pdf';
-
-        return response()->streamDownload(function () use ($content) {
-            echo $content;
-        }, $fileName);
+        return OrderLib::downloadBoardingPass($orderTicketId);
     }
 
     public function render() {

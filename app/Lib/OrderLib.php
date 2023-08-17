@@ -185,6 +185,21 @@ class OrderLib
         return $pdfData;
     }
 
+    public static function downloadBoardingPass($orderTicketId){
+        $orderTicket = self::getOrderTicket($orderTicketId);
+        //$this->orderDetail = OrderLib::getOrderDetail($orderTicket->orderId); // dirty fill up data
+
+        //if exist promo, change seat price
+        if ($orderTicket->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $orderTicket->discount);
+
+        $content = self::generateBoardingPass($orderTicket); 
+        $fileName = $orderTicket->type == ONEWAY ? 'Departure Ticket.pdf' : 'Return Ticket.pdf';
+
+        return response()->streamDownload(function () use ($content) {
+            echo $content;
+        }, $fileName);
+    }
+
     public function testPDF(){
         $order = Order::with(['orderTickets' => function($orderTicket){
             $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
