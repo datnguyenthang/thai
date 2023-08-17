@@ -153,6 +153,9 @@
                                     <td>{{ $ride->totalCustomer }}</td>
                                     <td>{{ $ride->totalCustomerConfirmed }}</td>
                                     <td>
+                                        <a href="#" wire:click="displayRide({{ $ride->id }})">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
                                         <a href="#" wire:click="exportRides({{ $ride->id }})">
                                             <i class="fas fa-download"></i>
                                         </a>
@@ -184,8 +187,78 @@
         -->
     </div>
 
+    /////////////----Modal Ride-------////////
+    {{--Show modal boostrap to quick view detail order--}}
+    <div class="modal fade show" tabindex="-1" wire:model="boardingPass" wire:key="modal-{{ $rideId }}"
+        style="display: @if($showModal === true) block @else none @endif;" role="dialog">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ trans('backend.ridedetail') }}</h5>
+                    <button class="btn-close" wire:click="$set('showModal', false)"></button>
+                </div>
+                <div class="modal-body">
+
+                    @if($showModal === true && $listPassengers)
+                        <div class="row">
+                            <table class="table table-striped table-danger">
+                                <tr>
+                                    <th>Order Code</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Adult Quantity</th>
+                                    <th>Children Quantity</th>
+                                    <th>Pickup</th>
+                                    <th>Dropoff</th>
+                                    <th>Full Name</th>
+                                    <th>Customer Type</th>
+                                    <th>User Name</th>
+                                    <th>Ticket Type</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                                @foreach ($listPassengers as $listPassenger)
+                                    <tr>
+                                        <td>{{ $listPassenger->code }}</td>
+                                        <td>{{ $listPassenger->phone }}</td>
+                                        <td>{{ $listPassenger->email }}</td>
+                                        <td>{{ $listPassenger->adultQuantity }}</td>
+                                        <td>{{ $listPassenger->childrenQuantity }}</td>
+                                        <td>{{ $listPassenger->pickup }}</td>
+                                        <td>{{ $listPassenger->dropoff }}</td>
+                                        <td>{{ $listPassenger->fullname }}</td>
+                                        <td>{{ $listPassenger->CustomerType }}</td>
+                                        <td>{{ $listPassenger->name }}</td>
+                                        <td>{{ $listPassenger->type }}</td>
+                                        <td>{{ $listPassenger->status }}</td>
+                                        <td>
+                                            <button class="btn bg_own_color text-light"
+                                                wire:key="passenger-{{ $listPassenger->orderTicketId }}"
+                                                wire:click="boardingPass({{ $rideId }}, {{ $listPassenger->orderTicketId }})"
+                                                wire:loading.attr="disabled">
+                                                    {{ trans('backend.download') }}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    @endif
+                    <div class="modal-footer">
+                        <button type="button" wire:click="$set('showModal', false)" class="btn btn-secondary">{{ trans('backend.close') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Let's also add the backdrop / overlay here -->
+    <div class="modal-backdrop fade show" id="backdrop"
+        style="display: @if($showModal === true) block @else none @endif;">
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module">
+        /*
         const data = {
             labels: [
                 'Confirm',
@@ -211,5 +284,6 @@
             //document.getElementById('revenueChart'),
             //config
         );
+        */
     </script>
 </div>

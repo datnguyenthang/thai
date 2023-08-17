@@ -107,4 +107,34 @@ class DashboardLib {
 
         return $passengers;
     }
+
+    public static function detailRides($rideId = 0) {
+        $passengers = Ride::select('rides.id', 'rides.name as Ridename', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
+                                   'o.code', 'o.phone', 'o.email', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff', 'ot.id as orderTicketId',
+                                   DB::raw('CONCAT(o.firstName, " ", o.lastName) as fullname'),
+                                   DB::raw('CASE WHEN o.customerType <> 0 THEN ct.name ELSE "Online" END AS CustomerType'), 'u.name',
+                                   DB::raw('CASE WHEN ot.type = '.ONEWAY.' THEN "Departure" ELSE "Return" END AS Ticket'),
+                                   DB::raw('CASE WHEN o.status = '.CONFIRMEDORDER.' THEN "Confirm" ELSE "Not Confirm" END AS Status')
+                                )
+                    ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
+                    ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
+                    ->join('order_tickets as ot' , function ($otjoin) {
+                        $otjoin->on('rides.id', '=', 'ot.rideId');
+                    })
+                    ->leftJoin('orders as o' , function ($ojoin) {
+                        $ojoin->on('ot.orderId', '=', 'o.id');
+                    })
+                    ->leftJoin('customer_types as ct', 'ct.id', '=', 'o.customerType')
+                    ->leftJoin('users as u', 'u.id', '=', 'o.userId')
+                    ->where(function ($query) use ($rideId) {
+
+                        if ($rideId) {
+                            $query->where('rides.id', $rideId);
+                        }
+                    })
+                    ->orderBy('rides.id', 'asc')
+                    ->get();
+
+        return $passengers;
+    }
 }
