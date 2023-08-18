@@ -15,7 +15,7 @@ use App\Models\Ride;
 
 class DashboardLib {
 
-    public static function ridesInDay($fromDate = 0, $toDate = 0, $depart = 0, $dest = 0){
+    public static function ridesInDay($fromDate = 0, $toDate = 0, $depart = 0, $dest = 0, $isOrder = true, $perPage = 10){
         $rides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
                                 DB::raw('COUNT(ot.id) as totalCustomer'), 
                                 DB::raw('COUNT(o.id) as totalCustomerConfirmed') ,
@@ -31,19 +31,23 @@ class DashboardLib {
                         $ojoin->on('ot.orderId', '=', 'o.id');
                         $ojoin->where('o.status', CONFIRMEDORDER);
                     })
-                    ->where(function ($query) use ($fromDate, $toDate, $depart, $dest) {
+                    ->where(function ($query) use ($fromDate, $toDate, $depart, $dest, $isOrder) {
                         if($fromDate) $query->where('rides.departDate', '>=', $fromDate);
                         if($toDate) $query->where('rides.departDate', '<=', $toDate);
                         if($depart) $query->where('rides.fromLocation', $depart);
                         if($dest) $query->where('rides.toLocation', $dest);
+                        //if($isOrder) $query->where('totalCustomer', '>', 0);
 
                         if (!$fromDate && !$toDate)
                             $query->where('rides.departDate', '=', Carbon::now()->toDateString());
                     })
                     ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate')
+                    ->when($isOrder, function ($query) {
+                        $query->having('totalCustomer', '>', 0);
+                    })
                     ->orderBy('rides.departDate', 'asc')
                     ->orderBy('rides.departTime', 'asc')
-                    ->get();
+                    ->paginate($perPage);
 
         return $rides;
     }

@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-md-2">
                         <label>Depart</label>
-                        <select id="fromLocation" name="fromLocation" class="form-control" wire:model="fromLocation" placeholder="{{ trans('messages.pickup') }}">
+                        <select id="fromLocation" name="fromLocation" class="form-control form-select" wire:model="fromLocation" placeholder="{{ trans('messages.pickup') }}">
                             <option value=""></option>
                             @foreach($fromLocationList as $location)
                                 <option value="{{ $location->id }}">{{ $location->name }}</option>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-md-2">
                         <label>Destination</label>
-                        <select id="toLocation" name="toLocation" class="form-control" wire:model="toLocation" placeholder="{{ trans('messages.dropoff') }}">
+                        <select id="toLocation" name="toLocation" class="form-control form-select" wire:model="toLocation" placeholder="{{ trans('messages.dropoff') }}">
                             <option value=""></option>
                             @foreach($toLocationList as $location)
                                 <option value="{{ $location->id }}">{{ $location->name }}</option>
@@ -124,13 +124,17 @@
                         <label>To</label>
                         <input id="toDate" name="toDate" wire:model="toDate" class="form-control" type="date" required>
                     </div>
+                    <div class="col-md-2 d-flex flex-column align-items-center text-center">
+                        <label>Is ordered?</label>
+                        <input id="isOrder" type="checkbox" wire:model="isOrder" class="form-control form-check-input">
+                    </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body" style="height: 30rem;">
                     <div class="row">
                         <table class="table">
                             <tr>
-                                <th>No</th>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>From</th>
                                 <th>To</th>
@@ -145,7 +149,7 @@
                             </tr>
                             @foreach($listRides as $key => $ride)
                                 <tr class="{{ $ride->isDepart ? 'table-danger' : 'table-success'; }}">
-                                    <td>{{ $key + 1 }}</td>
+                                    <td>{{ $ride->id }}</td>
                                     <td>{{ $ride->name }}</td>
                                     <td>{{ $ride->fromLocationName }}</td>
                                     <td>{{ $ride->toLocationName }}</td>
@@ -163,6 +167,7 @@
                                 </tr>
                             @endforeach
                         </table>
+                        {{ $listRides->links() }}
                     </div>
                 </div>
             </div>
@@ -187,7 +192,7 @@
         -->
     </div>
 
-    /////////////----Modal Ride-------////////
+    <!----Modal Ride------->
     {{--Show modal boostrap to quick view detail order--}}
     <div class="modal fade show" tabindex="-1" wire:model="boardingPass" wire:key="modal-{{ $rideId }}"
         style="display: @if($showModal === true) block @else none @endif;" role="dialog">
