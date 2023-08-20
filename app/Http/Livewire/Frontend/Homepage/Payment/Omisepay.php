@@ -8,6 +8,7 @@ use App\Lib\OrderLib;
 
 use App\Models\Order;
 use App\Models\OrderStatus;
+use App\Models\PaymentMethod;
 
 class Omisepay extends Component
 {
@@ -23,6 +24,8 @@ class Omisepay extends Component
         $this->order = OrderLib::getOrderDetail($orderId);
         $this->publicKey = OMISE_PUBLIC_KEY;
         $this->secretKey = OMISE_SECRET_KEY;
+
+        $this->paymentMethod = PaymentMethod::where('name', '=', CARD)->first();
 
         $this->amount = $this->order->finalPrice * 100;
     }
@@ -47,7 +50,7 @@ class Omisepay extends Component
                 ]);
 
                 $order = Order::findOrFail($this->order->id);
-                $order->paymentMethod = CARD;
+                $order->paymentMethod = $this->paymentMethod->id;
                 $order->paymentStatus = PAID;
                 $order->transactionCode = $charge['transaction'];
                 $order->transactionDate = date('Y-m-d H:i:s', strtotime($charge['created_at']));
@@ -55,12 +58,11 @@ class Omisepay extends Component
                 $order->save();
 
                 //dispatch event to Payment component
-                $this->emitUp('updatePayment', UPPLOADTRANSFER);
+                $this->emitUp('updatePayment', ALREADYPAID);
             }
 
         } catch (\Exception $e) {
-            // Handle payment error
-            // Display an error message to the user
+
         }
     }
 

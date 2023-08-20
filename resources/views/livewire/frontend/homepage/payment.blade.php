@@ -101,24 +101,7 @@
                                     <a data-bs-toggle="pill" href="#omisepay" class="omisepay nav-link {{ $tab == 'omise' ? 'active' : '' }}">
                                         <i class="fas fa-money-check-alt"></i> {{ trans('messages.paymentonline') }}
                                     </a> 
-                                </li>  
-                                <!--
-                                <li class="nav-item">
-                                    <a data-bs-toggle="pill" href="#alipay" class="alipay nav-link">
-                                        <i class="fab fa-alipay mr-2"></i> {{ trans('messages.alipay') }}
-                                    </a> 
                                 </li>
-                                <li class="nav-item">
-                                    <a data-bs-toggle="pill" href="#wechat" class="wechat nav-link">
-                                        <i class="fab fa-wechat mr-2"></i> {{ trans('messages.wechat') }}
-                                    </a> 
-                                </li>
-                                <li class="nav-item">
-                                    <a data-bs-toggle="pill" href="#promptpay" class="promptpay nav-link">
-                                        <i class="fab fa-promptpay mr-2"></i> {{ trans('messages.promptpay') }}
-                                    </a> 
-                                </li>
-                                -->
                             </ul>
                         </div> <!-- End -->
                         <!-- Credit card form content -->
@@ -132,28 +115,17 @@
                                     {!! trans('messages.omiseinfomation') !!}
                                 </div>
                                 <script type="text/javascript" src="https://cdn.omise.co/omise.js"></script>
-                                <livewire:frontend.homepage.payment.omisepay :orderId="$order->id" />
-                                <livewire:frontend.homepage.payment.promptpay :orderId="$order->id" />
+
+                                @foreach ($paymentMethodList as $paymentMethod)
+                                    @if($paymentMethod->name == CARD && $paymentMethod->status == ACTIVE)
+                                        <livewire:frontend.homepage.payment.omisepay :orderId="$order->id" />
+                                    @endif
+
+                                    @if($paymentMethod->name == PROMPTPAY && $paymentMethod->status == ACTIVE)
+                                        <livewire:frontend.homepage.payment.promptpay :orderId="$order->id" />
+                                    @endif
+                                @endforeach
                             </div>
-                            <!-- Alipay payment -->
-                            {{--
-                            <div id="alipay" class="tab-pane fade pt-3">
-                                <livewire:frontend.homepage.payment.alipay :orderId="$order->id" />
-                            </div>
-                            --}}
-                            <!-- Wechat payment -->
-                            {{--
-                            <div id="wechat" class="tab-pane fade pt-3">
-                                <livewire:frontend.homepage.payment.wechat :orderId="$order->id" />
-                            </div>
-                            --}}
-                            <!-- Promptpay payment -->
-                            {{--
-                            <div id="promptpay" class="tab-pane fade pt-3">
-                                <livewire:frontend.homepage.payment.promptpay :orderId="$order->id" />
-                            </div>
-                            --}}
-                            
                         </div>
                     </div>
                 </div>
@@ -161,10 +133,6 @@
         </section>
     </div>
 
-    <!-- Loading Overlay, show loading to lock user action-->
-    <div id="overlay" wire:loading>
-        <div class="spinner-grow text-danger"></div>
-        <br/>
-        <span>{{ trans('messages.processingpayment') }}</span>
-    </div>
+    <!-- Loading state-->
+    @include('livewire.frontend.homepage.payment.loading')
 </div>

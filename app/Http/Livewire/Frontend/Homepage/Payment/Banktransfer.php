@@ -92,18 +92,17 @@ class Banktransfer extends Component
         $this->loadProof();
     }
 
-    public function payment($paymentMethod) {
+    public function payment() {
         //Update status of this order
         OrderStatus::create([
             'orderId' => intVal($this->order->id),
             'status' => UPPLOADTRANSFER,
             //'note' => $this->note,
             'changeDate' => date('Y-m-d H:i:s'),
-            //'userId' => Auth::id(),
         ]);
         
         //dispatch event to Payment component
-        $this->emitUp('updatePayment', UPPLOADTRANSFER);
+        $this->emitUp('updatePayment', ALREADYPAID);
     }
 
     public function render()

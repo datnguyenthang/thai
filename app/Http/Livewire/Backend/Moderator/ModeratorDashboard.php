@@ -7,8 +7,10 @@ use Livewire\WithPagination;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\RidesExport;
+
 use App\Lib\DashboardLib;
 use App\Lib\OrderLib;
+use App\Lib\TicketLib;
 
 use App\Models\Location;
 use App\Models\Order;
@@ -74,7 +76,7 @@ class ModeratorDashboard extends Component
     public function boardingPass($rideId = 0, $orderTicketId = 0){
         $this->listPassengers = DashboardLib::detailRides($rideId);
 
-        return OrderLib::downloadBoardingPass($orderTicketId);
+        return TicketLib::downloadBoardingPass($orderTicketId);
     }
 
     public function render() {

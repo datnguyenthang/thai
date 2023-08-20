@@ -96,6 +96,7 @@ return [
     'search' => 'Search',
     'close' => 'Close',
     'download' => 'Download',
+    'downloadeticket' => 'Download E-ticket',
 
     //Customer
     'createcustomertype' => 'Create Customer Type',

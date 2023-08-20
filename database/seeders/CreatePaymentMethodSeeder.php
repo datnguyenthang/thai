@@ -17,24 +17,24 @@ class CreatePaymentMethodSeeder extends Seeder
     {
         $paymentMethods = [
             [
-               'name'=>'Cash',
-               'description'=>'Cash payment method',
-               'isTransaction'=>0,
+               'name'=> CASH,
+               'description'=> 'Cash payment method',
+               'isTransaction'=> 0,
             ],
             [
-                'name'=>'Bank Transfer',
+                'name'=> BANKTRANSFER,
                 'description'=>'Bank Transfer payment method',
-                'isTransaction'=>1,
+                'isTransaction'=> 1,
             ],
             [
-                'name'=>'Card',
+                'name'=> CARD,
                 'description'=>'Card payment method',
-                'isTransaction'=>1,
+                'isTransaction'=> 1,
              ],
             [
-                'name'=>'QRcode',
-                'description'=>'QR payment method',
-                'isTransaction'=>1,
+                'name'=> PROMPTPAY,
+                'description'=>'Promptpay QR payment method',
+                'isTransaction'=> 1,
             ],
         ];
     

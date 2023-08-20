@@ -11,6 +11,7 @@ use App\Lib\OrderLib;
 use App\Models\Order;
 use App\Models\OrderStatus;
 use App\Models\OmiseWebhookEvent;
+use App\Models\PaymentMethod;
 
 class Promptpay extends Component
 {
@@ -24,6 +25,7 @@ class Promptpay extends Component
 	public $paymentStatus = PENDING;
     public $webhookEventData = null;
     public $chargeTransaction;
+    public $paymentMethod;
 
     protected $listeners = ['promptpayCreateCharge' => 'promptpayCreateCharge',
 						    'promptpayRefresh' => 'promptpayRefresh',
@@ -34,6 +36,8 @@ class Promptpay extends Component
         $this->order = OrderLib::getOrderDetail($orderId);
         $this->publicKey = OMISE_PUBLIC_KEY;
         $this->secretKey = OMISE_SECRET_KEY;
+
+        $this->paymentMethod = PaymentMethod::where('name', '=', PROMPTPAY)->first();
 
         $this->amount = $this->order->finalPrice * 100;
     }
@@ -67,10 +71,10 @@ class Promptpay extends Component
                                                     ->where('eventStatus', SUCCESSFUL)
                                                     ->first();
                 if ($webhookPayment) {
-                    $this->paymentStatus = SUCCESSFUL;         
-                    //$this->paidByPromptpay();           
+                    $this->paymentStatus = SUCCESSFUL;
+                    //$this->paidByPromptpay();
                     $this->chargeTransaction = $omisePayment;
-                    $this->emit('paymentStatusUpdated', SUCCESSFUL);
+                    this->emit('paymentStatusUpdated', SUCCESSFUL);
                 }
             }
         }
@@ -78,26 +82,25 @@ class Promptpay extends Component
 
     public function paidByPromptpay(){
         try {
-            if ($this->chargeTransaction['status'] == SUCCESSFUL){
+            if ($this->chargeTransaction['status'] == SUCCESSFUL){ 
                 //Update order status
                 OrderStatus::create([
                     'orderId' => intVal($this->order->id),
                     'status' => PAIDORDER,
                     //'note' => $this->note,
                     'changeDate' => date('Y-m-d H:i:s'),
-                    //'userId' => Auth::id(),
                 ]);
 
                 $order = Order::findOrFail($this->order->id);
-                $order->paymentMethod = PROMPTPAY;
+                $order->paymentMethod = $this->paymentMethod->id;
                 $order->paymentStatus = PAID;
-                $order->transactionCode = $charge['transaction'];
-                $order->transactionDate = date('Y-m-d H:i:s', strtotime($charge['created_at']));
+                $order->transactionCode = $this->chargeTransaction['transaction'];
+                $order->transactionDate = date('Y-m-d H:i:s', strtotime($this->chargeTransaction['created_at']));
 
                 $order->save();
 
                 //dispatch event to Payment component
-                $this->emitUp('updatePayment', UPPLOADTRANSFER);
+                $this->emitUp('updatePayment', ALREADYPAID);
             }
 
         } catch (\Exception $e) {

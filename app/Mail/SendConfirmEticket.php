@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SendTicket extends Mailable
+class SendConfirmEticket extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -56,7 +56,7 @@ class SendTicket extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.successTicket',
+            view: 'emails.sendConfirmEticket',
         );
     }
 

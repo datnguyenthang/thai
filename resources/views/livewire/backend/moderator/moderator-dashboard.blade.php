@@ -256,6 +256,10 @@
             </div>
         </div>
     </div>
+
+    <!-- Loading Overlay, show loading to lock user action-->
+    @include('livewire.frontend.homepage.payment.loading')
+
     <!-- Let's also add the backdrop / overlay here -->
     <div class="modal-backdrop fade show" id="backdrop"
         style="display: @if($showModal === true) block @else none @endif;">

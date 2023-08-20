@@ -126,6 +126,8 @@
     define('DROPOFFANYOTHER', 2);
 
     //ORDER STATUS
+    define('ALREADYPAID', 1);
+
     define('NEWORDER', 0);
     define('UPPLOADTRANSFER', 1);
     define('RESERVATION', 2);
@@ -139,31 +141,24 @@
                             NEWORDER => "New Order",
                             UPPLOADTRANSFER => "Upload Transfered", 
                             RESERVATION => "Reserve",
+                            PAIDORDER => 'Paid',
                             CONFIRMEDORDER => "Confirmed", 
                             CANCELDORDER => "Canceled",
-                            COMPLETEDORDER => "Completed"
+                            //COMPLETEDORDER => "Completed"
                         ]);
 
     //PAYMENT METHOD
+
     define('PAYMENTMETHODSTATUS', [
                                         0 => "Open",
                                         1 => "Close"
                                     ]);
-    define('BANKTRANSFER', 1);
-    define('CASH', 2);
-    define('CARD', 3);
-    define('PROMPTPAY', 4);
-    define('ALIPAY', 5);
-    define('WECHAT', 6);
-    
-
-    define('PAYMENTMETHOD', [
-                                BANKTRANSFER => "Bank transfer",
-                                CASH => "Cash",
-                                CARD => "Card",
-                                PROMPTPAY => 'Promptpay',
-                            ]
-                        );
+    define('BANKTRANSFER', 'bank transfer');
+    define('CASH', 'cash');
+    define('CARD', 'card');
+    define('PROMPTPAY', 'promptpay');
+    define('ALIPAY', 'alipay');
+    define('WECHAT', 'wechat');
 
     //PAYMENT STATUS
     define('NOTPAID', 0);

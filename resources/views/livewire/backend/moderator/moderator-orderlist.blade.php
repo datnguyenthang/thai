@@ -153,12 +153,12 @@
                         <td>{{ ORDERSTATUS[$order->status] }}</td>
                         <td>
                             <!--<button class="btn btn-info" wire:click="detail({{ $order->orderTicketId }})"></button>-->
-                            <button class="call-btn btn btn-outline-success btn-floating btn-sm"
+                            <button class="call-btn btn btn-success btn-floating btn-sm"
                                 wire:click="viewOrder({{ $order->id }})">
                                     <!--<i class="fa fa-eye"></i>-->
                                     {{ trans('backend.vieworder') }}
                             </button>
-                            <a class="call-btn btn btn-outline-warning btn-floating btn-sm"
+                            <a class="call-btn btn btn-warning btn-floating btn-sm"
                                 href="/{{ auth()->user()->role}}processorder/{{ $order->id }}">
                                     <!--<i class="fa fa-process"></i>-->
                                     {{ trans('backend.processorder') }}
@@ -226,7 +226,7 @@
                                             <p>{{ trans('backend.departdate') }}: {{ $orderTicket['departDate'] }}</p>
                                             <button class="btn bg_own_color text-light"
                                                     wire:click="downnloadTicket({{$orderTicket->id}})"
-                                                    wire:loading.attr="disabled">{{ trans('backend.download') }}</button>
+                                                    wire:loading.attr="disabled">{{ trans('backend.downloadeticket') }}</button>
                                         </div>
                                     @endif
                                 @endif
@@ -243,7 +243,7 @@
                                             <p>{{ trans('backend.departdate') }}: {{ $orderTicket['departDate'] }}</p>
                                             <button class="btn bg_own_color text-light"
                                                     wire:click="downnloadTicket({{$orderTicket->id}})"
-                                                    wire:loading.attr="disabled">{{ trans('backend.download') }}</button>
+                                                    wire:loading.attr="disabled">{{ trans('backend.downloadeticket') }}</button>
                                         </div>
                                     @endif
 
@@ -258,7 +258,7 @@
                                             <p>{{ trans('backend.departdate') }}: {{ $orderTicket['departDate'] }}</p>
                                             <button class="btn bg_own_color text-light"
                                                     wire:click="downnloadTicket({{$orderTicket->id}})"
-                                                    wire:loading.attr="disabled">{{ trans('backend.download') }}</button>
+                                                    wire:loading.attr="disabled">{{ trans('backend.downloadeticket') }}</button>
                                         </div>
                                     @endif
                                 @endif

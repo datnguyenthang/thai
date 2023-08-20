@@ -9,15 +9,17 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SendCancelationCustomerRequest extends Mailable
+class SendConfirmCompleteOrder extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $order;
+    public $pdfFiles;
 
-    public function __construct( $order)
+    public function __construct($order, $pdfFiles)
     {
-        $this->order  = $order;
+        $this->order = $order;
+        $this->pdfFiles = $pdfFiles;
     }
     /**
      * Create a new message instance.
@@ -26,7 +28,11 @@ class SendCancelationCustomerRequest extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.sendCancelationCustomerRequest')
+        foreach ($this->pdfFiles as $pdfFile) {
+            $this->attachData($pdfFile['content'], $pdfFile['filename']);
+        }
+
+        return $this->view('emails.sendConfirmCompleteOrder')
                     ->with(['order' => $this->order]);
     }
 
@@ -38,7 +44,7 @@ class SendCancelationCustomerRequest extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'SEUDAMGO - CANCELATION',
+            subject: 'SEUDAMGO - CONFIRMATION ORDER',
         );
     }
 
@@ -50,7 +56,7 @@ class SendCancelationCustomerRequest extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.sendCancelationCustomerRequest',
+            view: 'emails.sendConfirmCompleteOrder',
         );
     }
 

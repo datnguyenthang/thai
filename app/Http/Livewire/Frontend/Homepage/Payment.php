@@ -9,6 +9,7 @@ use OmiseCustomer;
 
 use Livewire\WithFileUploads;
 use App\Lib\OrderLib;
+use App\Lib\EmailLib;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -19,14 +20,15 @@ use App\Models\SeatClass;
 use App\Models\Ticket;
 use App\Models\Order;
 use App\Models\OrderStatus;
+use App\Models\PaymentMethod;
 
 class Payment extends Component
 {
     use WithFileUploads;
     protected $orderLib;
 
-    const GOTOPAY = 0;
-    const PAID = 1;
+    CONST GOTOPAY = 0;
+    CONST PAID = 1;
 
     public $step = 0;
 
@@ -43,6 +45,7 @@ class Payment extends Component
 
         $this->code = $this->folderName = Route::current()->parameter('code');
         $this->order = OrderLib::getOrderDetailByCode($this->code);
+        $this->paymentMethodList = PaymentMethod::get()->whereNotIn('name', [BANKTRANSFER, CASH]);
 
         //redirect to homepage if there are no order match code found
         if (!$this->order) redirect('/');
@@ -52,7 +55,7 @@ class Payment extends Component
         $this->step = $step;
 
         //SEND MAIL
-        OrderLib::sendMailConfirmTicket($this->code);
+        EmailLib::sendMailConfirmOrderEticket($this->code);
     }
 
     public function hydrate(){

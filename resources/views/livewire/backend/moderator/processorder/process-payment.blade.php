@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th>{{ $order->paymentMethod ? $paymentMethodList->firstWhere('id', $order->paymentMethod)->name : '' }}</th>
+                            <th>{{ $order->paymentMethod ? ucwords($paymentMethodList->firstWhere('id', $order->paymentMethod)->name) : '' }}</th>
                             <th>{{ $order->transactionCode ?? '' }}</th>
                             <th>{{ !is_null($order->paymentStatus) ? PAYMENTSTATUS[$order->paymentStatus] : '' }}</th>
                             <th>{{ $order->transactionDate ? date('Y-m-d H:i:s', strtotime($order->transactionDate)) : '' }}</th>
@@ -37,34 +37,34 @@ style="display: @if($showModalPayment === true) block @else none @endif;" role="
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ trans('backend.updateorderpayment') }}</h5>
+                <h5 class="modal-title fw-bold">{{ trans('backend.updateorderpayment') }}</h5>
                 <button class="btn-close" wire:click="$set('showModalPayment', false)"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <span class="form-label">{{ trans('backend.paymentmethod') }}</span>
+                            <span class="form-label fw-bold">{{ trans('backend.paymentmethod') }}</span>
                             <select id="paymentMethod" name="paymentMethod" class="form-select" wire:model="paymentMethod">
                                 @foreach($paymentMethodList as $value)
-                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                    <option value="{{ $value->id }}">{{ ucwords($value->name) }}</option>
                                 @endforeach
                             </select>
                             @error('paymentMethod') <span class="text-danger error">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     @if($isTransaction)
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-3">
                             <div class="form-group">
-                                <span class="form-label">{{ trans('backend.transactioncode') }}</span>
+                                <span class="form-label fw-bold">{{ trans('backend.transactioncode') }}</span>
                                 <input id="transactionCode" type="text" class="form-control" name="transactionCode" class="form-input" wire:model="transactionCode" />
                                 @error('transactionCode') <span class="text-danger error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     @endif
-                    <div class="col-md-12">
+                    <div class="col-md-12 mt-3">
                         <div class="form-group">
-                            <span class="form-label">{{ trans('backend.paymentmethodstatus') }}</span>
+                            <span class="form-label fw-bold">{{ trans('backend.paymentmethodstatus') }}</span>
                             <select id="paymentStatus" name="paymentStatus" class="form-select" wire:model="paymentStatus">
                                 @foreach(PAYMENTSTATUS as $key => $value)
                                     <option value="{{ $key }}">{{ $value }}</option>
@@ -73,15 +73,15 @@ style="display: @if($showModalPayment === true) block @else none @endif;" role="
                             @error('paymentStatus') <span class="text-danger error">{{ $message }}</span> @enderror
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 mt-3">
                         <div class="form-group">
-                            <span class="form-label">{{ trans('backend.transactiondate') }}</span>
+                            <span class="form-label fw-bold">{{ trans('backend.transactiondate') }}</span>
                             <input id="transactionDate" type="datetime-local" step="1" class="form-control" name="transactionDate" wire:model="transactionDate" />
                             @error('transactionDate') <span class="text-danger error">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 mt-3">
                         <button class="btn bg_own_color text-light"
                                             wire:click="updatePayment()"
                                             wire:loading.attr="disabled">{{ trans('backend.update') }}</button>

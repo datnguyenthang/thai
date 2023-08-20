@@ -8,6 +8,9 @@ use Illuminate\Validation\Rule;
 
 use Livewire\Component;
 use App\Lib\OrderLib;
+use App\Lib\EmailLib;
+use App\Lib\TicketLib;
+
 use App\Models\Order;
 use App\Models\OrderStatus;
 use App\Models\PaymentMethod;
@@ -26,6 +29,7 @@ class ModeratorProcessOrder extends Component
 
     public $status;
     public $note;
+    public $isSendmail = true;
 
     public $showModalStatus = false;
     public $showModalPayment = false;
@@ -40,7 +44,7 @@ class ModeratorProcessOrder extends Component
         $this->orderStatuses = OrderStatus::select('order_statuses.status', 'order_statuses.orderId', 'order_statuses.note', 'order_statuses.changeDate', 'u.name')
                                             ->leftJoin('users as u', 'u.id', '=', 'order_statuses.userId')
                                             ->where('orderId', $this->orderId)->get();
-        $this->paymentMethodList = PaymentMethod::get()->where('status', ACTIVE);
+        $this->paymentMethodList = PaymentMethod::get();
         $this->paymentMethod = $this->paymentMethodList->first()->id;
         $this->loadProof();
     }
@@ -66,10 +70,14 @@ class ModeratorProcessOrder extends Component
     }
 
     public function viewOrderPayment() {
-        $this->paymentMethod = $this->paymentMethodList->first()->id;
-        $this->paymentStatus = PAID;
-        $this->transactionCode = null;
-        $this->transactionDate = null;
+
+        $this->paymentMethod = $this->order->paymentMethod ?? $this->paymentMethodList->first()->id;
+        $this->paymentStatus = $this->order->paymentStatus ?? PAID;
+        $this->transactionCode = $this->order->transactionCode ?? null;
+        $this->transactionDate = $this->order->transactionDate ?? null;
+
+        $this->isTransaction = PaymentMethod::find($this->paymentMethod)->isTransaction;
+
         $this->showModalPayment = true;
     }
 
@@ -95,7 +103,7 @@ class ModeratorProcessOrder extends Component
     }
 
     public function downloadBoardingPass($orderTicketId){
-        return OrderLib::downloadBoardingPass($orderTicketId);
+        return TicketLib::downloadBoardingPass($orderTicketId);
     }
 
     public function updatePayment(){
@@ -118,7 +126,7 @@ class ModeratorProcessOrder extends Component
         $order = Order::findOrFail($this->orderId);
         $order->paymentMethod = $this->paymentMethod;
         $order->paymentStatus = $this->paymentStatus;
-        $order->transactionCode = $this->transactionCode;
+        $order->transactionCode = $this->isTransaction ? $this->transactionCode : '';
         $order->transactionDate = $this->transactionDate;
 
         $order->save();
@@ -157,6 +165,29 @@ class ModeratorProcessOrder extends Component
         $order->status = $this->status;
         $order->save();
 
+        //send email
+        if ($this->isSendmail) {
+            switch ($this->status) {
+                case NEWORDER:
+                    EmailLib::sendMailConfirmOrderEticket($order->code);
+                    break;
+                case RESERVATION:
+                    EmailLib::sendMailConfirmReservation($order->code);
+                    break;
+                case CONFIRMEDORDER:
+                    EmailLib::sendMailConfirmCompleteOrder($order->code);
+                break;
+                case PAIDORDER:
+                    EmailLib::sendMailConfirmPaidOrder($order->code);
+                    break;
+                case CANCELDORDER:
+                    EmailLib::sendMailCancelOrder($order->code);
+                    break;
+
+                default:
+                echo "Your favorite color is neither red, blue, nor green!";
+            }
+        }
         //reset field
         $this->status = null;
         $this->note = null;

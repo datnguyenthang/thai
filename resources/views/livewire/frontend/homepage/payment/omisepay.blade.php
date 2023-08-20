@@ -2,7 +2,11 @@
     <form id="checkoutCardForm" wire:submit.prevent="pay">
         <input type="hidden" name="omiseToken" wire:model.defer="token">
         <input type="hidden" name="omiseSource" wire:model.defer="source">
-        <button type="submit" wire:loading.attr="disabled" class="form-control bg_own_color" wire:loading.attr="disabled" id="checkoutCardButton">Pay with Opn Payments</button>
+        <button type="submit" wire:loading.attr="disabled" class="form-control bg_own_color" wire:loading.class="loading" id="checkoutCardButton">
+            <span wire:loading.remove>Pay with Open Payments</span>
+            <span wire:loading>Loading...</span>
+        </button>
+        @error('paymentcard') <span class="text-danger error">{{ $message }}</span> @enderror
     </form>
 
     <script>
@@ -35,4 +39,7 @@
             });
         });
     </script>
+
+    <!-- Loading state-->
+    @include('livewire.frontend.homepage.payment.loading')
 </div>

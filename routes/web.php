@@ -62,7 +62,7 @@ Route::get('/aboutus', App\Http\Livewire\Frontend\Aboutus::class)->name('aboutus
 Route::get('/contactus', App\Http\Livewire\Frontend\Contactus::class)->name('contactus');
 
 Route::middleware(['auth'])->group(function () {
-    //User profile
+    /*---User authenciation----*/
     Route::get('/user/profile',  App\Http\Livewire\Component\User\Profile::class)->name('userprofile');
     Route::get('/user/edit',  App\Http\Livewire\Component\User\Edit::class)->name('useredit');
 

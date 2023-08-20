@@ -68,18 +68,7 @@ class ModeratorOrderlist extends Component
     }
 
     public function downnloadTicket($orderTicketId){
-        $orderTicket = OrderLib::getOrderTicket($orderTicketId);
-        $this->orderDetail = OrderLib::getOrderDetail($orderTicket->orderId); // dirty fill up data
-
-        //if exist promo, change seat price
-        //if ($orderTicket->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $orderTicket->discount);
-
-        $content = OrderLib::generateEticket($orderTicket); 
-        $fileName = $orderTicket->type == ONEWAY ? 'Departure Ticket.pdf' : 'Return Ticket.pdf';
-
-        return response()->streamDownload(function () use ($content) {
-            echo $content;
-        }, $fileName);
+        return OrderLib::downloadEticket($orderTicketId);
     }
 
     public function viewOrder($orderId) {

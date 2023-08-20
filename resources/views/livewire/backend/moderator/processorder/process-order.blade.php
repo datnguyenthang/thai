@@ -47,14 +47,14 @@ style="display: @if($showModalStatus === true) block @else none @endif;" role="d
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ trans('backend.updateorderstatus') }}</h5>
+                <h5 class="modal-title fw-bold">{{ trans('backend.updateorderstatus') }}</h5>
                 <button class="btn-close" wire:click="$set('showModalStatus', false)"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <span class="form-label">{{ trans('backend.orderstatus') }}</span>
+                            <span class="form-label fw-bold">{{ trans('backend.orderstatus') }}</span>
                             <select id="status" name="status" class="form-select" wire:model="status">
                                 @foreach(ORDERSTATUS as $key => $value)
                                     <option value="{{ $key }}">{{ $value }}</option>
@@ -63,14 +63,22 @@ style="display: @if($showModalStatus === true) block @else none @endif;" role="d
                             @error('status') <span class="text-danger error">{{ $message }}</span> @enderror
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 mt-3">
                         <div class="form-group">
-                            <span class="form-label">{{ trans('backend.note') }}</span>
+                            <span class="form-label fw-bold">{{ trans('backend.note') }}</span>
                             <textarea id="note" name="note" class="form-control" type="date" wire:model="note" cols="50" rows="5"></textarea>
                             @error('note') <span class="text-danger error">{{ $message }}</span> @enderror
                         </div>
                     </div>
-                    <div class="col-md-12">
+
+                    <div class="col-md-12 mt-3">
+                        <div class="form-group">
+                            <label>Send Email</label>
+                            <input id="isSendmail" type="checkbox" wire:model="isSendmail" class="form-check-input">
+                            <p class="fw-bold text-red">Considering sending email to customer when changing status to avoid spamming email.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-3">
                         <button class="btn bg_own_color text-light"
                                             wire:click="updateOrderStatus()"
                                             wire:loading.attr="disabled">{{ trans('backend.updateorderstatus') }}</button>
