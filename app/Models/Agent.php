@@ -15,6 +15,6 @@ class Agent extends Model
      * @return response()
      */
     protected $fillable = [
-        'name', 'agentType', 'code', 'type', 'manager', 'email', 'phone', 'line', 'paymentType', 'status'
+        'name', 'agentType', 'code', 'type', 'manager', 'email', 'phone', 'line', 'location', 'paymentType', 'agentContractType', 'status'
     ];
 }

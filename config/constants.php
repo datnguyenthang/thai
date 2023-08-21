@@ -54,11 +54,14 @@
     define('RESORTAGENT', 1);
     define('TRAVELAGENT', 2);
     define('WEBSITEAGENT', 3);
+    define('TICKETBOOTHAGENT', 4);
+    
     define('OTHERSAGENT', 9);
     define('ATYPE', [ 
                         RESORTAGENT => "Resort agent",
                         TRAVELAGENT => "Travel agent",
                         WEBSITEAGENT => "Website agent",
+                        TICKETBOOTHAGENT => "Ticket Booth Agent",
                         OTHERSAGENT => "Others",
                     ]);
     define('AGENTPAYMENTTYPE', [
@@ -66,6 +69,23 @@
                                     1 => "Transfer", 
                                     2 => "Card"
                                 ]);
+    
+    define('BOOKED', 1);
+    define('NOTBOOKED', 2);
+    define('INTRODUCED', 3);
+    define('CONTRACTPROCESS', 4);
+    define('DONECONTRACT', 5);
+    define('BOOKEDUNCONTRACT', 6);
+
+    define('AGENTSTATUSLIST', [
+        BOOKED => "Booked", 
+        NOTBOOKED => "Not Booked",
+        INTRODUCED => "Introduced",
+        CONTRACTPROCESS => "Contract Process",
+        DONECONTRACT => "Done Contract",
+        BOOKEDUNCONTRACT => "Booked/Uncontract",
+    ]);
+
     define('AGENTSTATUS', [
                             0 => "Open", 
                             1 => "Close"

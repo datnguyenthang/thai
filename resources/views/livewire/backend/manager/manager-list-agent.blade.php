@@ -39,7 +39,7 @@
                     <td>{{ $agent->email }}</td>
                     <td>{{ $agent->phone }}</td>
                     <td>{{ $agent->line }}</td>
-                    <td>{{ AGENTPAYMENTTYPE[$agent->paymentType] }}</td>
+                    <td>{{ $agent->paymentType ? AGENTPAYMENTTYPE[$agent->paymentType] : '' }}</td>
 
                     <td>{{ AGENTSTATUS[$agent->status] }}</td>
                     <td>
