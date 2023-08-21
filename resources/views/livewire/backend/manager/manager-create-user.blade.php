@@ -14,7 +14,7 @@
             <input type="email" class="form-control w-50" wire:model="email">
             @error('email') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
-        
+
         <div class="form-outline mb-4">
             <label  class="form-label">{{ trans('backend.userpassword') }}</label>
             <input type="password" class="form-control w-50" wire:model="password">
@@ -24,7 +24,7 @@
         <div class="form-outline mb-4">
             <label class="form-label">{{ trans('backend.userrole') }}</label>
             <select id="role" class="form-select w-50" wire:model="role" wire:change="updateAgentId">
-                @foreach([3 => 'Moderator', 4 => 'Agent'] as $key => $value)
+                @foreach([MODERATOR => 'Moderator', AGENT => 'Agent'] as $key => $value)
                     <option value="{{ $key }}">{{ $value }}</option>
                 @endforeach
             </select>

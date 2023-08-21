@@ -89,7 +89,7 @@ class ManagerCreateUser extends Component
         if ($this->role == MODERATOR) $this->agentId = null;
     }
 
-    public function updateRole() {
+    public function updatedRole() {
         if ($this->role == AGENT) $this->agentId = $this->listAgent->keys()->first();
         if ($this->role == MODERATOR) $this->agentId = null;
     }
