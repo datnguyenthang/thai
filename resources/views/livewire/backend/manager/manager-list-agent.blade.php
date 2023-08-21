@@ -6,6 +6,7 @@
     <table class="table datatable-table">
         <thead>
             <tr>
+                <th>{{ trans('backend.id') }}</th>
                 <th wire:click="sortBy('name')"><i class="fas fa-sort"></i>{{ trans('backend.agentname') }}</th>
                 <th wire:click="sortBy('code')"><i class="fas fa-sort"></i>{{ trans('backend.agentcode') }}</th>
                 <th wire:click="sortBy('agenttype')"><i class="fas fa-sort"></i>{{ trans('backend.agenttype') }}</th>
@@ -22,6 +23,7 @@
         <tbody>
             @foreach ($agents as $agent)
                 <tr>
+                    <td>{{ $agent->id }}</td>
                     <td>{{ $agent->name }}</td>
                     <td>{{ $agent->code }}</td>
                     <td>
