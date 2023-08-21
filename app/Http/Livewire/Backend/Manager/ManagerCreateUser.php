@@ -21,7 +21,8 @@ class ManagerCreateUser extends Component
     public function mount($userId = 0)
     {
         $this->listAgent = Agent::pluck('name', 'id');
-        $this->agentId = $this->listAgent->keys()->first();
+        $this->agentId = null;
+        $this->role = MODERATOR;
 
         $this->userId = $userId;
 
