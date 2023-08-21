@@ -18,8 +18,7 @@ class ManagerCreateUser extends Component
 
     public $listAgent;
 
-    public function mount($userId = 0)
-    {
+    public function mount($userId = 0) {
         $this->listAgent = Agent::pluck('name', 'id');
         $this->agentId = null;
         $this->role = MODERATOR;
@@ -38,8 +37,7 @@ class ManagerCreateUser extends Component
         }
     }
 
-    public function save()
-    {
+    public function save() {
         $this->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $this->userId,
@@ -87,7 +85,12 @@ class ManagerCreateUser extends Component
         return redirect()->route('managerListUser');
     }
 
-    public function updateAgentId(){
+    public function updateAgentId() {
+        if ($this->role == MODERATOR) $this->agentId = null;
+    }
+
+    public function updateRole() {
+        if ($this->role == AGENT) $this->agentId = $this->listAgent->keys()->first();
         if ($this->role == MODERATOR) $this->agentId = null;
     }
 
