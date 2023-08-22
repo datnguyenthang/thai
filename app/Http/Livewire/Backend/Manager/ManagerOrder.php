@@ -9,8 +9,7 @@ class ManagerOrder extends Component
 {
     public $moderatorOrder;
 
-    public function mount()
-    {
+    public function mount() {
         $this->moderatorOrder = ModeratorOrder::class;
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\AdminController;
@@ -66,6 +67,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user/profile',  App\Http\Livewire\Component\User\Profile::class)->name('userprofile');
     Route::get('/user/edit',  App\Http\Livewire\Component\User\Edit::class)->name('useredit');
 
+    Route::get('/pagelist', App\Http\Livewire\Component\Cms\PageList::class)->name('pageList');
+    Route::get('/createpage/{pageId}', App\Http\Livewire\Component\Cms\CreatePage::class)->name('createPage');
+
+
     /*---All Admin Routes List----*/
     Route::middleware(['user-access:admin'])->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
@@ -74,9 +79,6 @@ Route::middleware(['auth'])->group(function () {
     /*------All Manager Routes List------*/
     Route::middleware(['user-access:manager'])->group(function () {
         Route::get('/manager', App\Http\Livewire\Backend\Manager\ManagerDashboard::class)->name('managerDashboard');
-
-        Route::get('/managercms', App\Http\Livewire\Backend\Manager\ManagerCms::class)->name('managerCms');
-        Route::get('/cms/create/{pageId}', App\Http\Livewire\Backend\Manager\ManagerCreateCms::class)->name('managerCreateCms');
 
         Route::get('/managerorder', App\Http\Livewire\Backend\Manager\ManagerOrder::class)->name('managerOrder');
         Route::get('/managerorderlist', App\Http\Livewire\Backend\Manager\ManagerOrderlist::class)->name('managerOrderlist');
@@ -123,12 +125,4 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/agentorderlist', App\Http\Livewire\Backend\Agent\AgentOrderList::class)->name('agentOrderlist');
     });
 
-/*
-    Route::middleware(['user-access:manager|moderator'])->group(function () {dd(auth()->user());
-        if (auth()->user()->role == 'moderator')
-            Route::get('order', [App\Http\Livewire\Backend\Moderator\ModeratorDashboard::class, 'render'])->name('order');
-        if (auth()->user()->role == 'manager')
-            Route::get('order', [App\Http\Livewire\Backend\Manager\ManagerOrder::class, 'render'])->name('order');
-    });
-*/
 });

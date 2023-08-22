@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Manager;
+namespace App\Http\Livewire\Component\Cms;
 
 use MSA\LaravelGrapes\Models\Page;
 use MSA\LaravelGrapes\Services\GenerateFrontEndService;
 
 use Livewire\Component;
 
-class ManagerCreateCms extends Component
+class CreatePage extends Component
 {
     public $pageId;
     public $name;
@@ -59,11 +59,30 @@ class ManagerCreateCms extends Component
         }
         // Reset input fields
 
-        return redirect()->route('managerCms');
+        return redirect()->route('pageList');
     }
 
-    public function render(){
-        return view('livewire.backend.manager.manager-create-cms')
-                    ->layout('manager.layouts.app');
+    public function render() {
+
+        $user = auth()->user();
+
+        switch ($user->role) {
+            case 'manager':
+                return view('livewire.component.cms.create-page')->layout('manager.layouts.app');
+                break;
+            case 'creator':
+                return view('livewire.component.cms.create-page')->layout('creator.layouts.app');
+                break;
+            case 'moderator':
+                return <<<'blade'
+                            <div><p>You do not have permission to access for this page.</p></div>
+                        blade;
+                break;
+            case 'agent':
+                return <<<'blade'
+                            <div><p>You do not have permission to access for this page.</p></div>
+                        blade;
+                break;
+        }
     }
 }

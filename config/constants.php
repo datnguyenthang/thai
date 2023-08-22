@@ -18,12 +18,14 @@
     define('MANAGER', 2);
     define('MODERATOR', 3);
     define('AGENT', 4);
+    define('CREATOR', 5);
     define('USERTYPE', [
                         USER => 'User',
                         ADMIN => 'Admin', 
                         MANAGER => 'Manager',
                         MODERATOR => 'Moderator',
-                        AGENT => 'Agent'
+                        AGENT => 'Agent',
+                        CREATOR =>  'Creator'
                     ]);
                     
     //CUSTOMER CHANNEL

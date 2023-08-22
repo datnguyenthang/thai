@@ -9,7 +9,7 @@
 
     <h1>{{ trans('backend.cms') }}</h1>
     <input type="text" wire:model.debounce.500ms="search" placeholder="{{ trans('backend.search') }}...">
-    <a href="/cms/create/0" class="btn btn-info">{{ trans('backend.createpage') }}</a>
+    <a href="/createpage/0" class="btn btn-info">{{ trans('backend.createpage') }}</a>
     
     <table class="table datatable-table">
         <thead>
@@ -34,7 +34,7 @@
                             <a class="call-btn btn btn-outline-primary btn-floating btn-sm" target="_blank" href='/{{ $page['slug'] }}'>                     
                                 <i class="fa fa-eye"></i>
                             </a>
-                            <a class="call-btn btn btn-outline-primary btn-floating btn-sm" href='/cms/create/{{ $page['id'] }}'>                     
+                            <a class="call-btn btn btn-outline-primary btn-floating btn-sm" href='/createpage/{{ $page['id'] }}'>                     
                                 <i class="fa fa-edit"></i>
                             </a>
                             <a class="call-btn btn btn-outline-primary btn-floating btn-sm" href="#" wire:click="deletePage({{ $page['id'] }})">

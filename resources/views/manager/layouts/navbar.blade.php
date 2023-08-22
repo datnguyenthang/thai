@@ -71,8 +71,8 @@
              <span>{{ trans('backend.pkdp') }}</span>
           </a>
           
-          <a href="{{ route('managerCms') }}" 
-             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerCms' ? 'active' : '' }}">
+          <a href="{{ route('pageList') }}" 
+             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'pageList' ? 'active' : '' }}">
              <i class="fas fa-newspaper fa-fw me-3"></i>
              <span>{{ trans('backend.cms') }}</span>
           </a>

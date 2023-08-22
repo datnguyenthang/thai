@@ -24,7 +24,7 @@
         <div class="form-outline mb-4">
             <label class="form-label">{{ trans('backend.userrole') }}</label>
             <select id="role" class="form-select w-50" wire:model="role" wire:change="updateAgentId">
-                @foreach([MODERATOR => 'Moderator', AGENT => 'Agent'] as $key => $value)
+                @foreach([MODERATOR => 'Moderator', AGENT => 'Agent' , CREATOR => 'Creator'] as $key => $value)
                     <option value="{{ $key }}">{{ $value }}</option>
                 @endforeach
             </select>

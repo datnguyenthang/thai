@@ -58,6 +58,8 @@ class LoginController extends Controller
                 return redirect('/moderator');
             } else if (auth()->user()->role == 'agent') {
                 return redirect('/agent');
+            } else if (auth()->user()->role == 'creator') {
+                return redirect('/creatorcms');
             } else {
                 return redirect()->route('home');
             }
