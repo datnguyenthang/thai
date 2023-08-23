@@ -51,7 +51,7 @@ class LoginController extends Controller
         if(auth()->attempt(array('email' => $inputVal['email'], 'password' => $inputVal['password']))){
 
             if (auth()->user()->role == 'admin') {
-                return redirect('/admin');
+                return redirect('/user');
             } else if (auth()->user()->role == 'manager') {
                 return redirect('/manager');
             } else if (auth()->user()->role == 'moderator') {
@@ -59,7 +59,7 @@ class LoginController extends Controller
             } else if (auth()->user()->role == 'agent') {
                 return redirect('/agent');
             } else if (auth()->user()->role == 'creator') {
-                return redirect('/creatorcms');
+                return redirect('/pagelist');
             } else {
                 return redirect()->route('home');
             }
