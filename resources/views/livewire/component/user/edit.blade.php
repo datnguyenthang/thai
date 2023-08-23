@@ -11,7 +11,7 @@
         </div>
         <div class="form-outline mb-4">
             <label class="form-label">Email:</label>
-            <input type="email" wire:model="email" class="form-control w-50">
+            <input type="email" wire:model="email" class="form-control w-50" disabled>
             @error('email') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
         <div class="form-outline mb-4">

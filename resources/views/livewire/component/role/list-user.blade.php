@@ -35,4 +35,3 @@
         {{ $users->links() }}
     </div>
 </div>
-

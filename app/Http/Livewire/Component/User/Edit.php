@@ -44,6 +44,9 @@ class Edit extends Component
         $user = auth()->user();
 
         switch ($user->role) {
+            case 'admin':
+                return view('livewire.component.user.edit')->layout('admin.layouts.app');
+                break;
             case 'manager':
                 return view('livewire.component.user.edit')->layout('manager.layouts.app');
                 break;

@@ -63,17 +63,21 @@ Route::get('/aboutus', App\Http\Livewire\Frontend\Aboutus::class)->name('aboutus
 Route::get('/contactus', App\Http\Livewire\Frontend\Contactus::class)->name('contactus');
 
 Route::middleware(['auth'])->group(function () {
-    /*---User authenciation----*/
+    /*---User authenciation, EDIT, PROFILE----*/
     Route::get('/user/profile',  App\Http\Livewire\Component\User\Profile::class)->name('userprofile');
     Route::get('/user/edit',  App\Http\Livewire\Component\User\Edit::class)->name('useredit');
 
+    //CMS only for creator, manager
     Route::get('/pagelist', App\Http\Livewire\Component\Cms\PageList::class)->name('pageList');
     Route::get('/createpage/{pageId}', App\Http\Livewire\Component\Cms\CreatePage::class)->name('createPage');
 
-
+    //MANAGER USER only for admin and manager
+    Route::get('/user', App\Http\Livewire\Component\Role\ListUser::class)->name('listUser');
+    Route::get('/user/create/{userId}', App\Http\Livewire\Component\Role\CreateUser::class)->name('createUser');
+    
     /*---All Admin Routes List----*/
     Route::middleware(['user-access:admin'])->group(function () {
-        Route::get('/admin', [AdminController::class, 'index'])->name('dashboard');
+        //Route::get('/admin', [App\Http\Livewire\Component\Role\ListUser::class])->name('adminDashboard');
     });
 
     /*------All Manager Routes List------*/
@@ -83,9 +87,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/managerorder', App\Http\Livewire\Backend\Manager\ManagerOrder::class)->name('managerOrder');
         Route::get('/managerorderlist', App\Http\Livewire\Backend\Manager\ManagerOrderlist::class)->name('managerOrderlist');
         Route::get('/managerprocessorder/{orderId}', App\Http\Livewire\Backend\Manager\ManagerProcessOrder::class)->name('managerProcessOrder');
-
-        Route::get('/user', App\Http\Livewire\Backend\Manager\ManagerListUser::class)->name('managerListUser');
-        Route::get('/user/create/{userId}', App\Http\Livewire\Backend\Manager\ManagerCreateUser::class)->name('managerCreateUser');
 
         Route::get('/location', App\Http\Livewire\Backend\Manager\ManagerListLocation::class)->name('managerLocation');
         Route::get('/location/create/{locationId}', App\Http\Livewire\Backend\Manager\ManagerCreateLocation::class)->name('managerCreateLocation');

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Manager;
+namespace App\Http\Livewire\Component\Role;
 
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Agent;
 
-class ManagerCreateUser extends Component
+class CreateUser extends Component
 {
     public $userId;
     public $name;
@@ -17,8 +17,15 @@ class ManagerCreateUser extends Component
     public $status;
 
     public $listAgent;
+    public $listRole;
 
     public function mount($userId = 0) {
+        if(auth()->user()->role == 'admin') 
+            $this->listRole = [MANAGER => 'Manager', MODERATOR => 'Moderator', AGENT => 'Agent' , CREATOR => 'Creator'];
+        
+        if(auth()->user()->role == 'manager') 
+            $this->listRole = [MODERATOR => 'Moderator', AGENT => 'Agent' , CREATOR => 'Creator'];
+        
         $this->listAgent = Agent::pluck('name', 'id');
         $this->agentId = null;
         $this->role = MODERATOR;
@@ -44,7 +51,7 @@ class ManagerCreateUser extends Component
             'role' => 'required|numeric',
             'agentId' => [
                     'required_if:role,' . AGENT,
-                    'not_in:0',
+                    //'not_in:0',
                 ],
         ]);
 
@@ -82,7 +89,7 @@ class ManagerCreateUser extends Component
         $this->role = '';
         $this->password = '';
 
-        return redirect()->route('managerListUser');
+        return redirect()->route('listUser');
     }
 
     public function updateAgentId() {
@@ -94,9 +101,21 @@ class ManagerCreateUser extends Component
         if ($this->role == MODERATOR) $this->agentId = null;
     }
 
-    public function render()
-    {
-        return view('livewire.backend.manager.manager-create-user')
-                ->layout('manager.layouts.app');
+    public function render(){
+        $user = auth()->user();
+
+        switch ($user->role) {
+            case 'admin':
+                return view('livewire.component.role.create-user')->layout('admin.layouts.app');
+                break;
+            case 'manager':
+                return view('livewire.component.role.create-user')->layout('manager.layouts.app');
+                break;
+            default:
+                return <<<'blade'
+                            <div><p>You do not have permission to access for this page.</p></div>
+                        blade;
+                break;
+        }
     }
 }
