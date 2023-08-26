@@ -244,6 +244,12 @@
                                             <button class="btn bg_own_color text-light"
                                                     wire:click="downnloadTicket({{$orderTicket->id}})"
                                                     wire:loading.attr="disabled">{{ trans('backend.downloadeticket') }}</button>
+
+                                            <button class="btn bg_own_color text-light"
+                                                    wire:click="downnloadboardingPass({{ $orderTicket['rideId'] }}, {{ $orderTicket->id }})"
+                                                    wire:loading.attr="disabled">
+                                                        {{ trans('backend.download') }}
+                                                </button>
                                         </div>
                                     @endif
 
@@ -259,6 +265,12 @@
                                             <button class="btn bg_own_color text-light"
                                                     wire:click="downnloadTicket({{$orderTicket->id}})"
                                                     wire:loading.attr="disabled">{{ trans('backend.downloadeticket') }}</button>
+
+                                            <button class="btn bg_own_color text-light"
+                                                    wire:click="downnloadboardingPass({{ $orderTicket['rideId'] }}, {{ $orderTicket->id }})"
+                                                    wire:loading.attr="disabled">
+                                                        {{ trans('backend.download') }}
+                                                </button>
                                         </div>
                                     @endif
                                 @endif

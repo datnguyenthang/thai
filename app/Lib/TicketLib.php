@@ -73,7 +73,7 @@ class TicketLib {
     }
 
     public static function downloadEticket($orderTicketId) { 
-        $orderTicket = self::getOrderTicket($orderTicketId);
+        $orderTicket = OrderLib::getOrderTicket($orderTicketId);
         //$this->orderDetail = self::getOrderDetail($orderTicket->orderId); // dirty fill up data
 
         //if exist promo, change seat price

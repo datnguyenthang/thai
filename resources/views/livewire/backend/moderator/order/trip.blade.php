@@ -132,7 +132,7 @@
                                                 <td>{{ $ride->departTime }}</td>
                                                 <td>{{ $ride->returnTime }}</td>
                                                 <td>{{ $ride->seatClass }}</td>
-                                                <th>฿{{ round($customerTypePrice) }} ({{ AGENTLOCAL[$customerType] }})</th>
+                                                <th>฿{{ round($customerTypePrice) }} ({{ AGENTLOCAL[$customerTypeType] }})</th>
                                                 <td>
                                                     <input type="radio" name="returnRadio"
                                                             value="{{ $ride->seatClassId }}"

@@ -51,8 +51,7 @@ class ModeratorOrderlist extends Component
         $this->agents = Agent::get();
     }
 
-    public function sortBy($field)
-    {
+    public function sortBy($field){
         if ($this->sortField === $field) {
             $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
         } else {
@@ -61,8 +60,7 @@ class ModeratorOrderlist extends Component
         }
     }
 
-    public function orderBy($field)
-    {
+    public function orderBy($field){
         $this->rides = Ride::orderBy($field)->get();
     }
 
@@ -74,14 +72,16 @@ class ModeratorOrderlist extends Component
         return TicketLib::downloadEticket($orderTicketId);
     }
 
+    public function downnloadboardingPass($rideId = 0, $orderTicketId = 0){
+        return TicketLib::downloadBoardingPass($orderTicketId);
+    }
+
     public function viewOrder($orderId) {
-        
         $this->orderDetail = OrderLib::getOrderDetail($orderId);
         $this->showModal = true;
     }
 
-    public function render()
-    {
+    public function render() {
         $orderList = Order::with(['orderTickets' => function($orderTicket){
                                     $orderTicket->select('order_tickets.*', 'r.name', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
                                                 ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
