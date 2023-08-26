@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Response;
+
 use App\Lib\OrderLib;
+use App\Lib\TicketLib;
+
 
 use Livewire\Component;
 
@@ -68,7 +71,7 @@ class ModeratorOrderlist extends Component
     }
 
     public function downnloadTicket($orderTicketId){
-        return OrderLib::downloadEticket($orderTicketId);
+        return TicketLib::downloadEticket($orderTicketId);
     }
 
     public function viewOrder($orderId) {
