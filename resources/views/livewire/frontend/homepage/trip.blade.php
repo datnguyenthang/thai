@@ -80,7 +80,7 @@
                         >
                             <div class="fs-5 mt-2 fw-bold text-dark">{{ $ride->name }}</div>
                             <div class="col-md-1">
-                                <img src="https://images.ferryhopper.com/companies/optimized/SJT-min.png" alt="SEAJETS"  style="height: 50px; width: 50px;">
+                                <img src="img/seudamgo_ferry.png" alt="SEAJETS"  style="height: 50px; width: 50px;">
                             </div>
                             <div class="col-md-2 pl-0">
                                 <span class="fw-bold fs-5 lh-1 text-dark">{{ $ride->departTime }}</span><br/>
