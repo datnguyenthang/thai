@@ -8,6 +8,7 @@ use Livewire\Component;
 use Carbon\Carbon;
 
 use App\Lib\OrderLib;
+use App\Lib\EmailLib;
 
 use App\Models\Ride;
 use App\Models\Location;
@@ -408,7 +409,7 @@ class AgentOrder extends Component
             DB::commit();
 
             //SEND MAIL
-            OrderLib::sendMailConfirmTicket($codeOrder);
+            EmailLib::sendMailConfirmOrderEticket($codeOrder);
             $this->order = OrderLib::getOrderDetailByCode($codeOrder);
 
             $this->step++;
