@@ -37,7 +37,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ trans('messages.promptpay') }}</h5>
-                        <button class="btn-close" wire:click="promptpayRefresh" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button class="btn-close" id="close" wire:click="promptpayRefresh" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="container mt-3 d-flex justify-content-center">
@@ -59,9 +59,16 @@
         </div>
         <div class="modal-backdrop fade show" id="backdrop" style="display: block;"></div>           
         <script>
+            var close = document.querySelector("#close");
+
             var intervalId = setInterval(function() {
                 window.livewire.emit('checkPaymentStatus');
             }, 5000);
+
+            close.addEventListener("click", (event) => {
+                event.preventDefault();
+                clearInterval(intervalId);
+            });
 
             window.livewire.on('paymentStatusUpdated', (newPaymentStatus) => {
                 if (newPaymentStatus === '{{ SUCCESSFUL }}') {
