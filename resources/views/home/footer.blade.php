@@ -22,7 +22,10 @@
         <div class="twits1">
           <ul class="ul1">
             <li>Contact us via phone or email:</li>
-            <li>+66 631251421</li>
+            <li>+666-3125-1421 (Th- En)</li>
+            <li>+668-2038-8825(Th)</li>
+            <li>+669-7989-9780(Th)</li>
+            <li>+666-4564-1112(Th)</li>
             <li>info@seudamgo.com</li>
           </ul>
         </div>

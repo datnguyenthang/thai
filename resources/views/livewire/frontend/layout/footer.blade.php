@@ -10,11 +10,8 @@
           <p>
             SEUDAMGO is a new brand of sea passenger transport in Thailand. We have a team of staff who are well-trained in customer service. Along with that, we also bring motor catamarans with new designs and different engine improvements to help customers experience the fastest vessels with unexpected utilities. Our services are fully committed to safety, reliability, and reduced environmental impact. We connect family, friends and make it possible for you to discover new destinations or revisit favorites.
           </p>
-          <!--
-          <p>
-            <a href="#" class="btn-default btn2">Read More</a>
-          </p>
-          -->
+          <p>Thailand Travel License Number 12/03291 for Leopard Transportation Co.,Ltd.</p>
+          <p>Company registration no. 0205565031093</p>
         </div>
         
         <div class="col-md-12 col-lg-4">
@@ -22,8 +19,11 @@
           <div class="twits1">
             <ul class="ul1">
               <li>Contact us via phone or email:</li>
-              <li>+66 631251421</li>
-              <li>info@seudamgo.com</li>
+              <li><a href="tel:+66631251421">+666-3125-1421 (Th- En)</a></li>
+              <li><a href="tel:+66820388825">+668-2038-8825(Th)</a></li>
+              <li><a href="tel:+66979899780">+669-7989-9780(Th)</a></li>
+              <li><a href="tel:+66645641112">+666-4564-1112(Th)</a></li>
+              <li><a href="mailto:info@seudamgo.com">info@seudamgo.com</a></li>
             </ul>
           </div>
         </div>
