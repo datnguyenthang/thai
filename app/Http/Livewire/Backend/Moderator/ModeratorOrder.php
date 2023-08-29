@@ -103,6 +103,7 @@ class ModeratorOrder extends Component
     public $discountAmount= null;
 
     public $order;
+    protected $listeners = ['refreshOrder' => 'refreshOrder'];
 
     public function mount(){
         $this->adults = 1;
@@ -140,6 +141,23 @@ class ModeratorOrder extends Component
         
         $this->orderStatusList = array_intersect_key(ORDERSTATUS, array_flip([RESERVATION, CONFIRMEDORDER]));
         $this->status = RESERVATION;
+    }
+    public function refreshOrder(){
+        $user = auth()->user();
+
+        switch ($user->role) {
+            case 'manager':
+                return redirect()->to('/managerorder');
+                break;
+            case 'moderator':
+                return redirect()->to('/moderatororder');
+                break;
+            default:
+                return <<<'blade'
+                            <div><p>You do not have permission to access for this page.</p></div>
+                        blade;
+                break;
+        }
     }
 
     public function updatedDepartureDate(){

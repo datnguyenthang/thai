@@ -18,6 +18,9 @@ class EmailLib {
     public static function sendMailConfirmOrderEticket($code){
         $order = OrderLib::getOrderDetailByCode($code);
 
+        //If customer have no email and agent, return
+        if (!$order->email && !$order->agentEmail) return false;
+
         foreach($order->orderTickets as $orderTicket) {
             $orderTicket->fullname = $order->fullname;
             $orderTicket->pickup = $order->pickup;
@@ -34,6 +37,7 @@ class EmailLib {
             $locationFiles = TicketLib::getLocationFile($orderTicket->locationId);
             $pdfFiles[] = ['content' => TicketLib::generateEticket($orderTicket, $locationFiles), 'filename' => $fileName];
         }
+        
         
         //if there are no email of customer, sending mail to agent instead.
         if (!$order->email) $order->email = $order->agentEmail;

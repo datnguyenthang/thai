@@ -68,7 +68,7 @@
                 @include('livewire.backend.moderator.order.trip')
                 <div class="container">
                     <div class="list-inline pull-left">
-                        <a href="/moderatororder" class="btn bg-dark text-light" onclick="return confirm('Are you sure?');">Cancel</a>
+                        <a wire:click="$emit('refreshOrder')" class="btn bg-dark text-light" onclick="return confirm('Are you sure?');">Cancel</a>
                     </div>
                     <div class="list-inline pull-right">
                         <button class="btn bg_own_color text-light" 
@@ -86,7 +86,7 @@
                 @include('livewire.backend.moderator.order.info')
                 <div class="container">
                     <div class="list-inline pull-left">
-                        <a href="/moderatororder" class="btn bg-dark text-light" onclick="return confirm('Are you sure?');">Cancel</a>
+                        <a wire:click="$emit('refreshOrder')" class="btn bg-dark text-light" onclick="return confirm('Are you sure?');">Cancel</a>
                     </div>
                     <div class="list-inline pull-right">
                         <button class="btn bg_own_color text-light" 
@@ -104,7 +104,7 @@
                 @include('livewire.backend.moderator.order.review')
                 <div class="container">
                     <div class="list-inline pull-left">
-                        <a href="/moderatororder" class="btn bg-dark text-light" onclick="return confirm('Are you sure?');">Cancel</a>
+                        <a wire:click="$emit('refreshOrder')" class="btn bg-dark text-light" onclick="return confirm('Are you sure?');">Cancel</a>
                     </div>
                     <div class="list-inline pull-right">
                         <button class="btn bg_own_color text-light"
