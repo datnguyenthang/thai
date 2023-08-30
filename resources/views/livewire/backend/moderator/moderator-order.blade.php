@@ -116,6 +116,8 @@
                             wire:loading.attr="disabled">{{ trans('backend.booking') }}</button>
                     </div>
                 </div>
+                <!-- Loading Overlay, show loading to lock user action-->
+                @include('livewire.frontend.homepage.payment.loading')
             </div>
 
             <div class="tab-pane p-1 fade @if($step === 5) in show active @endif" role="tabpanel" id="stepper-step-5">
@@ -126,8 +128,5 @@
 
         </div>
     </div>
-    
-    <!-- Loading Overlay, show loading to lock user action-->
-    @include('livewire.frontend.homepage.payment.loading')
 
 </div>

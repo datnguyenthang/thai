@@ -97,6 +97,7 @@ class AgentOrder extends Component
     public $discountAmount= null;
 
     public $order;
+    protected $listeners = ['refreshAgentOrder' => 'refreshAgentOrder'];
 
     public function mount(){
         $this->adults = 1;
@@ -136,6 +137,9 @@ class AgentOrder extends Component
 
         $this->orderStatusList = array_intersect_key(ORDERSTATUS, array_flip([RESERVATION, UPPLOADTRANSFER]));
         $this->status = RESERVATION;
+    }
+    public function refreshOrder(){
+        return redirect()->to('/agentorder');
     }
 
     public function chooseFromLocation($location){

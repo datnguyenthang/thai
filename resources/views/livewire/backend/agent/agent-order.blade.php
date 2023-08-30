@@ -104,7 +104,7 @@
                 @include('livewire.backend.agent.order.review')
                 <div class="container">
                     <div class="list-inline pull-left">
-                        <a href="/agentorder" class="btn bg-dark text-light" onclick="return confirm('Are you sure?');">Cancel</a>
+                        <a wire:click="$emit('refreshAgentOrder')" class="btn bg-dark text-light" onclick="return confirm('Are you sure?');">Cancel</a>
                     </div>
                     <div class="list-inline pull-right">
                         <button class="btn bg_own_color text-light"
@@ -115,6 +115,8 @@
                             wire:click="bookTicket"
                             wire:loading.attr="disabled">{{ trans('backend.booking') }}</button>
                     </div>
+                    <!-- Loading Overlay, show loading to lock user action-->
+                    @include('livewire.frontend.homepage.payment.loading')
                 </div>
             </div>
 
