@@ -97,6 +97,7 @@ return [
     'close' => 'Close',
     'download' => 'Download',
     'downloadeticket' => 'Download E-ticket',
+    'downloadeboardingpass' => 'Download Boarding Pass',
 
     //Customer
     'createcustomertype' => 'Create Customer Type',
