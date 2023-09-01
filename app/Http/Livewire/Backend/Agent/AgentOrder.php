@@ -54,6 +54,9 @@ class AgentOrder extends Component
     public $agentId;
     public $status;
 
+    public $statusNote;
+    public $paymentNote;
+
     public $agent;
 
     public $fromLocationList;
@@ -382,6 +385,17 @@ class AgentOrder extends Component
                 'orderId' => intVal($order->id),
                 'status' => $this->status,
                 //'note' => $this->note,
+                'changeDate' => date('Y-m-d H:i:s'),
+                'userId' => Auth::id(),
+            ]);
+
+            //SAVE first payment of this order
+            OrderPayment::create([
+                'orderId' => intVal($this->order->id),
+                'paymentStatus' => $this->paymentStatus,
+                'paymentMethod' => $this->paymentMethod,
+                'transactionCode' => $this->transactionCode,
+                'transactionDate' => $this->transactionDate,
                 'changeDate' => date('Y-m-d H:i:s'),
                 'userId' => Auth::id(),
             ]);

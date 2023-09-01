@@ -74,11 +74,6 @@ Route::middleware(['auth'])->group(function () {
     //MANAGER USER only for admin and manager
     Route::get('/user', App\Http\Livewire\Component\Role\ListUser::class)->name('listUser');
     Route::get('/user/create/{userId}', App\Http\Livewire\Component\Role\CreateUser::class)->name('createUser');
-    
-    /*---All Admin Routes List----*/
-    Route::middleware(['user-access:admin'])->group(function () {
-        //Route::get('/admin', [App\Http\Livewire\Component\Role\ListUser::class])->name('adminDashboard');
-    });
 
     /*------All Manager Routes List------*/
     Route::middleware(['user-access:manager'])->group(function () {
@@ -126,4 +121,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/agentorderlist', App\Http\Livewire\Backend\Agent\AgentOrderList::class)->name('agentOrderlist');
     });
 
+    /*---All Admin Routes List----*/
+    Route::middleware(['user-access:admin'])->group(function () {
+        Route::get('/importorder', App\Http\Livewire\Backend\Admin\ImportOrder::class)->name('importOrder');
+    });
 });

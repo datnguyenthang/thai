@@ -20,7 +20,7 @@ return new class extends Migration
                 $table->string('fromLocation');
                 $table->string('toLocation');
                 $table->string('departTime');
-                $table->string('returnTime');
+                $table->string('returnTime')->nullable($value = true);
                 $table->date('departDate');
                 $table->integer('hoursBeforeBooking')->default(0);/* 0=>Anytime*/
                 $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */

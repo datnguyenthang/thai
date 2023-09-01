@@ -184,11 +184,13 @@
 
     //PAYMENT STATUS
     define('NOTPAID', 0);
+    define('REFUND', 3);
     define('PAID', 8);
     define('PAIDBYCASH', 9);
     define('PAIDBYAGENT', 10);
     define('PAYMENTSTATUS', [
                                 NOTPAID => "Not paid",
+                                REFUND => "Refund",
                                 PAID => "Paid",
                                 //PAIDBYCASH => "Paid by cash",
                                 PAIDBYAGENT => "Paid by agent"

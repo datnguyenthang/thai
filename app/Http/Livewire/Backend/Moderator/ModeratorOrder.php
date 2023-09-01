@@ -19,6 +19,7 @@ use App\Models\Location;
 use App\Models\SeatClass;
 use App\Models\Order;
 use App\Models\OrderStatus;
+use App\Models\OrderPayment;
 use App\Models\OrderTicket;
 use App\Models\CustomerType;
 use App\Models\Promotion;
@@ -57,6 +58,9 @@ class ModeratorOrder extends Component
     public $transactionDate;
     public $agentId;
     public $status;
+
+    public $statusNote;
+    public $paymentNote;
 
     public $agent;
 
@@ -431,7 +435,19 @@ class ModeratorOrder extends Component
             OrderStatus::create([
                 'orderId' => intVal($order->id),
                 'status' => $this->status,
-                //'note' => $this->note,
+                //'note' => $this->statusNote,
+                'changeDate' => date('Y-m-d H:i:s'),
+                'userId' => Auth::id(),
+            ]);
+
+            //SAVE first payment of this order
+            OrderPayment::create([
+                'orderId' => intVal($this->order->id),
+                'paymentStatus' => $this->paymentStatus,
+                'paymentMethod' => $this->paymentMethod,
+                'transactionCode' => $this->transactionCode,
+                'transactionDate' => $this->transactionDate,
+                //'note' => $this->paymentNote,
                 'changeDate' => date('Y-m-d H:i:s'),
                 'userId' => Auth::id(),
             ]);

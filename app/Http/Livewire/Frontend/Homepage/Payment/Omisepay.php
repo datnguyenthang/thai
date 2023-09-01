@@ -8,6 +8,7 @@ use App\Lib\OrderLib;
 
 use App\Models\Order;
 use App\Models\OrderStatus;
+use App\Models\OrderPayment;
 use App\Models\PaymentMethod;
 
 class Omisepay extends Component
@@ -49,11 +50,15 @@ class Omisepay extends Component
                     //'userId' => Auth::id(),
                 ]);
 
-                $order = Order::findOrFail($this->order->id);
-                $order->paymentMethod = $this->paymentMethod->id;
-                $order->paymentStatus = PAID;
-                $order->transactionCode = $charge['transaction'];
-                $order->transactionDate = date('Y-m-d H:i:s', strtotime($charge['created_at']));
+                //Update order payment
+                OrderPayment::create([
+                    'orderId' => intVal($this->order->id),
+                    'paymentMethod' => $this->paymentMethod->id,
+                    'paymentStatus' => PAID,
+                    'transactionCode' => $charge['transaction'],
+                    'transactionDate' => date('Y-m-d H:i:s', strtotime($charge['created_at'])),
+                    'changeDate' => date('Y-m-d H:i:s'),
+                ]);
 
                 $order->save();
 

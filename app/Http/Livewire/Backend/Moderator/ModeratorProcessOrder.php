@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+use Omise\Omise;
 use Livewire\Component;
 use App\Lib\OrderLib;
 use App\Lib\EmailLib;
@@ -13,6 +14,7 @@ use App\Lib\TicketLib;
 
 use App\Models\Order;
 use App\Models\OrderStatus;
+use App\Models\OrderPayment;
 use App\Models\PaymentMethod;
 
 class ModeratorProcessOrder extends Component
@@ -20,6 +22,7 @@ class ModeratorProcessOrder extends Component
     public $order;
     public $orderId;
     public $orderStatuses;
+    public $orderPayments;
     public $paymentMethodList;
 
     public $paymentMethod;
@@ -44,6 +47,12 @@ class ModeratorProcessOrder extends Component
         $this->orderStatuses = OrderStatus::select('order_statuses.status', 'order_statuses.orderId', 'order_statuses.note', 'order_statuses.changeDate', 'u.name')
                                             ->leftJoin('users as u', 'u.id', '=', 'order_statuses.userId')
                                             ->where('orderId', $this->orderId)->get();
+
+        $this->orderPayments = OrderPayment::select('order_payments.paymentStatus', 'order_payments.orderId', 'order_payments.transactionCode',
+                                                    'order_payments.transactionDate', 'order_payments.paymentMethod', 'order_payments.note',
+                                                    'order_payments.changeDate', 'u.name')
+                                            ->leftJoin('users as u', 'u.id', '=', 'order_payments.userId')
+                                            ->where('orderId', $this->orderId)->get();
         $this->paymentMethodList = PaymentMethod::get();
         $this->paymentMethod = $this->paymentMethodList->first()->id;
         $this->loadProof();
@@ -54,6 +63,12 @@ class ModeratorProcessOrder extends Component
         $this->orderStatuses = OrderStatus::select('order_statuses.status', 'order_statuses.orderId', 'order_statuses.note', 'order_statuses.changeDate', 'u.name')
                                             ->leftJoin('users as u', 'u.id', '=', 'order_statuses.userId')
                                             ->where('orderId', $this->orderId)->get();
+        
+        $this->orderPayments = OrderPayment::select('order_payments.paymentStatus', 'order_payments.orderId', 'order_payments.transactionCode',
+                                            'order_payments.transactionDate', 'order_payments.paymentMethod', 'order_payments.note',
+                                            'order_payments.changeDate', 'u.name')
+                                    ->leftJoin('users as u', 'u.id', '=', 'order_payments.userId')
+                                    ->where('orderId', $this->orderId)->get();
     }
 
     public function updatedPaymentStatus(){
@@ -123,15 +138,24 @@ class ModeratorProcessOrder extends Component
             'paymentStatus' => 'required',
         ]);
 
-        $order = Order::findOrFail($this->orderId);
-        $order->paymentMethod = $this->paymentMethod;
-        $order->paymentStatus = $this->paymentStatus;
-        $order->transactionCode = $this->isTransaction ? $this->transactionCode : '';
-        $order->transactionDate = $this->transactionDate;
+        //SAVE first payment of this order
+        $orderPayment = OrderPayment::create([
+            'orderId' => intVal($this->orderId),
+            'paymentMethod' => $this->paymentMethod,
+            'paymentStatus' => $this->paymentStatus,
+            'transactionCode' => $this->isTransaction ? $this->transactionCode : '',
+            'transactionDate' => $this->transactionDate,
+            //'note' => $this->paymentNote,
+            'changeDate' => date('Y-m-d H:i:s'),
+            'userId' => Auth::id(),
+        ]);
 
-        $order->save();
+        // Add the new order status to the existing list
+        $orderPayment->name = Auth::user()->name;
+        $this->orderPayments->push($orderPayment);
 
         // Update order payment info
+        $order = Order::findOrFail($this->orderId);
         $this->order = $order;
 
         //reset field
@@ -193,6 +217,33 @@ class ModeratorProcessOrder extends Component
         $this->note = null;
 
         $this->showModalStatus = false;
+    }
+
+    public function refundOrder($orderId, $transactionCode) {
+        $order = Order::findOrFail($orderId);
+
+        $charge = \OmiseCharge::retrieve(OMISE_SECRET_KEY);
+        try {
+            $omise = new \Omise([
+                'publicKey' => OMISE_PUBLIC_KEY,
+                'secretKey' => OMISE_SECRET_KEY,
+            ]);
+
+            $charge = OmiseCharge::retrieve($transactionCode);
+            $refund = $charge->refunds()->create([
+                'amount'   => $order->finalPrice,  // Amount to refund in the smallest currency unit (e.g., cents)
+                'metadata' => [
+                    'order_id' => $order->code,  // Optional metadata, you can customize as needed
+                    'color'    => 'pink'
+                ]
+            ]);
+        
+            // Refund successful, handle your logic here
+            echo 'Refund successful! Refund ID: ' . $refund['id'];
+        } catch (Exception $e) {
+            // Handle errors
+            echo 'Error: ' . $e->getMessage();
+        }        
     }
 
     public function render() {

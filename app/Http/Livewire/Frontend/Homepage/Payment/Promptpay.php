@@ -10,6 +10,7 @@ use App\Lib\OrderLib;
 
 use App\Models\Order;
 use App\Models\OrderStatus;
+use App\Models\OrderPayment;
 use App\Models\OmiseWebhookEvent;
 use App\Models\PaymentMethod;
 
@@ -91,11 +92,15 @@ class Promptpay extends Component
                     'changeDate' => date('Y-m-d H:i:s'),
                 ]);
 
-                $order = Order::findOrFail($this->order->id);
-                $order->paymentMethod = $this->paymentMethod->id;
-                $order->paymentStatus = PAID;
-                $order->transactionCode = $this->chargeTransaction['transaction'];
-                $order->transactionDate = date('Y-m-d H:i:s', strtotime($this->chargeTransaction['created_at']));
+                //Update order payment
+                OrderPayment::create([
+                    'orderId' => intVal($this->order->id),
+                    'paymentMethod' => $this->paymentMethod->id,
+                    'paymentStatus' => PAID,
+                    'transactionCode' => $charge['transaction'],
+                    'transactionDate' => date('Y-m-d H:i:s', strtotime($charge['created_at'])),
+                    'changeDate' => date('Y-m-d H:i:s'),
+                ]);
 
                 $order->save();
 

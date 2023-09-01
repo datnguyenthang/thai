@@ -12,6 +12,7 @@ use App\Models\Location;
 use App\Models\SeatClass;
 use App\Models\Order;
 use App\Models\OrderStatus;
+use App\Models\OrderPayment;
 use App\Models\OrderTicket;
 use App\Models\Pickupdropoff;
 use App\Models\Promotion;
@@ -198,6 +199,13 @@ class ProceedBooking extends Component
                 //'note' => $this->note,
                 'changeDate' => date('Y-m-d H:i:s'),
                 //'userId' => Auth::id(),
+            ]);
+
+            //SAVE first payment of this order
+            OrderPayment::create([
+                'orderId' => intVal($order->id),
+                'paymentStatus' => NOTPAID,
+                'changeDate' => date('Y-m-d H:i:s'),
             ]);
 
             //SAVE ORDER TICKET DEPART FIRST

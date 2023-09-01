@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\OrderStatus;
+use App\Models\OrderPayment;
 
 class Banktransfer extends Component
 {
@@ -98,6 +99,14 @@ class Banktransfer extends Component
             'orderId' => intVal($this->order->id),
             'status' => UPPLOADTRANSFER,
             //'note' => $this->note,
+            'changeDate' => date('Y-m-d H:i:s'),
+        ]);
+
+        //SAVE first payment of this order
+        OrderPayment::create([
+            'orderId' => intVal($this->order->id),
+            'paymentStatus' => NOTPAID,
+            'paymentMethod' => 2,
             'changeDate' => date('Y-m-d H:i:s'),
         ]);
         

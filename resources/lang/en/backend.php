@@ -89,6 +89,7 @@ return [
     'approval' => 'Approval',
     'decline' => 'Decline',
     'reasondecline' => 'Reason',
+    'refund' => 'Refund',
 
     'id' => 'ID',
     'save' => 'Save',
@@ -96,6 +97,7 @@ return [
     'search' => 'Search',
     'close' => 'Close',
     'download' => 'Download',
+    'importorder' => 'Import Order',
     'downloadeticket' => 'Download E-ticket',
     'downloadeboardingpass' => 'Download Boarding Pass',
 

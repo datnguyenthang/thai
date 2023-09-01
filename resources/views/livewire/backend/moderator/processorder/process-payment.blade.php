@@ -16,13 +16,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>{{ $order->paymentMethod ? ucwords($paymentMethodList->firstWhere('id', $order->paymentMethod)->name) : '' }}</th>
-                            <th>{{ $order->transactionCode ?? '' }}</th>
-                            <th>{{ !is_null($order->paymentStatus) ? PAYMENTSTATUS[$order->paymentStatus] : '' }}</th>
-                            <th>{{ $order->transactionDate ? date('Y-m-d H:i:s', strtotime($order->transactionDate)) : '' }}</th>
-                            <th><button class="btn btn bg_own_color text-light" wire:click="viewOrderPayment()">{{ trans('backend.updatepayment') }}</button></th>
-                        </tr>
+                        @if(!empty($orderPayments))
+                            @foreach ($orderPayments as $payment)
+                            <tr>
+                                <th>{{ $payment->paymentMethod ? ucwords($paymentMethodList->firstWhere('id', $payment->paymentMethod)->name) : '' }}</th>
+                                <th>{{ $payment->transactionCode ?? '' }}</th>
+                                <th>{{ !is_null($payment->paymentStatus) ? PAYMENTSTATUS[$payment->paymentStatus] : '' }}</th>
+                                <th>{{ $payment->transactionDate ? date('Y-m-d H:i:s', strtotime($payment->transactionDate)) : '' }}</th>
+
+                                @if(($payment->paymentMethod == 3 || $payment->paymentMethod == 4) && auth()->user()->role == 'manager')
+                                    <th>
+                                        <a class="btn btn bg_own_color text-light" 
+                                            onclick="confirm('Are you sure for making refund on this order?') || event.stopImmediatePropagation()"
+                                            wire:click="refundOrder({{ $orderId, $payment->transactionCode}})">{{ trans('backend.refund') }}</a>
+                                    </th>
+                                @endif
+                            </tr>
+                            @endforeach
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th><button class="btn btn bg_own_color text-light" wire:click="viewOrderPayment()">{{ trans('backend.updatepayment') }}</button></th>
+                            </tr>
+                    @endif
                     <tbody>
                 </table>
             </div>

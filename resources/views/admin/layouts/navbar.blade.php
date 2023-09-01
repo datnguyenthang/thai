@@ -26,6 +26,14 @@
                 <span>{{ trans('backend.user') }}</span>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{ route('importOrder') }}" 
+              class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'importOrder' ? 'active' : '' }}" 
+              aria-current="true">
+                <span>{{ trans('backend.importorder') }}</span>
+            </a>
+          </li>
         </ul>
       </div>
   
