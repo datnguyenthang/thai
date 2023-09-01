@@ -433,7 +433,7 @@ class ModeratorOrder extends Component
 
             //SAVE first status of this order
             OrderStatus::create([
-                'orderId' => intVal($order->id),
+                'orderId' => intVal($this->order->id),
                 'status' => $this->status,
                 //'note' => $this->statusNote,
                 'changeDate' => date('Y-m-d H:i:s'),
