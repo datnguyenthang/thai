@@ -382,7 +382,7 @@ class AgentOrder extends Component
 
             //SAVE first status of this order
             OrderStatus::create([
-                'orderId' => intVal($this->order->id),
+                'orderId' => intVal($order->id),
                 'status' => $this->status,
                 //'note' => $this->note,
                 'changeDate' => date('Y-m-d H:i:s'),
@@ -391,7 +391,7 @@ class AgentOrder extends Component
 
             //SAVE first payment of this order
             OrderPayment::create([
-                'orderId' => intVal($this->order->id),
+                'orderId' => intVal($order->id),
                 'paymentStatus' => $this->paymentStatus,
                 'paymentMethod' => $this->paymentMethod,
                 'transactionCode' => $this->transactionCode,
