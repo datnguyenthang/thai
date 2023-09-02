@@ -22,6 +22,7 @@
                     <option value="{{ $value->id }}">{{ $value->name }}</option>
                 @endforeach
             </select>
+            @error('agentType') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
@@ -31,6 +32,7 @@
                     <option value="{{ $key }}">{{ $value }}</option>
                 @endforeach
             </select>
+            @error('type') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
@@ -64,6 +66,7 @@
                     <option value="{{ $key }}">{{ $value }}</option>
                 @endforeach
             </select>
+            @error('paymentType') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
         
         <div class="form-outline mb-4">

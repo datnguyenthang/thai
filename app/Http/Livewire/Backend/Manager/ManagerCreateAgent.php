@@ -25,6 +25,7 @@ class ManagerCreateAgent extends Component
     public function mount($agentId = 0)
     {
         $this->customerType = CustomerType::get()->where('status', 0);
+        $this->type = $this->customerType->first()->id; 
 
         $this->agentId = $agentId;
         $this->paymentType = 0;
@@ -50,12 +51,12 @@ class ManagerCreateAgent extends Component
     {
         $this->validate([
             'name' => 'required|unique:agents,name,' . $this->agentId,
-            'code' => 'required|unique:agents,code,' . $this->agentId,
+            //'code' => 'required|unique:agents,code,' . $this->agentId,
             'agentType' => 'required',
             'type' => 'required',
-            'manager' => 'required',
-            'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i',
-            'phone' => 'required|numeric|digits_between:8,11',
+            //'manager' => 'required',
+            //'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i',
+            //'phone' => 'required|numeric|digits_between:8,11',
             'paymentType' => 'required',
         ]);
 
