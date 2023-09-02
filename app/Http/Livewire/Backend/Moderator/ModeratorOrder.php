@@ -323,16 +323,8 @@ class ModeratorOrder extends Component
                     ->sum('adultQuantity');
         return $counting;
     }
-
+/*
     public function hydrate(){
-        $this->validate([
-            'fromLocation' => 'required',
-            'toLocation' => 'required',
-            'departureDate' => 'required',
-            'returnDate' => 'required',
-            'customerType' => 'required',
-            //'email' => 'required|email|unique:users,email,' . $this->userId,
-        ]);
         $this->departRides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 
                                             'tl.name as toLocation', 'rides.departTime', 'rides.returnTime',
                                             'rides.departDate', 'rides.status',
@@ -369,7 +361,7 @@ class ModeratorOrder extends Component
                                     })
                                     ->get();
     }
-
+*/
     public function checkInfo() {
         $this->validate([
             'firstName' => 'required|max:255',
