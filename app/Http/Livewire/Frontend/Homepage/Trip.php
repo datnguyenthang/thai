@@ -169,7 +169,7 @@ class Trip extends Component
                                     ->where(function ($query) use ($rideId, $seatClassId) {
                                         $query->where('rides.fromLocation', $this->toLocation);
                                         $query->where('rides.toLocation', $this->fromLocation);
-                                        $query->where('rides.departDate', $this->departureDate);
+                                        $query->where('rides.departDate', $this->returnDate);
                                         $query->where('rides.status', 0);
                                         $query->where('sc.status', 0);
                                         $query->where('sc.capacity', '>=', $this->countingSeatBooked('rides.id', 'sc.id') + $this->adults); //check avaiable seatclasses to show
