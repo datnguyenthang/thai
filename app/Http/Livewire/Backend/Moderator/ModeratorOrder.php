@@ -108,6 +108,7 @@ class ModeratorOrder extends Component
 
     public $order;
     protected $listeners = ['refreshOrder' => 'refreshOrder'];
+    
 
     public function mount(){
         $this->adults = 1;
@@ -146,6 +147,7 @@ class ModeratorOrder extends Component
         $this->orderStatusList = array_intersect_key(ORDERSTATUS, array_flip([RESERVATION, CONFIRMEDORDER]));
         $this->status = RESERVATION;
     }
+
     public function refreshOrder(){
         $user = auth()->user();
 
@@ -294,7 +296,7 @@ class ModeratorOrder extends Component
         $this->validate([
             'fromLocation' => 'required',
             'toLocation' => 'required',
-            'departureDate' => 'required',
+            'departureDate' => 'required|date|after_or_equal:' . now()->format('Y-m-d'),
             'returnDate' => 'required',
             'customerType' => 'required',
             //'email' => 'required|email|unique:users,email,' . $this->userId,
