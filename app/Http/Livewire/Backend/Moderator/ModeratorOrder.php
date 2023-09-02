@@ -105,7 +105,7 @@ class ModeratorOrder extends Component
     public $couponCode;
     public $isValidCoupon = false;
     public $discountAmount= null;
-    public $validationPassed = true;
+    public $validationPassed = false;
 
     public $order;
     protected $listeners = ['refreshOrder' => 'refreshOrder'];
