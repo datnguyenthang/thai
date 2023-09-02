@@ -295,8 +295,8 @@ class ModeratorOrder extends Component
         $this->validate([
             'fromLocation' => 'required',
             'toLocation' => 'required',
-            'departureDate' => 'required',
-            'returnDate' => 'required',
+            'departureDate' => 'required|date|after_or_equal:' . now()->format('Y-m-d'),
+            'returnDate' => 'required|date|after_or_equal:' . now()->format('Y-m-d'),
             'customerType' => 'required',
             //'email' => 'required|email|unique:users,email,' . $this->userId,
         ]);
