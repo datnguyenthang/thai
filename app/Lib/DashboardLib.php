@@ -17,7 +17,8 @@ class DashboardLib {
 
     public static function ridesInDay($fromDate = 0, $toDate = 0, $depart = 0, $dest = 0, $isOrder = true, $perPage = 10){
         $rides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
-                                DB::raw('COUNT(ot.id) as totalCustomer'), 
+                                DB::raw('o.adultQuantity + o.childrenQuantity as totalCustomer'),
+                                //DB::raw('COUNT(ot.id) as totalCustomer'), 
                                 DB::raw('COUNT(o.id) as totalCustomerConfirmed') ,
                                 DB::raw('CASE WHEN cast(CONCAT(rides.departDate, " ", rides.departTime) as datetime) > "'.Carbon::now()->format('Y-m-d H:i:s').'" THEN 0 ELSE 1 END AS isDepart')
                             )
@@ -41,7 +42,7 @@ class DashboardLib {
                         if (!$fromDate && !$toDate)
                             $query->where('rides.departDate', '=', Carbon::now()->toDateString());
                     })
-                    ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate')
+                    ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate', 'o.adultQuantity', 'o.childrenQuantity')
                     ->when($isOrder, function ($query) {
                         $query->having('totalCustomer', '>', 0);
                     })

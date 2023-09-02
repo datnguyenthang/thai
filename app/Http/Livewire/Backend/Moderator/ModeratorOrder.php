@@ -296,7 +296,7 @@ class ModeratorOrder extends Component
         $this->validate([
             'fromLocation' => 'required',
             'toLocation' => 'required',
-            'departureDate' => 'required|date|after_or_equal:' . now()->format('Y-m-d'),
+            'departureDate' => 'required',
             'returnDate' => 'required',
             'customerType' => 'required',
             //'email' => 'required|email|unique:users,email,' . $this->userId,
@@ -325,6 +325,14 @@ class ModeratorOrder extends Component
     }
 
     public function hydrate(){
+        $this->validate([
+            'fromLocation' => 'required',
+            'toLocation' => 'required',
+            'departureDate' => 'required',
+            'returnDate' => 'required',
+            'customerType' => 'required',
+            //'email' => 'required|email|unique:users,email,' . $this->userId,
+        ]);
         $this->departRides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 
                                             'tl.name as toLocation', 'rides.departTime', 'rides.returnTime',
                                             'rides.departDate', 'rides.status',
