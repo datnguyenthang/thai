@@ -105,6 +105,7 @@ class ModeratorOrder extends Component
     public $couponCode;
     public $isValidCoupon = false;
     public $discountAmount= null;
+
     public $validationPassed = false;
 
     public $order;
@@ -171,12 +172,12 @@ class ModeratorOrder extends Component
 
     public function chooseFromLocation($location){
         $this->toLocationList = Location::get()->where('status', ACTIVE)->except($location);
-        $this->toLocation =  $this->toLocationList->first()->id;
+        if($this->toLocation == $location) $this->toLocation =  $this->toLocationList->first()->id;
     }
 
     public function chooseToLocation($location){
         $this->fromLocationList = Location::get()->where('status', ACTIVE)->except($location);
-        $this->fromLocation =  $this->fromLocationList->first()->id;
+        if($this->fromLocation == $location) $this->fromLocation =  $this->fromLocationList->first()->id;
     }
 
     public function updatedPickup(){

@@ -99,6 +99,8 @@ class AgentOrder extends Component
     public $isValidCoupon = false;
     public $discountAmount= null;
 
+    public $validationPassed = false;
+
     public $order;
     protected $listeners = ['refreshAgentOrder' => 'refreshAgentOrder'];
 
@@ -147,12 +149,12 @@ class AgentOrder extends Component
 
     public function chooseFromLocation($location){
         $this->toLocationList = Location::get()->where('status', ACTIVE)->except($location);
-        $this->toLocation =  $this->toLocationList->first()->id;
+        if($this->toLocation == $location) $this->toLocation =  $this->toLocationList->first()->id;
     }
 
     public function chooseToLocation($location){
         $this->fromLocationList = Location::get()->where('status', ACTIVE)->except($location);
-        $this->fromLocation =  $this->fromLocationList->first()->id;
+        if($this->fromLocation == $location) $this->fromLocation =  $this->fromLocationList->first()->id;
     }
 
     public function updatedPickup($pickup){
@@ -248,6 +250,8 @@ class AgentOrder extends Component
             'customerType' => 'required',
             //'email' => 'required|email|unique:users,email,' . $this->userId,
         ]);
+        // Set the property to true if validation passes
+        $this->validationPassed = true;
         
         $this->step++;
         $this->text_ticket_select = trans('messages.ticketselected', ['totalTicket' => $this->countTicketSelected, 'typeTrip'=> $this->tripType]);
@@ -272,41 +276,43 @@ class AgentOrder extends Component
     }
 
     public function hydrate(){
-        $this->departRides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 
-                                            'tl.name as toLocation', 'rides.departTime', 'rides.returnTime',
-                                            'rides.departDate', 'rides.status',
-                                            //DB::raw('TIME_FORMAT(TIMEDIFF(rides.returnTime, rides.departTime), "%H:%i") AS distanceTime'),
-                                            'sc.id as seatClassId', 'sc.name as seatClass', 'sc.capacity', 'sc.price', 'sc.status')
-                                    ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
-                                    ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
-                                    ->leftJoin('seat_classes as sc', 'rides.id', '=', 'sc.rideId')
-                                    ->where(function ($query) {
-                                        $query->where('rides.fromLocation', $this->fromLocation);
-                                        $query->where('rides.toLocation', $this->toLocation);
-                                        $query->where('rides.departDate', $this->departureDate);
-                                        $query->where('sc.capacity', '>=', $this->countingSeatBooked('rides.id', 'sc.id') + $this->adults); //check avaiable seatclasses to show
-                                        $query->where('rides.status', 0);
-                                        $query->where('sc.status', 0);
-                                    })
-                                    ->get();
+        if ($this->validationPassed) {
+            $this->departRides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 
+                                                'tl.name as toLocation', 'rides.departTime', 'rides.returnTime',
+                                                'rides.departDate', 'rides.status',
+                                                //DB::raw('TIME_FORMAT(TIMEDIFF(rides.returnTime, rides.departTime), "%H:%i") AS distanceTime'),
+                                                'sc.id as seatClassId', 'sc.name as seatClass', 'sc.capacity', 'sc.price', 'sc.status')
+                                        ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
+                                        ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
+                                        ->leftJoin('seat_classes as sc', 'rides.id', '=', 'sc.rideId')
+                                        ->where(function ($query) {
+                                            $query->where('rides.fromLocation', $this->fromLocation);
+                                            $query->where('rides.toLocation', $this->toLocation);
+                                            $query->where('rides.departDate', $this->departureDate);
+                                            $query->where('sc.capacity', '>=', $this->countingSeatBooked('rides.id', 'sc.id') + $this->adults); //check avaiable seatclasses to show
+                                            $query->where('rides.status', 0);
+                                            $query->where('sc.status', 0);
+                                        })
+                                        ->get();
 
-        $this->returnRides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 
-                                    'tl.name as toLocation', 'rides.departTime', 'rides.returnTime',
-                                    'rides.departDate', 'rides.status',
-                                    //DB::raw('TIME_FORMAT(TIMEDIFF(rides.returnTime, rides.departTime), "%H:%i") AS distanceTime'),
-                                    'sc.id as seatClassId', 'sc.name as seatClass', 'sc.capacity', 'sc.price', 'sc.status')
-                            ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
-                            ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
-                            ->leftJoin('seat_classes as sc', 'rides.id', '=', 'sc.rideId')
-                            ->where(function ($query) {
-                                $query->where('rides.fromLocation', $this->toLocation);
-                                $query->where('rides.toLocation', $this->fromLocation);
-                                $query->where('rides.departDate', $this->departureDate);
-                                $query->where('sc.capacity', '>=', $this->countingSeatBooked('rides.id', 'sc.id') + $this->adults); //check avaiable seatclasses to show
-                                $query->where('rides.status', 0);
-                                $query->where('sc.status', 0);
-                            })
-                            ->get();
+            $this->returnRides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 
+                                        'tl.name as toLocation', 'rides.departTime', 'rides.returnTime',
+                                        'rides.departDate', 'rides.status',
+                                        //DB::raw('TIME_FORMAT(TIMEDIFF(rides.returnTime, rides.departTime), "%H:%i") AS distanceTime'),
+                                        'sc.id as seatClassId', 'sc.name as seatClass', 'sc.capacity', 'sc.price', 'sc.status')
+                                ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
+                                ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
+                                ->leftJoin('seat_classes as sc', 'rides.id', '=', 'sc.rideId')
+                                ->where(function ($query) {
+                                    $query->where('rides.fromLocation', $this->toLocation);
+                                    $query->where('rides.toLocation', $this->fromLocation);
+                                    $query->where('rides.departDate', $this->departureDate);
+                                    $query->where('sc.capacity', '>=', $this->countingSeatBooked('rides.id', 'sc.id') + $this->adults); //check avaiable seatclasses to show
+                                    $query->where('rides.status', 0);
+                                    $query->where('sc.status', 0);
+                                })
+                                ->get();
+        }
     }
 
     public function checkInfo() {
