@@ -10,7 +10,7 @@ class ManagerListAgent extends Component
 {
     public $search = '';
     public $perPage = 20;
-    public $sortField = 'name';
+    public $sortField = 'id';
     public $sortDirection = 'asc';
 
     public $agentId;
