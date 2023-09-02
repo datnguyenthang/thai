@@ -68,11 +68,13 @@ class ModeratorOrderlist extends Component
         $this->resetPage();
     }
 
-    public function downnloadTicket($orderTicketId){
+    public function downnloadTicket($orderId = 0, $orderTicketId){
+        $this->orderDetail = OrderLib::getOrderDetail($orderId);
         return TicketLib::downloadEticket($orderTicketId);
     }
 
-    public function downnloadboardingPass($rideId = 0, $orderTicketId = 0){
+    public function downnloadboardingPass($orderId = 0, $orderTicketId = 0){
+        $this->orderDetail = OrderLib::getOrderDetail($orderId);
         return TicketLib::downloadBoardingPass($orderTicketId);
     }
 

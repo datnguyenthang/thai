@@ -34,7 +34,7 @@ return [
     'departuredate' => 'Departure Date',
     'returndate' => 'Return Date',
     'adults' => 'Adults (18+)',
-    'children' => 'Children (0-5)',
+    'children' => 'Children (0-4)',
     'seatclass' => 'Seat Class',
     'showboat' => 'Show boats',
     'bookingtrip' => 'Booking Boat',

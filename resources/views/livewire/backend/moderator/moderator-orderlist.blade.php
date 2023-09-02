@@ -225,11 +225,11 @@
                                             <p>{{ trans('backend.returntime') }}: {{ $orderTicket['returnTime'] }}</p>
                                             <p>{{ trans('backend.departdate') }}: {{ $orderTicket['departDate'] }}</p>
                                             <button class="btn bg_own_color text-light"
-                                                wire:click="downnloadTicket({{$orderTicket->id}})"
+                                                wire:click="downnloadTicket({{ $orderTicket->orderId}}, {{$orderTicket->id}})"
                                                 wire:loading.attr="disabled">{{ trans('backend.downloadeticket') }}</button>
                                                 
                                             <button class="btn bg_own_color text-light"
-                                                wire:click="downnloadboardingPass({{ $orderTicket['rideId'] }}, {{ $orderTicket->id }})"
+                                                wire:click="downnloadboardingPass({{ $orderTicket->orderId }}, {{ $orderTicket->id }})"
                                                 wire:loading.attr="disabled">{{ trans('backend.downloadeboardingpass') }}</button>
                                         </div>
                                     @endif
@@ -246,11 +246,11 @@
                                             <p>{{ trans('backend.returntime') }}: {{ $orderTicket['returnTime'] }}</p>
                                             <p>{{ trans('backend.departdate') }}: {{ $orderTicket['departDate'] }}</p>
                                             <button class="btn bg_own_color text-light"
-                                                wire:click="downnloadTicket({{$orderTicket->id}})"
+                                                wire:click="downnloadTicket({{ $orderTicket->orderId }}, {{$orderTicket->id}})"
                                                 wire:loading.attr="disabled">{{ trans('backend.downloadeticket') }}</button>
 
                                             <button class="btn bg_own_color text-light"
-                                                wire:click="downnloadboardingPass({{ $orderTicket['rideId'] }}, {{ $orderTicket->id }})"
+                                                wire:click="downnloadboardingPass({{ $orderTicket->orderId }}, {{ $orderTicket->id }})"
                                                 wire:loading.attr="disabled">{{ trans('backend.downloadeboardingpass') }}</button>
                                         </div>
                                     @endif
@@ -265,11 +265,11 @@
                                             <p>{{ trans('backend.returntime') }}: {{ $orderTicket['returnTime'] }}</p>
                                             <p>{{ trans('backend.departdate') }}: {{ $orderTicket['departDate'] }}</p>
                                             <button class="btn bg_own_color text-light"
-                                                wire:click="downnloadTicket({{$orderTicket->id}})"
+                                                wire:click="downnloadTicket({{ $orderTicket->orderId }}, {{$orderTicket->id}})"
                                                 wire:loading.attr="disabled">{{ trans('backend.downloadeticket') }}</button>
 
                                             <button class="btn bg_own_color text-light"
-                                                wire:click="downnloadboardingPass({{ $orderTicket['rideId'] }}, {{ $orderTicket->id }})"
+                                                wire:click="downnloadboardingPass({{ $orderTicket->orderId }}, {{ $orderTicket->id }})"
                                                 wire:loading.attr="disabled">{{ trans('backend.downloadeboardingpass') }}</button>
                                         </div>
                                     @endif
