@@ -3,11 +3,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap">
+	
 	<style>
-        body {
-            font-family: 'Noto Sans Thai', sans-serif;
-        }
+        <style>
+            @font-face {
+                font-family: 'Noto Sans Thai', sans-serif;
+                font-style: normal;
+                font-weight: normal;
+                src: url("{{ public_path('fonts/thai/NotoSansThaiLooped-Regular.ttf') }}") format('truetype');
+            }
+        </style>
 
 		@page { margin: 1in 1in 1in 1in;}
 		.passenger th, .passenger td {
