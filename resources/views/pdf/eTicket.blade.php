@@ -4,8 +4,11 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
-		font-family: 'Noto Sans Thai', sans-serif;
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
+        body {
+            font-family: 'Noto Sans Thai', sans-serif;
+        }
+
 		@page { margin: 1in 1in 1in 1in;}
 		.passenger th, .passenger td {
 			border: 1px solid #000; /* 1px solid black border */
