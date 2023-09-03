@@ -3,8 +3,8 @@
     <head>
         <title>PDF View</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap">
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
             body {
                 font-family: 'Noto Sans Thai', sans-serif;
             }
