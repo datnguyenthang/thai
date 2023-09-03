@@ -62,6 +62,7 @@
         <div class="form-outline mb-4">
             <label class="form-label">{{ trans('backend.agentpaymenttype') }}</label>
             <select id="paymentType" class="form-select w-50" wire:model="paymentType">
+                <option value=""></option>
                 @foreach(AGENTPAYMENTTYPE as $key => $value)
                     <option value="{{ $key }}">{{ $value }}</option>
                 @endforeach

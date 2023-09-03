@@ -17,7 +17,7 @@ return new class extends Migration
             Schema::create('agents', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
-                $table->tinyInteger('agentType');
+                $table->string('agentType');
                 $table->string('code')->nullable($value = true);
                 $table->tinyInteger('type')->nullable($value = true);
                 $table->string('manager')->nullable($value = true);

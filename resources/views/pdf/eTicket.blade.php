@@ -4,7 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<style>
-		*{ font-family: DejaVu Sans !important;}
+		* { 
+                font-family: 'DejaVu Sans', sans-serif !important;
+                /* Or use Arial Unicode MS or another Unicode font */
+            }
 		@page { margin: 1in 1in 1in 1in;}
 		.passenger th, .passenger td {
 			border: 1px solid #000; /* 1px solid black border */

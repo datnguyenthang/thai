@@ -28,7 +28,7 @@ class ManagerCreateAgent extends Component
         $this->type = $this->customerType->first()->id; 
 
         $this->agentId = $agentId;
-        $this->paymentType = 0;
+        //$this->paymentType = 0;
         $this->status = 0;
 
         if ($agentId > 0) {
@@ -47,8 +47,7 @@ class ManagerCreateAgent extends Component
         }
     }
 
-    public function save()
-    {
+    public function save(){
         $this->validate([
             'name' => 'required|unique:agents,name,' . $this->agentId,
             //'code' => 'required|unique:agents,code,' . $this->agentId,
@@ -57,7 +56,7 @@ class ManagerCreateAgent extends Component
             //'manager' => 'required',
             //'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i',
             //'phone' => 'required|numeric|digits_between:8,11',
-            'paymentType' => 'required',
+            //'paymentType' => 'required',
         ]);
 
         if ($this->agentId > 0){ // update agent
@@ -71,7 +70,7 @@ class ManagerCreateAgent extends Component
             $agent->email = $this->email;
             $agent->phone = $this->phone;
             $agent->line = $this->line;
-            $agent->paymentType = intVal($this->paymentType);
+            $agent->paymentType = $this->paymentType ? intVal($this->paymentType) : null;
             $agent->status = intVal($this->status);
             $agent->save();
 
@@ -88,7 +87,7 @@ class ManagerCreateAgent extends Component
                 'email' => $this->email,
                 'phone' => $this->phone,
                 'line' => $this->line,
-                'paymentType' => intVal($this->paymentType),
+                'paymentType' => $this->paymentType ? intVal($this->paymentType) : null,
                 'status' => intVal($this->status),
             ]);
 

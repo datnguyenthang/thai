@@ -303,6 +303,7 @@ class ModeratorOrder extends Component
         ]);
         // Set the property to true if validation passes
         $this->validationPassed = true;
+        $this->findRides();
         
         $this->step++;
         $this->text_ticket_select = trans('messages.ticketselected', ['totalTicket' => $this->countTicketSelected, 'typeTrip'=> $this->tripType]);
@@ -327,6 +328,10 @@ class ModeratorOrder extends Component
     }
 
     public function hydrate(){
+        $this->findRides();
+    }
+
+    public function findRides(){
         if ($this->validationPassed) {
             $this->departRides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 
                                                 'tl.name as toLocation', 'rides.departTime', 'rides.returnTime',
@@ -363,7 +368,7 @@ class ModeratorOrder extends Component
                                             $query->where('sc.status', 0);
                                         })
                                         ->get();
-         }
+        }
     }
 
     public function checkInfo() {

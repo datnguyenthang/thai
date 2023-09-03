@@ -4,8 +4,10 @@
         <title>PDF View</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <style>
-            *{ font-family: DejaVu Sans !important;}
-            @page { margin: 0.1in 0.1in 0.1in 0.1in;}
+            * { 
+                font-family: 'DejaVu Sans', sans-serif !important;
+                /* Or use Arial Unicode MS or another Unicode font */
+            }
         </style>
     </head>
     <body>
