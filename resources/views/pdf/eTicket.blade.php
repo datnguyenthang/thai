@@ -6,7 +6,7 @@
 		<style>
 			@font-face {
 				font-family: 'NotoSansThaiLooped';
-				src: url(/fonts/Satoshi-Variable.ttf) format('truetype');
+				src: url({{ storage_path("fonts/thai/NotoSansThaiLooped-Regular.ttf") }}) format("truetype");
 			}
 
 			* { 
