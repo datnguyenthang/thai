@@ -3,20 +3,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-	
 	<style>
-        <style>
-            @font-face {
-                font-family: 'Noto Sans Thai', sans-serif;
-                font-style: normal;
-                font-weight: normal;
-                src: url("{{ public_path('fonts/thai/NotoSansThaiLooped-Regular.ttf') }}") format('truetype');
-            }
-			body {
-				font-family: 'Noto Sans Thai', sans-serif;
-			}
-        </style>
-
+		*{ font-family: DejaVu Sans !important;}
 		@page { margin: 1in 1in 1in 1in;}
 		.passenger th, .passenger td {
 			border: 1px solid #000; /* 1px solid black border */
