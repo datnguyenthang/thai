@@ -4,9 +4,13 @@
         <title>PDF View</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <style>
+            @font-face {
+                font-family: 'NotoSansThaiLooped';
+				src: url(/fonts/Satoshi-Variable.ttf) format('truetype');
+            }
+
             * { 
-                font-family: 'DejaVu Sans', sans-serif !important;
-                /* Or use Arial Unicode MS or another Unicode font */
+                font-family: 'NotoSansThaiLooped', sans-serif !important;
             }
         </style>
     </head>
