@@ -4,19 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 		<style>
-			@font-face {
-				font-family: 'NotoSansThaiLooped';
-				src: url({{ storage_path("fonts/thai/NotoSansThaiLooped-Regular.ttf") }}) format("truetype");
-			}
-
-			* { 
-				font-family: 'NotoSansThaiLooped', sans-serif !important;
-			}
-
-			@page { margin: 1in 1in 1in 1in;}
-			.passenger th, .passenger td {
-				border: 1px solid #000; /* 1px solid black border */
-			}
+			@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
 		</style>
 	</head>
 	<body style="background-image: url(data:image/png;base64,{{ $bgBase64 }});background-repeat: no-repeat;background-size: contain;background-position: center center;">

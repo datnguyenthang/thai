@@ -4,14 +4,7 @@
         <title>PDF View</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <style>
-            @font-face {
-                font-family: 'NotoSansThaiLooped';
-                src: url({{ storage_path("fonts/thai/NotoSansThaiLooped-Regular.ttf") }}) format("truetype");
-            }
-
-            * { 
-                font-family: 'NotoSansThaiLooped', sans-serif !important;
-            }
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
         </style>
     </head>
     <body>
