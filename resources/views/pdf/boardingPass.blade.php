@@ -10,6 +10,9 @@
                 font-weight: normal;
                 src: url("{{ public_path('fonts/thai/NotoSansThaiLooped-Regular.ttf') }}") format('truetype');
             }
+            body {
+                font-family: 'Noto Sans Thai', sans-serif;
+            }
         </style>
     </head>
     <body>
