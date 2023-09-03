@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
+		    font-family: 'Noto Sans Thai', sans-serif;
         </style>
     </head>
     <body>
