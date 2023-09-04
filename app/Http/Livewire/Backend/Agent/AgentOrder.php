@@ -243,6 +243,8 @@ class AgentOrder extends Component
 
     public function applyFilter(){
         $this->validate([
+            'adults' => 'required|numeric|gt:0',
+            'children' => 'required|numeric',
             'fromLocation' => 'required',
             'toLocation' => 'required',
             'departureDate' => 'required',

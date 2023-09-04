@@ -109,7 +109,7 @@ class ModeratorOrder extends Component
     public $validationPassed = false;
 
     public $order;
-    protected $listeners = ['refreshOrder' => 'refreshOrder'];
+    protected $listeners = ['refreshOrder' => 'refreshOrder'];    
 
     public function mount(){
         $this->adults = 1;
@@ -294,6 +294,8 @@ class ModeratorOrder extends Component
 
     public function applyFilter(){
         $this->validate([
+            'adults' => 'required|numeric|gt:0',
+            'children' => 'required|numeric',
             'fromLocation' => 'required',
             'toLocation' => 'required',
             'departureDate' => 'required|date|after_or_equal:' . now()->format('Y-m-d'),
