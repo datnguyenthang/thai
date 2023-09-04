@@ -29,7 +29,7 @@ class OrderLib {
                             ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
                             ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
                             ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.status', 'orders.phone', 'orders.finalPrice',
-                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.originalPrice', 'orders.couponAmount', 'orders.customerType',
+                                    DB::raw('CONCAT(COALESCE(firstname, ""), " ", COALESCE(lastName, "")) as fullname'), 'orders.originalPrice', 'orders.couponAmount', 'orders.customerType',
                                     'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.childrenQuantity', 'orders.paymentMethod',
                                     'orders.pickup','orders.dropoff', 'orders.transactionCode', 'orders.transactionDate', 'orders.paymentStatus',
                                     'p.name as promotionName', 'p.code as promotionCode', 'p.discount as discount', 'a.name as agentName', 'ct.name as customerTypeName')
@@ -51,7 +51,7 @@ class OrderLib {
                             ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
                             ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
                             ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.status', 'orders.phone', 'orders.finalPrice',
-                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.originalPrice', 'orders.couponAmount', 'orders.customerType',
+                                    DB::raw('CONCAT(COALESCE(firstname, ""), " ", COALESCE(lastName, "")) as fullname'), 'orders.originalPrice', 'orders.couponAmount', 'orders.customerType',
                                     'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 'orders.childrenQuantity', 'orders.paymentMethod',
                                     'orders.pickup','orders.dropoff', 'orders.transactionCode', 'orders.transactionDate', 'orders.paymentStatus',
                                     'p.name as promotionName', 'p.code as promotionCode', 'p.discount as discount', 
@@ -65,7 +65,7 @@ class OrderLib {
         $orderDetail = OrderTicket::select('order_tickets.*', 'r.name', 'r.departTime', 'r.returnTime', 'r.departDate',
                                 'fl.id as locationId', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'fl.nameOffice', 'fl.googleMapUrl', 
                                 'sc.name as seatClassName', 'sc.price as seatClassPrice',
-                                DB::raw('CONCAT(o.firstName, " ",o.lastName) as fullname'), 'o.customerType',
+                                DB::raw('CONCAT(COALESCE(firstname, ""), " ", COALESCE(lastName, "")) as fullname'), 'o.customerType',
                                 'o.phone', 'o.originalPrice', 'o.couponAmount', 'o.finalPrice', 'o.agentId',
                                 'o.code', 'o.email', 'o.bookingDate', 'o.note', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff',
                                 'o.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 

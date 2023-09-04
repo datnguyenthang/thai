@@ -4,7 +4,34 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<style>
-		*{ font-family: DejaVu Sans !important;}
+		@font-face {
+            font-family: 'THSarabunNew';
+            font-style: normal;
+            font-weight: normal;
+            src: url("{{ public_path('fonts/thai/THSarabunNew.ttf') }}") format('truetype');
+        }
+        @font-face {
+            font-family: 'THSarabunNew';
+            font-style: normal;
+            font-weight: bold;
+            src: url("{{ public_path('fonts/thai/THSarabunNewBold.ttf') }}") format('truetype');
+        }
+        @font-face {
+            font-family: 'THSarabunNew';
+            font-style: italic;
+            font-weight: normal;
+            src: url("{{ public_path('fonts/thai/THSarabunNewItalic.ttf') }}") format('truetype');
+        }
+        @font-face {
+            font-family: 'THSarabunNew';
+            font-style: italic;
+            font-weight: bold;
+            src: url("{{ public_path('fonts/thai/THSarabunNewBoldItalic.ttf') }}") format('truetype');
+        }
+        body {
+            font-family: "THSarabunNew";
+        }
+
 		@page { margin: 1in 1in 1in 1in;}
 		.passenger th, .passenger td {
 			border: 1px solid #000; /* 1px solid black border */
@@ -26,7 +53,7 @@
 			</div>
 		</div>
 	</div>
-	
+<p>คุณ เรือง</p>
 	<div style="clear:both; text-align: center; padding: 0;">
 		<table style="width: 500pt; margin-top: 4%; font-size: 18px;">
 			<thead style="background-color: #c00000; border-collapse: collapse;">
