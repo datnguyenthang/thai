@@ -103,7 +103,7 @@
                                 <i class="fas fa-minus"></i>
                               </button>
                           </span>
-                          <input type="text" wire:model.lazy="adults" id="adults" name="adults" class="form-control input-number text-center" min="1" max="100" required/>
+                          <input type="number" wire:model.defer="adults" id="adults" name="adults" class="form-control input-number text-center" min="1" max="100" required/>
                           <span class="input-group-btn">
                               <button type="button" x-on:click="adults++" class="btn bg_own_color btn-number">
                                 <i class="fas fa-plus"></i>
@@ -132,7 +132,7 @@
                                 <i class="fas fa-minus"></i>
                               </button>
                           </span>
-                          <input type="text" wire:model.lazy ="children" id="children" name="children" class="form-control input-number text-center" min="1" max="100" required/>
+                          <input type="number" wire:model.defer ="children" id="children" name="children" class="form-control input-number text-center" min="0" max="100" required/>
                           <span class="input-group-btn">
                               <button type="button" x-on:click="children++" class="btn bg_own_color btn-number">
                                 <i class="fas fa-plus"></i>
@@ -153,28 +153,26 @@
                 </form>
               </div>
 
-              @once
-                <script>
-                    document.addEventListener('livewire:load', function () {
-                        $('.input-number').keydown(function (e) {
-                            // Allow: backspace, delete, tab, escape, enter and .
-                            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
-                                // Allow: Ctrl+A
-                                (e.keyCode == 65 && e.ctrlKey === true) ||
-                                // Allow: home, end, left, right
-                                (e.keyCode >= 35 && e.keyCode <= 39)) {
-                                // let it happen, don't do anything
-                                return;
-                            }
-                            // Ensure that it is a number and stop the keypress
-                            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) &&
-                                (e.keyCode < 96 || e.keyCode > 105)) {
-                                e.preventDefault();
-                            }
-                        });
-                    });
-                </script>
-              @endonce
+              <script>
+                var adultsInput = document.getElementById("adults");
+                var childrenInput = document.getElementById("children");
+
+                // Add a keyup event listener for adults input
+                adultsInput.addEventListener("keyup", function() {
+                  var currentValue = this.value.trim();
+                  if (currentValue === "") {
+                    this.value = "1";
+                  }
+                });
+
+                // Add a keyup event listener for children input
+                childrenInput.addEventListener("keyup", function() {
+                  var currentValue = this.value.trim();
+                  if (currentValue === "") {
+                    this.value = "0";
+                  }
+                });
+              </script>
 
               <!--
               <div id="tabs-2" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom tab-hidden" role="tabpanel" aria-hidden="true" style="display: none;">
