@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai+Looped&display=swap" rel="stylesheet">
     <style>
-        .m {
+        .m, h5 {
             font-family: 'Noto Sans Thai Looped';
         }
 
@@ -76,7 +76,7 @@
                 <h5>Drop off:</h5>
             </div>
             <div style="margin-left:100pt;">
-                <h5>{{ $orderTicket->dropoff }}</h5>
+                <h5 class="m">{{ $orderTicket->dropoff }}</h5>
             </div>
         </div>
 
@@ -85,7 +85,7 @@
                 <h5>Pickup:</h5>
             </div>
             <div style="margin-left:100pt;">
-                <h5>{{ $orderTicket->pickup }}</h5>
+                <h5 class="m">{{ $orderTicket->pickup }}</h5>
             </div>
         </div>
 
