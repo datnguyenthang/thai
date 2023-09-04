@@ -9,6 +9,7 @@
 		.m {
 			font-family: 'Noto Sans Thai Looped';
 		}
+
 		@page { margin: 1in 1in 1in 1in;}
 		.passenger th, .passenger td {
 			border: 1px solid #000; /* 1px solid black border */
