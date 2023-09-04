@@ -53,7 +53,7 @@
 			</div>
 		</div>
 	</div>
-<p>คุณ เรือง</p>
+
 	<div style="clear:both; text-align: center; padding: 0;">
 		<table style="width: 500pt; margin-top: 4%; font-size: 18px;">
 			<thead style="background-color: #c00000; border-collapse: collapse;">
