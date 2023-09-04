@@ -3,16 +3,17 @@
     <head>
         <title>PDF View</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai+Looped&display=swap" rel="stylesheet">
         <style>
-            @font-face {
-                font-family: 'Noto Sans Thai', sans-serif;
-                font-style: normal;
-                font-weight: normal;
-                src: url("{{ public_path('fonts/thai/NotoSansThaiLooped-Regular.ttf') }}") format('truetype');
+            .m {
+                font-family: 'Noto Sans Thai Looped';
             }
-            body {
-                font-family: 'Noto Sans Thai', sans-serif;
+            @page { margin: 1in 1in 1in 1in;}
+
+            .passenger th, .passenger td {
+                border: 1px solid #000; /* 1px solid black border */
             }
+            @page { margin: 0.1in 0.1in 0.1in 0.1in;}
         </style>
     </head>
     <body>
@@ -51,7 +52,7 @@
                     <h5>Name:</h5>
                 </div>
                 <div style="margin-left:100pt;">
-                    <h5>{{ $orderTicket->fullname }}</h5>
+                    <h5 class="m">{{ $orderTicket->fullname }}</h5>
                 </div>
             </div>
 

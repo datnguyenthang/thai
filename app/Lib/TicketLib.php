@@ -3,6 +3,7 @@
 namespace App\Lib;
 
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +31,17 @@ class TicketLib {
     }
 
     public static function generateEticket($orderTicket, $locationFiles = []) {
-        $dompdf = new Dompdf();
+        // Initialize Dompdf with custom options
+        $tmp = sys_get_temp_dir();
+
+        $dompdf = new Dompdf([
+            'logOutputFile' => '',
+            'isRemoteEnabled' => true,
+            'fontDir' => $tmp,
+            'fontCache' => $tmp,
+            'tempDir' => $tmp,
+            'chroot' => $tmp,
+        ]);
         
         $logoPath = public_path('img/logo.png');
         $logoData = File::get($logoPath);
@@ -41,6 +52,7 @@ class TicketLib {
         $bgBase64 = base64_encode($bgData);
         
         $dompdf->loadHTML(View::make('pdf.eTicket', compact('orderTicket', 'bgBase64', 'logoBase64')));
+
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->set_option('isHtml5ParserEnabled', true);
         $dompdf->render();
@@ -94,8 +106,18 @@ class TicketLib {
         $logoData = File::get($logoPath);
         $logoBase64 = base64_encode($logoData);
 
-        $dompdf = new Dompdf();
-        
+        // Initialize Dompdf with custom options
+        $tmp = sys_get_temp_dir();
+
+        $dompdf = new Dompdf([
+            'logOutputFile' => '',
+            'isRemoteEnabled' => true,
+            'fontDir' => $tmp,
+            'fontCache' => $tmp,
+            'tempDir' => $tmp,
+            'chroot' => $tmp,
+        ]);
+
         $dompdf->loadHTML(View::make('pdf.boardingPass', compact('orderTicket', 'logoBase64')));
         $dompdf->setPaper($customPaper, 'portrait');
         $dompdf->set_option('isHtml5ParserEnabled', true);

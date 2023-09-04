@@ -3,38 +3,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-	<style>
-		@font-face {
-            font-family: 'thsarabunnew';
-            font-style: normal;
-            font-weight: normal;
-            src: url("{{ asset('fonts/thai/thsarabunnew.ttf') }}") format('truetype');
-        }
-        @font-face {
-            font-family: 'thsarabunnew';
-            font-style: normal;
-            font-weight: bold;
-            src: url("{{ asset('fonts/thai/thsarabunnewbold.ttf') }}") format('truetype');
-        }
-        @font-face {
-            font-family: 'thsarabunnew';
-            font-style: italic;
-            font-weight: normal;
-            src: url("{{ asset('fonts/thai/thsarabunnewitalic.ttf') }}") format('truetype');
-        }
-        @font-face {
-            font-family: 'thsarabunnew';
-            font-style: italic;
-            font-weight: bold;
-            src: url("{{ asset('fonts/thai/thsarabunnewbolditalic.ttf') }}") format('truetype');
-        }
-        body {
-            font-family: "thsarabunnew";
-        }
-		p {
-            font-family: "thsarabunnew";
-        }
-
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai+Looped&display=swap" rel="stylesheet">
+	<style>	
+		.m {
+			font-family: 'Noto Sans Thai Looped';
+		}
 		@page { margin: 1in 1in 1in 1in;}
 		.passenger th, .passenger td {
 			border: 1px solid #000; /* 1px solid black border */
@@ -56,7 +30,7 @@
 			</div>
 		</div>
 	</div>
-<h1>{{ $orderTicket->fullname }}</h1>
+<p><
 	<div style="clear:both; text-align: center; padding: 0;">
 		<table style="width: 500pt; margin-top: 4%; font-size: 18px;">
 			<thead style="background-color: #c00000; border-collapse: collapse;">
@@ -101,7 +75,7 @@
 				</tr>
 				<tr style="text-align: center;">
 					<td>1</td>
-					<td colspan="5">{{ $orderTicket->fullname }}(CHILDREN {{ $orderTicket->childrenQuantity }})</td>
+					<td colspan="5" class="m">{{ $orderTicket->fullname }}(CHILDREN {{ $orderTicket->childrenQuantity }})</td>
 					<td>{{ $orderTicket->childrenQuantity + $orderTicket->adultQuantity }}</td>
 					<td colspan="2">{{ round($orderTicket->price / $orderTicket->adultQuantity) }}</td>
 				</tr>
