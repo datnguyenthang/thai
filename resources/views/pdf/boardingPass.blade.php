@@ -104,7 +104,7 @@
                     <h3>PRICE</h3>
                 </div>
                 <div style="margin-left:170pt; margin-top: 13pt;">
-                    <span>Price</span> <strong style="font-size: 20px;">฿{{ $orderTicket->price }}</strong>
+                    <h5 class="m">฿</h5><strong style="font-size: 20px;">{{ $orderTicket->price }}</strong>
                 </div>
             </div>
         @endif
