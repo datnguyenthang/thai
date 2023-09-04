@@ -3,18 +3,13 @@
 <head>
     <title>PDF View</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai+Looped&display=swap" rel="stylesheet">
     <style>
         .m {
             font-family: 'Noto Sans Thai Looped';
         }
-        @page { margin: 1in 1in 1in 1in;}
 
-        .passenger th, .passenger td {
-            border: 1px solid #000; /* 1px solid black border */
-        }
         @page { margin: 0.1in 0.1in 0.1in 0.1in;}
     </style>
 </head>
