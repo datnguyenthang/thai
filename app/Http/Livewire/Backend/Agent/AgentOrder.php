@@ -321,8 +321,8 @@ class AgentOrder extends Component
 
     public function checkInfo() {
         $this->validate([
-            'firstName' => 'required|max:255',
-            'lastName' => 'required|max:255',
+            //'firstName' => 'required|max:255',
+            //'lastName' => 'required|max:255',
             'phone' => 'nullable|numeric|digits_between:8,12|required_without:email',
             'email' => 'nullable|email|max:255||regex:/(.+)@(.+)\.(.+)/i|required_without:phone',
             'pickupAnyOther' => 'max:255|required_if:pickup,'.PICKUPANYOTHER,

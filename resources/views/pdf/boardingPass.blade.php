@@ -108,7 +108,7 @@
                     <h3>PRICE</h3>
                 </div>
                 <div style="margin-left:170pt; margin-top: 13pt;">
-                    <strong class="t">฿</strong><strong style="font-size: 20px;">{{ $orderTicket->price }}</strong>
+                    <strong class="t">฿</strong><strong style="font-size: 20px;">{{ round($orderTicket->price) }}</strong>
                 </div>
             </div>
         @endif
