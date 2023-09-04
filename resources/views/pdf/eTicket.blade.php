@@ -5,31 +5,34 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<style>
 		@font-face {
-            font-family: 'THSarabunNew';
+            font-family: 'thsarabunnew';
             font-style: normal;
             font-weight: normal;
-            src: url("{{ public_path('fonts/thai/THSarabunNew.ttf') }}") format('truetype');
+            src: url("{{ asset('fonts/thai/thsarabunnew.ttf') }}") format('truetype');
         }
         @font-face {
-            font-family: 'THSarabunNew';
+            font-family: 'thsarabunnew';
             font-style: normal;
             font-weight: bold;
-            src: url("{{ public_path('fonts/thai/THSarabunNewBold.ttf') }}") format('truetype');
+            src: url("{{ asset('fonts/thai/thsarabunnewbold.ttf') }}") format('truetype');
         }
         @font-face {
-            font-family: 'THSarabunNew';
+            font-family: 'thsarabunnew';
             font-style: italic;
             font-weight: normal;
-            src: url("{{ public_path('fonts/thai/THSarabunNewItalic.ttf') }}") format('truetype');
+            src: url("{{ asset('fonts/thai/thsarabunnewitalic.ttf') }}") format('truetype');
         }
         @font-face {
-            font-family: 'THSarabunNew';
+            font-family: 'thsarabunnew';
             font-style: italic;
             font-weight: bold;
-            src: url("{{ public_path('fonts/thai/THSarabunNewBoldItalic.ttf') }}") format('truetype');
+            src: url("{{ asset('fonts/thai/thsarabunnewbolditalic.ttf') }}") format('truetype');
         }
         body {
-            font-family: "THSarabunNew";
+            font-family: "thsarabunnew";
+        }
+		p {
+            font-family: "thsarabunnew";
         }
 
 		@page { margin: 1in 1in 1in 1in;}
@@ -53,7 +56,7 @@
 			</div>
 		</div>
 	</div>
-
+<h1>{{ $orderTicket->fullname }}</h1>
 	<div style="clear:both; text-align: center; padding: 0;">
 		<table style="width: 500pt; margin-top: 4%; font-size: 18px;">
 			<thead style="background-color: #c00000; border-collapse: collapse;">
