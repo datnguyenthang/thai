@@ -59,14 +59,14 @@
     </div>
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3" wire:ignore>
             <div class="form-group">
                 <span class="form-label">{{ trans('backend.agent') }}</span>
-                <select id="agentId" name="agentId" class="form-select" wire:model="agentId">
-                    <option value=""></option>
-                @foreach($agentList as $agency)
-                    <option value="{{ $agency->id }}">{{ $agency->name }}</option>
-                @endforeach
+                <select wire:model="agentId" id="agentId" name="agentId" class="selectpicker" data-live-search="true" data-style="btn-danger" data-size="5" title="Choose one of the following...">
+                    <option value="">-----------------------</option>
+                    @foreach($agentList as $agency)
+                        <option value="{{ $agency->id }}">{{ $agency->name }}</option>
+                    @endforeach
                 </select>
                 @error('agent') <span class="text-danger error">{{ $message }}</span> @enderror
             </div>
@@ -108,7 +108,10 @@
             </div>
         </div>
     </div>
-    <script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css">
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
+    <script type="module">
         var adultsInput = document.getElementById("adults");
         var childrenInput = document.getElementById("children");
 
@@ -127,5 +130,9 @@
             this.value = "0";
             }
         });
+
+        //$( document ).ready(function() {
+        //    $('.agentId').selectpicker();
+        //});
     </script>
 </div>

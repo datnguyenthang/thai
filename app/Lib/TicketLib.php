@@ -92,7 +92,7 @@ class TicketLib {
         //if ($orderTicket->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $orderTicket->discount);
 
         $content = self::generateEticket($orderTicket);
-        $fileName = $orderTicket->type == ONEWAY ? 'Departure Ticket - '.$orderTicket->code.'.pdf' : 'Return Ticket - '.$orderTicket->code.'.pdf';
+        $fileName = $orderTicket->type == ONEWAY ? 'Departure - eTicket - '.$orderTicket->code.'.pdf' : 'Return - eTicket - '.$orderTicket->code.'.pdf';
 
         return response()->streamDownload(function () use ($content) {
             echo $content;
@@ -135,7 +135,7 @@ class TicketLib {
         if ($orderTicket->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $orderTicket->discount);
 
         $content = self::generateBoardingPass($orderTicket);
-        $fileName = $orderTicket->type == ONEWAY ? 'Departure Ticket - '.$orderTicket->code.'.pdf' : 'Return Ticket - '.$orderTicket->code.'.pdf';
+        $fileName = $orderTicket->type == ONEWAY ? 'Departure - BoardingPass - '.$orderTicket->code.'.pdf' : 'Return - BoardingPass - '.$orderTicket->code.'.pdf';
 
         return response()->streamDownload(function () use ($content) {
             echo $content;

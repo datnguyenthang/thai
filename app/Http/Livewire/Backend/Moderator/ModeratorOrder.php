@@ -147,6 +147,7 @@ class ModeratorOrder extends Component
         
         $this->orderStatusList = array_intersect_key(ORDERSTATUS, array_flip([RESERVATION, CONFIRMEDORDER]));
         $this->status = RESERVATION;
+        $this->paymentStatus = NOTPAID;
     }
     public function refreshOrder(){
         $user = auth()->user();
@@ -193,7 +194,7 @@ class ModeratorOrder extends Component
             $this->paymentMethod = null;
             $this->transactionCode = null;
             $this->transactionDate = null;
-            $this->paymentStatus = null;
+            $this->paymentStatus = NOTPAID;
         }
         if ($this->status == CONFIRMEDORDER){
             $this->paymentMethod = $this->paymentMethodList->first()->id;
@@ -236,6 +237,7 @@ class ModeratorOrder extends Component
             $this->customerTypeType = $this->customerTypelist->first()->type;
             $this->email = null;
             $this->phone = null;
+            $this->agentId = null;
         }
     }
 
@@ -412,7 +414,6 @@ class ModeratorOrder extends Component
 
         // MAKE A TRANSACTION TO ENSURE DATA CONSISTENCY
         DB::beginTransaction();
-
         try {
             //SAVE ORDER FIRST
             $order = Order::create([

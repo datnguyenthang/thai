@@ -210,13 +210,13 @@
                                 <p>{{ trans('backend.dropoff') }}: {{ $orderDetail['dropoff'] }}</p>
                             </div>
                         </div>
-
+                        <hr class="dashed-stroke">
                         <!-- Other details -->
                         <div class="row">
                             @foreach ($orderDetail->orderTickets as $orderTicket)
                                 @if($orderDetail->isReturn == ONEWAY)
                                     @if($orderTicket->type == DEPARTURETICKET)
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 dashed-line">
                                             <h5>{{ trans('backend.ticketdepart') }}</h5>
                                             <p>{{ trans('backend.ridename') }} : {{ $orderTicket['name'] }}</p>
                                             <p>{{ trans('backend.fromlocation') }} : {{ $orderTicket['fromLocationName'] }}</p>
@@ -234,7 +234,9 @@
                                         </div>
                                     @endif
                                 @endif
+
                                 
+
                                 @if($orderDetail->isReturn == ROUNDTRIP)
                                     @if($orderTicket->type == DEPARTURETICKET)
                                         <div class="col-md-6">

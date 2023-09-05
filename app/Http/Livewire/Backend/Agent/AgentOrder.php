@@ -142,6 +142,7 @@ class AgentOrder extends Component
 
         $this->orderStatusList = array_intersect_key(ORDERSTATUS, array_flip([RESERVATION, UPPLOADTRANSFER]));
         $this->status = RESERVATION;
+        $this->paymentStatus = NOTPAID;
     }
     public function refreshOrder(){
         return redirect()->to('/agentorder');
@@ -170,7 +171,7 @@ class AgentOrder extends Component
             $this->paymentMethod = null;
             $this->transactionCode = null;
             $this->transactionDate = null;
-            $this->paymentStatus = null;
+            $this->paymentStatus = NOTPAID;
         }
         if ($this->status == CONFIRMEDORDER){
             $this->paymentMethod = $this->paymentMethodList->first()->id;

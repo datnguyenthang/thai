@@ -372,3 +372,9 @@ footer {
   background-color: #9d474a;
   border-color: #9d474a;
 }
+.dashed-stroke{
+  border-top: 2px dashed red;
+}
+.dashed-line {
+  border-right: 1px dashed #000;
+}

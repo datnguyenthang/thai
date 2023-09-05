@@ -98,10 +98,18 @@ class ModeratorOrderlist extends Component
                             ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
                             ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
                             ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
-                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType', 'orders.status',
-                                     DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.finalPrice',
-                                     'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 
-                                     'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName', 'ct.name as customerTypeName')
+                            ->leftJoin('order_payments as op', function($join) {
+                                $join->on('orders.id', '=', 'op.orderId')
+                                    ->whereRaw('op.id = (select max(id) from order_payments where order_payments.orderId = orders.id)');
+                            })
+                            ->leftJoin('order_statuses as os', function($join) {
+                                $join->on('orders.id', '=', 'os.orderId')
+                                     ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = orders.id)');
+                            })
+                            ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'orders.customerType', 'os.status',
+                                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.finalPrice',
+                                    'orders.email', 'orders.bookingDate', 'orders.note', 'orders.adultQuantity', 
+                                    'orders.childrenQuantity', 'p.name as promotionName', 'a.name as agentName', 'ct.name as customerTypeName')
                             ->where(function ($query) {
                                 if ($this->orderCode) $query->where('orders.code', 'like', '%'.$this->orderCode.'%');
                                 if ($this->customerName) $query->whereRaw('CONCAT(orders.firstName, " ", orders.lastName) LIKE ?', ['%'.$this->customerName.'%']);
