@@ -17,9 +17,11 @@ class DashboardLib {
 
     public static function ridesInDay($fromDate = 0, $toDate = 0, $depart = 0, $dest = 0, $isOrder = true, $perPage = 10){
         $rides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
-                                //DB::raw('o.adultQuantity + o.childrenQuantity as totalCustomer'),
-                                DB::raw('SUM(o.adultQuantity + o.childrenQuantity) as totalCustomer'), 
+                                DB::raw('SUM(o.adultQuantity + o.childrenQuantity) as totalCustomer'),
+                                DB::raw('SUM(CASE WHEN os.status = '.CONFIRMEDORDER.' THEN o.adultQuantity + o.childrenQuantity ELSE 0 END) as totalCustomerConfirm'),
+                                
                                 DB::raw('COUNT(o.id) as totalOrder') ,
+                                DB::raw('COUNT(CASE WHEN os.status = '.CONFIRMEDORDER.' THEN o.id) as totalOrderConfirm') ,
                                 DB::raw('CASE WHEN cast(CONCAT(rides.departDate, " ", rides.departTime) as datetime) > "'.Carbon::now()->format('Y-m-d H:i:s').'" THEN 0 ELSE 1 END AS isDepart')
                             )
                     ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
@@ -30,7 +32,11 @@ class DashboardLib {
                     })
                     ->leftJoin('orders as o' , function ($ojoin) {
                         $ojoin->on('ot.orderId', '=', 'o.id');
-                        $ojoin->where('o.status', CONFIRMEDORDER);
+                        //$ojoin->where('o.status', CONFIRMEDORDER);
+                    })
+                    ->leftJoin('order_statuses as os', function($join) {
+                        $join->on('o.id', '=', 'os.orderId')
+                             ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
                     })
                     ->where(function ($query) use ($fromDate, $toDate, $depart, $dest, $isOrder) {
                         if($fromDate) $query->where('rides.departDate', '>=', $fromDate);
@@ -44,7 +50,7 @@ class DashboardLib {
                     })
                     ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate')
                     ->when($isOrder, function ($query) {
-                        //$query->having('totalCustomer', '>', 0);
+                        if ($isOrder) $query->having('totalCustomer', '>', 0);
                     })
                     ->orderBy('rides.departDate', 'asc')
                     ->orderBy('rides.departTime', 'asc')
