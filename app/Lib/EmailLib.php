@@ -24,12 +24,7 @@ class EmailLib {
         if (!$order->email && !$order->agentEmail) return false;
 
         foreach($order->orderTickets as $orderTicket) {
-            $orderTicket->fullname = $order->fullname;
-            $orderTicket->pickup = $order->pickup;
-            $orderTicket->dropoff = $order->dropoff;
-            $orderTicket->code = $order->code;
-            $orderTicket->adultQuantity = $order->adultQuantity;
-            $orderTicket->childrenQuantity = $order->childrenQuantity;
+            $orderTicket = OrderLib::getOrderTicket($orderTicket->id);
 
             if ($order->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $order->discount);
 
@@ -90,12 +85,7 @@ class EmailLib {
         if (!$order->email && !$order->agentEmail) return false;
 
         foreach($order->orderTickets as $orderTicket) {
-            $orderTicket->fullname = $order->fullname;
-            $orderTicket->pickup = $order->pickup;
-            $orderTicket->dropoff = $order->dropoff;
-            $orderTicket->code = $order->code;
-            $orderTicket->adultQuantity = $order->adultQuantity;
-            $orderTicket->childrenQuantity = $order->childrenQuantity;
+            $orderTicket = OrderLib::getOrderTicket($orderTicket->id);
 
             if ($order->discount) $orderTicket->seatClassPrice =  $orderTicket->seatClassPrice - ($orderTicket->seatClassPrice * $order->discount);
 

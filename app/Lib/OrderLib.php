@@ -69,7 +69,7 @@ class OrderLib {
                                 'o.phone', 'o.originalPrice', 'o.couponAmount', 'o.finalPrice', 'o.agentId',
                                 'o.code', 'o.email', 'o.bookingDate', 'o.note', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff',
                                 'o.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 
-                                'a.name as agentName', 'ct.type as agentType')
+                                'o.paymentStatus', 'a.name as agentName', 'ct.type as agentType')
                         ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
                         ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
                         ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')

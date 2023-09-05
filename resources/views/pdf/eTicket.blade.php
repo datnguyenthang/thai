@@ -53,40 +53,62 @@
 					<td colspan="3" rowspan="2">{{ $orderTicket->seatClassName }}</td>
 				</tr>
 				<tr>
-					<td>Date:</td>
+					<td>Departure Date:</td>
 					<td colspan="3">{{ $orderTicket->departDate }}</td>
 				</tr>
 				<tr>
-					<td>Time:</td>
+					<td>Departure Time:</td>
 					<td colspan="3">{{ $orderTicket->departTime }}</td>
+					<td colspan="3"></td>
+					<td>Payment status:</td>
+				</tr>
+				<tr>
+					<td>Pick up:</td>
+					<td colspan="3" class="m">{{ $orderTicket->pickup }}</td>
+					<td colspan="3"></td>
+					<td colspan="3" rowspan="2">{{ strtoupper(PAYMENTSTATUS[$orderTicket->paymentStatus]) }}</td>
+				</tr>
+				<tr>
+					<td>Drop off:</td>
+					<td colspan="3" class="m">{{ $orderTicket->dropoff }}</td>
 				</tr>
 			</tbody>
 		</table>
-		<table class="passenger" style="width: 500pt;border: 1px solid #000;">
+		<table style="width: 500pt; margin-top: 4%; font-size: 18px;">
 			<thead style="background-color: #c00000; border-collapse: collapse;">
 				<tr>
 					<th colspan="9" style="color:#fff">PASSENGER</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr style="text-align: center; font-weight: bold;">
-					<td colspan="6">Information</td>
-					<td>Pax</td>
-					<td colspan="2">Total</td>
+				<tr>
+					<td>Customer name:</td>
+					<td colspan="3" class="m">{{ $orderTicket->fullname }}</td>
+					<td colspan="3"></td>
+					<td>Adult:</td>
+					<td colspan="1">{{ $orderTicket->adultQuantity }}</td>
 				</tr>
-				<tr style="text-align: center;">
-					<td>1</td>
-					<td colspan="5" class="m">{{ $orderTicket->fullname }}(CHILDREN {{ $orderTicket->childrenQuantity }})</td>
-					<td>{{ $orderTicket->childrenQuantity + $orderTicket->adultQuantity }}</td>
-					<td colspan="2">{{ round($orderTicket->price / $orderTicket->adultQuantity) }}</td>
+				<tr>
+					<td>Phone number:</td>
+					<td colspan="3">{{ $orderTicket->phone }}</td>
+					<td colspan="3"></td>
+					<td>Children:</td>
+					<td colspan="3">{{ $orderTicket->childrenQuantity }}</td>
 				</tr>
-				<tr style="text-align: center;">
-					<td colspan="7">Total</td>
-					<td colspan="2">{{ round($orderTicket->price) }}</td>
+				<tr>
+					<td>Email:</td>
+					<td colspan="3">{{ $orderTicket->email }}</td>
 				</tr>
+
+				@if($orderTicket->agentName)
+					<tr style="margin-top: 20px;">
+						<td>Order by <strong>{{ $orderTicket->agentName }}</strong></td>
+					</tr>
+				@endif
 			</tbody>
 		</table>
 	</div>
+	<br/><br/><br/><br/><br/>
 	<div>
 		<div style="clear:both; position:relative; margin-left:1%; margin-top:-1%;">
 			<p style="font-weight: bold;">*Please show this E-ticket at our office to get the paper ticket before get on catamaran</p>
