@@ -50,7 +50,7 @@ class DashboardLib {
                     })
                     ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate')
                     ->when($isOrder, function ($query) {
-                        if ($isOrder) $query->having('totalCustomer', '>', 0);
+                        $query->having('totalCustomer', '>', 0);
                     })
                     ->orderBy('rides.departDate', 'asc')
                     ->orderBy('rides.departTime', 'asc')
