@@ -140,7 +140,7 @@
                                 <th>To</th>
                                 <th>Depart Time</th>
                                 <th>Total Customer</th>
-                                <th>Total Confirmed Customer</th>
+                                <th>Total Order</th>
                                 <th>
                                     <a href="#" wire:click="exportRides()">
                                         <i class="fas fa-download"></i>
@@ -155,7 +155,7 @@
                                     <td>{{ $ride->toLocationName }}</td>
                                     <td>{{ $ride->departDate . ' ' . $ride->departTime }}</td>
                                     <td>{{ $ride->totalCustomer }}</td>
-                                    <td>{{ $ride->totalCustomerConfirmed }}</td>
+                                    <td>{{ $ride->totalOrder }}</td>
                                     <td>
                                         <a href="#" wire:click="displayRide({{ $ride->id }})">
                                             <i class="fas fa-eye"></i>
