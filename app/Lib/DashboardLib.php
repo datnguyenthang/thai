@@ -20,8 +20,9 @@ class DashboardLib {
                                 DB::raw('SUM(o.adultQuantity + o.childrenQuantity) as totalCustomer'),
                                 DB::raw('SUM(CASE WHEN os.status = '.CONFIRMEDORDER.' THEN o.adultQuantity + o.childrenQuantity ELSE 0 END) as totalCustomerConfirm'),
                                 
-                                DB::raw('COUNT(o.id) as totalOrder') ,
-                                DB::raw('COUNT(CASE WHEN os.status = '.CONFIRMEDORDER.' THEN o.id) as totalOrderConfirm') ,
+                                DB::raw('COUNT(o.id) as totalOrder'),
+                                DB::raw('COUNT(CASE WHEN os.status = '.CONFIRMEDORDER.' THEN o.id ELSE 0 END) as totalOrderConfirm'),
+
                                 DB::raw('CASE WHEN cast(CONCAT(rides.departDate, " ", rides.departTime) as datetime) > "'.Carbon::now()->format('Y-m-d H:i:s').'" THEN 0 ELSE 1 END AS isDepart')
                             )
                     ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
