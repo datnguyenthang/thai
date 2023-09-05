@@ -1,4 +1,4 @@
-<div dir="ltr">Dear {{ $order->fullname }}, 
+<div dir="ltr">Dear Customer, 
     
   <div>
     <p>For the convenience of changing the trip schedule, SEUDAMGO would like to cancel the </p>

@@ -1,4 +1,4 @@
-<div dir="ltr">Dear {{ $order->fullname }}, 
+<div dir="ltr">Dear Customer, 
     
   <div>
     <p>Unfortunately, the booking you attempted to make recently was not completed. As a result, you</p>
@@ -12,7 +12,6 @@
     <p>us should you have any further inquiry.</p>
     <p>Thank you for choosing SEUDAMGO.</p>
     <p>SEUDAMGO TEAM.</p>
-    <p>unusual error.</p>
 
     <hr/>
     

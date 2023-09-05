@@ -1,4 +1,4 @@
-<div dir="ltr">Dear {{ $order->fullname }}, 
+<div dir="ltr">Dear Customer, 
     <div>A confirmed booking for<br/> 
         @foreach ($order->orderTickets as $orderTicket)
             <b>{{ $orderTicket->fromLocationName }} - {{ $orderTicket->toLocationName }}, {{ date("j F, Y", strtotime($orderTicket->departDate)) }}, {{ $orderTicket->departTime }}</b><br/>

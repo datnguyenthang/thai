@@ -12,6 +12,8 @@ use App\Lib\TicketLib;
 use App\Mail\SendConfirmEticket;
 use App\Mail\SendCancelationCustomerRequest;
 use App\Mail\SendConfirmCompleteOrder;
+use App\Mail\SendConfirmPaidOrder;
+use App\Mail\SendConfirmReservationOrder;
 
 class EmailLib {
 
@@ -55,6 +57,30 @@ class EmailLib {
         if (!$order->email) $order->email = $order->agentEmail;
 
         Mail::to($order->email)->send(new SendCancelationCustomerRequest($order));
+    }
+
+    public static function sendMailConfirmPaidOrder($code) {
+        $order = OrderLib::getOrderDetailByCode($code);
+
+        //If customer have no email and agent, return
+        if (!$order->email && !$order->agentEmail) return false;
+        
+        //if there are no email of customer, sending mail to agent instead.
+        if (!$order->email) $order->email = $order->agentEmail;
+
+        Mail::to($order->email)->send(new SendConfirmPaidOrder($order));
+    }
+
+    public static function sendMailConfirmReservation($code) {
+        $order = OrderLib::getOrderDetailByCode($code);
+
+        //If customer have no email and agent, return
+        if (!$order->email && !$order->agentEmail) return false;
+        
+        //if there are no email of customer, sending mail to agent instead.
+        if (!$order->email) $order->email = $order->agentEmail;
+
+        Mail::to($order->email)->send(new SendConfirmReservationOrder($order));
     }
 
     public static function sendMailConfirmCompleteOrder($code) {

@@ -1,4 +1,4 @@
-<div dir="ltr">Dear {{ $order->fullname }}, 
+<div dir="ltr">Dear Customer, 
     
   <div>
     <p>Your booking has just been canceled at your request. Refunds will be made to the payment </p>
