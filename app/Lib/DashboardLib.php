@@ -42,7 +42,7 @@ class DashboardLib {
                         if (!$fromDate && !$toDate)
                             $query->where('rides.departDate', '=', Carbon::now()->toDateString());
                     })
-                    ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate', 'o.adultQuantity', 'o.childrenQuantity')
+                    ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate')
                     ->when($isOrder, function ($query) {
                         $query->having('totalCustomer', '>', 0);
                     })
