@@ -88,7 +88,7 @@
                                 <span class="form-label">{{ trans('backend.paymentmethodname') }}</span>
                                 <select id="paymentMethod" name="paymentMethod" class="form-select" wire:model="paymentMethod">
                                     @foreach($paymentMethodList as $value)
-                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                        <option value="{{ $value->id }}">{{ ucwords($value->name) }}</option>
                                     @endforeach
                                 </select>
                                 @error('paymentMethod') <span class="text-danger error">{{ $message }}</span> @enderror
