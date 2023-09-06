@@ -41,8 +41,8 @@
              <span>{{ trans('backend.ride') }}</span>
           </a>
           
-          <a href="{{ route('managerAgent') }}" 
-            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerAgent' ? 'active' : '' }}">
+          <a href="{{ route('agentList') }}" 
+            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'agentList' ? 'active' : '' }}">
             <i class="fas fa-chart-pie fa-fw me-3"></i>
             <span>{{ trans('backend.agent') }}</span>
           </a>

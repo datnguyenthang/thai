@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Manager;
+namespace App\Http\Livewire\Component\Agent;
 
 use Livewire\Component;
 use App\Models\Agent;
 use App\Models\CustomerType;
 
-class ManagerCreateAgent extends Component
+class CreateAgent extends Component
 {
     public $agentId;
     public $name;
@@ -21,9 +21,12 @@ class ManagerCreateAgent extends Component
     public $status;
 
     public $customerType;
+    
+    public $role;
 
-    public function mount($agentId = 0)
-    {
+    public function mount($agentId = 0){
+        $this->role = auth()->user()->role;
+
         $this->customerType = CustomerType::get()->where('status', 0);
         $this->type = $this->customerType->first()->id; 
 
@@ -95,12 +98,22 @@ class ManagerCreateAgent extends Component
         }
         // Reset input fields
         $this->name = '';
-        return redirect()->route('managerAgent');
+        return redirect()->route('agentList');
     }
 
-    public function render()
-    {
-        return view('livewire.backend.manager.manager-create-agent')
-                ->layout('manager.layouts.app');
+    public function render(){
+        switch ($this->role) {
+            case 'manager':
+                return view('livewire.component.agent.create-agent')->layout('manager.layouts.app');
+                break;
+            case 'moderator':
+                return view('livewire.component.agent.create-agent')->layout('moderator.layouts.app');
+                break;
+            case 'agent':
+                return <<<'blade'
+                            <div><p>You do not have permission to access for this page.</p></div>
+                        blade;
+                break;
+        }
     }
 }

@@ -104,25 +104,34 @@
       <!-- Left links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+          <li class="nav-item me-3 me-lg-0">
             <a href="{{ route('moderatorDashboard') }}" 
               class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorDashboard' ? 'active' : '' }}" 
               aria-current="true">
                 <span>{{ trans('backend.dashboard') }}</span>
             </a>
           </li>
-          <li class="nav-item">
+
+          <li class="nav-item me-3 me-lg-0">
             <a href="{{ route('moderatorOrderlist') }}" 
               class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorOrderlist' ? 'active' : '' }}" 
               aria-current="true">
                 <span>{{ trans('backend.orderlist') }}</span>
             </a>
           </li>
-          <li class="nav-item">
+
+          <li class="nav-item me-3 me-lg-0">
             <a href="{{ route('moderatorOrder') }}" 
             class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorOrder' ? 'active' : '' }}" 
             aria-current="true">
               <span>{{ trans('backend.order') }}</span>
+            </a>
+          </li>
+
+          <li class="nav-item me-3 me-lg-0">
+            <a href="{{ route('agentList') }}" 
+              class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'agentList' ? 'active' : '' }}">
+              <span>{{ trans('backend.agent') }}</span>
             </a>
           </li>
         </ul>

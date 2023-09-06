@@ -75,6 +75,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/user', App\Http\Livewire\Component\Role\ListUser::class)->name('listUser');
     Route::get('/user/create/{userId}', App\Http\Livewire\Component\Role\CreateUser::class)->name('createUser');
 
+    //Manage Agent for manager and moderator
+    Route::get('/agentlist', App\Http\Livewire\Component\Agent\ListAgent::class)->name('agentList');
+    Route::get('/agent/create/{agentId}', App\Http\Livewire\Component\Agent\CreateAgent::class)->name('createAgent');
+
+
     /*------All Manager Routes List------*/
     Route::middleware(['user-access:manager'])->group(function () {
         Route::get('/manager', App\Http\Livewire\Backend\Manager\ManagerDashboard::class)->name('managerDashboard');
@@ -86,8 +91,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/location', App\Http\Livewire\Backend\Manager\ManagerListLocation::class)->name('managerLocation');
         Route::get('/location/create/{locationId}', App\Http\Livewire\Backend\Manager\ManagerCreateLocation::class)->name('managerCreateLocation');
 
-        Route::get('/agent', App\Http\Livewire\Backend\Manager\ManagerListAgent::class)->name('managerAgent');
-        Route::get('/agent/create/{agentId}', App\Http\Livewire\Backend\Manager\ManagerCreateAgent::class)->name('managerCreateAgent');
+        //Route::get('/agent', App\Http\Livewire\Backend\Manager\ManagerListAgent::class)->name('managerAgent');
+        //Route::get('/agent/create/{agentId}', App\Http\Livewire\Backend\Manager\ManagerCreateAgent::class)->name('managerCreateAgent');
         
         Route::get('/ride', App\Http\Livewire\Backend\Manager\ManagerListRide::class)->name('managerListRide');
         Route::get('/ride/create/{rideId}', App\Http\Livewire\Backend\Manager\ManagerCreateRide::class)->name('managerCreateRide');

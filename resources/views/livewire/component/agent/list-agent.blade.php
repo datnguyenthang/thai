@@ -45,10 +45,10 @@
 
                     <td>{{ AGENTSTATUS[$agent->status] }}</td>
                     <td>
-                        <button class="call-btn btn btn-outline-primary btn-floating btn-sm"
-                        wire:click="createAgent({{ $agent->id }})">
+                        <a class="call-btn btn btn-outline-primary btn-floating btn-sm"
+                            href="/agent/create/{{ $agent->id }}">
                             <i class="fa fa-edit"></i>
-                        </button>
+                        </a>
                     </td>
                 </tr>
             @endforeach

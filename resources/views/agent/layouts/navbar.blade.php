@@ -19,21 +19,21 @@
       <!-- Left links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+          <li class="nav-item me-3 me-lg-0">
             <a href="{{ route('agentDashboard') }}" 
               class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'agentDashboard' ? 'active' : '' }}" 
               aria-current="true">
                 <span>{{ trans('backend.dashboard') }}</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item me-3 me-lg-0">
             <a href="{{ route('agentOrderlist') }}" 
               class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'agentOrderlist' ? 'active' : '' }}" 
               aria-current="true">
                 <span>{{ trans('backend.orderlist') }}</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item me-3 me-lg-0">
             <a href="{{ route('agentOrder') }}" 
             class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'agentOrder' ? 'active' : '' }}" 
             aria-current="true">
