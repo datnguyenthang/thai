@@ -154,8 +154,8 @@
                                     <td>{{ $ride->fromLocationName }}</td>
                                     <td>{{ $ride->toLocationName }}</td>
                                     <td>{{ $ride->departDate . ' ' . $ride->departTime }}</td>
-                                    <td>{{ $ride->totalCustomer }}/{{ $ride->totalCustomerConfirm }}</td>
-                                    <td>{{ $ride->totalOrder }}/{{ $ride->totalOrderConfirm }}</td>
+                                    <td><strong class="text-success">{{ $ride->totalCustomerConfirm }}</strong>/<strong>{{ $ride->totalCustomer }}</strong></td>
+                                    <td><strong class="text-success">{{ $ride->totalOrderConfirm }}</strong>/<strong>{{ $ride->totalOrder }}</strong></td>
                                     <td>
                                         <a href="#" wire:click="displayRide({{ $ride->id }})">
                                             <i class="fas fa-eye"></i>
