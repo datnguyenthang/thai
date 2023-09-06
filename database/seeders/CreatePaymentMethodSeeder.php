@@ -40,6 +40,12 @@ class CreatePaymentMethodSeeder extends Seeder
                 'description'=>'Promptpay QR payment method',
                 'isTransaction'=> 1,
             ],
+            [
+                'id' => 5,
+                'name'=> PAIDBYAGENT,
+                'description'=>'Pay by agent method',
+                'isTransaction'=> 0,
+            ],
         ];
     
         foreach ($paymentMethods as $key => $paymentMethod) {

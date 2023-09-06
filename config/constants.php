@@ -181,19 +181,20 @@
     define('PROMPTPAY', 'promptpay');
     define('ALIPAY', 'alipay');
     define('WECHAT', 'wechat');
+    define('PAIDBYAGENT', 'pay by agent');
 
     //PAYMENT STATUS
     define('NOTPAID', 0);
     define('REFUND', 3);
     define('PAID', 8);
-    define('PAIDBYCASH', 9);
-    define('PAIDBYAGENT', 10);
+    //define('PAIDBYCASH', 9);
+    //define('PAIDBYAGENT', 10);
     define('PAYMENTSTATUS', [
                                 NOTPAID => "Not paid",
                                 REFUND => "Refund",
                                 PAID => "Paid",
                                 //PAIDBYCASH => "Paid by cash",
-                                PAIDBYAGENT => "Paid by agent"
+                                //PAIDBYAGENT => "Paid by agent"
                             ]);
     //OMISE 
     define('SUCCESSFUL', 'successful');

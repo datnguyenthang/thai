@@ -39,12 +39,15 @@ class ModeratorDashboard extends Component
     public $toLocationList;
 
     public $isOrder = true;
+    public $role;
 
     public $rideId;
     public $showModal;
     public $listPassengers;
 
     public function mount(){
+        $this->role = auth()->user()->role;
+
         $this->fromDate = $this->toDate = now()->toDateString();
         $this->fromLocationList = $this->toLocationList = Location::get()->where('status', ACTIVE);
 

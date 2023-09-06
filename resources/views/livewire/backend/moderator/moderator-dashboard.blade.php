@@ -1,5 +1,6 @@
 <div>
     <!-- Content Row -->
+    {{--
     <div class="row">
 
         <!-- Earnings (Monthly) Card Example -->
@@ -84,7 +85,7 @@
             </div>
         </div>
     </div>
-
+    --}}
     <!-- Content Row -->
     <div class="row">
 
@@ -141,6 +142,7 @@
                                 <th>Depart Time</th>
                                 <th>Total Customer</th>
                                 <th>Total Order</th>
+                                <th>Total Money</th>
                                 <th>
                                     <a href="#" wire:click="exportRides()">
                                         <i class="fas fa-download"></i>
@@ -156,6 +158,8 @@
                                     <td>{{ $ride->departDate . ' ' . $ride->departTime }}</td>
                                     <td><strong class="text-success">{{ $ride->totalCustomerConfirm }}</strong>/<strong>{{ $ride->totalCustomer }}</strong></td>
                                     <td><strong class="text-success">{{ $ride->totalOrderConfirm }}</strong>/<strong>{{ $ride->totalOrder }}</strong></td>
+                                    <td><strong class="text-success">{{ round($ride->totalMoneyConfirm) }}</strong>/<strong>{{ round($ride->totalMoney) }}</strong></td>
+                                    <td>
                                     <td>
                                         <a href="#" wire:click="displayRide({{ $ride->id }})">
                                             <i class="fas fa-eye"></i>
@@ -206,11 +210,11 @@
 
                     @if($showModal === true && $listPassengers)
                         <div class="row">
-                            <table class="table table-striped table-danger">
+                            <table class="table table-striped">
                                 <tr>
                                     <th>Order Code</th>
                                     <th>Phone</th>
-                                    <th>Email</th>
+                                    {{--<th>Email</th>--}}
                                     <th>Adult Quantity</th>
                                     <th>Children Quantity</th>
                                     <th>Pickup</th>
@@ -218,15 +222,16 @@
                                     <th>Full Name</th>
                                     <th>Customer Type</th>
                                     <th>User Name</th>
-                                    <th>Ticket Type</th>
+                                    <th>Payment Status</th>
                                     <th>Status</th>
+                                    <th></th>
                                     <th></th>
                                 </tr>
                                 @foreach ($listPassengers as $listPassenger)
                                     <tr>
                                         <td>{{ $listPassenger->code }}</td>
                                         <td>{{ $listPassenger->phone }}</td>
-                                        <td>{{ $listPassenger->email }}</td>
+                                        {{--<td>{{ $listPassenger->email }}</td>--}}
                                         <td>{{ $listPassenger->adultQuantity }}</td>
                                         <td>{{ $listPassenger->childrenQuantity }}</td>
                                         <td>{{ $listPassenger->pickup }}</td>
@@ -234,8 +239,17 @@
                                         <td>{{ $listPassenger->fullname }}</td>
                                         <td>{{ $listPassenger->CustomerType }}</td>
                                         <td>{{ $listPassenger->name }}</td>
-                                        <td>{{ $listPassenger->type }}</td>
-                                        <td>{{ $listPassenger->status }}</td>
+                                        <td>{{ PAYMENTSTATUS[$listPassenger->paymentStatus] }}</td>
+                                        <td>{{ ORDERSTATUS[$listPassenger->status] }}</td>
+                                        <td>
+                                            <a class="btn bg_own_color text-light"
+                                                href="/{{ $role }}processorder/{{$listPassenger->orderId}}"
+                                                target="_blank"
+                                            >
+
+                                                        {{ trans('backend.vieworder') }}
+                                            </a>
+                                        </td>
                                         <td>
                                             <button class="btn bg_own_color text-light"
                                                 wire:key="passenger-{{ $listPassenger->orderTicketId }}"
