@@ -127,7 +127,8 @@ class DashboardLib {
 
     public static function detailRides($rideId = 0) {
         $passengers = Ride::select('rides.id', 'rides.name as Ridename', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
-                                  'o.id as orderId','o.code', 'o.phone', 'o.email', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff', 'ot.id as orderTicketId', 'op.paymentStatus', 'os.status',
+                                  'o.id as orderId','o.code', 'o.phone', 'o.email', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff', 'ot.id as orderTicketId',
+                                   DB::raw('COALESCE(op.paymentStatus, 0) as paymentStatus'), 'os.status',
                                    DB::raw('CONCAT(o.firstName, " ", o.lastName) as fullname'),
                                    DB::raw('CASE WHEN o.customerType <> 0 THEN ct.name ELSE "Online" END AS CustomerType'), 'u.name',
                                    DB::raw('CASE WHEN ot.type = '.ONEWAY.' THEN "Departure" ELSE "Return" END AS ticket'),
