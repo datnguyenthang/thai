@@ -3,7 +3,7 @@
     <input type="text" wire:model.debounce.500ms="search" placeholder="{{ trans('backend.search') }}...">
     <a href="/paymentmethod/create/0" class="btn btn-info">{{ trans('backend.createpaymentmethod') }}</a>
     
-    <table class="table datatable-table">
+    <table class="table table-striped datatable-table">
         <thead>
             <tr>
                 <th>{{ trans('backend.paymentmethodname') }}</th>

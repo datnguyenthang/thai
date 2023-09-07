@@ -3,7 +3,7 @@
     <a href="/ride/create/0" class="btn btn-info">{{ trans('backend.createride') }}</a>
     <a href="/ride/massiveCreate" class="btn btn-success">{{ trans('backend.createmassiveride') }}</a>
 
-    <table class="table datatable-table">
+    <table class="table table-striped datatable-table">
         <thead>
             <tr>
                 <th>Id</th>

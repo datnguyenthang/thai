@@ -133,7 +133,7 @@
                 <!-- Card Body -->
                 <div class="card-body" style="height: 30rem;">
                     <div class="row">
-                        <table class="table">
+                        <table class="table table-striped">
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
@@ -143,6 +143,7 @@
                                 <th>Total Customer</th>
                                 <th>Total Order</th>
                                 <th>Total Money</th>
+                                <th></th>
                                 <th>
                                     <a href="#" wire:click="exportRides()">
                                         <i class="fas fa-download"></i>

@@ -4,7 +4,7 @@
     <input type="text" wire:model.debounce.500ms="search" placeholder="{{ trans('backend.search') }}...">
     <a href="/pkdp/create/0" class="btn btn-info">{{ trans('backend.createpkdp') }}</a>
     
-    <table class="table datatable-table">
+    <table class="table table-striped datatable-table">
         <thead>
             <tr>
                 <th wire:click="sortBy('id')"><i class="fas fa-sort"></i>{{ trans('backend.id') }}</th>

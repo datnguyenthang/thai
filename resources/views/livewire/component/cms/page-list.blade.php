@@ -11,7 +11,7 @@
     <input type="text" wire:model.debounce.500ms="search" placeholder="{{ trans('backend.search') }}...">
     <a href="/createpage/0" class="btn btn-info">{{ trans('backend.createpage') }}</a>
     
-    <table class="table datatable-table">
+    <table class="table table-striped datatable-table">
         <thead>
             <tr>
                 <th><i class="fas fa-sort"></i>{{ trans('backend.pageid') }}</th>

@@ -3,7 +3,7 @@
     <input type="text" wire:model.debounce.500ms="search" placeholder="{{ trans('backend.search') }}...">
     <a href="/promotion/create/0" class="btn btn-info">{{ trans('backend.createpromotion') }}</a>
     
-    <table class="table datatable-table">
+    <table class="table table-striped datatable-table">
         <thead>
             <tr>
                 <th wire:click="sortBy('name')"><i class="fas fa-sort"></i>{{ trans('backend.promotionname') }}</th>
