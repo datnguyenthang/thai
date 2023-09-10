@@ -30,6 +30,9 @@ class Profile extends Component
             case 'creator':
                 return view('livewire.component.user.profile', compact('user', 'listAgent'))->layout('creator.layouts.app');
                 break;
+            case 'viewer':
+                return view('livewire.component.user.profile', compact('user', 'listAgent'))->layout('viewer.layouts.app');
+                break;
         }
     }
 }

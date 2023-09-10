@@ -59,6 +59,9 @@ class Edit extends Component
             case 'creator':
                 return view('livewire.component.user.edit')->layout('creator.layouts.app');
                 break;
+            case 'viewer':
+                return view('livewire.component.user.edit')->layout('viewer.layouts.app');
+                break;
         }
     }
 }
