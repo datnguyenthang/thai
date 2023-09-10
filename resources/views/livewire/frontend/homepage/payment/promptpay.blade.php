@@ -81,6 +81,6 @@
 
     <!-- Loading state-->
     @if ($paymentStatus == SUCCESSFUL)
-        @include('livewire.frontend.homepage.payment.loading')
+    @include('loading.loading')
     @endif
 </div>

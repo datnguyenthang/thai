@@ -69,6 +69,8 @@
                     <th class="product-name">{{ trans('messages.product') }}</th>
                     <th class="product-seat">{{ trans('messages.seatclass') }}</th>
                     <th class="product-total">{{ trans('messages.total') }}</th>
+                    <th class="product-total">{{ trans('backend.status') }}</th>
+                    <th class="product-action">{{ trans('messages.action') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -93,8 +95,14 @@
                             </td>
                             <td class="product-total">
                                 <span class="amount">
-                                    <span>฿</span>{{ round($orderTicket->seatPrice  * $order->adultQuantity) }}
+                                    <span>฿</span>{{ round($orderTicket->price) }}
                                 </span>
+                            </td>
+                            <td class="product-status">
+                                    <span>{{ TICKETSTATUS[$orderTicket->status] }}</span>
+                            </td>
+                            <td class="product-action">
+                                <button class="btn bg_own_color" wire:click="modifyTicket({{ $orderTicket->id }})">Modify</button>
                             </td>
                         </tr>
                     @endif
@@ -118,7 +126,13 @@
                             </td>
             
                             <td class="product-total">
-                                <span class="amount">฿</span>{{ round($orderTicket->seatPrice * $order->adultQuantity) }}
+                                <span class="amount">฿</span>{{ round($orderTicket->price) }}
+                            </td>
+                            <td class="product-status">
+                                <span>{{ TICKETSTATUS[$orderTicket->status] }}</span>
+                            </td>
+                            <td class="product-action">
+                                <button class="btn bg_own_color" wire:click="modifyTicket({{ $orderTicket->id }})">Modify</button>
                             </td>
                         </tr>
                     @endif

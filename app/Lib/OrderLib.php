@@ -106,4 +106,52 @@ class OrderLib {
                         ->first();
         return $orderDetail;
     }
+
+    public static function getOrderListQuery($orderCode, $customerName, $customerPhone, $customerType,
+                                             $agentId, $fromLocation, $toLocation){
+        return Order::with(['orderTickets' => function($orderTicket){
+            $orderTicket->select('order_tickets.*', 'r.name', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
+                        ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
+                        ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
+                        ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
+                        ->leftJoin('seat_classes as sc', 'sc.id', '=', 'order_tickets.seatClassId');
+            }])
+            ->leftJoin('promotions as p', 'p.id', '=', 'orders.promotionId')
+            ->leftJoin('agents as a', 'a.id', '=', 'orders.agentId')
+            ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
+            ->leftJoin('users as u', 'u.id', '=', 'orders.userId')
+            
+            ->leftJoin('order_payments as op', function($join) {
+                $join->on('orders.id', '=', 'op.orderId')
+                    ->whereRaw('op.id = (select max(id) from order_payments where order_payments.orderId = orders.id)');
+            })
+            ->leftJoin('payment_methods as pm', 'pm.id', '=', 'op.paymentMethod')
+            ->leftJoin('order_statuses as os', function($join) {
+                $join->on('orders.id', '=', 'os.orderId')
+                    ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = orders.id)');
+            })
+            ->select('orders.id', 'orders.code', 'u.name as username', 'orders.isReturn', 'ct.name as customerTypeName', 'a.name as agentName', 'orders.channel', 
+                    DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.email', 'orders.note', 'orders.pickup', 'orders.dropoff',
+                    'orders.adultQuantity', 'orders.childrenQuantity', 'orders.finalPrice','orders.bookingDate', 'os.status',
+                    'p.name as promotionName', 'op.paymentStatus', 'pm.name as paymentMethod', 'op.transactionCode', 'op.transactionDate')
+            ->where(function ($query) use ($orderCode, $customerName, $customerPhone, $customerType, $agentId, $fromLocation, $toLocation) {
+                if ($orderCode) $query->where('orders.code', 'like', '%'.$orderCode.'%');
+                if ($customerName) $query->whereRaw('CONCAT(orders.firstName, " ", orders.lastName) LIKE ?', ['%'.$customerName.'%']);
+                if ($customerPhone) $query->where('orders.phone', 'like', '%'.$customerPhone.'%');
+                if ($customerType >= 0) $query->where('orders.customerType', $customerType);
+                if ($agentId) $query->where('orders.agentId', $agentId);
+
+                if ($fromLocation || $toLocation) {
+                    $query->whereIn('orders.id', function ($subquery) use ($fromLocation, $toLocation) {
+                        $subquery->select('order_tickets.orderId')
+                            ->from('order_tickets')
+                            ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
+                            ->where(function ($ticketQuery) use ($fromLocation, $toLocation) {
+                                if ($fromLocation) $ticketQuery->where('r.fromLocation', $fromLocation);
+                                if ($toLocation) $ticketQuery->where('r.toLocation', $toLocation);
+                            });
+                    });
+                }
+            });
+    }
 }

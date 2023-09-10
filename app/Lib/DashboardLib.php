@@ -144,7 +144,7 @@ class DashboardLib {
                     })
                     ->leftJoin('order_statuses as os', function($join) {
                         $join->on('o.id', '=', 'os.orderId')
-                             ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
+                            ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
                     })
                     ->leftJoin('order_payments as op', function($opjoin) {
                         $opjoin->on('o.id', '=', 'os.orderId')

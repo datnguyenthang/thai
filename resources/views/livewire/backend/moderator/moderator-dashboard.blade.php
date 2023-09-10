@@ -126,8 +126,8 @@
                         <input id="toDate" name="toDate" wire:model="toDate" class="form-control" type="date" required>
                     </div>
                     <div class="col-md-2 d-flex flex-column align-items-center text-center">
-                        <label>Is ordered?</label>
-                        <input id="isOrder" type="checkbox" wire:model="isOrder" class="form-control form-check-input">
+                        <label>Has ordered?</label>
+                        <input id="hasOrdered" type="checkbox" wire:model="hasOrdered" class="form-control form-check-input">
                     </div>
                 </div>
                 <!-- Card Body -->
@@ -273,7 +273,7 @@
     </div>
 
     <!-- Loading Overlay, show loading to lock user action-->
-    @include('livewire.frontend.homepage.payment.loading')
+    @include('loading.loading')
 
     <!-- Let's also add the backdrop / overlay here -->
     <div class="modal-backdrop fade show" id="backdrop"

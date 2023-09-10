@@ -126,6 +126,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/agentorderlist', App\Http\Livewire\Backend\Agent\AgentOrderList::class)->name('agentOrderlist');
     });
 
+    /*------All Viewer Routes List------*/
+    Route::middleware(['user-access:viewer'])->group(function () {
+        Route::get('/viewerdashboard', App\Http\Livewire\Backend\Viewer\ViewerDashboard::class)->name('viewerDashboard');
+        Route::get('/viewerorderlist', App\Http\Livewire\Backend\Viewer\ViewerOrderList::class)->name('viewerOrderlist');
+        Route::get('/viewerride', App\Http\Livewire\Backend\Viewer\ViewerRide::class)->name('viewerRide');
+        Route::get('/vieweragent', App\Http\Livewire\Backend\Viewer\ViewerAgent::class)->name('viewerAgent');
+    });
+
     /*---All Admin Routes List----*/
     Route::middleware(['user-access:admin'])->group(function () {
         Route::get('/importorder', App\Http\Livewire\Backend\Admin\ImportOrder::class)->name('importOrder');

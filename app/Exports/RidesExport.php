@@ -41,7 +41,7 @@ class RidesExport implements FromCollection, WithHeadings
             'Dropoff',
             'Full Name',
             'Customer Type',
-            'User Name',
+            'Booking User',
             'Ticket Type',
             'Status',
         ];

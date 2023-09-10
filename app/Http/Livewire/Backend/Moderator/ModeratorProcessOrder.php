@@ -30,12 +30,16 @@ class ModeratorProcessOrder extends Component
     public $transactionCode;
     public $transactionDate;
 
+    public $selectedTicket;
+    public $ticketStatus;
+
     public $status;
     public $note;
     public $isSendmail = true;
 
     public $showModalStatus = false;
     public $showModalPayment = false;
+    public $showModalModifyTicket = false;
 
     public $isTransaction = false;
 
@@ -44,6 +48,7 @@ class ModeratorProcessOrder extends Component
     public function mount($orderId){
         $this->orderId = $orderId;
         $this->order = OrderLib::getOrderDetail($this->orderId);
+        
         $this->orderStatuses = OrderStatus::select('order_statuses.status', 'order_statuses.orderId', 'order_statuses.note', 'order_statuses.changeDate', 'u.name')
                                             ->leftJoin('users as u', 'u.id', '=', 'order_statuses.userId')
                                             ->where('orderId', $this->orderId)->get();
@@ -244,6 +249,13 @@ class ModeratorProcessOrder extends Component
             // Handle errors
             echo 'Error: ' . $e->getMessage();
         }        
+    }
+
+    public function modifyTicket($orderTicketId = 0){
+        $this->selectedTicket = $this->order->orderTickets->first(function ($item) use ($orderTicketId) {
+            return $item['id'] === $orderTicketId;
+        });
+        $this->showModalModifyTicket = true;
     }
 
     public function render() {

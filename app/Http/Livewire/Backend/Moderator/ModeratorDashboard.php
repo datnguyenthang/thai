@@ -38,7 +38,7 @@ class ModeratorDashboard extends Component
     public $fromLocationList;
     public $toLocationList;
 
-    public $isOrder = true;
+    public $hasOrdered = true;
     public $role;
 
     public $rideId;
@@ -85,7 +85,7 @@ class ModeratorDashboard extends Component
     public function render() {
         $perPage = 10;
 
-        $listRides = DashboardLib::ridesInDay($this->fromDate, $this->toDate, $this->fromLocation, $this->toLocation, $this->isOrder, $perPage);
+        $listRides = DashboardLib::ridesInDay($this->fromDate, $this->toDate, $this->fromLocation, $this->toLocation, $this->hasOrdered, $perPage);
 
         return view('livewire.backend.moderator.moderator-dashboard', ['listRides' => $listRides])
               ->layout('moderator.layouts.app');

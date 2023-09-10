@@ -133,6 +133,7 @@ return [
     'locationgooglemapurl' => 'URL',
 
     //Ride
+    'listride' => 'Ride List',
     'createride' => 'Create Ride',
     'createmassiveride' => 'Massive Create Ride',
     'ridedetail' => 'Ride Detail',

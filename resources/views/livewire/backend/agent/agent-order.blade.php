@@ -116,7 +116,7 @@
                             wire:loading.attr="disabled">{{ trans('backend.booking') }}</button>
                     </div>
                     <!-- Loading Overlay, show loading to lock user action-->
-                    @include('livewire.frontend.homepage.payment.loading')
+                    @include('loading.loading')
                 </div>
             </div>
 

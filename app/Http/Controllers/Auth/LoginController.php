@@ -50,20 +50,28 @@ class LoginController extends Controller
    
         if(auth()->attempt(array('email' => $inputVal['email'], 'password' => $inputVal['password']))){
 
-            if (auth()->user()->role == 'admin') {
-                return redirect('/user');
-            } else if (auth()->user()->role == 'manager') {
-                return redirect('/manager');
-            } else if (auth()->user()->role == 'moderator') {
-                return redirect('/moderator');
-            } else if (auth()->user()->role == 'agent') {
-                return redirect('/agent');
-            } else if (auth()->user()->role == 'creator') {
-                return redirect('/pagelist');
-            } else {
-                return redirect()->route('home');
-            }
-
+            switch (auth()->user()->role) {
+                case 'admin':
+                    return redirect('/user');
+                    break;
+                case 'manager':
+                    return redirect('/manager');
+                    break;
+                case 'moderator':
+                    return redirect('/moderator');
+                    break;
+                case 'agent':
+                    return redirect('/agent');
+                    break;
+                case 'creator':
+                    return redirect('/pagelist');
+                    break;
+                case 'viewer':
+                    return redirect('/viewerdashboard');
+                    break;
+                default:
+                    return redirect()->route('home');
+              }
         } else {
             return redirect()->route('login')
                 ->with('error','Email & Password are incorrect.');

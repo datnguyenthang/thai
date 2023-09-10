@@ -1,11 +1,11 @@
 <div>
     <h1>{{ trans('backend.listorder') }}</h1>
 
-    @include('livewire.backend.moderator.orderlist.filter')
+    @include('livewire.backend.viewer.orderlist.filter')
 
-    @include('livewire.backend.moderator.orderlist.data')
+    @include('livewire.backend.viewer.orderlist.data')
 
-    @include('livewire.backend.moderator.orderlist.modalview')
+    @include('livewire.backend.viewer.orderlist.modalview')
 
     <!-- Loading Overlay, show loading to lock user action-->
     @include('loading.loading')

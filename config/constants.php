@@ -7,6 +7,7 @@
 
     define('ACTIVE', 0);
     define('DEACTIVE', 1);
+    define('MODIFY', 2);
 
     //USER
     define('USERSTATUS', [
@@ -19,18 +20,24 @@
     define('MODERATOR', 3);
     define('AGENT', 4);
     define('CREATOR', 5);
+    define('VIEWER', 6);
     define('USERTYPE', [
                         USER => 'User',
                         ADMIN => 'Admin', 
                         MANAGER => 'Manager',
                         MODERATOR => 'Moderator',
                         AGENT => 'Agent',
-                        CREATOR =>  'Creator'
+                        CREATOR =>  'Creator',
+                        VIEWER =>  'Viewer',
                     ]);
                     
     //CUSTOMER CHANNEL
     define('FACEBOOK', 1);
     define('GOOGLE', 2);
+    define('CHANNELSTATUS', [
+                        FACEBOOK => 'Facebook',
+                        GOOGLE => 'Google', 
+    ]);
 
     //MENU
     define('MENUSTATUS', [
@@ -132,6 +139,13 @@
 
     define('DEPARTURETICKET', 1);
     define('RETURNTICKET', 2);
+
+    //ORDER TICKET 
+    define('TICKETSTATUS', [
+        ACTIVE => "Active",
+        DEACTIVE => "Deactive",
+        MODIFY => "Modify"
+    ]);
 
     //PAYMENT METHOD
     define('PICKUPDROPOFFSTATUS', [

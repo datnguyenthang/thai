@@ -21,10 +21,10 @@ class CreateUser extends Component
 
     public function mount($userId = 0) {
         if(auth()->user()->role == 'admin') 
-            $this->listRole = [MANAGER => 'Manager', MODERATOR => 'Moderator', AGENT => 'Agent' , CREATOR => 'Creator'];
+            $this->listRole = [MANAGER => 'Manager', MODERATOR => 'Moderator', AGENT => 'Agent' , CREATOR => 'Creator', VIEWER => 'Viewer'];
         
         if(auth()->user()->role == 'manager') 
-            $this->listRole = [MODERATOR => 'Moderator', AGENT => 'Agent' , CREATOR => 'Creator'];
+            $this->listRole = [MODERATOR => 'Moderator', AGENT => 'Agent' , VIEWER => 'Viewer'];
         
         $this->listAgent = Agent::pluck('name', 'id');
         $this->agentId = null;

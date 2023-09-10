@@ -134,5 +134,5 @@
     </div>
 
     <!-- Loading state-->
-    @include('livewire.frontend.homepage.payment.loading')
+    @include('loading.loading')
 </div>

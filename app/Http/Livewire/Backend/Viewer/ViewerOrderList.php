@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Moderator;
+namespace App\Http\Livewire\Backend\Viewer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\WithPagination;
@@ -21,7 +21,7 @@ use App\Models\SeatClass;
 use App\Models\Order;
 use App\Models\OrderTicket;
 
-class ModeratorOrderlist extends Component
+class ViewerOrderList extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -52,19 +52,16 @@ class ModeratorOrderlist extends Component
     public $showModal = false;
 
     public $role;
-    public $isAllowed = false;
 
     protected $orderList;
 
     public function mount(){
         $this->role = auth()->user()->role;
-        if (in_array($this->role, ['manager', 'viewer'])) $this->isAllowed = true;
 
         $this->locationList = Location::get()->where('status', ACTIVE);
 
         $this->agents = Agent::get();
     }
-
     public function sortBy($field){
         if ($this->sortField === $field) {
             $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
@@ -114,7 +111,7 @@ class ModeratorOrderlist extends Component
                             ->orderBy($this->sortField, $this->sortDirection)
                             ->paginate($this->perPage);
 
-        return view('livewire.backend.moderator.moderator-orderlist', compact('orderList'))
-                ->layout('moderator.layouts.app');
+        return view('livewire.backend.viewer.viewer-order-list', compact('orderList'))
+                ->layout('viewer.layouts.app');
     }
 }
