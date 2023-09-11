@@ -60,7 +60,8 @@ class Promptpay extends Component
 		$this->chargeId = $this->chargeCreate['id'];
 		$this->imageQR = $this->chargeCreate['source']['scannable_code']['image']['download_uri'];
     }
-	
+
+    //Pool every 3 seconds to check payment in webhook
 	public function checkPaymentStatus(){
         if ($this->chargeId) {
             //check payment status in Omise server
@@ -97,12 +98,10 @@ class Promptpay extends Component
                     'orderId' => intVal($this->order->id),
                     'paymentMethod' => $this->paymentMethod->id,
                     'paymentStatus' => PAID,
-                    'transactionCode' => $charge['transaction'],
-                    'transactionDate' => date('Y-m-d H:i:s', strtotime($charge['created_at'])),
+                    'transactionCode' => $this->chargeTransaction['transaction'],
+                    'transactionDate' => date('Y-m-d H:i:s', strtotime($this->chargeTransaction['paid_at'])),
                     'changeDate' => date('Y-m-d H:i:s'),
                 ]);
-
-                $order->save();
 
                 //dispatch event to Payment component
                 $this->emitUp('updatePayment', ALREADYPAID);

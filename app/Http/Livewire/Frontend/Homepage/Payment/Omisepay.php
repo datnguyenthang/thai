@@ -40,7 +40,7 @@ class Omisepay extends Component
                 'card' => $this->token,
             ]);
 
-            if ($charge['status'] == 'successful'){
+            if ($charge['status'] == SUCCESSFUL){
                 //Update order status
                 OrderStatus::create([
                     'orderId' => intVal($this->order->id),
@@ -59,8 +59,6 @@ class Omisepay extends Component
                     'transactionDate' => date('Y-m-d H:i:s', strtotime($charge['created_at'])),
                     'changeDate' => date('Y-m-d H:i:s'),
                 ]);
-
-                $order->save();
 
                 //dispatch event to Payment component
                 $this->emitUp('updatePayment', ALREADYPAID);

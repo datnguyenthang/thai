@@ -150,7 +150,7 @@
                             </div>
                             <div class="text-left">
                                 <span><i class="fas fa-chair fa-lg"></i> {{ $departRides[0]->name }} ({{ $departRides[0]->seatClass }})</span>
-                                <span class="float-end">{{ $departRides[0]->price }}฿</span>
+                                <span class="float-end">{{ round($departRides[0]->price) }}฿</span>
                             </div>
                             <span>{{ date('F j, Y', strtotime($departRides[0]->departDate)) }}, {{$departRides[0]->departTime }}</span>
                         </div>
@@ -171,7 +171,7 @@
                                 </div>
                                 <div class="text-left">
                                     <span><i class="fas fa-chair fa-lg"></i> {{ $returnRides[0]->name }} ({{ $returnRides[0]->seatClass }})</span>
-                                    <span class="float-end">{{ $returnRides[0]->price }}฿</span>
+                                    <span class="float-end">{{ round($returnRides[0]->price) }}฿</span>
                                 </div>
                                 <span>{{ date('F j, Y', strtotime($returnRides[0]->departDate)) }}, {{$returnRides[0]->departTime }}</span>
                             </div>
