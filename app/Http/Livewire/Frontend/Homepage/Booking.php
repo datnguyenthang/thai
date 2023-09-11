@@ -60,7 +60,7 @@ class Booking extends Component
     }
 
     public function chooseFromLocation($fromLocation){
-        $this->toLocationList = Location::get()->except($fromLocation);
+        $this->toLocationList = Location::get()->where('status', ACTIVE)->except($fromLocation);
     }
 
     public function render()
