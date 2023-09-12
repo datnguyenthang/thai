@@ -45,4 +45,6 @@
 
         <button wire:loading.attr="disabled" wire:click="save" class="btn btn-success">{{ trans('backend.save') }}</button>
     </form>
+    <!-- Loading Overlay, show loading to lock user action-->
+    @include('loading.loading')
 </div>
