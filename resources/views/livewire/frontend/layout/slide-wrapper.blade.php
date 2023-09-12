@@ -2,8 +2,8 @@
     <div id="carouselExampleControls" id="slider_wrapper" data-bs-ride="carousel">
         <div class="carousel-inner">
             @foreach($this->bannerImages as $key => $banner)
-                <div class="carousel-item {{ $key == 1 ? 'active' : '' }}">
-                    <img src="{{ $banner['url'] }}" class="d-block w-100" alt="...">
+                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                    <img src="{{ $banner['url'] }}" class="d-block w-100" alt="banner">
                 </div>
             @endforeach
         </div>
