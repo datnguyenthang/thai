@@ -213,4 +213,8 @@ return [
     'pageid' => 'Page ID',
     'pagename' => 'Name',
     'pageslug' => 'Slug',
+
+    //CUSTOMIZE
+    'appearance' => "Appearance",
+    'customizehomepage' => "Customize homepage",
 ];
