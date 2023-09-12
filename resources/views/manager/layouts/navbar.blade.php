@@ -76,6 +76,14 @@
              <i class="fas fa-newspaper fa-fw me-3"></i>
              <span>{{ trans('backend.cms') }}</span>
           </a>
+
+          <a href="{{ route('customizeHomepage') }}" 
+             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'customizeHomepage' ? 'active' : '' }}">
+             <i class="fas fa-tv fa-fw me-3"></i>
+             <span>{{ trans('backend.appearance') }}</span>
+          </a>
+
+          
         </div>
       </div>
     </nav>

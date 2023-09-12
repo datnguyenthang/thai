@@ -79,6 +79,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/agentlist', App\Http\Livewire\Component\Agent\ListAgent::class)->name('agentList');
     Route::get('/agent/create/{agentId}', App\Http\Livewire\Component\Agent\CreateAgent::class)->name('createAgent');
 
+    Route::get('/appearance', App\Http\Livewire\Component\Appearance\Customize::class)->name('customizeHomepage');
 
     /*------All Manager Routes List------*/
     Route::middleware(['user-access:manager'])->group(function () {
