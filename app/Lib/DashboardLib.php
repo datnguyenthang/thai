@@ -23,8 +23,8 @@ class DashboardLib {
                                 DB::raw('COUNT(o.id) as totalOrder'),
                                 DB::raw('SUM(CASE WHEN os.status = '.CONFIRMEDORDER.' THEN 1 ELSE 0 END) as totalOrderConfirm'),
 
-                                DB::raw('SUM(o.finalPrice) as totalMoney'),
-                                DB::raw('SUM(CASE WHEN os.status = '.CONFIRMEDORDER.' THEN o.finalPrice ELSE 0 END) as totalMoneyConfirm'),
+                                DB::raw('SUM(ot.price) as totalMoney'),
+                                DB::raw('SUM(CASE WHEN os.status = '.CONFIRMEDORDER.' THEN ot.price ELSE 0 END) as totalMoneyConfirm'),
 
                                 DB::raw('CASE WHEN cast(CONCAT(rides.departDate, " ", rides.departTime) as datetime) > "'.Carbon::now()->format('Y-m-d H:i:s').'" THEN 0 ELSE 1 END AS isDepart')
                             )
