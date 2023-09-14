@@ -45,6 +45,9 @@ class Trip extends Component
         $this->adults = $request->input('adults');
         $this->children = $request->input('children');
 
+        //validate GET parameter
+        $this->validateInput($request);
+
         $this->fromLocationName = Location::find($this->fromLocation)->name;
         $this->toLocationName = Location::find($this->toLocation)->name;
 
@@ -54,7 +57,26 @@ class Trip extends Component
 
         $this->getDepartTrip();
         $this->getReturnTrip(); 
-        
+    }
+
+    public function validateInput($request){
+        $rules = [
+            'tripType' => 'required|numeric|in:'.ONEWAY.','.ROUNDTRIP.'', // Adjust the valid trip types as needed
+            'fromLocation' => 'required|numeric|exists:locations,id',
+            'toLocation' => 'required|numeric|exists:locations,id',
+            'departureDate' => 'required|date|after_or_equal:today',
+            'returnDate' => 'required|date|after:departureDate',
+            'adults' => 'required|numeric|min:1',
+            'children' => 'required|numeric|min:0',
+        ];
+    
+        // Perform validation
+        $validator = \Validator::make(request()->all(), $rules);
+       
+        if ($validator->fails()) {
+            header("Location: /");
+            die;
+        }
     }
 
     public function updateState(){
