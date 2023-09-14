@@ -21,7 +21,7 @@
             event.preventDefault();
             OmiseCard.open({
                 amount: {{ $amount }},
-                currency: "THB",
+                currency: "thb",
                 defaultPaymentMethod: "credit_card",
                 onCreateTokenSuccess: (nonce) => {
                     if (nonce.startsWith("tokn_")) {

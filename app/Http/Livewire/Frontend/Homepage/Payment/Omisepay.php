@@ -36,8 +36,9 @@ class Omisepay extends Component
         try {
             $charge = \OmiseCharge::create([
                 'amount' => $this->amount, // Amount in cents
-                'currency' => 'THB', // Change to your desired currency
+                'currency' => 'thb', // Change to your desired currency
                 'card' => $this->token,
+                'description' => $this->order->code,
             ]);
 
             if ($charge['status'] == SUCCESSFUL){
