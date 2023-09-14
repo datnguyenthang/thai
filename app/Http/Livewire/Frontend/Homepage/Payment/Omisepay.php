@@ -39,6 +39,7 @@ class Omisepay extends Component
                 'currency' => 'thb', // Change to your desired currency
                 'card' => $this->token,
                 'description' => $this->order->code,
+                'expires_at'  => Carbon::now()->addMinutes(15)->toIso8601String(),
             ]);
 
             if ($charge['status'] == SUCCESSFUL){

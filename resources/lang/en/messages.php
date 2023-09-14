@@ -191,6 +191,9 @@ return [
                                 <li><strong>Confirmation:</strong> Receive a confirmation message and receipt upon successful payment.</li>
                             </ul>
                         </div> ',
+    'paywithpromptpay' => 'Pay with Promptpay',
+    'paywithcard' => 'Pay with Card',
+    'loading' => 'Loading...',
 
     //MODERATOR
     'nametrip' => 'Trip Name',

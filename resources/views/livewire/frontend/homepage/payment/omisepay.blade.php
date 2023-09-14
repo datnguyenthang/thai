@@ -3,15 +3,16 @@
         <input type="hidden" name="omiseToken" wire:model.defer="token">
         <input type="hidden" name="omiseSource" wire:model.defer="source">
         <button type="submit" wire:loading.attr="disabled" class="form-control bg_own_color" wire:loading.class="loading" id="checkoutCardButton">
-            <span wire:loading.remove>Pay with card</span>
-            <span wire:loading>Loading...</span>
+            <span wire:loading.remove>{{ trans('messages.paywithcard') }}</span>
+            <span wire:loading>{{ trans('messages.loading') }}</span>
         </button>
         @error('paymentcard') <span class="text-danger error">{{ $message }}</span> @enderror
     </form>
 
     <script>
         OmiseCard.configure({
-            publicKey: "{{ $publicKey }}"
+            publicKey: "{{ $publicKey }}",
+            image: 'https://cdn.omise.co/assets/dashboard/images/omise-logo.png'
         });
 
         var buttonCard = document.querySelector("#checkoutCardButton");

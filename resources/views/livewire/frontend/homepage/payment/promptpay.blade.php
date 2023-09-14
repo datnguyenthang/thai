@@ -3,8 +3,8 @@
         <form id="checkoutPromptpayForm" wire:submit.prevent="promptpay">
             <input type="hidden" name="omiseSource" wire:model.defer="source">
             <button type="submit" wire:loading.attr="disabled" class="form-control bg_own_color" wire:loading.attr="disabled" id="checkoutPromptpayButton">
-                <span wire:loading.remove>Pay with Promptpay</span>
-                <span wire:loading>Loading...</span>
+                <span wire:loading.remove>{{ trans('messages.paywithpromptpay') }}</span>
+                <span wire:loading>{{ trans('messages.loading') }}</span>
             </button>
         </form>
 
