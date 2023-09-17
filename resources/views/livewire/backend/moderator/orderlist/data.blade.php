@@ -18,8 +18,8 @@
         </tr>
     </thead>
     <tbody>
-        @if (!empty($orderList))
-            @foreach ($orderList as $order)
+        @if (!empty($orderLists))
+            @foreach ($orderLists as $order)
                 <tr>
                     <td>{{ $order->id }}</td>
                     <td>{{ $order->code }}</td>
@@ -67,5 +67,5 @@
     </tbody>
 </table>
 <div>
-    {{ $orderList->links() }}
+    {{ $orderLists->links() }}
 </div>

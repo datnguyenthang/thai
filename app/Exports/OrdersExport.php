@@ -39,9 +39,15 @@ class OrdersExport implements FromCollection, WithHeadings, WithMapping
             'Note',
             'Pickup',
             'Dropoff',
+            'Depart Trip Name',
+            'Depart Date',
+            'Depart Price',
+            'Return Trip Name',
+            'Return Date',
+            'Return Price',
             'Adult Quantity',
             'Children Quantity',
-            'Final Price',
+            'Total Price',
             'Booking Date',
             'Booking Status',
             'Promotion Name',
@@ -68,6 +74,17 @@ class OrdersExport implements FromCollection, WithHeadings, WithMapping
         $isReturn = TRIPTYPE[$row->isReturn];
         $channel = CHANNELSTATUS[$row->channel] ?? '';
 
+        foreach ($row->orderTickets as $ticket)
+        if ($ticket->type == ONEWAY) {
+            $row->departTripName = $ticket->name;
+            $row->departDate = $ticket->departDate;
+            $row->departPrice = $ticket->price;
+        }
+        if ($ticket->type == ROUNDTRIP) {
+            $row->returnTripName = $ticket->name;
+            $row->returnDate = $ticket->departDate;
+            $row->returnPrice = $ticket->price;
+        }
         $fields = [
             $row->id,
             $row->code,
@@ -82,6 +99,12 @@ class OrdersExport implements FromCollection, WithHeadings, WithMapping
             $row->note,
             $row->pickup,
             $row->dropoff,
+            $row->departTripName,
+            $row->departDate,
+            $row->departPrice,
+            $row->returnTripName,
+            $row->returnDate,
+            $row->returnPrice,
             $row->adultQuantity,
             $row->childrenQuantity,
             $row->finalPrice,

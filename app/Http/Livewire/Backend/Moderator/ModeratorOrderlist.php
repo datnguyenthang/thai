@@ -87,7 +87,6 @@ class ModeratorOrderlist extends Component
                                         $this->customerType, $this->agentId, $this->fromLocation, $this->toLocation)
                                 ->orderBy($this->sortField, $this->sortDirection)
                                 ->get();
-
         $export = new OrdersExport($orderLists);
 
         return Excel::download($export, 'order_list.xlsx');
@@ -109,12 +108,12 @@ class ModeratorOrderlist extends Component
     }
 
     public function render() {
-        $orderList = OrderLib::getOrderListQuery($this->orderCode, $this->customerName, $this->customerPhone, 
+        $orderLists = OrderLib::getOrderListQuery($this->orderCode, $this->customerName, $this->customerPhone, 
                                     $this->customerType, $this->agentId, $this->fromLocation, $this->toLocation)
                             ->orderBy($this->sortField, $this->sortDirection)
                             ->paginate($this->perPage);
 
-        return view('livewire.backend.moderator.moderator-orderlist', compact('orderList'))
+        return view('livewire.backend.moderator.moderator-orderlist', compact('orderLists'))
                 ->layout('moderator.layouts.app');
     }
 }

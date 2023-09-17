@@ -110,7 +110,7 @@ class OrderLib {
     public static function getOrderListQuery($orderCode, $customerName, $customerPhone, $customerType,
                                              $agentId, $fromLocation, $toLocation){
         return Order::with(['orderTickets' => function($orderTicket){
-            $orderTicket->select('order_tickets.*', 'r.name', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
+            $orderTicket->select('order_tickets.*', 'r.name', 'r.departDate', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
                         ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
                         ->leftJoin('locations as fl', 'r.fromLocation', '=', 'fl.id')
                         ->leftJoin('locations as tl', 'r.toLocation', '=', 'tl.id')
