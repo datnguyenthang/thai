@@ -161,6 +161,8 @@ return [
     'loopfrom' => 'Loop From',
     'loopto' => 'Loop To',
     'hoursBeforeBooking' => 'Allow booking before hours',
+    'perpage' => 'Per Page',
+    'selectride' => 'You have selected :selected rows of :totalride total',
 
     //USER
     'createuser' => 'Create User',
@@ -215,6 +217,13 @@ return [
     'pageslug' => 'Slug',
 
     //CUSTOMIZE
-    'appearance' => "Appearance",
-    'customizehomepage' => "Customize homepage",
+    'appearance' => 'Appearance',
+    'customizehomepage' => 'Customize homepage',
+
+    //SETTING
+    'seo' => 'SEO',
+    'settingceo' => 'Setting SEO',
+    'fromdate' => 'From Date',
+    'todate' => 'To Date',
+    'perpage' => 'Per Page',
 ];

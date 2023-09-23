@@ -1,17 +1,15 @@
 <div>
-    <h1>{{ trans('backend.createride') }}</h1>
+    {{-- Care about people's approval and you will be their prisoner. --}}
     <form wire:submit.prevent="save">
-        <input type="hidden" name="userid" value="{{ $rideId }}">
-
-        <div class="form-outline mb-4">
+        <div class="form-outline mb-4" wire:ignore>
             <label class="form-label">{{ trans('backend.ridename') }}</label>
-            <input type="text" class="form-control w-50" wire:model="name">
+            <input type="text" class="form-control" wire:model.defer="name">
             @error('name') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
     
         <div class="form-outline mb-4">
             <label class="form-label" for="fromLocation">{{ trans('backend.fromlocation') }}</label>
-            <select id="fromLocation" class="form-select w-50" wire:model="fromLocation">
+            <select id="fromLocation" class="form-select" wire:model.defer="fromLocation">
                 @foreach($locations as $location)
                     <option value="{{ $location->id }}">{{ $location->name }}</option>
                 @endforeach
@@ -21,7 +19,7 @@
     
         <div class="form-outline mb-4">
             <label class="form-label" for="toLocation">{{ trans('backend.tolocation') }}</label>
-            <select id="toLocation" class="form-select w-50" wire:model="toLocation">
+            <select id="toLocation" class="form-select" wire:model.defer="toLocation">
                 @foreach($locations as $location)
                     <option value="{{ $location->id }}">{{ $location->name }}</option>
                 @endforeach
@@ -31,31 +29,31 @@
 
         <div class="form-outline mb-4">
             <label class="form-label" for="departTime">{{ trans('backend.departuretime') }}</label>
-            <input type="time" class="form-control w-50" id="departTime" wire:model="departTime" >
+            <input type="time" class="form-control" id="departTime" wire:model.defer="departTime" >
             @error('departTime') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
             <label class="form-label" for="returnTime">{{ trans('backend.returntime') }}</label>
-            <input type="time" class="form-control w-50" id="returnTime" wire:model="returnTime">
+            <input type="time" class="form-control" id="returnTime" wire:model.defer="returnTime">
             @error('returnTime') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
             <label class="form-label" for="departDate">{{ trans('backend.departdate') }}</label>
-            <input type="date" class="form-control w-50" id="departDate" wire:model="departDate">
+            <input type="date" class="form-control" id="departDate" wire:model.defer="departDate">
             @error('returnTime') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
             <label class="form-label" for="hoursBeforeBooking">{{ trans('backend.hoursBeforeBooking') }}</label>
-            <input type="number" class="form-control w-50" id="hoursBeforeBooking" wire:model="hoursBeforeBooking" min="0" />
+            <input type="number" class="form-control" id="hoursBeforeBooking" wire:model.defer="hoursBeforeBooking" min="0" />
             @error('hoursBeforeBooking') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
             <label class="form-label" for="status">{{ trans('backend.ridestatus') }}</label>
-            <select id="status" class="form-select w-50" wire:model="status">
+            <select id="status" class="form-select" wire:model.defer="status">
                 @foreach(RIDESTATUS as $key => $value)
                     <option value="{{ $key }}">{{ $value }}</option>
                 @endforeach
@@ -98,7 +96,7 @@
             @endforeach
 
         </table>
-        @error('seatClass') <span class="text-danger error">{{ $message }}</span> @enderror
+        @error('seatClasses') <span class="text-danger error">{{ $message }}</span> @enderror
 
         <br />
     

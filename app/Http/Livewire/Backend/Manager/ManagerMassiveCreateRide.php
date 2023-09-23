@@ -37,8 +37,7 @@ class ManagerMassiveCreateRide extends Component
     public $price;
     public $seatClasses = [];
 
-    public function addSeatClass()
-    {
+    public function addSeatClass() {
         $this->seatClasses[] = [
             'nameClass' => $this->nameClass,
             'capacity' => $this->capacity,
@@ -49,21 +48,18 @@ class ManagerMassiveCreateRide extends Component
         $this->setValidationRules();
     }
 
-    private function resetInputFields()
-    {
+    private function resetInputFields() {
         $this->nameClass = '';
         $this->capacity = '';
         $this->price = '';
     }
 
-    public function removeSeatClass($index)
-    {
+    public function removeSeatClass($index) {
         unset($this->seatClasses[$index]);
         $this->seatClasses = array_values($this->seatClasses);
     }
 
-    protected function setValidationRules()
-    {
+    protected function setValidationRules() {
         $this->rules = [
             'name' => 'required',
             'fromLocation' => 'required',
@@ -84,8 +80,7 @@ class ManagerMassiveCreateRide extends Component
         }
     }
 
-    public function mount($rideId = 0)
-    {
+    public function mount($rideId = 0) {
         $this->rideId = $rideId;
         $this->fromLocation = 1;
         $this->toLocation = 1;
@@ -96,8 +91,7 @@ class ManagerMassiveCreateRide extends Component
         $this->addSeatClass();
     }
 
-    public function save()
-    {
+    public function save() {
         $this->validate([
             'name' => 'required',
             'fromLocation' => 'required',
@@ -154,8 +148,7 @@ class ManagerMassiveCreateRide extends Component
         return redirect()->route('managerListRide');
     }
 
-    public function render()
-    {
+    public function render() {
         return view('livewire.backend.manager.manager-massive-create-ride')
                 ->layout('manager.layouts.app');
     }
