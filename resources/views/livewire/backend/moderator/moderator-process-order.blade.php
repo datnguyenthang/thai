@@ -14,15 +14,16 @@
     {{-- PROCESS ORDER--}}
     @include('livewire.backend.moderator.processorder.process-order')
 
-    {{-- MODIFY TICKET --}}
-    @include('livewire.backend.moderator.processorder.modify-ticket')
-
+    {{-- UPDATE ORDER --}}
+    @if ($showModalUpdateOrder)
+        @livewire('backend.moderator.processorder.update-order', ['orderId' => $orderId, 'pickup' => $order->pickup, 'dropoff' => $order->dropoff])
+    @endif
     <!-- Loading Overlay, show loading to lock user action-->
     @include('loading.loading')
     
     <!-- Let's also add the backdrop / overlay here -->
     <div class="modal-backdrop fade show" id="backdrop"
-        style="display: @if($showModalStatus === true || $showModalPayment === true || $showModalModifyTicket === true) block @else none @endif;"></div>
+        style="display: @if($showModalStatus === true || $showModalPayment === true || $showModalUpdateOrder === true) block @else none @endif;"></div>
     </div>
 
 </div>

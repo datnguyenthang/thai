@@ -55,6 +55,7 @@ return [
     'changeDate' => 'Change Date',
     'paymentimages' => 'Payment Upload Image',
     'processingorder' => 'Processing Order...',
+    'updateorder' => 'Update Order',
 
     'firstname' => 'First Name',
     'lastname' => 'Last Name',
@@ -225,5 +226,8 @@ return [
     'settingceo' => 'Setting SEO',
     'fromdate' => 'From Date',
     'todate' => 'To Date',
-    'perpage' => 'Per Page',
+    'status' => 'Status',
+    'ticketstatus' => 'Ticket Status',
+    'modifyticketorder' => 'Modify Ticket',
+    
 ];

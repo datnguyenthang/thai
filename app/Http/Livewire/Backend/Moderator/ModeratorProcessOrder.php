@@ -39,11 +39,13 @@ class ModeratorProcessOrder extends Component
 
     public $showModalStatus = false;
     public $showModalPayment = false;
-    public $showModalModifyTicket = false;
+    public $showModalUpdateOrder = false;
 
     public $isTransaction = false;
 
     public $photos = [];
+
+    protected $listeners = ['closeModalUpdateOrder' => 'closeModalUpdateOrder'];
 
     public function mount($orderId){
         $this->orderId = $orderId;
@@ -251,11 +253,11 @@ class ModeratorProcessOrder extends Component
         }        
     }
 
-    public function modifyTicket($orderTicketId = 0){
-        $this->selectedTicket = $this->order->orderTickets->first(function ($item) use ($orderTicketId) {
-            return $item['id'] === $orderTicketId;
-        });
-        $this->showModalModifyTicket = true;
+    public function closeModalUpdateOrder(){
+        //$this->selectedTicket = $this->order->orderTickets->first(function ($item) use ($orderTicketId) {
+        //   return $item['id'] === $orderTicketId;
+        //});
+        $this->showModalUpdateOrder = false;
     }
 
     public function render() {

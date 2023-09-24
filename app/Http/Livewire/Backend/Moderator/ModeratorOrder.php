@@ -149,6 +149,7 @@ class ModeratorOrder extends Component
         $this->status = RESERVATION;
         $this->paymentStatus = NOTPAID;
     }
+
     public function refreshOrder(){
         $user = auth()->user();
 

@@ -1,6 +1,9 @@
 <!---Booking detail--->
 <div class="border rounded-3 overflow-hidden p-4 mt-3">
-    <h4 class="select-departure-header mb-3" >{{ trans('messages.bookingdetail') }}</h4>
+    <h4 class="select-departure-header mb-3" >
+        {{ trans('messages.bookingdetail') }}
+        <button class="btn bg_own_color" wire:click="$set('showModalUpdateOrder', true)">Update Order</button>
+    </h4>
 
     <div class="row text-dark mb-2">
         <div class="col-md-4">
@@ -101,9 +104,6 @@
                             <td class="product-status">
                                     <span>{{ TICKETSTATUS[$orderTicket->status] }}</span>
                             </td>
-                            <td class="product-action">
-                                <button class="btn bg_own_color" wire:click="modifyTicket({{ $orderTicket->id }})">Modify</button>
-                            </td>
                         </tr>
                     @endif
                     @if ($orderTicket->type == RETURNTICKET)
@@ -130,9 +130,6 @@
                             </td>
                             <td class="product-status">
                                 <span>{{ TICKETSTATUS[$orderTicket->status] }}</span>
-                            </td>
-                            <td class="product-action">
-                                <button class="btn bg_own_color" wire:click="modifyTicket({{ $orderTicket->id }})">Modify</button>
                             </td>
                         </tr>
                     @endif
