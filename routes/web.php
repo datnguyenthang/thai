@@ -80,6 +80,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/agent/create/{agentId}', App\Http\Livewire\Component\Agent\CreateAgent::class)->name('createAgent');
 
     Route::get('/appearance', App\Http\Livewire\Component\Appearance\Customize::class)->name('customizeHomepage');
+    Route::get('/settingseo', App\Http\Livewire\Component\seo\SeoSetting::class)->name('settingSeo');
+
+    Route::get('/menu', App\Http\Livewire\Component\Menu\ListMenu::class)->name('listMenu');
+    Route::get('/menu/create/{menuId}', App\Http\Livewire\Component\Menu\CreateMenu::class)->name('createMenu');
 
     /*------All Manager Routes List------*/
     Route::middleware(['user-access:manager'])->group(function () {
@@ -104,9 +108,6 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/customertype', App\Http\Livewire\Backend\Manager\ManagerListCustomerType::class)->name('managerCustomerType');
         Route::get('/customertype/create/{customerTypeId}', App\Http\Livewire\Backend\Manager\ManagerCreateCustomerType::class)->name('managerCreateCustomerType');
-
-        Route::get('/menu', App\Http\Livewire\Backend\Manager\ManagerListMenu::class)->name('managerMenu');
-        Route::get('/menu/create/{menuId}', App\Http\Livewire\Backend\Manager\ManagerCreateMenu::class)->name('managerCreateMenu');
 
         Route::get('/pkdp', App\Http\Livewire\Backend\Manager\ManagerListPickupDropoff::class)->name('managerPkdp');
         Route::get('/pkdp/create/{pkdpId}', App\Http\Livewire\Backend\Manager\ManagerCreatePickupDropoff::class)->name('managerCreatePkdp');
