@@ -84,7 +84,7 @@ class Customize extends Component
                 break;
             case 'creator':
                 return view('livewire.component.appearance.customize')
-                            ->layout('manager.layouts.app');
+                            ->layout('creator.layouts.app');
                 break;
             default:
                 return <<<'blade'
