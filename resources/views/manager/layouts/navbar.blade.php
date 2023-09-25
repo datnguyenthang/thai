@@ -82,13 +82,13 @@
              <i class="fas fa-tv fa-fw me-3"></i>
              <span>{{ trans('backend.appearance') }}</span>
           </a>
-
+          {{--
           <a href="{{ route('settingSeo') }}" 
              class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'settingSeo' ? 'active' : '' }}">
              <i class="fas fa-icons fa-fw me-3"></i>
              <span>{{ trans('backend.seo') }}</span>
           </a>
-
+          --}}
         </div>
       </div>
     </nav>
