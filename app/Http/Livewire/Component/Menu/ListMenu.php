@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Manager;
+namespace App\Http\Livewire\Component\Menu;
 
 use Livewire\Component;
 use App\Models\MenuItem;
 use MSA\LaravelGrapes\Models\Page;
 
-class ManagerListMenu extends Component
+class ListMenu extends Component
 {
     public $search = '';
     public $perPage = 20;
@@ -45,6 +45,7 @@ class ManagerListMenu extends Component
     }
 
     public function render(){
+        $user = auth()->user();
         $menus = MenuItem::query()
             ->when($this->search, function ($query) {
                 $query->where('name', 'like', '%'.$this->search.'%');
@@ -52,7 +53,23 @@ class ManagerListMenu extends Component
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage);
 
-        return view('livewire.backend.manager.manager-list-menu', compact('menus'))
-                    ->layout('manager.layouts.app');
+        switch ($user->role) {
+            case 'manager':
+                return view('livewire.component.menu.list-menu', compact('menus'))->layout('manager.layouts.app');
+                break;
+            case 'creator':
+                return view('livewire.component.menu.list-menu', compact('menus'))->layout('creator.layouts.app');
+                break;
+            case 'moderator':
+                return <<<'blade'
+                            <div><p>You do not have permission to access for this page.</p></div>
+                        blade;
+                break;
+            case 'agent':
+                return <<<'blade'
+                            <div><p>You do not have permission to access for this page.</p></div>
+                        blade;
+                break;
+        }
     }
 }

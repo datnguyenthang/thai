@@ -1,5 +1,38 @@
 <!--Main Navigation-->
 <header>
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar bg-white">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+
+        <a href="{{ route('listMenu') }}" 
+           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listMenu' ? 'active' : '' }}">
+           <i class="fas fa-bars fa-fw me-3"></i>
+           <span>{{ trans('backend.menu') }}</span>
+        </a>
+        
+        <a href="{{ route('pageList') }}" 
+           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'pageList' ? 'active' : '' }}">
+           <i class="fas fa-newspaper fa-fw me-3"></i>
+           <span>{{ trans('backend.cms') }}</span>
+        </a>
+
+        <a href="{{ route('customizeHomepage') }}" 
+           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'customizeHomepage' ? 'active' : '' }}">
+           <i class="fas fa-tv fa-fw me-3"></i>
+           <span>{{ trans('backend.appearance') }}</span>
+        </a>
+
+        <a href="{{ route('settingSeo') }}" 
+           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'settingSeo' ? 'active' : '' }}">
+           <i class="fas fa-icons fa-fw me-3"></i>
+           <span>{{ trans('backend.seo') }}</span>
+        </a>
+
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar -->
   <!-- Navbar -->
   <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <!-- Container wrapper -->

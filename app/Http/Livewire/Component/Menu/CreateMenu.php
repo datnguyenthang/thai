@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Manager;
+namespace App\Http\Livewire\Component\Menu;
 
 use Livewire\Component;
 use App\Models\MenuItem;
 use MSA\LaravelGrapes\Models\Page;
 
-class ManagerCreateMenu extends Component
+class CreateMenu extends Component
 {
     public $menuId;
     public $name;
@@ -78,11 +78,30 @@ class ManagerCreateMenu extends Component
             session()->flash('success', 'Menu created successfully!');
         }
 
-        return redirect()->route('managerMenu');
+        return redirect()->route('listMenu');
     }
 
     public function render(){
-        return view('livewire.backend.manager.manager-create-menu')
-                    ->layout('manager.layouts.app');
+        $user = auth()->user();
+
+        switch ($user->role) {
+            case 'manager':
+                return view('livewire.component.menu.create-menu')->layout('manager.layouts.app');
+                break;
+            case 'creator':
+                return view('livewire.component.menu.create-menu')->layout('creator.layouts.app');
+                break;
+            case 'moderator':
+                return <<<'blade'
+                            <div><p>You do not have permission to access for this page.</p></div>
+                        blade;
+                break;
+            case 'agent':
+                return <<<'blade'
+                            <div><p>You do not have permission to access for this page.</p></div>
+                        blade;
+                break;
+        }
+        
     }
 }

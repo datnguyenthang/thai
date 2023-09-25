@@ -59,8 +59,8 @@
              <span>{{ trans('backend.customerType') }}</span>
           </a>
 
-          <a href="{{ route('managerMenu') }}" 
-             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerMenu' ? 'active' : '' }}">
+          <a href="{{ route('listMenu') }}" 
+             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listMenu' ? 'active' : '' }}">
              <i class="fas fa-bars fa-fw me-3"></i>
              <span>{{ trans('backend.menu') }}</span>
           </a>
@@ -83,7 +83,12 @@
              <span>{{ trans('backend.appearance') }}</span>
           </a>
 
-          
+          <a href="{{ route('settingSeo') }}" 
+             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'settingSeo' ? 'active' : '' }}">
+             <i class="fas fa-icons fa-fw me-3"></i>
+             <span>{{ trans('backend.seo') }}</span>
+          </a>
+
         </div>
       </div>
     </nav>
