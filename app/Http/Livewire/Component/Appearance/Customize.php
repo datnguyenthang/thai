@@ -82,6 +82,10 @@ class Customize extends Component
                 return view('livewire.component.appearance.customize')
                             ->layout('manager.layouts.app');
                 break;
+            case 'creator':
+                return view('livewire.component.appearance.customize')
+                            ->layout('manager.layouts.app');
+                break;
             default:
                 return <<<'blade'
                             <div><p>You do not have permission to access for this page.</p></div>
