@@ -38,13 +38,13 @@
             <input type="time" class="form-control" id="returnTime" wire:model.defer="returnTime">
             @error('returnTime') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
-
+{{--
         <div class="form-outline mb-4">
             <label class="form-label" for="departDate">{{ trans('backend.departdate') }}</label>
-            <input type="date" class="form-control" id="departDate" wire:model.defer="departDate">
+            <input type="date" class="form-control" id="departDate" wire:model.defer="departDate" disabled>
             @error('returnTime') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
-
+--}}
         <div class="form-outline mb-4">
             <label class="form-label" for="hoursBeforeBooking">{{ trans('backend.hoursBeforeBooking') }}</label>
             <input type="number" class="form-control" id="hoursBeforeBooking" wire:model.defer="hoursBeforeBooking" min="0" />

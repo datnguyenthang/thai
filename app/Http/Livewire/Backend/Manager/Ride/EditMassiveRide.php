@@ -18,7 +18,7 @@ class EditMassiveRide extends Component
     public $toLocation;
     public $departTime;
     public $returnTime;
-    public $departDate;
+    //public $departDate;
     public $hoursBeforeBooking = 0;
     public $status;
 
@@ -45,7 +45,7 @@ class EditMassiveRide extends Component
             $this->toLocation = $ride->toLocation;
             $this->departTime = $ride->departTime;
             $this->returnTime = $ride->returnTime;
-            $this->departDate = $ride->departDate;
+            //$this->departDate = $ride->departDate;
             $this->hoursBeforeBooking = $ride->hoursBeforeBooking;
             $this->status = $ride->status;
 
@@ -85,7 +85,7 @@ class EditMassiveRide extends Component
             'toLocation' => 'required|different:fromLocation',
             'departTime' => 'required',
             'returnTime' => 'required',
-            'departDate' => 'required',
+            //'departDate' => 'required',
         ];
 
         foreach ($this->seatClasses as $index => $seatClass) {
@@ -108,7 +108,7 @@ class EditMassiveRide extends Component
             $ride->toLocation = intVal($this->toLocation);
             $ride->departTime = $this->departTime;
             $ride->returnTime = $this->returnTime;
-            $ride->departDate = $this->departDate;
+            //$ride->departDate = $this->departDate;
             $ride->hoursBeforeBooking = $this->hoursBeforeBooking;
             $ride->status = intVal($this->status);
             $ride->save();
