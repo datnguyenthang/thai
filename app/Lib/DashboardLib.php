@@ -42,6 +42,7 @@ class DashboardLib {
                              ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
                     })
                     ->where(function ($query) use ($fromDate, $toDate, $depart, $dest, $isOrder) {
+                        $query->where('rides.status', ACTIVE);
                         if($fromDate) $query->where('rides.departDate', '>=', $fromDate);
                         if($toDate) $query->where('rides.departDate', '<=', $toDate);
                         if($depart) $query->where('rides.fromLocation', $depart);
@@ -109,7 +110,7 @@ class DashboardLib {
                     ->leftJoin('customer_types as ct', 'ct.id', '=', 'o.customerType')
                     ->leftJoin('users as u', 'u.id', '=', 'o.userId')
                     ->where(function ($query) use ($rideId, $fromDate, $toDate, $depart, $dest) {
-
+                        $query->where('rides.status', ACTIVE);
                         if ($rideId) {
                             $query->where('rides.id', $rideId);
                         } else {

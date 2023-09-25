@@ -4,15 +4,15 @@
     <title>PDF View</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai+Looped:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@700&display=swap" rel="stylesheet">
     <style>
         h5.m {
 			font-weight: bold;
-            font-family: 'Noto Sans Thai Looped';
+            font-family: 'Noto Sans Thai';
         }
         .t {
 			font-weight: bold;
-            font-family: 'Noto Sans Thai Looped';
+            font-family: 'Noto Sans Thai';
         }
 
         @page { margin: 0.1in 0.1in 0.1in 0.1in;}
