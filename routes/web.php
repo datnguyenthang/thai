@@ -51,7 +51,7 @@ Route::get('/500', function () {
 //OLD PAGE
 Route::get('/timetable', '\App\Http\Controllers\Home\HomeController@timetable')->name('timetable');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/trip', App\Http\Livewire\Frontend\Homepage\Trip::class)->name('trip');
 Route::post('/proceedbooking', App\Http\Livewire\Frontend\Homepage\ProceedBooking::class)->name('proceedbooking');
