@@ -16,7 +16,7 @@ return [
     */
 
     //'name' => 'env('APP_NAME', 'Laravel')',
-    'name' => 'SEUDAMGO - THE FARSTEST CATAMARAN',
+    'name' => 'SEUDAMGO - THE FASTEST CATAMARAN',
 
     /*
     |--------------------------------------------------------------------------

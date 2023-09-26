@@ -20,6 +20,8 @@ class Omisepay extends Component
     public $source;
     public $publicKey;
     public $secretKey;
+    public $error = false;
+    public $errorMessage;
 
     protected $listeners = ['payByCard' => 'payByCard'];
 
@@ -69,7 +71,8 @@ class Omisepay extends Component
             }
 
         } catch (\Exception $e) {
-
+            $this->error = true;
+            $this->errorMessage = $e->getMessage();
         }
     }
 

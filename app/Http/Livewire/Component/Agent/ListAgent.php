@@ -3,11 +3,16 @@
 namespace App\Http\Livewire\Component\Agent;
 
 use Livewire\Component;
+use Livewire\WithPagination;
+
 use App\Models\Agent;
 use App\Models\CustomerType;
 
 class ListAgent extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $search = '';
     public $perPage = 20;
     public $sortField = 'id';
