@@ -6,9 +6,13 @@ use MSA\LaravelGrapes\Models\Page;
 use MSA\LaravelGrapes\Services\GenerateFrontEndService;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PageList extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $pages;
     public $url;
 

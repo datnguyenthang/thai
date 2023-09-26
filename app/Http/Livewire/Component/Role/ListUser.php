@@ -3,11 +3,15 @@
 namespace App\Http\Livewire\Component\Role;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\User;
 use App\Models\Agent;
 
 class ListUser extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $search = '';
     public $perPage = 20;
     public $sortField = 'name';

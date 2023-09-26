@@ -3,11 +3,16 @@
 namespace App\Http\Livewire\Component\Menu;
 
 use Livewire\Component;
+use Livewire\WithPagination;
+
 use App\Models\MenuItem;
 use MSA\LaravelGrapes\Models\Page;
 
 class ListMenu extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $search = '';
     public $perPage = 20;
     public $sortField = 'name';
