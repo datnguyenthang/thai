@@ -3,10 +3,15 @@
 namespace App\Http\Livewire\Backend\Manager;
 
 use Livewire\Component;
+use Livewire\WithPagination;
+
 use App\Models\Pickupdropoff;
 
 class ManagerListPickupDropoff extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public $search = '';
     public $perPage = 20;
     public $sortField = 'name';
