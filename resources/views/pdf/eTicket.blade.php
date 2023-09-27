@@ -4,10 +4,11 @@
 	<title>PDF View</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@700&display=swap" rel="stylesheet">
 	<style>	
 		.m {
-			font-family: 'Noto Sans Thai';
+			font-weight: bold;
+            font-family: 'Noto Sans Thai';
 		}
 
 		@page { margin: 1in 1in 1in 1in;}
