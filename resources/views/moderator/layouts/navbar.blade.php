@@ -96,23 +96,23 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand" href="{{ route('moderatorDashboard') }}">
+      <a class="navbar-brand" href="{{ route('dashboard') }}">
         <img src="/img/logo.png" height="25" alt="MDB Logo"
           loading="lazy" />
       </a>
 
       <!-- Left links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item me-3 me-lg-0">
-            <a href="{{ route('moderatorDashboard') }}" 
-              class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorDashboard' ? 'active' : '' }}" 
+        <ul class="navbar-nav me-auto mb-2">
+          <li class="nav-item me-3">
+            <a href="{{ route('dashboard') }}" 
+              class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}" 
               aria-current="true">
                 <span>{{ trans('backend.dashboard') }}</span>
             </a>
           </li>
 
-          <li class="nav-item me-3 me-lg-0">
+          <li class="nav-item me-3">
             <a href="{{ route('moderatorOrderlist') }}" 
               class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorOrderlist' ? 'active' : '' }}" 
               aria-current="true">
@@ -120,7 +120,7 @@
             </a>
           </li>
 
-          <li class="nav-item me-3 me-lg-0">
+          <li class="nav-item me-3">
             <a href="{{ route('moderatorOrder') }}" 
             class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'moderatorOrder' ? 'active' : '' }}" 
             aria-current="true">
@@ -128,7 +128,7 @@
             </a>
           </li>
 
-          <li class="nav-item me-3 me-lg-0">
+          <li class="nav-item me-3">
             <a href="{{ route('agentList') }}" 
               class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'agentList' ? 'active' : '' }}">
               <span>{{ trans('backend.agent') }}</span>

@@ -85,9 +85,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/menu', App\Http\Livewire\Component\Menu\ListMenu::class)->name('listMenu');
     Route::get('/menu/create/{menuId}', App\Http\Livewire\Component\Menu\CreateMenu::class)->name('createMenu');
 
+    Route::get('/dashboard', App\Http\Livewire\Component\Report\Dashboard::class)->name('dashboard');
+
     /*------All Manager Routes List------*/
     Route::middleware(['user-access:manager'])->group(function () {
-        Route::get('/manager', App\Http\Livewire\Backend\Manager\ManagerDashboard::class)->name('managerDashboard');
+        //Route::get('/manager', App\Http\Livewire\Backend\Manager\ManagerDashboard::class)->name('managerDashboard');
 
         Route::get('/managerorder', App\Http\Livewire\Backend\Manager\ManagerOrder::class)->name('managerOrder');
         Route::get('/managerorderlist', App\Http\Livewire\Backend\Manager\ManagerOrderlist::class)->name('managerOrderlist');
@@ -123,14 +125,14 @@ Route::middleware(['auth'])->group(function () {
 
     /*------All Agent Routes List------*/
     Route::middleware(['user-access:agent'])->group(function () {
-        Route::get('/agentdashboard', App\Http\Livewire\Backend\Agent\AgentDashboard::class)->name('agentDashboard');
+        //Route::get('/agentdashboard', App\Http\Livewire\Backend\Agent\AgentDashboard::class)->name('agentDashboard');
         Route::get('/agentorder', App\Http\Livewire\Backend\Agent\AgentOrder::class)->name('agentOrder');
         Route::get('/agentorderlist', App\Http\Livewire\Backend\Agent\AgentOrderList::class)->name('agentOrderlist');
     });
 
     /*------All Viewer Routes List------*/
     Route::middleware(['user-access:viewer'])->group(function () {
-        Route::get('/viewerdashboard', App\Http\Livewire\Backend\Viewer\ViewerDashboard::class)->name('viewerDashboard');
+        //Route::get('/viewerdashboard', App\Http\Livewire\Backend\Viewer\ViewerDashboard::class)->name('viewerDashboard');
         Route::get('/viewerorderlist', App\Http\Livewire\Backend\Viewer\ViewerOrderList::class)->name('viewerOrderlist');
         Route::get('/viewerride', App\Http\Livewire\Backend\Viewer\ViewerRide::class)->name('viewerRide');
         Route::get('/vieweragent', App\Http\Livewire\Backend\Viewer\ViewerAgent::class)->name('viewerAgent');

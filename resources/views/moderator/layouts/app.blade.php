@@ -24,7 +24,7 @@
 
         <!--Main layout-->
         <!--<main style="margin-top: 58px;">-->
-            <div class="container-fluid pt-3 mt-5">
+            <div class="container-fluid pt-4 mt-5">
                 @include('moderator.layouts.flash-message')
                 {{ $slot }}
             </div>

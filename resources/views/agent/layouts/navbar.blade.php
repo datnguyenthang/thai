@@ -11,7 +11,7 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand" href="{{ route('agentDashboard') }}">
+      <a class="navbar-brand" href="{{ route('agentOrderlist') }}">
         <img src="/img/logo.png" height="25" alt="MDB Logo"
           loading="lazy" />
       </a>
@@ -19,13 +19,15 @@
       <!-- Left links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {{--
           <li class="nav-item me-3 me-lg-0">
-            <a href="{{ route('agentDashboard') }}" 
-              class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'agentDashboard' ? 'active' : '' }}" 
+            <a href="{{ route('dashboard') }}" 
+              class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}" 
               aria-current="true">
                 <span>{{ trans('backend.dashboard') }}</span>
             </a>
           </li>
+          --}}
           <li class="nav-item me-3 me-lg-0">
             <a href="{{ route('agentOrderlist') }}" 
               class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'agentOrderlist' ? 'active' : '' }}" 

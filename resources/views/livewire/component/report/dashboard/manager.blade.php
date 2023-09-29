@@ -1,97 +1,8 @@
 <div>
     <!-- Content Row -->
-    {{--
     <div class="row">
 
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Amount Order (Today)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalAmountThisDay }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Order Today
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalOrderThisDay }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                            </div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pending Requests Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Awaiting Confirmation</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $pendingComfirmation }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    --}}
-    <!-- Content Row -->
-    <div class="row">
-
-        <!-- List Rides
-        <div class="col-xl-8 col-lg-7"> 
-        -->
+        <!-- List Rides -->
         <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
@@ -175,24 +86,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Revenue Chart-->
-        <!--
-        <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Revenue in day</h6>
-                    <div class="dropdown no-arrow">
-                    </div>
-                </div>
-                <div class="card-body d-flex justify-content-center align-items-center" style="height: 33rem;">
-                    <div class="chart-container pt-4 pb-2" style="position: relative;">
-                        <canvas id="revenueChart" style=""></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
     </div>
 
     <!----Modal Ride------->
@@ -221,6 +114,7 @@
                                     <th>Full Name</th>
                                     <th>Customer Type</th>
                                     <th>User Name</th>
+                                    <th>Price</th>
                                     <th>Payment Status</th>
                                     <th>Status</th>
                                     <th></th>
@@ -238,6 +132,7 @@
                                         <td>{{ $listPassenger->fullname }}</td>
                                         <td>{{ $listPassenger->CustomerType }}</td>
                                         <td>{{ $listPassenger->name }}</td>
+                                        <th>{{ round($listPassenger->price) }}</th>
                                         <td>{{ PAYMENTSTATUS[$listPassenger->paymentStatus] }}</td>
                                         <td>{{ ORDERSTATUS[$listPassenger->status] }}</td>
                                         <td>
@@ -245,8 +140,7 @@
                                                 href="/{{ $role }}processorder/{{$listPassenger->orderId}}"
                                                 target="_blank"
                                             >
-
-                                                        {{ trans('backend.vieworder') }}
+                                                {{ trans('backend.vieworder') }}
                                             </a>
                                         </td>
                                         <td>
@@ -280,32 +174,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module">
-        /*
-        const data = {
-            labels: [
-                'Confirm',
-                'Not confirmed'
-            ],
-            datasets: [{
-                label: 'Revenue in day',
-                data: [
-                        
-                    ],
 
-                hoverOffset: 4
-            }]
-        };
-
-        const config = {
-            type: 'doughnut',
-            data: data,
-            options: {}
-        };
-
-        const myChart = new Chart(
-            //document.getElementById('revenueChart'),
-            //config
-        );
-        */
     </script>
 </div>
