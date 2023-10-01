@@ -11,7 +11,7 @@
       </button>
 
       <!-- Brand -->
-      <a class="navbar-brand" href="{{ route('agentDashboard') }}">
+      <a class="navbar-brand" href="{{ route('dashboard') }}">
         <img src="/img/logo.png" height="25" alt="MDB Logo"
           loading="lazy" />
       </a>

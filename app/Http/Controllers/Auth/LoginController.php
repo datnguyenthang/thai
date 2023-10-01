@@ -52,7 +52,7 @@ class LoginController extends Controller
 
             switch (auth()->user()->role) {
                 case 'admin':
-                    return redirect('/user');
+                    return redirect('/dashboard');
                     break;
                 case 'manager':
                     return redirect('/dashboard');
