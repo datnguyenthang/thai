@@ -55,19 +55,19 @@ class LoginController extends Controller
                     return redirect('/user');
                     break;
                 case 'manager':
-                    return redirect('/manager');
+                    return redirect('/dashboard');
                     break;
                 case 'moderator':
-                    return redirect('/moderator');
+                    return redirect('/dashboard');
                     break;
                 case 'agent':
-                    return redirect('/agent');
+                    return redirect('/agentorderlist');
                     break;
                 case 'creator':
                     return redirect('/pagelist');
                     break;
                 case 'viewer':
-                    return redirect('/viewerdashboard');
+                    return redirect('/dashboard');
                     break;
                 default:
                     return redirect()->route('home');

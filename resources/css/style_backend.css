@@ -4,6 +4,16 @@
   color: #fff;
 }
 
+ul.navbar-nav .active {
+  color: #9d474a;
+  text-decoration: none;
+  background: none;
+  box-shadow: none;
+  moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  border-bottom: 3px solid #9d474a;
+}
+
 .own_color {
   color: #9d474a;
 }
@@ -368,13 +378,16 @@ footer {
 .profile-list strong {
   font-weight: bold;
 }
+
 .list-group-item.active {
   background-color: #9d474a;
   border-color: #9d474a;
 }
+
 .dashed-stroke{
   border-top: 2px dashed red;
 }
+
 .dashed-line {
   border-right: 1px dashed #000;
 }
