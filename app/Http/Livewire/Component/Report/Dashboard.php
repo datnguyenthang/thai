@@ -90,7 +90,7 @@ class Dashboard extends Component
         $user = auth()->user();
         switch ($user->role) {
             case 'admin':
-                return view('livewire.component.report.dashboard.manager', compact('listRides'))->layout('manager.layouts.app');
+                return view('livewire.component.report.dashboard.manager', compact('listRides'))->layout('admin.layouts.app');
                 break;
             case 'manager':
                 return view('livewire.component.report.dashboard.manager', compact('listRides'))->layout('manager.layouts.app');
