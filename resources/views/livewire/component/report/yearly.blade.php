@@ -1,6 +1,6 @@
 <div>
     <script type="module" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <div class="row">
+    <div class="row  mt-5">
         <div class="col-xl-6 col-lg-6">
             @include('livewire.component.report.chart.revenuechart')
         </div>
