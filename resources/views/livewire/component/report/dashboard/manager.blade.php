@@ -1,9 +1,6 @@
 <div>
     <!-- Content Row -->
     <div class="row">
-        <div class="col-xl-12 col-lg-12">
-            <livewire:component.report.chart.chart />
-        </div>
         <!-- List Rides -->
         <div class="col-xl-12 col-lg-12 mt-4">
             <div class="card shadow mb-4">
