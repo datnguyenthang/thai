@@ -221,6 +221,18 @@ return [
     'appearance' => 'Appearance',
     'customizehomepage' => 'Customize homepage',
 
+    //REPORT
+    'report' => 'Report',
+    'dailyreport' => 'Daily',
+    'monthlyreport' => 'Monthly',
+    'yearlyreport' => 'Yearly',
+    'saleperformance' => 'Sale Performance',
+    'saleman' => 'Salesman',
+    'saletotalprice' => 'Sales Orders',
+    'revenue' => 'Revenue',
+    'totalorder' => 'Total order',
+    'achieve' => 'Achieve(%)',
+
     //SETTING
     'seo' => 'SEO',
     'settingceo' => 'Setting SEO',
@@ -229,5 +241,4 @@ return [
     'status' => 'Status',
     'ticketstatus' => 'Ticket Status',
     'modifyticketorder' => 'Modify Ticket',
-
 ];

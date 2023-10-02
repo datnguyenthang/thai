@@ -85,7 +85,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/menu', App\Http\Livewire\Component\Menu\ListMenu::class)->name('listMenu');
     Route::get('/menu/create/{menuId}', App\Http\Livewire\Component\Menu\CreateMenu::class)->name('createMenu');
 
+    //REPORT
     Route::get('/dashboard', App\Http\Livewire\Component\Report\Dashboard::class)->name('dashboard');
+    Route::get('/dailyreport', App\Http\Livewire\Component\Report\Daily::class)->name('dailyReport');
+    Route::get('/monthlyreport', App\Http\Livewire\Component\Report\Monthly::class)->name('monthlyReport');
+    Route::get('/yearlyreport', App\Http\Livewire\Component\Report\Yearly::class)->name('yearlyReport');
+    Route::get('/saleperformance', App\Http\Livewire\Component\Report\Performance::class)->name('salePerformance');
 
     /*------All Manager Routes List------*/
     Route::middleware(['user-access:manager'])->group(function () {

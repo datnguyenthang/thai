@@ -5,7 +5,7 @@
     const revenueData = {!! json_encode($revenues) !!};
 
     // Extracting labels and data for the chart
-    const labels_revenue = revenueData.map(item => item.byMonth); // Modify this based on your data structure
+    const labels_revenue = revenueData.map(item => item.data); // Modify this based on your data structure
     const data_revenue = revenueData.map(item => item.revenue);
     const revenueCtx = document.getElementById('revenuesChart').getContext('2d');
 
@@ -41,7 +41,26 @@
                 y: {
                     stacked: true
                 }
-            }
+            },
         }
+    });
+
+    Livewire.on('revenuesUpdated', (data) => {
+        const revenueNewData = JSON.parse(data.revenuesNewData);
+        // Clear existing data
+        revenueChart.data.labels = [];
+        revenueChart.data.datasets[0].data = [];
+
+        if (revenueNewData.length == 0) return false;
+
+        const labels_newData = revenueNewData.map(item => item.data);
+        const data_newData = revenueNewData.map(item => item.revenue);
+
+        // Add new data
+            revenueChart.data.labels = labels_newData;
+            revenueChart.data.datasets[0].data = data_newData;
+
+        revenueChart.update();
+
     });
 </script>

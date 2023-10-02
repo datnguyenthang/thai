@@ -7,16 +7,16 @@
 
     // Extracting labels and data for the chart
     // Modify this based on your data structure
-    const labels_order = orderData.map(item => item.byMonth);
+    const labels_order = orderData.map(item => item.data);
     const data_order = orderData.map(item => item.totalOrder);
 
-    const labels_pax = paxesData.map(item => item.byMonth);
+    const labels_pax = paxesData.map(item => item.data);
     const data_pax = paxesData.map(item => item.pax);
 
 
     const orderCtx = document.getElementById('orderChart').getContext('2d');
 
-    const revenueChart = new Chart(orderCtx, {
+    const orderChart = new Chart(orderCtx, {
         type: 'bar',
         data: {
             labels: labels_order,
@@ -61,5 +61,28 @@
                 }
             }
         }
+    });
+
+    Livewire.on('ordersUpdated', (data) => {
+        const ordersNewData = JSON.parse(data.ordersNewData);
+        const paxesNewData = JSON.parse(data.paxesNewData);
+        // Clear existing data
+        orderChart.data.labels = [];
+        orderChart.data.datasets[0].data = [];
+        orderChart.data.datasets[1].data = [];
+
+        if (ordersNewData.length == 0) return false;
+
+        const labels_newData = ordersNewData.map(item => item.data);
+        const data_newOrderData = ordersNewData.map(item => item.totalOrder);
+        const data_newPaxData = paxesNewData.map(item => item.pax);
+
+        // Add new data
+        orderChart.data.labels = labels_newData;
+        orderChart.data.datasets[0].data = data_newOrderData;
+        orderChart.data.datasets[1].data = data_newPaxData;
+
+        orderChart.update();
+
     });
 </script>

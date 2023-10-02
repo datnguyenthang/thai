@@ -13,12 +13,31 @@ use App\Models\Ride;
 
 class ChartLib {
 
+    public static function dateFormat($type = 'byMonth', $fromDate, $toDate){
+        switch ($type) {
+            case 'byYear':
+                $dateFormat = '%Y';
+                $fromDate = Carbon::parse("$fromDate-01-01")->startOfYear()->toDateString();
+                $toDate = Carbon::parse("$toDate-12-31")->endOfYear()->toDateString();
+                break;
+            case 'byMonth':
+                $dateFormat = '%Y-%m';
+                $fromDate = Carbon::parse($fromDate)->startOfMonth()->toDateString();
+                 $toDate = Carbon::parse($toDate)->endOfMonth()->toDateString();
+                break;
+            case 'byDay':
+                $dateFormat = '%Y-%m-%d';
+                break;
+        }
+        return [$dateFormat, $fromDate, $toDate];
+    }
+
     public static function revenueInDate($fromDate, $toDate, $type = 'byMonth', $status = CONFIRM, $depart, $dest) {
-        $dateFormat = $type === 'byMonth' ? '%Y-%m' : '%Y-%m-%d';
+        list($dateFormat, $fromDate, $toDate)  = self::dateFormat($type, $fromDate, $toDate);
 
         $revenues = Ride::select(
                     DB::raw('SUM(ot.price) as revenue'),
-                    DB::raw("DATE_FORMAT(rides.departDate, '{$dateFormat}') as {$type}")
+                    DB::raw("DATE_FORMAT(rides.departDate, '{$dateFormat}') as data")
                 )
                 ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
                 ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
@@ -34,7 +53,7 @@ class ChartLib {
                         ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
                 })
                 ->where(function ($query) use ($fromDate, $toDate, $status, $depart, $dest) {
-                    if ($status) $query->where('o.status', $status);
+                    if ($status) $query->where('os.status', $status);
                     if ($fromDate) $query->where('rides.departDate', '>=', $fromDate);
                     if ($toDate) $query->where('rides.departDate', '<=', $toDate);
                     if ($depart) $query->where('rides.fromLocation', $depart);
@@ -47,11 +66,11 @@ class ChartLib {
     }
 
     public static function orderInDate($fromDate, $toDate, $type = 'byMonth', $status = CONFIRM, $depart, $dest) {
-        $dateFormat = $type === 'byMonth' ? '%Y-%m' : '%Y-%m-%d';
+        list($dateFormat, $fromDate, $toDate)  = self::dateFormat($type, $fromDate, $toDate);
 
         $orders = Ride::select(
                     DB::raw('COUNT(ot.id) as totalOrder'),
-                    DB::raw("DATE_FORMAT(rides.departDate, '{$dateFormat}') as {$type}")
+                    DB::raw("DATE_FORMAT(rides.departDate, '{$dateFormat}') as data")
                 )
                 ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
                 ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
@@ -67,7 +86,7 @@ class ChartLib {
                         ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
                 })
                 ->where(function ($query) use ($fromDate, $toDate, $status, $depart, $dest) {
-                    if ($status) $query->where('o.status', $status);
+                    if ($status) $query->where('os.status', $status);
                     if ($fromDate) $query->where('rides.departDate', '>=', $fromDate);
                     if ($toDate) $query->where('rides.departDate', '<=', $toDate);
                     if ($depart) $query->where('rides.fromLocation', $depart);
@@ -80,11 +99,11 @@ class ChartLib {
     }
 
     public static function paxInDate($fromDate, $toDate, $type = 'byMonth', $status = CONFIRM, $depart, $dest) {
-        $dateFormat = $type === 'byMonth' ? '%Y-%m' : '%Y-%m-%d';
+        list($dateFormat, $fromDate, $toDate)  = self::dateFormat($type, $fromDate, $toDate);
 
         $paxes = Ride::select(
                     DB::raw('SUM(o.adultQuantity) as pax'),
-                    DB::raw("DATE_FORMAT(rides.departDate, '{$dateFormat}') as {$type}")
+                    DB::raw("DATE_FORMAT(rides.departDate, '{$dateFormat}') as data")
                 )
                 ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
                 ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
@@ -100,7 +119,7 @@ class ChartLib {
                         ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
                 })
                 ->where(function ($query) use ($fromDate, $toDate, $status, $depart, $dest) {
-                    if ($status) $query->where('o.status', $status);
+                    if ($status) $query->where('os.status', $status);
                     if ($fromDate) $query->where('rides.departDate', '>=', $fromDate);
                     if ($toDate) $query->where('rides.departDate', '<=', $toDate);
                     if ($depart) $query->where('rides.fromLocation', $depart);

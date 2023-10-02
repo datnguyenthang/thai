@@ -11,6 +11,8 @@
             <span>{{ trans('backend.dashboard') }}</span>
           </a>
 
+          @include('components.backend.reportnav')
+
           <a href="{{ route('viewerOrderlist') }}" 
             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'viewerOrderlist' ? 'active' : '' }}">
             <i class="fas fa-clipboard-list fa-fw me-3"></i>

@@ -10,6 +10,8 @@
             <i class="fas fa-tachometer-alt fa-fw me-3"></i>
             <span>{{ trans('backend.dashboard') }}</span>
           </a>
+           
+          @include('components.backend.reportnav')
 
           <a href="{{ route('managerOrder') }}" 
             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerOrder' ? 'active' : '' }}">
