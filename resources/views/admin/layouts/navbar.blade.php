@@ -15,6 +15,8 @@
         <img src="/img/logo.png" height="25" alt="MDB Logo"
           loading="lazy" />
       </a>
+
+      @include('components.backend.reportnav')
       
       <!-- Left links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
