@@ -1,5 +1,42 @@
 <!--Main Navigation-->
 <header>
+  <!-- Sidebar -->
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar bg-white">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <a href="{{ route('dashboard') }}" 
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}" 
+          aria-current="true">
+          <i class="fas fa-tachometer-alt fa-fw me-3"></i>
+          <span>{{ trans('backend.dashboard') }}</span>
+        </a>
+         
+        @include('components.backend.reportnav')
+
+        <a href="{{ route('managerOrder') }}" 
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerOrder' ? 'active' : '' }}">
+          <i class="fas fa-cart-plus fa-fw me-3"></i>
+          <span>{{ trans('backend.order') }}</span>
+        </a>
+
+        <a href="{{ route('listUser') }}" 
+          class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listUser' ? 'active' : '' }}" 
+          aria-current="true">
+            <i class="fas fa-chart-area fa-fw me-3"></i>
+            <span>{{ trans('backend.user') }}</span>
+        </a>
+
+        <a href="{{ route('importOrder') }}" 
+          class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'importOrder' ? 'active' : '' }}" 
+          aria-current="true">
+          <i class="fas fa-upload fa-fw me-3"></i>
+            <span>{{ trans('backend.importorder') }}</span>
+        </a>
+
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar -->
   <!-- Navbar -->
   <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <!-- Container wrapper -->
@@ -15,27 +52,11 @@
         <img src="/img/logo.png" height="25" alt="MDB Logo"
           loading="lazy" />
       </a>
-
-      @include('components.backend.reportnav')
       
       <!-- Left links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a href="{{ route('listUser') }}" 
-              class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listUser' ? 'active' : '' }}" 
-              aria-current="true">
-                <span>{{ trans('backend.user') }}</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{ route('importOrder') }}" 
-              class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'importOrder' ? 'active' : '' }}" 
-              aria-current="true">
-                <span>{{ trans('backend.importorder') }}</span>
-            </a>
-          </li>
+          <li class="nav-item"></li>
         </ul>
       </div>
   
@@ -62,24 +83,9 @@
         <!-- Icon dropdown -->
         @include('lang')
 
-        <!-- User menu -->
-        <div class="dropdown">
-          <a class="nav-link me-3 dropdown-toggle hidden-arrow" href="#"
-            id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ Auth::user()->name }}
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li>
-              <a class="dropdown-item" href="/user/profile">Profile</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="/user/edit">Edit</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="/logout">Logout</a>
-            </li>
-          </ul>
-        </div>
+        <!-- User panel -->
+        @include('livewire.component.user.userpanel')
+
       </div>
       <!-- Right elements -->
     </div>
