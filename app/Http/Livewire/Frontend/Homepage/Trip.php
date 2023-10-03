@@ -65,7 +65,11 @@ class Trip extends Component
             'fromLocation' => 'required|numeric|exists:locations,id',
             'toLocation' => 'required|numeric|exists:locations,id',
             'departureDate' => 'required|date|after_or_equal:today',
-            'returnDate' => 'required|date|after:departureDate',
+            'returnDate' => [
+                'required_if:tripType,'.ROUNDTRIP,
+                'date',
+                'after:departureDate'
+            ],
             'adults' => 'required|numeric|min:1',
             'children' => 'required|numeric|min:0',
         ];

@@ -24,7 +24,7 @@
                   <div class="row">
                     <div class="col-lg-2 col-sm-2">
                       <div class="rdio rdio-primary">
-                        <input type="radio" class="" id="roundtrip" value="{{ ROUNDTRIP }}" name="tripType" wire:model="tripType" wire:click="chooseTripType(1)">
+                        <input type="radio" class="" id="roundtrip" value="{{ ROUNDTRIP }}" name="tripType" wire:model="tripType" wire:click="chooseTripType(1)"  wire:init="chooseTripType(1)">
                         <label for="roundtrip" class="">{{ trans('messages.roundtrip') }}</label>
                       </div>
                     </div>
@@ -74,7 +74,7 @@
                       </div>
                     </div>
 
-                    @if($tripType == ROUNDTRIP)
+                    @if ($tripType == ROUNDTRIP)
                     <div class="col-lg-2 col-sm-12">
                       <div class="input1_wrapper">
                         <label>{{ trans('messages.returndate') }}</label>
