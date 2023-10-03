@@ -119,7 +119,12 @@
                                     <th></th>
                                 </tr>
                                 @foreach ($listPassengers as $listPassenger)
-                                    <tr>
+                                    @php
+                                        $class = "";
+                                        if ($listPassenger->status == CONFIRMEDORDER)  $class = "table-success";
+                                        if ($listPassenger->status == CANCELDORDER)  $class = "table-danger";
+                                    @endphp
+                                    <tr class="{{ $class }}">
                                         <td>{{ $listPassenger->code }}</td>
                                         <td>{{ $listPassenger->phone }}</td>
                                         {{--<td>{{ $listPassenger->email }}</td>--}}

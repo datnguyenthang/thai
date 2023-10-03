@@ -99,7 +99,7 @@ class Dashboard extends Component
                 return view('livewire.component.report.dashboard.moderator', compact('listRides'))->layout('moderator.layouts.app');
                 break; 
             case 'viewer':
-                return view('livewire.component.report.dashboard.manager', compact('listRides'))->layout('viewer.layouts.app');
+                return view('livewire.component.report.dashboard.viewer', compact('listRides'))->layout('viewer.layouts.app');
                 break;
             default:
                 return <<<'blade'

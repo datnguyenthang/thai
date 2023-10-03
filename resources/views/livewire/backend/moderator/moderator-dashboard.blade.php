@@ -227,7 +227,12 @@
                                     <th></th>
                                 </tr>
                                 @foreach ($listPassengers as $listPassenger)
-                                    <tr>
+                                    @php
+                                        $class = "";
+                                        if ($listPassenger->status == CONFIRMEDORDER)  $class = "table-success";
+                                        if ($listPassenger->status == CANCELDORDER)  $class = "table-danger";
+                                    @endphp
+                                    <tr class="{{ $class }}">
                                         <td>{{ $listPassenger->code }}</td>
                                         <td>{{ $listPassenger->phone }}</td>
                                         {{--<td>{{ $listPassenger->email }}</td>--}}
@@ -245,8 +250,7 @@
                                                 href="/{{ $role }}processorder/{{$listPassenger->orderId}}"
                                                 target="_blank"
                                             >
-
-                                                        {{ trans('backend.vieworder') }}
+                                                {{ trans('backend.vieworder') }}
                                             </a>
                                         </td>
                                         <td>
@@ -277,35 +281,4 @@
     <div class="modal-backdrop fade show" id="backdrop"
         style="display: @if($showModal === true) block @else none @endif;">
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="module">
-        /*
-        const data = {
-            labels: [
-                'Confirm',
-                'Not confirmed'
-            ],
-            datasets: [{
-                label: 'Revenue in day',
-                data: [
-                        
-                    ],
-
-                hoverOffset: 4
-            }]
-        };
-
-        const config = {
-            type: 'doughnut',
-            data: data,
-            options: {}
-        };
-
-        const myChart = new Chart(
-            //document.getElementById('revenueChart'),
-            //config
-        );
-        */
-    </script>
 </div>
