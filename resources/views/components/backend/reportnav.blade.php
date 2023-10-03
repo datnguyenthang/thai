@@ -9,25 +9,25 @@
 </a>
 <div class="collapse {{ in_array(Route::currentRouteName(), ['dailyReport', 'monthlyReport', 'yearlyReport', 'salePerformance']) ? 'show' : '' }}" id="submenu">
    <ul class="list-unstyled list-group-flush ms-3">
-       <li class="list-group-item">
+       <li class="list-group-item text-center">
            <a href="{{ route('dailyReport') }}" 
              class="text-decoration-none list-group-item-action ripple {{ Route::currentRouteName() == 'dailyReport' ? 'list-group-item active' : '' }}">
              <span>{{ trans('backend.dailyreport') }}</span>
            </a>
        </li>
-       <li class="list-group-item">
+       <li class="list-group-item text-center">
          <a href="{{ route('monthlyReport') }}" 
            class="text-decoration-none list-group-item-action ripple {{ Route::currentRouteName() == 'monthlyReport' ? 'list-group-item active' : '' }}">
            <span>{{ trans('backend.monthlyreport') }}</span>
          </a>
        </li>
-       <li class="list-group-item">
+       <li class="list-group-item text-center">
          <a href="{{ route('yearlyReport') }}" 
            class="text-decoration-none list-group-item-action ripple {{ Route::currentRouteName() == 'yearlyReport' ? 'list-group-item active' : '' }}">
            <span>{{ trans('backend.yearlyreport') }}</span>
          </a>
        </li>
-       <li class="list-group-item">
+       <li class="list-group-item text-center">
          <a href="{{ route('salePerformance') }}" 
            class="text-decoration-none list-group-item-action ripple {{ Route::currentRouteName() == 'salePerformance' ? 'list-group-item active' : '' }}">
            <span>{{ trans('backend.saleperformance') }}</span>
