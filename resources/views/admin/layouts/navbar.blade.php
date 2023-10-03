@@ -13,8 +13,8 @@
          
         @include('components.backend.reportnav')
 
-        <a href="{{ route('managerOrder') }}" 
-          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerOrder' ? 'active' : '' }}">
+        <a href="{{ route('adminOrder') }}" 
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'adminOrder' ? 'active' : '' }}">
           <i class="fas fa-cart-plus fa-fw me-3"></i>
           <span>{{ trans('backend.order') }}</span>
         </a>
