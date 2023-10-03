@@ -12,11 +12,13 @@
                     <th>Total Customer</th>
                     <th>Total Order</th>
                     <th>Total Money</th>
+                    {{--
                     <th>
                         <a href="#" wire:click="exportRides()">
                             <i class="fas fa-download"></i>
                         </a>
                     </th>
+                    --}}
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +33,7 @@
                             <td><strong class="text-success">{{ $ride->totalCustomerConfirm }}</strong>/<strong>{{ $ride->totalCustomer }}</strong></td>
                             <td><strong class="text-success">{{ $ride->totalOrderConfirm }}</strong>/<strong>{{ $ride->totalOrder }}</strong></td>
                             <td><strong class="text-success">{{ round($ride->totalMoneyConfirm) }}</strong>/<strong>{{ round($ride->totalMoney) }}</strong></td>
+                            {{--
                             <td>
                                 <a href="#" wire:click="displayRide({{ $ride->id }})">
                                     <i class="fas fa-eye"></i>
@@ -39,6 +42,7 @@
                                     <i class="fas fa-download"></i>
                                 </a>
                             </td>
+                            --}}
                         </tr>
                     @endforeach
                 @else
