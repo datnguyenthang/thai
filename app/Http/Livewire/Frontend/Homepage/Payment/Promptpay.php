@@ -29,7 +29,7 @@ class Promptpay extends Component
     public $paymentMethod;
 
     protected $listeners = ['promptpayCreateCharge' => 'promptpayCreateCharge',
-						    'promptpayRefresh' => 'promptpayRefresh',
+                            'promptpayRefresh' => 'promptpayRefresh',
                             'checkPaymentStatus' => 'checkPaymentStatus',
                             'paidByPromptpay' => 'paidByPromptpay'];
 
@@ -76,7 +76,7 @@ class Promptpay extends Component
                     $this->paymentStatus = SUCCESSFUL;
                     //$this->paidByPromptpay();
                     $this->chargeTransaction = $omisePayment;
-                    this->emit('paymentStatusUpdated', SUCCESSFUL);
+                    $this->emit('paymentStatusUpdated', SUCCESSFUL);
                 }
             }
         }
