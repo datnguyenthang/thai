@@ -29,10 +29,6 @@ class ListMenu extends Component
         $this->pageList = Page::pluck('name', 'id');
     }
 
-    public function createMenu($menuId = 0){
-        return redirect()->route('managerCreateMenu', ['menuId' => $menuId]);
-    }
-
     public function sortBy($field){
         if ($this->sortField === $field) {
             $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
