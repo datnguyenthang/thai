@@ -30,11 +30,11 @@ class OrderLib {
                             ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
                             ->leftJoin('order_payments as op', function($join) {
                                 $join->on('orders.id', '=', 'op.orderId')
-                                     ->whereRaw('op.id = (select max(id) from order_payments where order_payments.orderId = orders.id)');
+                                ->whereRaw('op.id = (select max(id) from order_payments where order_payments.orderId = orders.id)');
                             })
                             ->leftJoin('order_statuses as os', function($join) {
                                 $join->on('orders.id', '=', 'os.orderId')
-                                     ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = orders.id)');
+                                ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = orders.id)');
                             })
                             ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'os.status', 'orders.phone', 'orders.finalPrice',
                                     DB::raw('CONCAT(COALESCE(firstname, ""), " ", COALESCE(lastName, "")) as fullname'), 'orders.originalPrice', 'orders.couponAmount', 'orders.customerType',
@@ -60,11 +60,11 @@ class OrderLib {
                             ->leftJoin('customer_types as ct', 'ct.id', '=', 'orders.customerType')
                             ->leftJoin('order_payments as op', function($join) {
                                 $join->on('orders.id', '=', 'op.orderId')
-                                     ->whereRaw('op.id = (select max(id) from order_payments where order_payments.orderId = orders.id)');
+                                ->whereRaw('op.id = (select max(id) from order_payments where order_payments.orderId = orders.id)');
                             })
                             ->leftJoin('order_statuses as os', function($join) {
                                 $join->on('orders.id', '=', 'os.orderId')
-                                     ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = orders.id)');
+                                ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = orders.id)');
                             })
                             ->select('orders.id', 'orders.code', 'orders.userId', 'orders.isReturn', 'os.status', 'orders.phone', 'orders.finalPrice',
                                     DB::raw('CONCAT(COALESCE(firstname, ""), " ", COALESCE(lastName, "")) as fullname'), 'orders.originalPrice', 'orders.couponAmount', 'orders.customerType',
@@ -96,11 +96,11 @@ class OrderLib {
                         ->leftJoin('customer_types as ct', 'o.customerType', '=', 'a.agentType')
                         ->leftJoin('order_payments as op', function($join) {
                             $join->on('o.id', '=', 'op.orderId')
-                                 ->whereRaw('op.id = (select max(id) from order_payments where order_payments.orderId = o.id)');
+                            ->whereRaw('op.id = (select max(id) from order_payments where order_payments.orderId = o.id)');
                         })
                         ->leftJoin('order_statuses as os', function($join) {
                             $join->on('o.id', '=', 'os.orderId')
-                                 ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
+                            ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
                         })
                         ->where('order_tickets.id', $orderTicketId)
                         ->first();
@@ -108,7 +108,7 @@ class OrderLib {
     }
 
     public static function getOrderListQuery($orderCode, $customerName, $customerPhone, $customerType,
-                                             $agentId, $fromLocation, $toLocation){
+                                            $agentId, $fromLocation, $toLocation){
         return Order::with(['orderTickets' => function($orderTicket){
             $orderTicket->select('order_tickets.*', 'r.name', 'r.departDate', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
                         ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')

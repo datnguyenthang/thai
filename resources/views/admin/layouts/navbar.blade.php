@@ -10,7 +10,7 @@
           <i class="fas fa-tachometer-alt fa-fw me-3"></i>
           <span>{{ trans('backend.dashboard') }}</span>
         </a>
-         
+
         @include('components.backend.reportnav')
 
         <a href="{{ route('adminOrder') }}" 
@@ -25,7 +25,11 @@
             <i class="fas fa-chart-area fa-fw me-3"></i>
             <span>{{ trans('backend.user') }}</span>
         </a>
-
+        <a href="{{ route('settingSeo') }}" 
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'settingSeo' ? 'active' : '' }}">
+          <i class="fas fa-icons fa-fw me-3"></i>
+          <span>{{ trans('backend.seo') }}</span>
+      </a>
         <a href="{{ route('importOrder') }}" 
           class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'importOrder' ? 'active' : '' }}" 
           aria-current="true">

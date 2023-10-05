@@ -81,6 +81,6 @@
 
     <!-- Loading state-->
     @if ($paymentStatus == SUCCESSFUL)
-    @include('loading.loading')
+        @include('loading.loading')
     @endif
 </div>

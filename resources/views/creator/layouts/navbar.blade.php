@@ -6,29 +6,27 @@
       <div class="list-group list-group-flush mx-3 mt-4">
 
         <a href="{{ route('listMenu') }}" 
-           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listMenu' ? 'active' : '' }}">
-           <i class="fas fa-bars fa-fw me-3"></i>
-           <span>{{ trans('backend.menu') }}</span>
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listMenu' ? 'active' : '' }}">
+          <i class="fas fa-bars fa-fw me-3"></i>
+          <span>{{ trans('backend.menu') }}</span>
         </a>
         
         <a href="{{ route('pageList') }}" 
-           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'pageList' ? 'active' : '' }}">
-           <i class="fas fa-newspaper fa-fw me-3"></i>
-           <span>{{ trans('backend.cms') }}</span>
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'pageList' ? 'active' : '' }}">
+          <i class="fas fa-newspaper fa-fw me-3"></i>
+          <span>{{ trans('backend.cms') }}</span>
         </a>
 
         <a href="{{ route('customizeHomepage') }}" 
-           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'customizeHomepage' ? 'active' : '' }}">
-           <i class="fas fa-tv fa-fw me-3"></i>
-           <span>{{ trans('backend.appearance') }}</span>
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'customizeHomepage' ? 'active' : '' }}">
+          <i class="fas fa-tv fa-fw me-3"></i>
+          <span>{{ trans('backend.appearance') }}</span>
         </a>
-        {{--
         <a href="{{ route('settingSeo') }}" 
-           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'settingSeo' ? 'active' : '' }}">
-           <i class="fas fa-icons fa-fw me-3"></i>
-           <span>{{ trans('backend.seo') }}</span>
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'settingSeo' ? 'active' : '' }}">
+          <i class="fas fa-icons fa-fw me-3"></i>
+          <span>{{ trans('backend.seo') }}</span>
         </a>
-        --}}
       </div>
     </div>
   </nav>
@@ -48,20 +46,17 @@
         <img src="/img/logo.png" height="25" alt="MDB Logo"
           loading="lazy" />
       </a>
-      
-
-      </div>
+    </div>
   
       <!-- Right links -->
-      <div class="d-flex align-items-center">
-        <!-- Icon dropdown -->
-        @include('lang')
+    <div class="d-flex align-items-center">
+      <!-- Icon dropdown -->
+      @include('lang')
 
-        <!-- User panel -->
-        @include('livewire.component.user.userpanel')
-      </div>
-      <!-- Right elements -->
+      <!-- User panel -->
+      @include('livewire.component.user.userpanel')
     </div>
+      <!-- Right elements -->
     <!-- Container wrapper -->
   </nav>
   <!-- Navbar -->

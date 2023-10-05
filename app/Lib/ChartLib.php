@@ -23,7 +23,7 @@ class ChartLib {
             case 'byMonth':
                 $dateFormat = '%Y-%m';
                 $fromDate = Carbon::parse($fromDate)->startOfMonth()->toDateString();
-                 $toDate = Carbon::parse($toDate)->endOfMonth()->toDateString();
+                $toDate = Carbon::parse($toDate)->endOfMonth()->toDateString();
                 break;
             case 'byDay':
                 $dateFormat = '%Y-%m-%d';
@@ -130,5 +130,6 @@ class ChartLib {
                 ->get();
         return $paxes;
     }
+    
     
 }

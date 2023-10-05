@@ -9,6 +9,9 @@
     define('DEACTIVE', 1);
     define('MODIFY', 2);
 
+    define('HEAD_TAG_SEO', 'headTagSeo');
+    define('BODY_TAG_SEO', 'bodyTagSeo');
+
     //USER
     define('USERSTATUS', [
                             0 => 'Active', 

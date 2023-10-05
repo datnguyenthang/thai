@@ -23,6 +23,7 @@
         <livewire:frontend.layout.header  />
 
         @if(Request::is('/'))
+            <livewire:frontend.layout.seo-head-tag  />
             <livewire:frontend.layout.slide-wrapper  />
             <livewire:frontend.homepage.booking  />
 {{--
@@ -50,7 +51,6 @@
     </div>
 
     <!--<a href="#" id="toTop" style="display: inline;"><span id="toTopHover" style="opacity: 0;"></span></a>-->
-
     @livewireScripts
 </body>
 </html>

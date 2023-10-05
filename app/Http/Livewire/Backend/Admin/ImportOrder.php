@@ -30,6 +30,7 @@ class ImportOrder extends Component
     }
 
     public function render() {
-        return view('livewire.backend.admin.import-order');
+        return view('livewire.backend.admin.import-order')
+                    ->layout('admin.layouts.app');
     }
 }
