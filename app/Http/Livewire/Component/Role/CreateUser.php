@@ -71,7 +71,7 @@ class CreateUser extends Component
             session()->flash('success', 'User updated successfully!');
             
         } else { // create new user
-           
+
             User::create([
                 'name' => $this->name,
                 'email' => $this->email,

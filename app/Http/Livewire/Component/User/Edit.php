@@ -33,7 +33,7 @@ class Edit extends Component
 
         if ($this->password) {
             $this->user->update([
-                'password' => Hash::make($this->password),
+                'password' => bcrypt($this->password),
             ]);
         }
 
