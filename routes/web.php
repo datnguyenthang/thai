@@ -80,7 +80,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/agent/create/{agentId}', App\Http\Livewire\Component\Agent\CreateAgent::class)->name('createAgent');
 
     Route::get('/appearance', App\Http\Livewire\Component\Appearance\Customize::class)->name('customizeHomepage');
-    Route::get('/settingseo', App\Http\Livewire\Component\seo\SeoSetting::class)->name('settingSeo');
+    Route::get('/settingseo', App\Http\Livewire\Component\Seo\SeoSetting::class)->name('settingSeo');
 
     Route::get('/menu', App\Http\Livewire\Component\Menu\ListMenu::class)->name('listMenu');
     Route::get('/menu/create/{menuId}', App\Http\Livewire\Component\Menu\CreateMenu::class)->name('createMenu');
