@@ -19,11 +19,11 @@
 </head>
 <body class="front">
     <div id="main">
+        <livewire:frontend.layout.seo-head-tag  />
         <livewire:frontend.layout.top  />
         <livewire:frontend.layout.header  />
 
         @if(Request::is('/'))
-            <livewire:frontend.layout.seo-head-tag  />
             <livewire:frontend.layout.slide-wrapper  />
             <livewire:frontend.homepage.booking  />
 {{--
