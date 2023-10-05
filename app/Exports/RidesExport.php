@@ -37,6 +37,7 @@ class RidesExport implements FromCollection, WithHeadings
             'Email',
             'Adult Quantity',
             'Children Quantity',
+            'Price',
             'Pickup',
             'Dropoff',
             'Full Name',

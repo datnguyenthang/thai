@@ -39,7 +39,7 @@ class DashboardLib {
                     })
                     ->leftJoin('order_statuses as os', function($join) {
                         $join->on('o.id', '=', 'os.orderId')
-                             ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
+                            ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
                     })
                     ->where(function ($query) use ($fromDate, $toDate, $depart, $dest, $isOrder) {
                         $query->where('rides.status', ACTIVE);
@@ -89,11 +89,11 @@ class DashboardLib {
 
     public static function exportRides($rideId = 0, $fromDate = 0, $toDate = 0, $depart = 0, $dest = 0) {
         $passengers = Ride::select('rides.id', 'rides.name as Ridename', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
-                                   'o.code','o.code', 'o.phone', 'o.email', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff',
-                                   DB::raw('CONCAT(o.firstName, " ", o.lastName) as fullname'),
-                                   DB::raw('CASE WHEN o.customerType <> 0 THEN ct.name ELSE "Online" END AS CustomerType'), 'u.name',
-                                   DB::raw('CASE WHEN ot.type = '.ONEWAY.' THEN "Departure" ELSE "Return" END AS Ticket'),
-                                   DB::raw('CASE WHEN os.status = '.CONFIRMEDORDER.' THEN "Confirm" ELSE "Not Confirm" END AS Status')
+                                'o.code', 'o.code', 'o.phone', 'o.email', 'o.adultQuantity', 'o.childrenQuantity', 'ot.price', 'o.pickup', 'o.dropoff',
+                                DB::raw('CONCAT(o.firstName, " ", o.lastName) as fullname'),
+                                DB::raw('CASE WHEN o.customerType <> 0 THEN ct.name ELSE "Online" END AS CustomerType'), 'u.name',
+                                DB::raw('CASE WHEN ot.type = '.ONEWAY.' THEN "Departure" ELSE "Return" END AS Ticket'),
+                                DB::raw('CASE WHEN os.status = '.CONFIRMEDORDER.' THEN "Confirm" ELSE "Not Confirm" END AS Status')
                                 )
                     ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
                     ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
@@ -105,7 +105,7 @@ class DashboardLib {
                     })
                     ->leftJoin('order_statuses as os', function($join) {
                         $join->on('o.id', '=', 'os.orderId')
-                             ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
+                            ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
                     })
                     ->leftJoin('customer_types as ct', 'ct.id', '=', 'o.customerType')
                     ->leftJoin('users as u', 'u.id', '=', 'o.userId')
@@ -128,13 +128,13 @@ class DashboardLib {
 
     public static function detailRides($rideId = 0) {
         $passengers = Ride::select('rides.id', 'rides.name as Ridename', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
-                                  'o.id as orderId','o.code', 'o.phone', 'o.email', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff', 'ot.id as orderTicketId', 'ot.price',
-                                   DB::raw('COALESCE(op.paymentStatus, 0) as paymentStatus'), 'os.status',
-                                   DB::raw('CONCAT(o.firstName, " ", o.lastName) as fullname'),
-                                   DB::raw('CASE WHEN o.customerType <> 0 THEN ct.name ELSE "Online" END AS CustomerType'), 'u.name',
-                                   DB::raw('CASE WHEN ot.type = '.ONEWAY.' THEN "Departure" ELSE "Return" END AS ticket'),
-                                   //DB::raw('CASE WHEN os.status = '.CONFIRMEDORDER.' THEN "Confirm" ELSE "Not Confirm" END AS status')
-                                )
+                                'o.id as orderId','o.code', 'o.phone', 'o.email', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff', 'ot.id as orderTicketId', 'ot.price',
+                                DB::raw('COALESCE(op.paymentStatus, 0) as paymentStatus'), 'os.status',
+                                DB::raw('CONCAT(o.firstName, " ", o.lastName) as fullname'),
+                                DB::raw('CASE WHEN o.customerType <> 0 THEN ct.name ELSE "Online" END AS CustomerType'), 'u.name',
+                                DB::raw('CASE WHEN ot.type = '.ONEWAY.' THEN "Departure" ELSE "Return" END AS ticket'),
+                                //DB::raw('CASE WHEN os.status = '.CONFIRMEDORDER.' THEN "Confirm" ELSE "Not Confirm" END AS status')
+                            )
                     ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
                     ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
                     ->join('order_tickets as ot' , function ($otjoin) {
@@ -149,7 +149,7 @@ class DashboardLib {
                     })
                     ->leftJoin('order_payments as op', function($opjoin) {
                         $opjoin->on('o.id', '=', 'os.orderId')
-                             ->whereRaw('op.id = (select max(id) from order_payments where order_payments.orderId = o.id)');
+                            ->whereRaw('op.id = (select max(id) from order_payments where order_payments.orderId = o.id)');
                     })
                     ->leftJoin('customer_types as ct', 'ct.id', '=', 'o.customerType')
                     ->leftJoin('users as u', 'u.id', '=', 'o.userId')
