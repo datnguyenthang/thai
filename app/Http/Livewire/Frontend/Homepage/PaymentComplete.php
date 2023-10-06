@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Frontend\Homepage;
 
 use Livewire\Component;
-use Illuminate\Http\Request;
 use App\Lib\OrderLib;
 use Omise\Omise;
 use App\Models\OmiseWebhookEvent;
@@ -13,6 +12,8 @@ class PaymentComplete extends Component {
 
     CONST SUCCESS = 0;
     CONST FAIL = 1;
+	
+	public $tab = 'omise';
 
     public $code;
     public $order;
@@ -20,13 +21,15 @@ class PaymentComplete extends Component {
     public $error = false;
     public $errorMessage;
 
-    public function mount(Request $request){
-        $this->code = $request->input('code');
+    public function mount($code = ''){
+        $this->code = $code;
         $this->order = OrderLib::getOrderDetailByCode($this->code);
+		$this->paymentMethodList = PaymentMethod::get()->whereNotIn('name', [BANKTRANSFER, CASH]);
 
         $this->paymentMethod = PaymentMethod::where('name', '=', CARD)->first();
 
-        $event = OmiseWebhookEvent::where('eventType', CARD)->where('orderCode', $this->code)->where('eventStatus', CHARGE);       
+        $event = OmiseWebhookEvent::where('eventType', CARD)->where('orderCode', $this->code)->where('eventStatus', CHARGE)->first();
+
         $charge = \OmiseCharge::retrieve($event->eventChargeid);
 
         if ( $charge['authorized'] == false || $charge['paid'] == false) {
