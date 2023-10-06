@@ -149,8 +149,6 @@
                 </div>
             </div>
         </div>
-        
-        <div class="modal-backdrop d-block" id="backdrop"></div>
     @endif
     <!-- Loading state-->
     @include('loading.loading')
