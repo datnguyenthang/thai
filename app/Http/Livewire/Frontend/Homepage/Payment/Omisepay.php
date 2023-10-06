@@ -62,7 +62,8 @@ class Omisepay extends Component
                 'orderCode' => $this->order->code,
             ]);
             // redirect to authorize_uri
-            header('Location: ' . $charge['authorize_uri']);
+            //header('Location: ' . $charge['authorize_uri']);
+            return redirect()->to($charge['authorize_uri']);
             exit();
         } catch (\Exception $e) {
             $this->error = true;
