@@ -144,11 +144,13 @@
                         <p>{{ $errorMessage }}</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" wire:click="$set('error', false)" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div class="modal-backdrop d-block" id="backdrop"></div>
     @endif
     <!-- Loading state-->
     @include('loading.loading')
