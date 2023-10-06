@@ -10,5 +10,5 @@ class OmiseWebhookEvent extends Model
     use HasFactory;
 
     protected $fillable = [
-        'eventType', 'eventChargeid', 'eventStatus', 'eventData'];
+        'orderCode', 'eventType', 'eventChargeid', 'eventStatus', 'eventData'];
 }

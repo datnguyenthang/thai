@@ -53,7 +53,7 @@ class Omisepay extends Component
                 'eventType' => CARD,
                 'eventChargeid' => $charge['id'],
                 'eventStatus' => CHARGE,
-                'eventData' => $this->order->code,
+                'orderCode' => $this->order->code,
             ]);
             // redirect to authorize_uri
             header('Location: ' . $charge['authorize_uri']);
