@@ -7,6 +7,8 @@ use App\Lib\OrderLib;
 use Omise\Omise;
 use App\Models\OmiseWebhookEvent;
 use App\Models\PaymentMethod;
+use App\Models\OrderStatus;
+use App\Models\OrderPayment;
 
 class PaymentComplete extends Component {
 
