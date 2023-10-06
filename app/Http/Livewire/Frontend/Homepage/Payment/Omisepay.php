@@ -57,6 +57,7 @@ class Omisepay extends Component
             ]);
             // redirect to authorize_uri
             header('Location: ' . $charge['authorize_uri']);
+            exit();
         } catch (\Exception $e) {
             $this->error = true;
             $this->errorMessage = $e->getMessage();

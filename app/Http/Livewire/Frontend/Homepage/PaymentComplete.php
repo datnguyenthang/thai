@@ -27,7 +27,7 @@ class PaymentComplete extends Component {
         $this->paymentMethod = PaymentMethod::where('name', '=', CARD)->first();
 
         $event = OmiseWebhookEvent::where('eventType', CARD)->where('eventData', $this->code)->where('eventStatus', CHARGE);       
-        $charge = OmiseCharge::retrieve($event->eventChargeid);
+        $charge = \OmiseCharge::retrieve($event->eventChargeid);
 
         if ( $charge['authorized'] == false || $charge['paid'] == false) {
             $this->error = true;
