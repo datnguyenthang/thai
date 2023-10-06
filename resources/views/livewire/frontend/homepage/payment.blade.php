@@ -111,8 +111,8 @@
                                 <livewire:frontend.homepage.payment.banktransfer :orderId="$order->id" />
                             </div>
                             <div id="omisepay" class="tab-pane fade pt-3 {{ $tab == 'omise' ? 'show active' : '' }}">
-                                @if($error)
-                                    <div  class="alert alert-danger" role="alert">
+                                @if($errorMessage )
+                                    <div class="alert alert-danger" role="alert">
                                         {{ $errorMessage }}
                                     </div>
                                 @endif
