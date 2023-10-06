@@ -57,14 +57,15 @@ class PaymentComplete extends Component {
                     'changeDate' => date('Y-m-d H:i:s'),
                 ]);
 
-                $this->emitUp('updatePayment', ALREADYPAID);
+                $this->error = true;
             }
         }
     }
 
     public function render() {
+        if ($this->error) return view('livewire.frontend.homepage.success-booking');
+
         return view('livewire.frontend.homepage.payment-complete');
-        //if ($this->error) return view('livewire.frontend.homepage.payment');
         //if (!$this->error) return view('livewire.frontend.homepage.success-booking');
     }
 }
