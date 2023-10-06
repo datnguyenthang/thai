@@ -111,6 +111,11 @@
                                 <livewire:frontend.homepage.payment.banktransfer :orderId="$order->id" />
                             </div>
                             <div id="omisepay" class="tab-pane fade pt-3 {{ $tab == 'omise' ? 'show active' : '' }}">
+                                @if($error)
+                                    <div  class="alert alert-danger" role="alert">
+                                        {{ $errorMessage }}
+                                    </div>
+                                @endif
                                 <div class="payment_box text-dark">
                                     {!! trans('messages.omiseinfomation') !!}
                                 </div>
@@ -132,24 +137,6 @@
             </div>
         </section>
     </div>
-
-    @if($error)
-        <div data-bs-toggle="modal" class="modal d-block" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Error...</h5>
-                    </div>
-                    <div class="modal-body">
-                        <p>{{ $errorMessage }}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-target="#modal" data-bs-dismiss="paymenterror">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
     <!-- Loading state-->
     @include('loading.loading')
 </div>

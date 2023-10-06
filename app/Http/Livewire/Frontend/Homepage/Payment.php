@@ -37,6 +37,8 @@ class Payment extends Component
     public $code;
     public $order;
 
+    public $errorMessage;
+
     protected $listeners = [
         'updatePayment' => 'updatePayment'
     ];
@@ -49,6 +51,9 @@ class Payment extends Component
 
         //redirect to homepage if there are no order match code found
         if (!$this->order) redirect('/');
+
+        $this->errorMessage = session('message');
+        if ($this->errorMessage) $this->tab = 'omise';
     }
 
     public function updatePayment($step){

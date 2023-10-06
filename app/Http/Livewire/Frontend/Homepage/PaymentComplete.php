@@ -33,8 +33,7 @@ class PaymentComplete extends Component {
         $charge = \OmiseCharge::retrieve($event->eventChargeid);
 
         if ( $charge['authorized'] == false || $charge['paid'] == false) {
-            $this->error = true;
-            $this->errorMessage = 'Payment Error!!!';
+            return redirect()->route('payment')->with('message', 'Payment Error. Please try again!');
         } else {
             if ($charge['status'] == SUCCESSFUL){
                 //Update order status
@@ -55,17 +54,13 @@ class PaymentComplete extends Component {
                     'transactionDate' => date('Y-m-d H:i:s', strtotime($charge['created_at'])),
                     'changeDate' => date('Y-m-d H:i:s'),
                 ]);
-
-                //dispatch event to Payment component
-                $this->emitUp('updatePayment', ALREADYPAID);
             }
         }
-
     }
 
     public function render() {
-        //return view('livewire.frontend.homepage.payment-complete');
-        if ($this->error) return view('livewire.frontend.homepage.payment');
-        if (!$this->error) return view('livewire.frontend.homepage.success-booking');
+        return view('livewire.frontend.homepage.payment-complete');
+        //if ($this->error) return view('livewire.frontend.homepage.payment');
+        //if (!$this->error) return view('livewire.frontend.homepage.success-booking');
     }
 }
