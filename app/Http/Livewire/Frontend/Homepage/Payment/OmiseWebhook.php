@@ -15,7 +15,7 @@ class OmiseWebhook extends Component
 
         if (isset($eventObject['data']['status']) && 
                 $eventObject['data']['status'] == SUCCESSFUL) {
-             
+
             // IF CHARGE CARD
             if (isset($eventObject['data']['card'])) $eventType = CARD;
 

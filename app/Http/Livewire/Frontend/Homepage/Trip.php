@@ -76,7 +76,7 @@ class Trip extends Component
     
         // Perform validation
         $validator = \Validator::make(request()->all(), $rules);
-       
+
         if ($validator->fails()) {
             header("Location: /");
             die;

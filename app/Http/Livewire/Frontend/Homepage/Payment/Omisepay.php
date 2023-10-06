@@ -12,10 +12,12 @@ use App\Models\Order;
 use App\Models\OrderStatus;
 use App\Models\OrderPayment;
 use App\Models\PaymentMethod;
+use App\Models\OmiseWebhookEvent;
 
 class Omisepay extends Component
 {
     public $order;
+    public $paymentMethod;
     public $token;
     public $source;
     public $publicKey;
@@ -39,37 +41,22 @@ class Omisepay extends Component
         // Create a charge
         try {
             $charge = \OmiseCharge::create([
-                'amount' => $this->amount, // Amount in cents
-                'currency' => 'thb', // Change to your desired currency
-                'card' => $this->token,
+                'amount'      => $this->amount, // Amount in cents
+                'currency'    => 'thb',
+                'return_uri'  => 'https://www.seudamgo.com/payment_complete/'.$this->order->code,
                 'description' => $this->order->code,
-                'expires_at'  => Carbon::now()->addMinutes(15)->toIso8601String(),
+                'card'        => $this->token
             ]);
 
-            if ($charge['status'] == SUCCESSFUL){
-                //Update order status
-                OrderStatus::create([
-                    'orderId' => intVal($this->order->id),
-                    'status' => PAIDORDER,
-                    //'note' => $this->note,
-                    'changeDate' => date('Y-m-d H:i:s'),
-                    //'userId' => Auth::id(),
-                ]);
-
-                //Update order payment
-                OrderPayment::create([
-                    'orderId' => intVal($this->order->id),
-                    'paymentMethod' => $this->paymentMethod->id,
-                    'paymentStatus' => PAID,
-                    'transactionCode' => $charge['transaction'],
-                    'transactionDate' => date('Y-m-d H:i:s', strtotime($charge['created_at'])),
-                    'changeDate' => date('Y-m-d H:i:s'),
-                ]);
-
-                //dispatch event to Payment component
-                $this->emitUp('updatePayment', ALREADYPAID);
-            }
-
+            // Save the event data into the database
+            OmiseWebhookEvent::create([
+                'eventType' => CARD,
+                'eventChargeid' => $charge['id'],
+                'eventStatus' => CHARGE,
+                'eventData' => $this->order->code,
+            ]);
+            // redirect to authorize_uri
+            header('Location: ' . $charge['authorize_uri']);
         } catch (\Exception $e) {
             $this->error = true;
             $this->errorMessage = $e->getMessage();

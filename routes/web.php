@@ -56,6 +56,7 @@ Auth::routes(['register' => false]);
 Route::get('/trip', App\Http\Livewire\Frontend\Homepage\Trip::class)->name('trip');
 Route::post('/proceedbooking', App\Http\Livewire\Frontend\Homepage\ProceedBooking::class)->name('proceedbooking');
 Route::get('/payment/{code}', App\Http\Livewire\Frontend\Homepage\Payment::class)->name('payment');
+Route::get('/payment_complete/{code}', App\Http\Livewire\Frontend\Homepage\PaymentComplete::class)->name('paymentComplete');
 
 Route::get('/policy-for-customer', App\Http\Livewire\Frontend\Policy::class)->name('policycustomer');
 Route::get('/privacy-policy', App\Http\Livewire\Frontend\PrivatePolicy::class)->name('privatepolicy');

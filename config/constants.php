@@ -215,4 +215,5 @@
                             ]);
     //OMISE 
     define('SUCCESSFUL', 'successful');
+    define('CHARGE', 'charge');
     define('PENDING', 'pending');

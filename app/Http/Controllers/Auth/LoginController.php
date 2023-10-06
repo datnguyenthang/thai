@@ -42,12 +42,12 @@ class LoginController extends Controller
     public function login(Request $request)
     {  
         $inputVal = $request->all();
-   
+
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
         ]);
-   
+
         if(auth()->attempt(array('email' => $inputVal['email'], 'password' => $inputVal['password']))){
 
             switch (auth()->user()->role) {
@@ -71,7 +71,7 @@ class LoginController extends Controller
                     break;
                 default:
                     return redirect()->route('home');
-              }
+            }
         } else {
             return redirect()->route('login')
                 ->with('error','Email & Password are incorrect.');
