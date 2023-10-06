@@ -134,7 +134,7 @@
     </div>
 
     @if($error)
-        <div class="modal d-block" tabindex="-1">
+        <div id="paymenterror" class="modal d-block" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -144,7 +144,7 @@
                         <p>{{ $errorMessage }}</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-target="#paymenterror" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
