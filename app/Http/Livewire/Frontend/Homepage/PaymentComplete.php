@@ -54,6 +54,8 @@ class PaymentComplete extends Component {
                     'transactionDate' => date('Y-m-d H:i:s', strtotime($charge['created_at'])),
                     'changeDate' => date('Y-m-d H:i:s'),
                 ]);
+
+                $this->emitUp('updatePayment', ALREADYPAID);
             }
         }
     }
