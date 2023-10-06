@@ -48,6 +48,12 @@ class Omisepay extends Component
                 'card'        => $this->token
             ]);
 
+            // Delete existing records that match the specified conditions
+            OmiseWebhookEvent::where('eventType', 'CARD')
+                ->where('eventStatus', CHARGE)
+                ->where('orderCode', $this->order->code)
+                ->delete();
+
             // Save the event data into the database
             OmiseWebhookEvent::create([
                 'eventType' => CARD,
