@@ -134,7 +134,7 @@
     </div>
 
     @if($error)
-        <div class="modal" tabindex="-1">
+        <div class="modal d-block" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
