@@ -33,7 +33,7 @@ class PaymentComplete extends Component {
         $charge = \OmiseCharge::retrieve($event->eventChargeid);
 
         if ( $charge['authorized'] == false || $charge['paid'] == false) {
-            return redirect()->route('payment')->with('message', 'Payment Error. Please try again!');
+            return redirect()->route('payment', ['code' => $this->code])->with('message', 'Payment Error. Please try again!');
         } else {
             if ($charge['status'] == SUCCESSFUL){
                 //Update order status
