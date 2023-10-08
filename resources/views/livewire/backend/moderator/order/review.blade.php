@@ -13,10 +13,10 @@
                     <tr class="order_item">
                         <td class="product-name">
                             {!! trans('messages.detailorder', ['fromlocation' => $fromLocationName, 
-                                                              'tolocation' => $toLocationName, 
-                                                              'ride' => isset($depart->name) ? $depart->name : '',
-                                                              'departdate' => isset($depart->departDate) ? date('F j, Y', strtotime($depart->departDate)) : '',
-                                                              'departtime' => isset($depart->departTime) ? $depart->departTime : '']) !!}
+                                                                'tolocation' => $toLocationName, 
+                                                                'ride' => isset($depart->name) ? $depart->name : '',
+                                                                'departdate' => isset($depart->departDate) ? date('F j, Y', strtotime($depart->departDate)) : '',
+                                                                'departtime' => isset($depart->departTime) ? $depart->departTime : '']) !!}
                             <br>{{ trans('messages.people') }}: {{ $adults + $children }} <strong class="product-quantity">×{{ $adults + $children }}</strong>
                         </td>
                         <td class="product-total">
@@ -29,10 +29,10 @@
                     <tr class="order_item">
                         <td class="">
                             {!! trans('messages.detailorder', ['fromlocation' => $toLocationName, 
-                                                              'tolocation' => $fromLocationName, 
-                                                              'ride' => isset($return->name) ? $return->name : '',
-                                                              'departdate' => isset($return->departDate) ? date('F j, Y', strtotime($return->departDate)) : '',
-                                                              'departtime' => isset($return->departTime) ? $return->departTime : '']) !!}
+                                                                'tolocation' => $fromLocationName, 
+                                                                'ride' => isset($return->name) ? $return->name : '',
+                                                                'departdate' => isset($return->departDate) ? date('F j, Y', strtotime($return->departDate)) : '',
+                                                                'departtime' => isset($return->departTime) ? $return->departTime : '']) !!}
                             <br>{{ trans('messages.people') }}: {{ $adults + $children }} <strong class="product-quantity">×{{ $adults + $children }}</strong>	</td>
         
                         <td class="product-total">
@@ -102,15 +102,26 @@
                                     <input id="transactionCode" type="text" class="form-control" name="transactionCode" class="form-input" wire:model="transactionCode" />
                                     @error('transactionCode') <span class="text-light error">{{ $message }}</span> @enderror
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span class="form-label">{{ trans('backend.transactiondate') }}</span>
-                                    <input id="transactionDate" type="datetime-local" step="1" class="form-control" name="transactionDate" class="form-input" wire:model="transactionDate" />
-                                    @error('transactionDate') <span class="text-light error">{{ $message }}</span> @enderror
-                                </div>
-                            </div>
+                            </div>                            
                         @endif
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span class="form-label">{{ trans('backend.transactiondate') }}</span>
+                                <input id="transactionDate" type="datetime-local" step="1" class="form-control" name="transactionDate" class="form-input" wire:model="transactionDate" />
+                                @error('transactionDate') <span class="text-light error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span class="form-label fw-bold">{{ trans('backend.paymentmethodstatus') }}</span>
+                                <select id="paymentStatus" name="paymentStatus" class="form-select" wire:model="paymentStatus">
+                                    @foreach(PAYMENTSTATUS as $key => $value)
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                                @error('paymentStatus') <span class="text-danger error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>
@@ -125,7 +136,7 @@
                     <div class="col-md-4">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">{{ trans('messages.fullname') }}</span>
+                                <span class="input-group-text bg-secondary text-light">{{ trans('messages.fullname') }}</span>
                             </div>
                             <p type="text" class="form-control">{{ $firstName }} {{ $lastName }}</p>
                         </div>
@@ -133,7 +144,7 @@
                     <div class="col-md-4">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">{{ trans('messages.email') }}</span>
+                                <span class="input-group-text bg-secondary text-light">{{ trans('messages.email') }}</span>
                             </div>
                             <p type="text" class="form-control mb-0">{{ $email }}</p>
                         </div>
@@ -143,7 +154,7 @@
                     <div class="col-md-6">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">{{ trans('messages.phone') }}</span>
+                                <span class="input-group-text bg-secondary text-light">{{ trans('messages.phone') }}</span>
                             </div>
                             <p type="text" class="form-control mb-0">{{ $phone }}</p>
                         </div>
@@ -155,7 +166,7 @@
                     <div class="col-md-6">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">{{ trans('messages.pickupinfo') }}</span>
+                                <span class="input-group-text bg-secondary text-light">{{ trans('messages.pickupinfo') }}</span>
                             </div>
                             <p type="text" class="form-control mb-0">
                                 @if($pickup == PICKUPANY) {{ $pickupAny }} @endif
@@ -167,7 +178,7 @@
                     <div class="col-md-6">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">{{ trans('messages.dropoffinfo') }}</span>
+                                <span class="input-group-text bg-secondary text-light">{{ trans('messages.dropoffinfo') }}</span>
                             </div>
                             <p type="text" class="form-control mb-0">
                                 @if ($dropoff == DROPOFFANY) {{ $dropoffAny }} @endif
@@ -181,7 +192,7 @@
                 <div class="row mt-3">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">{{ trans('messages.note') }}</span>
+                            <span class="input-group-text bg-secondary text-light">{{ trans('messages.note') }}</span>
                         </div>
                         <p type="text" class="form-control mb-0">{{ $note }}</p>
                     </div>

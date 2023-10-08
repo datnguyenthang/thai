@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 use App\Mail\SendTicket;
 
@@ -396,8 +397,13 @@ class ModeratorOrder extends Component
                 $this->isTransaction == 1 ? 'max:15' : '',
             ],
             'transactionDate' => [
-                'required_if:isTransaction,1',
+                'required_without_all:isTransaction,paymentStatus',
+                Rule::requiredIf(function () {
+                    return $this->isTransaction == 1 || $this->paymentStatus == PAID;
+                }),
             ],
+            'paymentMethod' => 'required',
+            'paymentStatus' => 'required',
         ]);
 
         //set value for pickup and dropoff
