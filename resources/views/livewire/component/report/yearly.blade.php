@@ -4,10 +4,10 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <div class="row  mt-5">
         <div class="col-xl-6 col-lg-6">
-            @include('livewire.component.report.chart.revenuechart')
+            @include('livewire.component.report.chart.revenueChart')
         </div>
         <div class="col-xl-6 col-lg-6">
-            @include('livewire.component.report.chart.paxchart')
+            @include('livewire.component.report.chart.paxChart')
         </div>
     </div>
 
