@@ -18,19 +18,27 @@ class Yearly extends Component {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $revenues;
-    public $orders;
-    public $paxes;
-
-    public $perPage = 10;
+    public $revenueOrders;
+    public $revenueRides;
+    public $paxOrders;
+    public $paxTravels;
 
     public $fromDate;
     public $toDate;
-
-    public $hasOrdered = true;
-
     public $fromLocation;
     public $toLocation;
+
+    public $revenueOrderIndex;
+    public $revenueRideIndex;
+    public $paxOrderIndex;
+    public $paxTravelIndex;
+
+    public $confirmOrderTotal;
+    public $reserveOrderTotal;
+    public $cancelOrderTotal;
+
+    public $paxOrderCustomerType;
+    public $paxRideCustomerType;
 
     public $status = CONFIRMEDORDER;
     public $type = 'byYear';
@@ -48,9 +56,22 @@ class Yearly extends Component {
         $this->locationList = Location::get()->where('status', ACTIVE);
         $this->agents = Agent::get();
 
-        $this->revenues = ChartLib::revenueInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $this->orders = ChartLib::orderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $this->paxes = ChartLib::paxInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $this->revenueOrders = ChartLib::revenueOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $this->revenueRides = ChartLib::revenueRideInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $this->paxOrders = ChartLib::paxOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $this->paxTravels = ChartLib::paxTravelInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+
+        $this->revenueOrderIndex = $this->revenueOrders->sum('revenue');
+        $this->revenueRideIndex = $this->revenueRides->sum('revenue');
+        $this->paxOrderIndex = $this->paxOrders->sum('pax');
+        $this->paxTravelIndex = $this->paxTravels->sum('pax');
+
+        $this->confirmOrderTotal = ChartLib::countOrderStatus($this->fromDate, $this->toDate, $this->type, CONFIRMEDORDER, $this->fromLocation, $this->toLocation);
+        $this->reserveOrderTotal = ChartLib::countOrderStatus($this->fromDate, $this->toDate, $this->type, RESERVATION, $this->fromLocation, $this->toLocation);
+        $this->cancelOrderTotal = ChartLib::countOrderStatus($this->fromDate, $this->toDate, $this->type, CANCELDORDER, $this->fromLocation, $this->toLocation);
+
+        $this->paxOrderCustomerType = ChartLib::countPaxOrderByCustomerType($this->fromDate, $this->toDate, $this->type, CONFIRMEDORDER, $this->fromLocation, $this->toLocation);
+        $this->paxRideCustomerType = ChartLib::countPaxTraveledByCustomerType($this->fromDate, $this->toDate, $this->type, CONFIRMEDORDER, $this->fromLocation, $this->toLocation);
     }
 
     public function handleYearSelected($type, $year){
@@ -59,28 +80,44 @@ class Yearly extends Component {
     }
 
     public function updated(){
-        $revenuesNewData = ChartLib::revenueInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $ordersNewData = ChartLib::orderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $paxesNewData = ChartLib::paxInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $revenueOrderNewData = ChartLib::revenueOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $revenueRideNewData = ChartLib::revenueRideInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $paxOrdersNewData = ChartLib::paxOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $paxTravelsNewData = ChartLib::paxTravelInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
 
-        $this->emit('revenuesUpdated', ['revenuesNewData' => json_encode($revenuesNewData)]);
-        $this->emit('ordersUpdated', ['ordersNewData' => json_encode($ordersNewData), 'paxesNewData' => json_encode($paxesNewData)]);
+        $this->revenueOrderIndex = $revenueOrderNewData->sum('revenue');
+        $this->revenueRideIndex = $revenueRideNewData->sum('revenue');
+        $this->paxOrderIndex = $paxOrdersNewData->sum('pax');
+        $this->paxTravelIndex = $paxTravelsNewData->sum('pax');
+
+        $this->confirmOrderTotal = ChartLib::countOrderStatus($this->fromDate, $this->toDate, $this->type, CONFIRMEDORDER, $this->fromLocation, $this->toLocation);
+        $this->reserveOrderTotal = ChartLib::countOrderStatus($this->fromDate, $this->toDate, $this->type, RESERVATION, $this->fromLocation, $this->toLocation);
+        $this->cancelOrderTotal = ChartLib::countOrderStatus($this->fromDate, $this->toDate, $this->type, CANCELDORDER, $this->fromLocation, $this->toLocation);
+
+        $this->paxOrderCustomerType = ChartLib::countPaxOrderByCustomerType($this->fromDate, $this->toDate, $this->type, CONFIRMEDORDER, $this->fromLocation, $this->toLocation);
+        $this->paxRideCustomerType = ChartLib::countPaxTraveledByCustomerType($this->fromDate, $this->toDate, $this->type, CONFIRMEDORDER, $this->fromLocation, $this->toLocation);
+
+        $this->emit('revenuesUpdated', [
+                                        'revenueOrderNewData' => json_encode($revenueOrderNewData),
+                                        'revenueRideNewData' => json_encode($revenueRideNewData),
+                                    ]);
+        $this->emit('ordersUpdated', [
+                                        'paxOrdersNewData' => json_encode($paxOrdersNewData), 
+                                        'paxTravelsNewData' => json_encode($paxTravelsNewData)
+                                    ]);
     }
 
     public function render() {
-        list($type, $fromDate, $toDate) = ChartLib::dateFormat($this->type, $this->fromDate, $this->toDate);
-        $listRides = DashboardLib::ridesInDay($fromDate, $toDate, $this->fromLocation, $this->toLocation, $this->hasOrdered, $this->perPage);
-
         $user = auth()->user();
         switch ($user->role) {
             case 'admin':
-                return view('livewire.component.report.yearly', compact('listRides'))->layout('admin.layouts.app');
+                return view('livewire.component.report.yearly')->layout('admin.layouts.app');
                 break;
             case 'manager':
-                return view('livewire.component.report.yearly', compact('listRides'))->layout('manager.layouts.app');
+                return view('livewire.component.report.yearly')->layout('manager.layouts.app');
                 break;
             case 'viewer':
-                return view('livewire.component.report.yearly', compact('listRides'))->layout('viewer.layouts.app');
+                return view('livewire.component.report.yearly')->layout('viewer.layouts.app');
                 break;
             default:
                 return <<<'blade'

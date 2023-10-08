@@ -507,7 +507,7 @@ class ModeratorOrder extends Component
     public function getLocationFile($locationId) {
         $path = 'location/'.$locationId.'/';
         $allFiles = Storage::disk('public')->allFiles($path);
-       
+
         $files = [];
 
         foreach ($allFiles as $key => $file) {
@@ -543,7 +543,7 @@ class ModeratorOrder extends Component
         if ($coupon && Carbon::now()->between($coupon->fromDate, $coupon->toDate)) {
             //check valid quantity of coupon 
             $ordersWithCoupon = Order::where('promotionId', $coupon->id)
-                                       ->where('status', COMPLETEDORDER)->count();
+                                        ->where('status', COMPLETEDORDER)->count();
 
             if ($coupon->quantity == 0) { // if coupon has unlimited used time
                 $this->isValidCoupon = true;

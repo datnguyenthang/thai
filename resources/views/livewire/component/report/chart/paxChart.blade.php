@@ -2,40 +2,36 @@
 <script type="module">
     // Assuming you have the data available as PHP variables in your view
     let delayed;
-    const orderData = {!! json_encode($orders) !!};
-    const paxesData = {!! json_encode($paxes) !!};
+    const paxOrders = {!! json_encode($paxOrders) !!};
+    const paxTravels = {!! json_encode($paxTravels) !!};
 
     // Extracting labels and data for the chart
     // Modify this based on your data structure
-    const labels_order = orderData.map(item => item.data);
-    const data_order = orderData.map(item => item.totalOrder);
+    const labels_paxOrder = paxOrders.map(item => item.data);
+    const data_paxOrder = paxOrders.map(item => item.pax);
 
-    const labels_pax = paxesData.map(item => item.data);
-    const data_pax = paxesData.map(item => item.pax);
-
+    const data_paxTravel = paxTravels.map(item => item.pax);
 
     const orderCtx = document.getElementById('orderChart').getContext('2d');
 
     const orderChart = new Chart(orderCtx, {
         type: 'bar',
         data: {
-            labels: labels_order,
+            labels: labels_paxOrder,
             datasets: [
                 {
-                label: 'Order',
-                data: data_order,
-                backgroundColor: 'rgba(144, 238, 144, 0.5)',
-                borderColor: 'rgba(144, 238, 144, 1)',
-                borderWidth: 1
+                    label: 'Pax - New Order',
+                    data: data_paxOrder,
+                    backgroundColor: 'rgba(144, 238, 144, 0.5)',
+                    borderColor: 'rgba(144, 238, 144, 1)',
+                    borderWidth: 1
                 },
                 {
-                    label: 'Pax',
-                    data: data_pax,
-                    type: 'line',
+                    label: 'Pax - Travelled',
+                    data: data_paxTravel,
                     backgroundColor: 'rgba(147, 112, 219, 0.5)',
                     borderColor: 'rgba(147, 112, 219, 1)',
                     borderWidth: 1,
-                    fill: false
                 }
             ]
         },
@@ -54,33 +50,35 @@
             },
             scales: {
                 x: {
-                    stacked: true,
+                    stacked: false,
+                    group: 'group' ,
                 },
                 y: {
-                    stacked: true
+                    stacked: false
                 }
             }
         }
     });
 
     Livewire.on('ordersUpdated', (data) => {
-        const ordersNewData = JSON.parse(data.ordersNewData);
-        const paxesNewData = JSON.parse(data.paxesNewData);
+        const paxOrderNewData = JSON.parse(data.paxOrdersNewData);
+        const paxTravelNewData = JSON.parse(data.paxTravelsNewData);
+
         // Clear existing data
         orderChart.data.labels = [];
         orderChart.data.datasets[0].data = [];
         orderChart.data.datasets[1].data = [];
 
-        if (ordersNewData.length == 0) return false;
+        if (paxOrderNewData.length == 0) return false;
 
-        const labels_newData = ordersNewData.map(item => item.data);
-        const data_newOrderData = ordersNewData.map(item => item.totalOrder);
-        const data_newPaxData = paxesNewData.map(item => item.pax);
+        const labels_newData = paxOrderNewData.map(item => item.data);
+        const data_paxOrderData = paxOrderNewData.map(item => item.pax);
+        const data_PaxTravelData = paxTravelNewData.map(item => item.pax);
 
         // Add new data
         orderChart.data.labels = labels_newData;
-        orderChart.data.datasets[0].data = data_newOrderData;
-        orderChart.data.datasets[1].data = data_newPaxData;
+        orderChart.data.datasets[0].data = data_paxOrderData;
+        orderChart.data.datasets[1].data = data_PaxTravelData;
 
         orderChart.update();
 
