@@ -27,12 +27,14 @@ class ChartLib {
                 break;
             case 'byDay':
                 $dateFormat = '%Y-%m-%d';
+                $fromDate = Carbon::now()->parse("$fromDate")->startOfDay()->format('Y-m-d H:i:s');
+                $toDate = Carbon::now()->parse("$toDate")->endOfDay()->format('Y-m-d H:i:s');
                 break;
         }
         return [$dateFormat, $fromDate, $toDate];
     }
 
-    public static function revenueOrderInDate($fromDate, $toDate, $type = 'byMonth', $status = CONFIRM, $depart, $dest) {
+    public static function revenueOrderInDate($fromDate, $toDate, $type = 'byMonth', $status = CONFIRMEDORDER, $depart, $dest) {
         list($dateFormat, $fromDate, $toDate) = self::dateFormat($type, $fromDate, $toDate);
 
         $revenueOrders = Order::with(['orderTickets' => function($orderTicket){
@@ -73,7 +75,7 @@ class ChartLib {
         return $revenueOrders;
     }
 
-    public static function revenueRideInDate($fromDate, $toDate, $type = 'byMonth', $status = CONFIRM, $depart, $dest) {
+    public static function revenueRideInDate($fromDate, $toDate, $type = 'byMonth', $status = CONFIRMEDORDER, $depart, $dest) {
         list($dateFormat, $fromDate, $toDate)  = self::dateFormat($type, $fromDate, $toDate);
 
         $revenueRides = Ride::select(
@@ -106,7 +108,7 @@ class ChartLib {
         return $revenueRides;
     }
 
-    public static function paxOrderInDate($fromDate, $toDate, $type = 'byMonth', $status = CONFIRM, $depart, $dest) {
+    public static function paxOrderInDate($fromDate, $toDate, $type = 'byMonth', $status = CONFIRMEDORDER, $depart, $dest) {
         list($dateFormat, $fromDate, $toDate)  = self::dateFormat($type, $fromDate, $toDate);
 
         $paxOrders = Order::with(['orderTickets' => function($orderTicket){
@@ -147,7 +149,7 @@ class ChartLib {
         return $paxOrders;
     }
 
-    public static function paxTravelInDate($fromDate, $toDate, $type = 'byMonth', $status = CONFIRM, $depart, $dest) {
+    public static function paxTravelInDate($fromDate, $toDate, $type = 'byMonth', $status = CONFIRMEDORDER, $depart, $dest) {
         list($dateFormat, $fromDate, $toDate)  = self::dateFormat($type, $fromDate, $toDate);
 
         $paxTravels = Ride::select(
@@ -180,7 +182,7 @@ class ChartLib {
         return $paxTravels;
     }
 
-    public static function countOrderStatus($fromDate, $toDate, $type = 'byMonth', $status = CONFIRM, $depart, $dest){
+    public static function countOrderStatus($fromDate, $toDate, $type = 'byMonth', $status = CONFIRMEDORDER, $depart, $dest){
         list($dateFormat, $fromDate, $toDate)  = self::dateFormat($type, $fromDate, $toDate);
 
         $total = Order::with(['orderTickets' => function($orderTicket){
@@ -221,7 +223,7 @@ class ChartLib {
         return $total->sum('totalOrder');
     }
 
-    public static function countPaxOrderByCustomerType($fromDate, $toDate, $type = 'byMonth', $status = CONFIRM, $depart, $dest){
+    public static function countPaxOrderByCustomerType($fromDate, $toDate, $type = 'byMonth', $status = CONFIRMEDORDER, $depart, $dest){
         list($dateFormat, $fromDate, $toDate) = self::dateFormat($type, $fromDate, $toDate);
 
         $paxOrders = Order::with(['orderTickets' => function($orderTicket){
@@ -263,7 +265,7 @@ class ChartLib {
         return $paxOrders;
     }
 
-    public static function countPaxTraveledByCustomerType($fromDate, $toDate, $type = 'byMonth', $status = CONFIRM, $depart, $dest){
+    public static function countPaxTraveledByCustomerType($fromDate, $toDate, $type = 'byMonth', $status = CONFIRMEDORDER, $depart, $dest){
         list($dateFormat, $fromDate, $toDate)  = self::dateFormat($type, $fromDate, $toDate);
 
         $paxTravels = Ride::select(
