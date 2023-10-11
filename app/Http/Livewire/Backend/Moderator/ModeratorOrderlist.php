@@ -84,7 +84,7 @@ class ModeratorOrderlist extends Component
 
     public function downloadOrderList(){
         $orderLists = OrderLib::getOrderListQuery($this->orderCode, $this->customerName, $this->customerPhone, 
-                                        $this->customerType, $this->agentId, $this->fromLocation, $this->toLocation)
+                                        $this->customerType, $this->agentId, $this->fromLocation, $this->toLocation, $this->orderStatus)
                                 ->orderBy($this->sortField, $this->sortDirection)
                                 ->get();
         $export = new OrdersExport($orderLists);
@@ -109,7 +109,7 @@ class ModeratorOrderlist extends Component
 
     public function render() {
         $orderLists = OrderLib::getOrderListQuery($this->orderCode, $this->customerName, $this->customerPhone, 
-                                    $this->customerType, $this->agentId, $this->fromLocation, $this->toLocation)
+                                    $this->customerType, $this->agentId, $this->fromLocation, $this->toLocation, $this->orderStatus)
                             ->orderBy($this->sortField, $this->sortDirection)
                             ->paginate($this->perPage);
 

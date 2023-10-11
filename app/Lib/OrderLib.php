@@ -108,7 +108,7 @@ class OrderLib {
     }
 
     public static function getOrderListQuery($orderCode, $customerName, $customerPhone, $customerType,
-                                            $agentId, $fromLocation, $toLocation){
+                                            $agentId, $fromLocation, $toLocation, $orderStatus){
         return Order::with(['orderTickets' => function($orderTicket){
             $orderTicket->select('order_tickets.*', 'r.name', 'r.departDate', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')
                         ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')
@@ -134,12 +134,13 @@ class OrderLib {
                     DB::raw('CONCAT(firstName, " ",lastName) as fullname'), 'orders.phone', 'orders.email', 'orders.note', 'orders.pickup', 'orders.dropoff',
                     'orders.adultQuantity', 'orders.childrenQuantity', 'orders.finalPrice','orders.bookingDate', 'os.status',
                     'p.name as promotionName', 'op.paymentStatus', 'pm.name as paymentMethod', 'op.transactionCode', 'op.transactionDate')
-            ->where(function ($query) use ($orderCode, $customerName, $customerPhone, $customerType, $agentId, $fromLocation, $toLocation) {
+            ->where(function ($query) use ($orderCode, $customerName, $customerPhone, $customerType, $agentId, $fromLocation, $toLocation, $orderStatus) {
                 if ($orderCode) $query->where('orders.code', 'like', '%'.$orderCode.'%');
                 if ($customerName) $query->whereRaw('CONCAT(orders.firstName, " ", orders.lastName) LIKE ?', ['%'.$customerName.'%']);
                 if ($customerPhone) $query->where('orders.phone', 'like', '%'.$customerPhone.'%');
                 if ($customerType >= 0) $query->where('orders.customerType', $customerType);
                 if ($agentId) $query->where('orders.agentId', $agentId);
+                if ($orderStatus) $query->where('os.status', $orderStatus);
 
                 if ($fromLocation || $toLocation) {
                     $query->whereIn('orders.id', function ($subquery) use ($fromLocation, $toLocation) {
