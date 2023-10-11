@@ -23,17 +23,27 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                //return redirect(RouteServiceProvider::HOME);
-                if (auth()->user()->role == 'admin') {
-                    return redirect('/admin');
-                } else if (auth()->user()->role == 'manager') {
-                    return redirect('/agent');
-                } else if (auth()->user()->role == 'moderator') {
-                    return redirect('/moderatororderlist');
-                } else if (auth()->user()->role == 'agent') {
-                    return redirect('/agentorder');
-                } else {
-                    return redirect()->route('home');
+                switch (auth()->user()->role) {
+                    case 'admin':
+                        return redirect('/dashboard');
+                        break;
+                    case 'manager':
+                        return redirect('/dashboard');
+                        break;
+                    case 'moderator':
+                        return redirect('/dashboard');
+                        break;
+                    case 'agent':
+                        return redirect('/agentorderlist');
+                        break;
+                    case 'creator':
+                        return redirect('/pagelist');
+                        break;
+                    case 'viewer':
+                        return redirect('/dashboard');
+                        break;
+                    default:
+                        return redirect()->route('home');
                 }
             }
         }
