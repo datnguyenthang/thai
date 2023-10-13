@@ -27,8 +27,8 @@
                     <td>{{ $menu->sortOrder }}</td>
                     <td>{{ MENUSTATUS[$menu->status] }}</td>
                     <td>
-                        <button class="call-btn btn btn-outline-primary btn-floating btn-sm"
-                            wire:click="createMenu({{ $menu->id }})">
+                        <a class="call-btn btn btn-outline-primary btn-floating btn-sm"
+                            href="/menu/create/{{ $menu->id }}">
                                 <i class="fa fa-edit"></i>
                         </button>
                         <button class="call-btn btn btn-danger btn-floating btn-sm"
