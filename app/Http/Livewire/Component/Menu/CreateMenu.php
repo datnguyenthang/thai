@@ -46,7 +46,7 @@ class CreateMenu extends Component
         $this->validate([
             'name' => 'required|unique:menu_items,name,' . $this->menuId,
             'url' => 'required_without:page_id',
-            'page_id' => 'nullable|numeric|unique:menu_items|required_without:url',
+            'page_id' => 'nullable|numeric|required_without:url|unique:menu_items'. $this->menuId,
         ]);
 
         if ($this->menuId > 0){ // update location
