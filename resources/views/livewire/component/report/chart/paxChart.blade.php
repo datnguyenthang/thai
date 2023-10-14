@@ -9,7 +9,6 @@
     // Modify this based on your data structure
     const labels_paxOrder = paxOrders.map(item => item.data);
     const data_paxOrder = paxOrders.map(item => item.pax);
-
     const data_paxTravel = paxTravels.map(item => item.pax);
 
     const orderCtx = document.getElementById('orderChart').getContext('2d');

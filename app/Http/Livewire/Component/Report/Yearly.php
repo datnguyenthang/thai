@@ -56,10 +56,10 @@ class Yearly extends Component {
         $this->locationList = Location::get()->where('status', ACTIVE);
         $this->agents = Agent::get();
 
-        $this->revenueOrders = ChartLib::revenueOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $this->revenueRides = ChartLib::revenueRideInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $this->paxOrders = ChartLib::paxOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $this->paxTravels = ChartLib::paxTravelInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $this->revenueOrders = $this->modifyData(ChartLib::revenueOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation));
+        $this->revenueRides = $this->modifyData(ChartLib::revenueRideInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation));
+        $this->paxOrders = $this->modifyData(ChartLib::paxOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation), 'pax');
+        $this->paxTravels = $this->modifyData(ChartLib::paxTravelInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation), 'pax');
 
         $this->revenueOrderIndex = $this->revenueOrders->sum('revenue');
         $this->revenueRideIndex = $this->revenueRides->sum('revenue');
@@ -74,16 +74,40 @@ class Yearly extends Component {
         $this->paxRideCustomerType = ChartLib::countPaxTraveledByCustomerType($this->fromDate, $this->toDate, $this->type, CONFIRMEDORDER, $this->fromLocation, $this->toLocation);
     }
 
+    public function modifyData($data, $attributeName = 'revenue') {
+        $modifiedData = collect(); // Create a new collection for modified data
+
+        for ($year = $this->fromDate; $year <= $this->toDate; $year++) {
+            for ($month = 1; $month <= 12; $month++) {
+                // Format the year and month
+                $currentMonth = sprintf('%d-%02d', $year, $month);
+
+                // Check if the data for the current month exists
+                $itemForCurrentMonth = $data->firstWhere('data', $currentMonth);
+    
+                if ($itemForCurrentMonth) {
+                    // If data for the current month exists, add it to the modified collection
+                    $modifiedData->push($itemForCurrentMonth);
+                } else {
+                    // If data for the current month doesn't exist, add a new item
+                    $modifiedData->push(['data' => $currentMonth, $attributeName => 0]);
+                }
+            }
+        }
+        return $modifiedData;
+    }
+
     public function handleYearSelected($type, $year){
         if($type == 'fromDate') $this->fromDate = $year;
         if($type == 'toDate') $this->toDate = $year;
+        $this->updated();
     }
 
     public function updated(){
-        $revenueOrderNewData = ChartLib::revenueOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $revenueRideNewData = ChartLib::revenueRideInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $paxOrdersNewData = ChartLib::paxOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $paxTravelsNewData = ChartLib::paxTravelInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $revenueOrderNewData = $this->modifyData(ChartLib::revenueOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation));
+        $revenueRideNewData = $this->modifyData(ChartLib::revenueRideInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation));
+        $paxOrdersNewData = $this->modifyData(ChartLib::paxOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation), 'pax');
+        $paxTravelsNewData = $this->modifyData(ChartLib::paxTravelInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation), 'pax');
 
         $this->revenueOrderIndex = $revenueOrderNewData->sum('revenue');
         $this->revenueRideIndex = $revenueRideNewData->sum('revenue');
