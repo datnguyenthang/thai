@@ -55,10 +55,10 @@ class Monthly extends Component {
         $this->locationList = Location::get()->where('status', ACTIVE);
         $this->agents = Agent::get();
 
-        $this->revenueOrders = ChartLib::revenueOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $this->revenueRides = ChartLib::revenueRideInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $this->paxOrders = ChartLib::paxOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $this->paxTravels = ChartLib::paxTravelInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $this->revenueOrders = $this->modifyData(ChartLib::revenueOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation));
+        $this->revenueRides = $this->modifyData(ChartLib::revenueRideInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation));
+        $this->paxOrders = $this->modifyData(ChartLib::paxOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation), 'pax');
+        $this->paxTravels = $this->modifyData(ChartLib::paxTravelInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation), 'pax');
 
         $this->revenueOrderIndex = $this->revenueOrders->sum('revenue');
         $this->revenueRideIndex = $this->revenueRides->sum('revenue');
@@ -74,10 +74,10 @@ class Monthly extends Component {
     }
 
     public function updated(){
-        $revenueOrderNewData = ChartLib::revenueOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $revenueRideNewData = ChartLib::revenueRideInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $paxOrdersNewData = ChartLib::paxOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $paxTravelsNewData = ChartLib::paxTravelInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $revenueOrderNewData = $this->modifyData(ChartLib::revenueOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation));
+        $revenueRideNewData = $this->modifyData(ChartLib::revenueRideInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation));
+        $paxOrdersNewData = $this->modifyData(ChartLib::paxOrderInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation), 'pax');
+        $paxTravelsNewData = $this->modifyData(ChartLib::paxTravelInDate($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation), 'pax');
 
         $this->revenueOrderIndex = $revenueOrderNewData->sum('revenue');
         $this->revenueRideIndex = $revenueRideNewData->sum('revenue');
@@ -100,6 +100,32 @@ class Monthly extends Component {
                                         'paxTravelsNewData' => json_encode($paxTravelsNewData)
                                     ]);
     }
+
+    public function modifyData($data, $attributeName = 'revenue') {
+        $modifiedData = collect(); // Create a new collection for modified data
+
+        list($type, $fromDate, $toDate) = ChartLib::dateFormat($this->type, $this->fromDate, $this->toDate);
+        $currentDate = new \DateTime($fromDate);
+        $endDate = new \DateTime($toDate);
+
+        while ($currentDate <= $endDate) {
+            $formattedDate = $currentDate->format('Y-m-d');
+
+            // Check if the data for the current date exists
+            $itemForCurrentDate = $data->firstWhere('data', $formattedDate);
+    
+            if ($itemForCurrentDate) {
+                // If data for the current date exists, add it to the modified collection
+                $modifiedData->push($itemForCurrentDate);
+            } else {
+                // If data for the current date doesn't exist, add a new item
+                $modifiedData->push(['data' => $formattedDate, $attributeName => 0]);
+            }
+    
+            $currentDate->modify('+1 day');
+        }
+        return $modifiedData;
+    }    
 
     public function render() {
 
