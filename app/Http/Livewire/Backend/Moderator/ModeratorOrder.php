@@ -402,8 +402,8 @@ class ModeratorOrder extends Component
                     return $this->isTransaction == 1 || $this->paymentStatus == PAID;
                 }),
             ],
-            'paymentMethod' => 'required',
-            'paymentStatus' => 'required',
+            'paymentMethod' => 'required_if:isTransaction,1',
+            'paymentStatus' => 'required_if:isTransaction,1',
         ]);
 
         //set value for pickup and dropoff
