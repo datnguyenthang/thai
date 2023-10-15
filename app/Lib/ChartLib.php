@@ -14,16 +14,23 @@ use App\Models\Ride;
 class ChartLib {
 
     public static function dateFormat($type = 'byMonth', $fromDate, $toDate){
+        $currentDay = Carbon::now()->format('Y-m-d');
+        $currentYearMonth = Carbon::now()->format('Y-m');
+        $currentYear = Carbon::now()->format('Y');
         switch ($type) {
             case 'byYear':
                 $dateFormat = '%Y-%m';
                 $fromDate = Carbon::parse("$fromDate-01-01")->startOfYear()->toDateString();
-                $toDate = Carbon::parse("$toDate-12-31")->endOfYear()->toDateString();
+
+                if ($currentYear == $toDate) $toDate = $currentDay;
+                else $toDate = Carbon::parse("$toDate-12-31")->endOfYear()->toDateString();
                 break;
             case 'byMonth':
                 $dateFormat = '%Y-%m-%d';
                 $fromDate = Carbon::now()->parse("$fromDate")->firstOfMonth()->formatLocalized($dateFormat);
-                $toDate = Carbon::now()->parse("$toDate")->lastOfMonth()->formatLocalized($dateFormat);
+                
+                if ($currentYearMonth == $toDate) $toDate = $currentDay;
+                else $toDate = Carbon::now()->parse("$toDate")->lastOfMonth()->formatLocalized($dateFormat);
                 break;
             case 'byDay':
                 $dateFormat = '%Y-%m-%d';
