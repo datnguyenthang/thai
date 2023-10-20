@@ -108,9 +108,6 @@
 
     Livewire.on('updateDateRangeEvent', (data) => {
         $('#comparedaterange span').html('Compare: No compare!');
-        //$('#comparedaterange').data('daterangepicker').setStartDate(null);
-        //$('#comparedaterange').data('daterangepicker').setEndDate(null);
-        //initCompare('{{ $fromDate}}', '{{ $toDate}}');
 
         const performanceAll = JSON.parse(data.chartDataOriginal);
 
@@ -196,7 +193,6 @@
             return label;
         };
 
-
         chartOrder.update();
         chartRevenue.update();
     });
@@ -261,7 +257,6 @@
             }
             return label;
         };
-
 
         chartOrder.update();
         chartRevenue.update();

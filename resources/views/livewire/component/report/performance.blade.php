@@ -10,5 +10,7 @@
     @include('livewire.component.report.performance.dataChart')
 
     @include('livewire.component.report.performance.performanceChart')
+    <!-- Loading Overlay, show loading to lock user action-->
+    @include('loading.loading')
 
 </div>
