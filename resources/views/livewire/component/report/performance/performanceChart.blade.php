@@ -131,15 +131,16 @@
     });
 
     Livewire.on('selectedUserEvent', (data) => {
-        const chartDataOriginal = JSON.parse(data.chartDataOriginal);
+        let chartDataOriginal = JSON.parse(data.chartDataOriginal);
+        let chartDataCompare = JSON.parse(data.chartDataCompare);
 
         resetChart();
 
         if (chartDataOriginal.length == 0) return false;
         
-        const labels_all_total = chartDataOriginal.map(item => item.data);
-        const data_all_order = chartDataOriginal.map(item => item.totalOrder);
-        const data_all_revenue = chartDataOriginal.map(item => item.revenue);
+        let labels_all_total = chartDataOriginal.map(item => item.data);
+        let data_all_order = chartDataOriginal.map(item => item.totalOrder);
+        let data_all_revenue = chartDataOriginal.map(item => item.revenue);
 
         // Add new data
         chartOrder.data.labels = labels_all_total;
