@@ -125,7 +125,7 @@ class Monthly extends Component {
             $currentDate->modify('+1 day');
         }
         return $modifiedData;
-    }    
+    }
 
     public function render() {
 

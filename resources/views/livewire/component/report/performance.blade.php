@@ -1,35 +1,14 @@
 <div>
-    <h1>{{ trans('backend.saleperformance') }}</h1>
-    <table class="table table-striped mt-3">
-        <thead>
-            <tr class="table-primary">
-                <th>{{ trans('backend.saleman') }}</th>
-                <th>{{ trans('backend.agent') }}</th>
-                <th>{{ trans('backend.saletotalprice') }}</th>
-                <th>{{ trans('backend.revenue') }}</th>
-                <th>{{ trans('backend.totalorder') }}</th>
-                <th>{{ trans('backend.achieve') }}</th>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-            </tr>
-        </thead>
-        <tbody>
-            @if (!empty($performances))
-                @foreach ($performances as $performance)
-                    <tr>
-                        <td>{{ $performance->userName ?? "ONLINE" }}</td>
-                        <td>{{ $performance->agentName ?? "" }}</td>
-                        <td>{{ round($performance->totalPrice) }}</td>
-                        <td>Revenue</td>
-                        <td>{{ $performance->totalOrder }}</td>
-                        <td>Achieve</td>
-                        
-                    </tr>
-                @endforeach
-            @else
-                <tr>
-                    <td class="text-center text-danger" colspan="10">{{ trans('backend.noorderfound') }}</td>
-                </tr>
-            @endif
-        </tbody>
-    </table>
+    @include('livewire.component.report.performance.filter')
+
+    @include('livewire.component.report.performance.dataChart')
+
+    @include('livewire.component.report.performance.performanceChart')
+
 </div>

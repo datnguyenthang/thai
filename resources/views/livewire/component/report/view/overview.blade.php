@@ -19,11 +19,11 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
                     <div>
-                        <h3 class="text-danger">฿{{ number_format($revenueRideIndex, 0) }}</h3>
-                        <p class="mb-0">REVENEU TRAVELED</p>
+                        <h3 class="text-warning">{{ $paxOrderIndex }}</h3>
+                        <p class="mb-0">TOTAL PAX ORDER</p>
                     </div>
                     <div class="align-self-center">
-                        <i class="far fa-user  text-danger fa-3x"></i>
+                        <i class="fas fa-chart-pie text-warning fa-3x"></i>
                     </div>
                 </div>
             </div>
@@ -34,11 +34,11 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between px-md-1">
                     <div>
-                        <h3 class="text-warning">{{ $paxOrderIndex }}</h3>
-                        <p class="mb-0">TOTAL PAX ORDER</p>
+                        <h3 class="text-danger">฿{{ number_format($revenueRideIndex, 0) }}</h3>
+                        <p class="mb-0">REVENEU TRAVELED</p>
                     </div>
                     <div class="align-self-center">
-                        <i class="fas fa-chart-pie text-warning fa-3x"></i>
+                        <i class="far fa-user  text-danger fa-3x"></i>
                     </div>
                 </div>
             </div>
