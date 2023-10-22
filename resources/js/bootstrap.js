@@ -21,7 +21,11 @@ import $ from 'jquery';
 window.jQuery = $;
 window.$ = $;
 
+import moment from 'moment';
+window.moment = moment;
 
+import daterangepicker from 'daterangepicker';
+window.daterangepicker = daterangepicker;
 
 //loading Alpine library into app
 import Alpine from 'alpinejs';

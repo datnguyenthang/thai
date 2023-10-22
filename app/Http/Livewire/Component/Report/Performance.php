@@ -23,9 +23,6 @@ class Performance extends Component {
     public $chartDataOriginal;
     public $chartDataCompare;
 
-    public $openChartList = [];
-    public $openChart = false;
-
     public $userSelected;
     public $chartDataUser;
 
@@ -44,15 +41,24 @@ class Performance extends Component {
         $this->chartDataOriginal = EmployeeLib::performanceAllTime($this->fromDate, $this->toDate, 'byDay');
     }
 
-    public function toggleChart($userId, $value){
+    public function dataChartUser(){
+        $this->chartDataOriginal = EmployeeLib::getPerformanceUser($this->userSelected->id, $this->fromDate, $this->toDate);
+
+        $this->chartDataCompare = [];
+        if($this->cpFromDate && $this->fromDate != $this->cpFromDate && $this->toDate != $this->cpToDate){
+            $this->chartDataCompare = EmployeeLib::getPerformanceUser($this->userSelected->id, $this->cpFromDate, $this->cpToDate);
+        }
+    }
+
+    public function selectUser($userId){
         $this->userSelected = $this->pfmUsers->first(function ($item) use ($userId) {
             if ($item['id'] == $userId) {
                 return $item;
             }
         });
-        $this->chartDataOriginal = EmployeeLib::getPerformanceUser($userId, $this->fromDate, $this->toDate);
-        $this->chartDataCompare = EmployeeLib::getPerformanceUser($userId, $this->cpFromDate, $this->cpToDate);
         $this->pfmUsers = EmployeeLib::getListPerformanceAllUser($this->fromDate, $this->toDate, $this->status);
+
+        $this->dataChartUser();
         $this->emit('selectedUserEvent', [
             'chartDataOriginal' => json_encode($this->chartDataOriginal),
             'chartDataCompare' => json_encode($this->chartDataCompare), 
@@ -63,19 +69,26 @@ class Performance extends Component {
         $this->fromDate = date('Y-m-d', strtotime($start));
         $this->toDate = date('Y-m-d', strtotime($end));
         $this->pfmUsers = EmployeeLib::getListPerformanceAllUser($this->fromDate, $this->toDate, $this->status);
-        $this->chartDataOriginal = EmployeeLib::performanceAllTime($this->fromDate, $this->toDate, 'byDay');
-        //$this->emit('chageDateRangeCompare', ['start' => $start, 'end' => $end]);
+
+        if ($this->userSelected){
+            $this->dataChartUser();
+        } else {
+            $this->chartDataOriginal = EmployeeLib::performanceAllTime($this->fromDate, $this->toDate, 'byDay');
+            $this->chartDataCompare = EmployeeLib::performanceAllTime($this->cpFromDate, $this->cpToDate, 'byDay');
+        }
+
         $this->emit('updateDateRangeEvent', [
             'chartDataOriginal' => json_encode($this->chartDataOriginal),
-            'fromDate' => $this->fromDate,
-            'toDate' => $this->toDate,
+            'chartDataCompare' => json_encode($this->chartDataCompare),
+            'fromDate' => json_encode($this->fromDate),
+            'toDate' => json_encode($this->toDate),
         ]);
     }
 
-    function updateDateCompare($start, $end, $distance){
-        $this->cpFromDate = Carbon::parse($this->fromDate)->subMonth($distance)->format("Y-m-d H:i:s");
-        $this->cpToDate = Carbon::parse($this->toDate)->subMonth($distance)->format("Y-m-d H:i:s");
-        
+    function updateDateCompare($start, $end){
+        $this->cpFromDate = date('Y-m-d', strtotime($start));
+        $this->cpToDate = date('Y-m-d', strtotime($end));
+
         $this->cpPfmUsers = EmployeeLib::getListPerformanceAllUser($this->cpFromDate, $this->cpToDate);
         $this->pfmUsers = EmployeeLib::getListPerformanceAllUser($this->fromDate, $this->toDate, $this->status);
 
@@ -91,8 +104,12 @@ class Performance extends Component {
                 }
             }
         }
-        $this->chartDataOriginal = EmployeeLib::performanceAllTime($this->fromDate, $this->toDate, 'byDay');
-        $this->chartDataCompare = EmployeeLib::performanceAllTime($this->cpFromDate, $this->cpToDate, 'byDay');
+        if ($this->userSelected){
+            $this->dataChartUser();
+        } else {
+            $this->chartDataOriginal = EmployeeLib::performanceAllTime($this->fromDate, $this->toDate, 'byDay');
+            $this->chartDataCompare = EmployeeLib::performanceAllTime($this->cpFromDate, $this->cpToDate, 'byDay');
+        }
         $this->emit('updateCompareDateRangeEvent', [
             'chartDataOriginal' => json_encode($this->chartDataOriginal),
             'chartDataCompare' => json_encode($this->chartDataCompare)

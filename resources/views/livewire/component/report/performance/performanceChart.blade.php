@@ -96,39 +96,18 @@
     });
 
     function resetChart() {
-         // Clear existing data
+        // Clear existing data
         chartOrder.data.labels = [];
         chartOrder.data.datasets[0].data = [];
-        if (chartOrder.data.datasets.length > 1) chartOrder.data.datasets[1].data = [];
+        if (chartOrder.data.datasets.length > 1)
+            chartOrder.data.datasets.splice(1, 1);
 
         chartRevenue.data.labels = [];
         chartRevenue.data.datasets[0].data = [];
-        if (chartRevenue.data.datasets.length > 1) chartRevenue.data.datasets[1].data = [];
+        if (chartRevenue.data.datasets.length > 1) 
+            chartRevenue.data.datasets.splice(1, 1);
+
     };
-
-    Livewire.on('updateDateRangeEvent', (data) => {
-        $('#comparedaterange span').html('Compare: No compare!');
-
-        const performanceAll = JSON.parse(data.chartDataOriginal);
-
-        resetChart();
-
-        if (performanceAll.length == 0) return false;
-        
-        const labels_all_total = performanceAll.map(item => item.data);
-        const data_all_order = performanceAll.map(item => item.totalOrder);
-        const data_all_revenue = performanceAll.map(item => item.revenue);
-
-        // Add new data
-        chartOrder.data.labels = labels_all_total;
-        chartOrder.data.datasets[0].data = data_all_order;
-
-        chartRevenue.data.labels = labels_all_total;
-        chartRevenue.data.datasets[0].data = data_all_revenue;
-
-        chartOrder.update();
-        chartRevenue.update();
-    });
 
     Livewire.on('selectedUserEvent', (data) => {
         let chartDataOriginal = JSON.parse(data.chartDataOriginal);
@@ -198,6 +177,34 @@
         chartRevenue.update();
     });
 
+    Livewire.on('updateDateRangeEvent', (data) => {
+        $('#comparedaterange span').html('Compare: No compare!');
+
+        let performanceAll = JSON.parse(data.chartDataOriginal);
+
+        resetChart();
+
+        if (performanceAll.length == 0) return false;
+        
+        let labels_all_total = performanceAll.map(item => item.data);
+        let data_all_order = performanceAll.map(item => item.totalOrder);
+        let data_all_revenue = performanceAll.map(item => item.revenue);
+
+        // Add new data
+        chartOrder.data.labels = labels_all_total;
+        chartOrder.data.datasets[0].data = data_all_order;
+
+        chartRevenue.data.labels = labels_all_total;
+        chartRevenue.data.datasets[0].data = data_all_revenue;
+
+        chartOrder.update();
+        chartRevenue.update();
+
+        let fromDate = JSON.parse(data.fromDate);
+        let toDate = JSON.parse(data.toDate);
+        rerenderDateRangePicker(fromDate, toDate);
+    });
+
     Livewire.on('updateCompareDateRangeEvent', (data) => {
         resetChart();
 
@@ -262,13 +269,9 @@
         chartOrder.update();
         chartRevenue.update();
     });
-</script>
 
-<script>
     var start = moment().startOf('month');
     var end = moment();
-    var startCp = moment().startOf('month');
-    var endCp = moment();
 
     $('#daterange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
     $('#daterange').daterangepicker({
@@ -286,54 +289,17 @@
             'This Month': [moment().startOf('month'), moment().endOf('month')],
             'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         }
-    }, (start, end, label) => {
-        $('#daterange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        Livewire.emit('updateDate', start, end);
-        //@this.set('fromDate', start);
-        //@this.set('toDate', end);
+    }, (startdate, enddate, labeldate) => {
+        $('#daterange span').html(startdate.format('MMMM D, YYYY') + ' - ' + enddate.format('MMMM D, YYYY'));
+        Livewire.emit('updateDate', startdate.format('YYYY-MM-DD'), enddate.format('YYYY-MM-DD'));
+        
     });
 
     $('#comparedaterange span').html('Compare: No compare!');
 
-    $('#comparedaterange').daterangepicker({
-        opens: 'left',
-        autoUpdateInput: false,
-        alwaysShowCalendars: true,
-        maxDate: new Date(),
-        ranges: {
-            'No compare': [moment(), moment()],
-            'Previous 1 month': [moment("{{ $fromDate }}").subtract(1, 'month'), moment("{{ $toDate }}").subtract(1, 'month')],
-            'Previous 2 month': [moment("{{ $fromDate }}").subtract(2, 'month'), moment("{{ $toDate }}").subtract(2, 'month')],
-            'Previous 3 month': [moment("{{ $fromDate }}").subtract(3, 'month'), moment("{{ $toDate }}").subtract(3, 'month')],
-            'Previous Year': [moment("{{ $fromDate }}").subtract(1, 'year'), moment("{{ $toDate }}").subtract(1, 'year')],
-        }
-    }, (start, end, label) => {
-        let distance;
-        switch (label) {
-            case 'Previous 1 month':
-                distance = 1;
-                break;
-            case 'Previous 2 months':
-                distance = 2;
-                break;
-            case 'Previous 3 months':
-                distance = 3;
-                break;
-            case 'Previous Year':
-                distance = 12;
-                break;
-            default:
-                distance = 0;
-                break;
-        }
+    rerenderDateRangePicker("{{ $fromDate }}", "{{ $toDate }}");
 
-        $('#comparedaterange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        Livewire.emit('updateDateCompare', start, end, distance);
-    });
-
-/*
-    document.addEventListener("livewire:update", () => {
-        $("#comparedaterange").daterangepicker("remove");
+    function rerenderDateRangePicker(fromDate, toDate) {
         $('#comparedaterange').daterangepicker({
             opens: 'left',
             autoUpdateInput: false,
@@ -341,15 +307,14 @@
             maxDate: new Date(),
             ranges: {
                 'No compare': [moment(), moment()],
-                'Previous 1 month': [moment("{{ $fromDate }}").subtract(1, 'month'), moment("{{ $toDate }}").subtract(1, 'month')],
-                'Previous 2 month': [moment("{{ $fromDate }}").subtract(2, 'month'), moment("{{ $toDate }}").subtract(2, 'month')],
-                'Previous 3 month': [moment("{{ $fromDate }}").subtract(3, 'month'), moment("{{ $toDate }}").subtract(3, 'month')],
-                'Previous Year': [moment("{{ $fromDate }}").subtract(1, 'year'), moment("{{ $toDate }}").subtract(1, 'year')],
+                'Previous 1 month': [moment(fromDate).subtract(1, 'month'), moment(toDate).subtract(1, 'month')],
+                'Previous 2 month': [moment(fromDate).subtract(2, 'months'), moment(toDate).subtract(2, 'months')],
+                'Previous 3 month': [moment(fromDate).subtract(3, 'months'), moment(toDate).subtract(3, 'months')],
+                'Previous Year': [moment(fromDate).subtract(1, 'year'), moment(toDate).subtract(1, 'year')],
             }
-        }, (start, end, label) => {console.log(start);
-            $('#comparedaterange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-            Livewire.emit('updateDateCompare', start, end);
+        }, (startcpdate, endcpdate, labelcpdate) => {
+            $('#comparedaterange span').html(startcpdate.format('MMMM D, YYYY') + ' - ' + endcpdate.format('MMMM D, YYYY'));
+            Livewire.emit('updateDateCompare', startcpdate, endcpdate);
         });
-    });
-*/
+    }
 </script>

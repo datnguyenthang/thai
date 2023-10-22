@@ -62,33 +62,6 @@ class EmployeeLib {
         return round(abs(($newValue - $oldValue) / $oldValue) * 100, 2);
     }
 
-    public static function getPerformanceUser($userId, $fromDate, $toDate, $bookingStatus = CONFIRMEDORDER, $status = ACTIVE){
-        //list($dateFormat, $fromDate, $toDate)  = self::dateFormat($type, $fromDate, $toDate);
-
-        $performance = User::select(
-                            DB::raw('COALESCE(COUNT(o.id), 0) as totalOrder'),
-                            DB::raw('COALESCE(SUM(o.finalPrice), 0) as revenue'),
-                            DB::raw("DATE_FORMAT(o.bookingDate, '%Y-%m-%d') as data")
-                        )
-                        ->leftJoin('agents as a', 'a.id', '=', 'users.agentId')
-                        ->leftJoin('orders as o', 'users.id', '=', 'o.userId')
-                        ->leftJoin('order_statuses as os', function($ojoin) {
-                            $ojoin->on('o.id', '=', 'os.orderId')
-                                ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
-                        })
-                        ->where(function ($query) use ($userId, $fromDate, $toDate, $bookingStatus, $status) {
-                            if ($userId) $query->where('o.userId', $userId);
-                            if ($bookingStatus) $query->where('os.status', $bookingStatus);
-                            if ($fromDate) $query->where('o.bookingDate', '>=', $fromDate);
-                            if ($toDate) $query->where('o.bookingDate', '<=', $toDate);
-                            if ($status) $query->where('u.status', ACTIVE);
-                        })
-                        ->groupBy(DB::raw("DATE_FORMAT(o.bookingDate, '%Y-%m-%d')"))
-                        ->orderBy(DB::raw("DATE_FORMAT(o.bookingDate, '%Y-%m-%d')"))
-                        ->get();
-        return self::modifyData($performance, $fromDate, $toDate);
-    }
-
     public static function getListPerformanceAllUser($fromDate, $toDate, $bookingStatus = CONFIRMEDORDER, $status = ACTIVE){
         $performances = User::select(
                             'users.id',
@@ -115,6 +88,33 @@ class EmployeeLib {
                         ->orderBy('totalPrice', 'DESC')
                         ->get();
         return $performances;
+    }
+
+    public static function getPerformanceUser($userId, $fromDate, $toDate, $bookingStatus = CONFIRMEDORDER, $status = ACTIVE){
+        //list($dateFormat, $fromDate, $toDate)  = self::dateFormat($type, $fromDate, $toDate);
+
+        $performance = User::select(
+                            DB::raw('COALESCE(COUNT(o.id), 0) as totalOrder'),
+                            DB::raw('COALESCE(SUM(o.finalPrice), 0) as revenue'),
+                            DB::raw("DATE_FORMAT(o.bookingDate, '%Y-%m-%d') as data")
+                        )
+                        ->leftJoin('agents as a', 'a.id', '=', 'users.agentId')
+                        ->leftJoin('orders as o', 'users.id', '=', 'o.userId')
+                        ->leftJoin('order_statuses as os', function($ojoin) {
+                            $ojoin->on('o.id', '=', 'os.orderId')
+                                ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
+                        })
+                        ->where(function ($query) use ($userId, $fromDate, $toDate, $bookingStatus, $status) {
+                            if ($userId) $query->where('o.userId', $userId);
+                            if ($bookingStatus) $query->where('os.status', $bookingStatus);
+                            if ($fromDate) $query->where('o.bookingDate', '>=', $fromDate);
+                            if ($toDate) $query->where('o.bookingDate', '<=', $toDate);
+                            if ($status) $query->where('u.status', ACTIVE);
+                        })
+                        ->groupBy(DB::raw("DATE_FORMAT(o.bookingDate, '%Y-%m-%d')"))
+                        ->orderBy(DB::raw("DATE_FORMAT(o.bookingDate, '%Y-%m-%d')"))
+                        ->get();
+        return self::modifyData($performance, $fromDate, $toDate);
     }
 
     public static function performanceAllTime($fromDate, $toDate, $type = 'byMonth', $status = CONFIRMEDORDER) {
@@ -151,7 +151,7 @@ class EmployeeLib {
     public static function modifyData($data, $fromDate, $toDate) {
         $modifiedData = collect(); // Create a new collection for modified data
 
-        list($type, $fromDate, $toDate) = ChartLib::dateFormat('byMonth', $fromDate, $toDate);
+        //list($type, $fromDate, $toDate) = ChartLib::dateFormat('byMonth', $fromDate, $toDate);
         $currentDate = new \DateTime($fromDate);
         $endDate = new \DateTime($toDate);
 
@@ -166,7 +166,8 @@ class EmployeeLib {
                 $modifiedData->push($itemForCurrentDate);
             } else {
                 // If data for the current date doesn't exist, add a new item
-                $modifiedData->push(['data' => $formattedDate]);
+                //$modifiedData->push(['data' => $formattedDate]);
+                $modifiedData->push(['data' => $formattedDate, 'totalOrder' => 0, 'revenue' => 0]);
             }
     
             $currentDate->modify('+1 day');

@@ -37,7 +37,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <button class="btn bg_own_color" wire:key="{{ $pfm->id }}" wire:click="toggleChart({{ $pfm->id }}, 1)"><i class="fas fa-chart-bar"></i></button>
+                                        <button class="btn bg_own_color" wire:key="{{ $pfm->id }}" wire:click="selectUser({{ $pfm->id }})"><i class="fas fa-chart-bar"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
