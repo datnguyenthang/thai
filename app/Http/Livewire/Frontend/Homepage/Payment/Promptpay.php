@@ -25,7 +25,7 @@ class Promptpay extends Component
 	public $chargeId;
 	public $paymentStatus = PENDING;
     public $webhookEventData = null;
-    public $chargeTransaction;
+    protected $chargeTransaction;
     public $paymentMethod;
 
     protected $listeners = ['promptpayCreateCharge' => 'promptpayCreateCharge',
