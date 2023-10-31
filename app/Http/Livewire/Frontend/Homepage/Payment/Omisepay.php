@@ -32,7 +32,7 @@ class Omisepay extends Component
         $this->publicKey = OMISE_PUBLIC_KEY;
         $this->secretKey = OMISE_SECRET_KEY;
 
-        $this->paymentMethod = PaymentMethod::where('name', '=', CARD)->first();
+        $this->paymentMethod = PaymentMethod::where('name', '=', OMISECARD)->first();
 
         $this->amount = $this->order->finalPrice * 100;
     }

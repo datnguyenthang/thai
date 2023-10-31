@@ -199,6 +199,7 @@
     define('ALIPAY', 'alipay');
     define('WECHAT', 'wechat');
     define('PAIDBYAGENT', 'pay by agent');
+    define('OMISECARD', 'omise card');
 
     //PAYMENT STATUS
     define('NOTPAID', 0);
@@ -208,7 +209,7 @@
     //define('PAIDBYAGENT', 10);
     define('PAYMENTSTATUS', [
                                 NOTPAID => "Not paid",
-                                REFUND => "Refund",
+                                //REFUND => "Refund",
                                 PAID => "Paid",
                                 //PAIDBYCASH => "Paid by cash",
                                 //PAIDBYAGENT => "Paid by agent"

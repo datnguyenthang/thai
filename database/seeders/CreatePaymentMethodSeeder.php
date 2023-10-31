@@ -33,7 +33,7 @@ class CreatePaymentMethodSeeder extends Seeder
                 'name'=> CARD,
                 'description'=>'Card payment method',
                 'isTransaction'=> 1,
-             ],
+            ],
             [
                 'id' => 4,
                 'name'=> PROMPTPAY,
@@ -44,6 +44,12 @@ class CreatePaymentMethodSeeder extends Seeder
                 'id' => 5,
                 'name'=> PAIDBYAGENT,
                 'description'=>'Pay by agent method',
+                'isTransaction'=> 0,
+            ],
+            [
+                'id' => 6,
+                'name'=> OMISECARD,
+                'description'=>'Omise card payment method',
                 'isTransaction'=> 0,
             ],
         ];
