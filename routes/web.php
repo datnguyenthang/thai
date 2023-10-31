@@ -142,5 +142,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['user-access:admin'])->group(function () {
         Route::get('/importorder', App\Http\Livewire\Backend\Admin\ImportOrder::class)->name('importOrder');
         Route::get('/adminorder', App\Http\Livewire\Backend\Admin\AdminOrder::class)->name('adminOrder');
+        Route::get('/adminorderlist', App\Http\Livewire\Backend\Admin\AdminOrderlist::class)->name('adminOrderlist');
+        Route::get('/adminprocessorder/{orderId}', App\Http\Livewire\Backend\Admin\AdminProcessOrder::class)->name('adminProcessOrder');
     });
 });
