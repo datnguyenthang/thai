@@ -56,7 +56,7 @@ style="display: @if($showModalStatus === true) block @else none @endif;" role="d
                         <div class="form-group">
                             <span class="form-label fw-bold">{{ trans('backend.orderstatus') }}</span>
                             <select id="status" name="status" class="form-select" wire:model="status">
-                                @foreach(ORDERSTATUS as $key => $value)
+                                @foreach($orderStatusList as $key => $value)
                                     <option value="{{ $key }}">{{ $value }}</option>
                                 @endforeach
                             </select>

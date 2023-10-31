@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Arr;
 
 use Omise\Omise;
 use Livewire\Component;
@@ -37,8 +38,12 @@ class ModeratorProcessOrder extends Component
     public $note;
     public $isSendmail = true;
 
+    public $orderStatusList = [];
+    public $role;
+
     public $showModalStatus = false;
     public $showModalPayment = false;
+    public $showModalRefund = false;
     public $showModalUpdateOrder = false;
 
     public $isTransaction = false;
@@ -62,6 +67,10 @@ class ModeratorProcessOrder extends Component
                                             ->where('orderId', $this->orderId)->get();
         $this->paymentMethodList = PaymentMethod::get();
         $this->paymentMethod = $this->paymentMethodList->first()->id;
+
+        $this->orderStatusList = ORDERSTATUS;
+        if (auth()->user()->role != 'manager') $this->orderStatusList = Arr::except(ORDERSTATUS, [CANCELDORDER]);
+
         $this->loadProof();
     }
 
@@ -226,6 +235,12 @@ class ModeratorProcessOrder extends Component
         $this->showModalStatus = false;
     }
 
+    //TODO: refund money from Omise
+    public function viewRefundPayment() {
+        //$charge = \OmiseCharge::retrieve("chrg_test_4xso2s8ivdej29pqnhz");
+        $this->showModalRefund = true;
+    }
+
     public function refundOrder($orderId, $transactionCode) {
         $order = Order::findOrFail($orderId);
 
@@ -236,7 +251,7 @@ class ModeratorProcessOrder extends Component
                 'secretKey' => OMISE_SECRET_KEY,
             ]);
 
-            $charge = OmiseCharge::retrieve($transactionCode);
+            $charge = \OmiseCharge::retrieve($transactionCode);
             $refund = $charge->refunds()->create([
                 'amount'   => $order->finalPrice,  // Amount to refund in the smallest currency unit (e.g., cents)
                 'metadata' => [
