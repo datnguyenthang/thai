@@ -28,7 +28,7 @@ class PaymentComplete extends Component {
         $this->order = OrderLib::getOrderDetailByCode($this->code);
 		$this->paymentMethodList = PaymentMethod::get()->whereNotIn('name', [BANKTRANSFER, CASH]);
 
-        $this->paymentMethod = PaymentMethod::where('name', '=', CARD)->first();
+        $this->paymentMethod = PaymentMethod::where('name', '=', OMISECARD)->first();
 
         $event = OmiseWebhookEvent::where('eventType', CARD)->where('orderCode', $this->code)->where('eventStatus', CHARGE)->first();
 
