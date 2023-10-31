@@ -19,6 +19,12 @@
           <span>{{ trans('backend.order') }}</span>
         </a>
 
+        <a href="{{ route('adminOrderlist') }}"
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'adminOrderlist' ? 'active' : '' }}">
+          <i class="fas fa-cart-plus fa-fw me-3"></i>
+          <span>{{ trans('backend.orderlist') }}</span>
+        </a>
+
         <a href="{{ route('listUser') }}"
           class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listUser' ? 'active' : '' }}"
           aria-current="true">
