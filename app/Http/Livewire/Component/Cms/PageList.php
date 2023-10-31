@@ -36,6 +36,9 @@ class PageList extends Component
         $user = auth()->user();
 
         switch ($user->role) {
+            case 'admin':
+                return view('livewire.component.cms.page-list')->layout('admin.layouts.app');
+                break;
             case 'manager':
                 return view('livewire.component.cms.page-list')->layout('manager.layouts.app');
                 break;

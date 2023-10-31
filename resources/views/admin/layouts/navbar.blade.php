@@ -4,8 +4,8 @@
   <nav id="sidebarMenu" class="collapse d-lg-block sidebar bg-white">
     <div class="position-sticky">
       <div class="list-group list-group-flush mx-3 mt-4">
-        <a href="{{ route('dashboard') }}" 
-          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}" 
+        <a href="{{ route('dashboard') }}"
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}"
           aria-current="true">
           <i class="fas fa-tachometer-alt fa-fw me-3"></i>
           <span>{{ trans('backend.dashboard') }}</span>
@@ -13,28 +13,45 @@
 
         @include('components.backend.reportnav')
 
-        <a href="{{ route('adminOrder') }}" 
+        <a href="{{ route('adminOrder') }}"
           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'adminOrder' ? 'active' : '' }}">
           <i class="fas fa-cart-plus fa-fw me-3"></i>
           <span>{{ trans('backend.order') }}</span>
         </a>
 
-        <a href="{{ route('listUser') }}" 
-          class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listUser' ? 'active' : '' }}" 
+        <a href="{{ route('listUser') }}"
+          class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listUser' ? 'active' : '' }}"
           aria-current="true">
-            <i class="fas fa-chart-area fa-fw me-3"></i>
-            <span>{{ trans('backend.user') }}</span>
+          <i class="fas fa-chart-area fa-fw me-3"></i>
+          <span>{{ trans('backend.user') }}</span>
         </a>
-        <a href="{{ route('settingSeo') }}" 
+        <a href="{{ route('settingSeo') }}"
           class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'settingSeo' ? 'active' : '' }}">
           <i class="fas fa-icons fa-fw me-3"></i>
           <span>{{ trans('backend.seo') }}</span>
-      </a>
-        <a href="{{ route('importOrder') }}" 
-          class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'importOrder' ? 'active' : '' }}" 
+        </a>
+        <a href="{{ route('listMenu') }}"
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listMenu' ? 'active' : '' }}">
+          <i class="fas fa-bars fa-fw me-3"></i>
+          <span>{{ trans('backend.menu') }}</span>
+        </a>
+
+        <a href="{{ route('pageList') }}"
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'pageList' ? 'active' : '' }}">
+          <i class="fas fa-newspaper fa-fw me-3"></i>
+          <span>{{ trans('backend.cms') }}</span>
+        </a>
+
+        <a href="{{ route('customizeHomepage') }}"
+          class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'customizeHomepage' ? 'active' : '' }}">
+          <i class="fas fa-tv fa-fw me-3"></i>
+          <span>{{ trans('backend.appearance') }}</span>
+        </a>
+        <a href="{{ route('importOrder') }}"
+          class="nav-link list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'importOrder' ? 'active' : '' }}"
           aria-current="true">
           <i class="fas fa-upload fa-fw me-3"></i>
-            <span>{{ trans('backend.importorder') }}</span>
+          <span>{{ trans('backend.importorder') }}</span>
         </a>
 
       </div>
@@ -53,17 +70,16 @@
 
       <!-- Brand -->
       <a class="navbar-brand" href="{{ route('dashboard') }}">
-        <img src="/img/logo.png" height="25" alt="MDB Logo"
-          loading="lazy" />
+        <img src="/img/logo.png" height="25" alt="MDB Logo" loading="lazy" />
       </a>
-      
+
       <!-- Left links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item"></li>
         </ul>
       </div>
-  
+
       <!-- Right links -->
       <div class="d-flex align-items-center">
         <!-- Notification dropdown

@@ -85,6 +85,9 @@ class CreateMenu extends Component
         $user = auth()->user();
 
         switch ($user->role) {
+            case 'admin':
+                return view('livewire.component.menu.create-menu')->layout('admin.layouts.app');
+                break;
             case 'manager':
                 return view('livewire.component.menu.create-menu')->layout('manager.layouts.app');
                 break;

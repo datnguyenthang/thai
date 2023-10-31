@@ -55,6 +55,9 @@ class ListMenu extends Component
             ->paginate($this->perPage);
 
         switch ($user->role) {
+            case 'admin':
+                return view('livewire.component.menu.list-menu', compact('menus'))->layout('admin.layouts.app');
+                break;
             case 'manager':
                 return view('livewire.component.menu.list-menu', compact('menus'))->layout('manager.layouts.app');
                 break;

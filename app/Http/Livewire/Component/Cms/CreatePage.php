@@ -67,6 +67,9 @@ class CreatePage extends Component
         $user = auth()->user();
 
         switch ($user->role) {
+            case 'admin':
+                return view('livewire.component.cms.create-page')->layout('admin.layouts.app');
+                break;
             case 'manager':
                 return view('livewire.component.cms.create-page')->layout('manager.layouts.app');
                 break;
