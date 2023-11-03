@@ -11,8 +11,8 @@
     -->
     <div class="stepper">
         <ul class="nav nav-tabs border-0" role="tablist">
-            <li role="presentation" class="@if($step === 1) active @endif
-                                           @if($step > 1) completed @endif" 
+            <li role="presentation"  class="@if($step === 1) active @endif
+                                            @if($step > 1) completed @endif" 
                 wire:click="$set('step', 1)"
             >
                 <a class="persistant-disabled" href="#" data-bs-toggle="tab" aria-controls="stepper-step-1" role="tab" title="Step 1">

@@ -58,7 +58,7 @@ class ModeratorOrderlist extends Component
 
     public function mount(){
         $this->role = auth()->user()->role;
-        if (in_array($this->role, ['manager', 'viewer'])) $this->isAllowed = true;
+        if (in_array($this->role, ['admin', 'manager', 'viewer'])) $this->isAllowed = true;
 
         $this->locationList = Location::get()->where('status', ACTIVE);
 

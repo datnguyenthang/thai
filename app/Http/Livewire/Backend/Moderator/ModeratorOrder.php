@@ -302,8 +302,8 @@ class ModeratorOrder extends Component
             'children' => 'required|numeric',
             'fromLocation' => 'required',
             'toLocation' => 'required',
-            'departureDate' => 'required|date|after_or_equal:' . now()->format('Y-m-d'),
-            'returnDate' => 'required|date|after_or_equal:' . now()->format('Y-m-d'),
+            'departureDate' => 'required|date|after_or_equal:' . now()->subDays(30)->format('Y-m-d'),
+            'returnDate' => 'required|date|after_or_equal:' . now()->subDays(30)->format('Y-m-d'),
             'customerType' => 'required',
             //'email' => 'required|email|unique:users,email,' . $this->userId,
         ]);
