@@ -90,7 +90,7 @@ class DashboardLib {
     public static function exportRides($rideId = 0, $fromDate = 0, $toDate = 0, $depart = 0, $dest = 0) {
         $passengers = Ride::select('rides.id', 'rides.name as Ridename', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
                                 'o.code', 'o.code', 'o.phone', 'o.email', 'o.adultQuantity', 'o.childrenQuantity', 'ot.price', 'o.pickup', 'o.dropoff',
-                                DB::raw('CONCAT(o.firstName, " ", o.lastName) as fullname'),
+                                DB::raw('CONCAT(COALESCE(o.firstname, ""), " ", COALESCE(o.lastName, "")) as fullname'),
                                 DB::raw('CASE WHEN o.customerType <> 0 THEN ct.name ELSE "Online" END AS CustomerType'), 'u.name',
                                 DB::raw('CASE WHEN ot.type = '.ONEWAY.' THEN "Departure" ELSE "Return" END AS Ticket'),
                                 DB::raw('CASE WHEN os.status = '.CONFIRMEDORDER.' THEN "Confirm" ELSE "Not Confirm" END AS Status')
@@ -130,7 +130,7 @@ class DashboardLib {
         $passengers = Ride::select('rides.id', 'rides.name as Ridename', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
                                 'o.id as orderId','o.code', 'o.phone', 'o.email', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff', 'ot.id as orderTicketId', 'ot.price',
                                 DB::raw('COALESCE(op.paymentStatus, 0) as paymentStatus'), 'os.status',
-                                DB::raw('CONCAT(o.firstName, " ", o.lastName) as fullname'),
+                                DB::raw('CONCAT(COALESCE(o.firstname, ""), " ", COALESCE(o.lastName, "")) as fullname'),
                                 DB::raw('CASE WHEN o.customerType <> 0 THEN ct.name ELSE "Online" END AS CustomerType'), 'u.name',
                                 DB::raw('CASE WHEN ot.type = '.ONEWAY.' THEN "Departure" ELSE "Return" END AS ticket'),
                                 //DB::raw('CASE WHEN os.status = '.CONFIRMEDORDER.' THEN "Confirm" ELSE "Not Confirm" END AS status')
