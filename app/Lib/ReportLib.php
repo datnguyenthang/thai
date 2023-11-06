@@ -103,7 +103,10 @@ class ReportLib {
                             $join->on('orders.id', '=', 'os.orderId')
                                 ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = orders.id)');
                         })
-                        ->leftJoin('order_payments as op', 'op.orderId', '=', 'orders.id')
+                        ->leftJoin('order_payments as op', function($join) {
+                            $join->on('orders.id', '=', 'op.orderId')
+                                ->whereRaw('op.id = (select max(id) from order_payments where order_payments.orderId = orders.id)');
+                        })
                         ->leftJoin('payment_methods as pm', 'pm.id', '=', 'op.paymentMethod')
                         ->select(
                             'pm.name as name',
@@ -128,7 +131,6 @@ class ReportLib {
                         ->groupBy("pm.name")
                         ->orderBy("pm.name")
                         ->get();
-
         return $paymentMethodDetails;
     }
 }

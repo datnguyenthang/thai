@@ -50,7 +50,7 @@
                                 @if (!empty($paymentMethodDetails))
                                     @foreach($paymentMethodDetails as $paymentMethod)
                                         <tr class='table-success'>
-                                            <td>{{ ucwords($paymentMethod->name) }}</td>
+                                            <td>{{ $paymentMethod->name ? ucwords($paymentMethod->name) : 'NOT PAID' }}</td>
                                             <td>฿{{ number_format($paymentMethod->amount, 0) }}</td>
                                         </tr>
                                     @endforeach
