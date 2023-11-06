@@ -17,6 +17,8 @@
 
     @include('livewire.component.report.view.detailCustomerType')
 
+    @include('livewire.component.report.view.detailPayment')
+
     <!-- Loading Overlay, show loading to lock user action-->
     @include('loading.loading')
 

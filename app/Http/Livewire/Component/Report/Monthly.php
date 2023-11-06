@@ -10,6 +10,7 @@ use App\Exports\OrdersExport;
 use App\Lib\OrderLib;
 use App\Lib\DashboardLib;
 use App\Lib\ChartLib;
+use App\Lib\ReportLib;
 
 use App\Models\Agent;
 use App\Models\Location;
@@ -48,9 +49,14 @@ class Monthly extends Component {
 
     public $orderDetail;
     public $showModal = false;
+    public $customerTypePayments;
+    public $paymentMethodDetails;
 
     public function mount(){
         $this->fromDate = $this->toDate = now()->format('Y-m');
+
+        $this->customerTypePayments = ReportLib::getCustomerTypePayment($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $this->paymentMethodDetails = ReportLib::getPaymentMethod($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
 
         $this->locationList = Location::get()->where('status', ACTIVE);
         $this->agents = Agent::get();
@@ -91,6 +97,9 @@ class Monthly extends Component {
         $this->paxOrderCustomerType = ChartLib::countPaxOrderByCustomerType($this->fromDate, $this->toDate, $this->type, CONFIRMEDORDER, $this->fromLocation, $this->toLocation);
         $this->paxRideCustomerType = ChartLib::countPaxTraveledByCustomerType($this->fromDate, $this->toDate, $this->type, CONFIRMEDORDER, $this->fromLocation, $this->toLocation);
 
+        $this->customerTypePayments = ReportLib::getCustomerTypePayment($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $this->paymentMethodDetails = ReportLib::getPaymentMethod($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+    
         $this->emit('revenuesUpdated', [
                                         'revenueOrderNewData' => json_encode($revenueOrderNewData),
                                         'revenueRideNewData' => json_encode($revenueRideNewData),
