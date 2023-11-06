@@ -101,6 +101,7 @@ return [
     'importorder' => 'Import Order',
     'downloadeticket' => 'Download E-ticket',
     'downloadeboardingpass' => 'Download Boarding Pass',
+    'nodatafound' => 'No data found!',
 
     //Customer
     'createcustomertype' => 'Create Customer Type',
