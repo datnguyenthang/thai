@@ -17,6 +17,10 @@
 
     @include('livewire.component.report.view.detailCustomerType')
 
+    @include('livewire.component.report.dashboard.utils.listRideTotalPrice')
+
+    @include('livewire.component.report.dashboard.utils.listPassenger')
+
     <!-- Loading Overlay, show loading to lock user action-->
     @include('loading.loading')
 

@@ -88,6 +88,6 @@ class ModeratorDashboard extends Component
         $listRides = DashboardLib::ridesInDay($this->fromDate, $this->toDate, $this->fromLocation, $this->toLocation, $this->hasOrdered, $perPage);
 
         return view('livewire.backend.moderator.moderator-dashboard', ['listRides' => $listRides])
-              ->layout('moderator.layouts.app');
+                ->layout('moderator.layouts.app');
     }
 }

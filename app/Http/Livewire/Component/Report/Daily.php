@@ -5,11 +5,13 @@ namespace App\Http\Livewire\Component\Report;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RidesExport;
 use App\Exports\OrdersExport;
 
 use App\Lib\OrderLib;
 use App\Lib\DashboardLib;
 use App\Lib\ChartLib;
+use App\Lib\TicketLib;
 
 use App\Models\Agent;
 use App\Models\Location;
@@ -48,8 +50,12 @@ class Daily extends Component {
 
     public $orderDetail;
     public $showModal = false;
+    public $rideId;
+    public $listPassengers;
 
     public function mount(){
+        $this->role = auth()->user()->role;
+
         $this->fromDate = $this->toDate = now()->toDateString();
 
         $this->locationList = Location::get()->where('status', ACTIVE);
@@ -101,18 +107,40 @@ class Daily extends Component {
                                     ]);
     }
 
+    public function exportRides($rideId = 0){
+        $passengers = DashboardLib::exportRides($rideId, $this->fromDate, $this->toDate, $this->fromLocation, $this->toLocation);
+        
+        $export = new RidesExport($passengers);
+
+        return Excel::download($export, 'passengers.xlsx');
+    }
+
+    public function displayRide($rideId = 0){
+        $this->rideId = $rideId;
+        $this->listPassengers = DashboardLib::detailRides($rideId);
+        $this->showModal = true;
+    }
+
+    public function boardingPass($rideId = 0, $orderTicketId = 0){
+        $this->listPassengers = DashboardLib::detailRides($rideId);
+
+        return TicketLib::downloadBoardingPass($orderTicketId);
+    }
+
     public function render() {
 
+        $listRides = DashboardLib::ridesInDay($this->fromDate, $this->toDate, $this->fromLocation, $this->toLocation);
+    
         $user = auth()->user();
         switch ($user->role) {
             case 'admin':
-                return view('livewire.component.report.daily')->layout('admin.layouts.app');
+                return view('livewire.component.report.daily', ['listRides' => $listRides])->layout('admin.layouts.app');
                 break;
             case 'manager':
-                return view('livewire.component.report.daily')->layout('manager.layouts.app');
+                return view('livewire.component.report.daily', ['listRides' => $listRides])->layout('manager.layouts.app');
                 break;
             case 'viewer':
-                return view('livewire.component.report.daily')->layout('viewer.layouts.app');
+                return view('livewire.component.report.daily', ['listRides' => $listRides])->layout('viewer.layouts.app');
                 break;
             default:
                 return <<<'blade'
