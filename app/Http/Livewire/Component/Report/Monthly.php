@@ -55,8 +55,8 @@ class Monthly extends Component {
     public function mount(){
         $this->fromDate = $this->toDate = now()->format('Y-m');
 
-        $this->customerTypePayments = ReportLib::getCustomerTypePayment($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $this->paymentMethodDetails = ReportLib::getPaymentMethod($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $this->customerTypePayments = ReportLib::getCustomerTypePaymentTicket($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $this->paymentMethodDetails = ReportLib::getPaymentMethodTicket($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
 
         $this->locationList = Location::get()->where('status', ACTIVE);
         $this->agents = Agent::get();
@@ -97,8 +97,8 @@ class Monthly extends Component {
         $this->paxOrderCustomerType = ChartLib::countPaxOrderByCustomerType($this->fromDate, $this->toDate, $this->type, CONFIRMEDORDER, $this->fromLocation, $this->toLocation);
         $this->paxRideCustomerType = ChartLib::countPaxTraveledByCustomerType($this->fromDate, $this->toDate, $this->type, CONFIRMEDORDER, $this->fromLocation, $this->toLocation);
 
-        $this->customerTypePayments = ReportLib::getCustomerTypePayment($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
-        $this->paymentMethodDetails = ReportLib::getPaymentMethod($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $this->customerTypePayments = ReportLib::getCustomerTypePaymentTicket($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
+        $this->paymentMethodDetails = ReportLib::getPaymentMethodTicket($this->fromDate, $this->toDate, $this->type, $this->status, $this->fromLocation, $this->toLocation);
     
         $this->emit('revenuesUpdated', [
                                         'revenueOrderNewData' => json_encode($revenueOrderNewData),

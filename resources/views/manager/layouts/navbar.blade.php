@@ -10,7 +10,7 @@
             <i class="fas fa-tachometer-alt fa-fw me-3"></i>
             <span>{{ trans('backend.dashboard') }}</span>
           </a>
-           
+
           @include('components.backend.reportnav')
 
           <a href="{{ route('managerOrder') }}" 
@@ -32,15 +32,15 @@
           </a>
 
           <a href="{{ route('managerLocation') }}" 
-             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerLocation' ? 'active' : '' }}">
-             <i class="fas fa-lock fa-fw me-3"></i>
-             <span>{{ trans('backend.location') }}</span>
+            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerLocation' ? 'active' : '' }}">
+            <i class="fas fa-lock fa-fw me-3"></i>
+            <span>{{ trans('backend.location') }}</span>
           </a>
 
           <a href="{{ route('managerListRide') }}" 
-             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerListRide' ? 'active' : '' }}">
-             <i class="fas fa-chart-line fa-fw me-3"></i>
-             <span>{{ trans('backend.ride') }}</span>
+            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerListRide' ? 'active' : '' }}">
+            <i class="fas fa-chart-line fa-fw me-3"></i>
+            <span>{{ trans('backend.ride') }}</span>
           </a>
           
           <a href="{{ route('agentList') }}" 
@@ -50,45 +50,45 @@
           </a>
 
           <a href="{{ route('managerPromotion') }}" 
-             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerPromotion' ? 'active' : '' }}">
-             <i class="fas fa-money-bill fa-fw me-3"></i>
-             <span>{{ trans('backend.promotion') }}</span>
+            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerPromotion' ? 'active' : '' }}">
+            <i class="fas fa-money-bill fa-fw me-3"></i>
+            <span>{{ trans('backend.promotion') }}</span>
           </a>
 
           <a href="{{ route('managerCustomerType') }}" 
-             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerCustomerType' ? 'active' : '' }}">
-             <i class="fas fa-street-view fa-fw me-3"></i>
-             <span>{{ trans('backend.customerType') }}</span>
+            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerCustomerType' ? 'active' : '' }}">
+            <i class="fas fa-street-view fa-fw me-3"></i>
+            <span>{{ trans('backend.customerType') }}</span>
           </a>
 
           <a href="{{ route('listMenu') }}" 
-             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listMenu' ? 'active' : '' }}">
-             <i class="fas fa-bars fa-fw me-3"></i>
-             <span>{{ trans('backend.menu') }}</span>
+            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listMenu' ? 'active' : '' }}">
+            <i class="fas fa-bars fa-fw me-3"></i>
+            <span>{{ trans('backend.menu') }}</span>
           </a>
 
           <a href="{{ route('managerPkdp') }}" 
-             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerPkdp' ? 'active' : '' }}">
-             <i class="fas fa-location-arrow fa-fw me-3"></i>
-             <span>{{ trans('backend.pkdp') }}</span>
+            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerPkdp' ? 'active' : '' }}">
+            <i class="fas fa-location-arrow fa-fw me-3"></i>
+            <span>{{ trans('backend.pkdp') }}</span>
           </a>
           
           <a href="{{ route('pageList') }}" 
-             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'pageList' ? 'active' : '' }}">
-             <i class="fas fa-newspaper fa-fw me-3"></i>
-             <span>{{ trans('backend.cms') }}</span>
+            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'pageList' ? 'active' : '' }}">
+            <i class="fas fa-newspaper fa-fw me-3"></i>
+            <span>{{ trans('backend.cms') }}</span>
           </a>
 
           <a href="{{ route('customizeHomepage') }}" 
-             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'customizeHomepage' ? 'active' : '' }}">
-             <i class="fas fa-tv fa-fw me-3"></i>
-             <span>{{ trans('backend.appearance') }}</span>
+            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'customizeHomepage' ? 'active' : '' }}">
+            <i class="fas fa-tv fa-fw me-3"></i>
+            <span>{{ trans('backend.appearance') }}</span>
           </a>
           {{--
           <a href="{{ route('settingSeo') }}" 
-             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'settingSeo' ? 'active' : '' }}">
-             <i class="fas fa-icons fa-fw me-3"></i>
-             <span>{{ trans('backend.seo') }}</span>
+            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'settingSeo' ? 'active' : '' }}">
+            <i class="fas fa-icons fa-fw me-3"></i>
+            <span>{{ trans('backend.seo') }}</span>
           </a>
           --}}
         </div>
@@ -130,7 +130,7 @@
               </li>
             </ul>
           </li>
-           -->
+          -->
           <!-- Icon dropdown -->
           @include('lang')
   

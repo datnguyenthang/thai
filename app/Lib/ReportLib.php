@@ -133,4 +133,80 @@ class ReportLib {
                         ->get();
         return $paymentMethodDetails;
     }
+
+    public static function getCustomerTypePaymentTicket($fromDate, $toDate, $type = 'byMonth', $status = CONFIRMEDORDER, $depart, $dest) {
+        list($dateFormat, $fromDate, $toDate)  = self::dateFormat($type, $fromDate, $toDate);
+
+        $customerTypePayments = Ride::select(
+                                    'ct.name as name',
+                                    DB::raw('SUM(ot.price) as amount')
+                                )
+                                ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
+                                ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
+
+                                ->leftJoin('order_tickets as ot' , function ($otjoin) {
+                                    $otjoin->on('rides.id', '=', 'ot.rideId');
+                                })
+                                ->leftJoin('orders as o' , function ($ojoin) {
+                                    $ojoin->on('ot.orderId', '=', 'o.id');
+                                })
+                                ->leftJoin('order_statuses as os', function($ojoin) {
+                                    $ojoin->on('o.id', '=', 'os.orderId')
+                                        ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
+                                })
+                                ->leftJoin('customer_types as ct', 'ct.id', '=', 'o.customerType')
+
+                                ->where(function ($query) use ($fromDate, $toDate, $status, $depart, $dest) {
+                                    if ($status) $query->where('os.status', $status);
+                                    if ($fromDate) $query->where('rides.departDate', '>=', $fromDate);
+                                    if ($toDate) $query->where('rides.departDate', '<=', $toDate);
+                                    if ($depart) $query->where('rides.fromLocation', $depart);
+                                    if ($dest) $query->where('rides.toLocation', $dest);
+                                })
+                                ->groupBy("ct.name")
+                                ->orderBy("ct.name")
+                                ->get();
+
+        return $customerTypePayments;
+    }
+
+    public static function getPaymentMethodTicket($fromDate, $toDate, $type = 'byMonth', $status = CONFIRMEDORDER, $depart, $dest) {
+        list($dateFormat, $fromDate, $toDate)  = self::dateFormat($type, $fromDate, $toDate);
+
+        $paymentMethodDetails = Ride::select(
+                                    'pm.name as name',
+                                    DB::raw('SUM(ot.price) as amount')
+                                )
+                                ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
+                                ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
+
+                                ->leftJoin('order_tickets as ot' , function ($otjoin) {
+                                    $otjoin->on('rides.id', '=', 'ot.rideId');
+                                })
+                                ->leftJoin('orders as o' , function ($ojoin) {
+                                    $ojoin->on('ot.orderId', '=', 'o.id');
+                                })
+                                ->leftJoin('order_statuses as os', function($ojoin) {
+                                    $ojoin->on('o.id', '=', 'os.orderId')
+                                        ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
+                                })
+                                ->leftJoin('order_payments as op', function($join) {
+                                    $join->on('o.id', '=', 'op.orderId')
+                                        ->whereRaw('op.id = (select max(id) from order_payments where order_payments.orderId = o.id)');
+                                })
+                                ->leftJoin('payment_methods as pm', 'pm.id', '=', 'op.paymentMethod')
+
+                                ->where(function ($query) use ($fromDate, $toDate, $status, $depart, $dest) {
+                                    if ($status) $query->where('os.status', $status);
+                                    if ($fromDate) $query->where('rides.departDate', '>=', $fromDate);
+                                    if ($toDate) $query->where('rides.departDate', '<=', $toDate);
+                                    if ($depart) $query->where('rides.fromLocation', $depart);
+                                    if ($dest) $query->where('rides.toLocation', $dest);
+                                })
+                                ->groupBy("pm.name")
+                                ->orderBy("pm.name")
+                                ->get();
+
+        return $paymentMethodDetails;
+    }
 }
