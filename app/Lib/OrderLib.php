@@ -140,7 +140,7 @@ class OrderLib {
                 if ($customerPhone) $query->where('orders.phone', 'like', '%'.$customerPhone.'%');
                 if ($customerType >= 0) $query->where('orders.customerType', $customerType);
                 if ($agentId) $query->where('orders.agentId', $agentId);
-                if ($orderStatus) $query->where('os.status', $orderStatus);
+                if ($orderStatus >= 0) $query->where('os.status', $orderStatus);
 
                 if ($fromLocation || $toLocation) {
                     $query->whereIn('orders.id', function ($subquery) use ($fromLocation, $toLocation) {

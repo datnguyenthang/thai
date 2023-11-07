@@ -27,8 +27,8 @@ class ManagerListRide extends Component
     protected $rides;
     public $perPage = 50;
     public $sortField = 'rides.departDate';
-    public $sortDirection = 'asc';
-    
+    public $sortDirection = 'desc';
+
     public $rideDetail;
     public $seatClasses;
 
@@ -108,6 +108,6 @@ class ManagerListRide extends Component
         return view('livewire.backend.manager.manager-list-ride', [ 'listRides' => $this->getRides(),
                                                                     'locationList' => $locationList
                                                                 ])
-               ->layout('manager.layouts.app');
+                    ->layout('manager.layouts.app');
     }
 }
