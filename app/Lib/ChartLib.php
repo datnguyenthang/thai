@@ -22,8 +22,9 @@ class ChartLib {
                 $dateFormat = '%Y-%m';
                 $fromDate = Carbon::parse("$fromDate-01-01")->startOfYear()->toDateString();
 
-                if ($currentYear == $toDate) $toDate = $currentDay;
-                else $toDate = Carbon::parse("$toDate-12-31")->endOfYear()->toDateString();
+                //if ($currentYear == $toDate) $toDate = $currentDay;
+                //else $toDate = Carbon::parse("$toDate-12-31")->endOfYear()->toDateString();
+                $toDate = Carbon::parse("$toDate-12-31")->endOfYear()->toDateString();
                 break;
             case 'byMonth':
                 $dateFormat = '%Y-%m-%d';
