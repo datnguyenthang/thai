@@ -104,10 +104,13 @@ class AccountingLib {
                         ->selectRaw('SUM(orders.adultQuantity) as pax')
                         ->selectRaw("SUM(CASE WHEN op.paymentStatus = 8 THEN orders.finalPrice ELSE 0 END) as paid")
                         ->selectRaw("SUM(CASE WHEN op.paymentStatus = 0 THEN orders.finalPrice ELSE 0 END) as notpaid");
+        
+        
         $pms = PaymentMethod::get();
         foreach ($pms as $pm) {
             $workflows->selectRaw("SUM(CASE WHEN pm.name = '{$pm->name}' THEN orders.finalPrice ELSE 0 END) as '{$pm->name}'");
         }
+        
         $workflows = $workflows
                 ->where(function ($query) use ($fromDate, $toDate, $status) {
                     if ($status) $query->where('os.status', $status);

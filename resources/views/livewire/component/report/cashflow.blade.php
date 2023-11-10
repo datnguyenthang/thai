@@ -24,14 +24,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                            @foreach($cashflows as $cashflow)
-                                <tr>
-                                    @foreach($headerTables as $headerTable)
-                                        <td>{{ $cashflow->{$headerTable } }}</td>
-                                    @endforeach
-                                </tr>
-                            @endforeach
-                        
+                        @foreach($cashflows as $cashflow)
+                            <tr>
+                                @foreach($headerTables as $headerTable)
+                                    @php
+                                        $value = $cashflow->{$headerTable};
+                                        $hasDecimal = strpos($value, '.') !== false && preg_match('/\.\d+/', $value);
+                                        $formattedValue = $hasDecimal ? '฿'.number_format($value, 0) : $value;
+                                    @endphp
+                            
+                                    <td>{{ $formattedValue }}</td>
+                                @endforeach
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             @else
