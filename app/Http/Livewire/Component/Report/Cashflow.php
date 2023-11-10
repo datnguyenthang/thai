@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Component\Report;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
-//use App\Exports\CashflowExport;
+use App\Exports\CashflowsExport;
 use App\Lib\ReportLib;
 use Illuminate\Support\Str;
 
@@ -29,6 +29,14 @@ class Cashflow extends Component {
 
     public function updated(){
         $this->cashflows = AccountingLib::cashFlowByDate($this->fromDate, $this->toDate, $this->type);
+    }
+
+    public function downloadCashflow(){
+        $this->cashflows = AccountingLib::cashFlowByDate($this->fromDate, $this->toDate, $this->type);
+
+        $export = new CashflowsExport($this->headerTables, $this->cashflows);
+
+        return Excel::download($export, 'Cashflow.xlsx');
     }
 
     public function render(){
