@@ -100,8 +100,8 @@ class AccountingLib {
                         })
                         ->leftJoin('payment_methods as pm', 'pm.id', '=', 'op.paymentMethod')
                         ->selectRaw("DATE_FORMAT(orders.bookingDate, '{$dateFormat}') as data")
-                        ->selectRaw('SUM(orders.finalPrice) as revenue')
                         ->selectRaw('SUM(orders.adultQuantity) as pax')
+                        ->selectRaw('SUM(orders.finalPrice) as revenue')
                         ->selectRaw("SUM(CASE WHEN op.paymentStatus = 8 THEN orders.finalPrice ELSE 0 END) as paid")
                         ->selectRaw("SUM(CASE WHEN op.paymentStatus = 0 THEN orders.finalPrice ELSE 0 END) as notpaid");
         

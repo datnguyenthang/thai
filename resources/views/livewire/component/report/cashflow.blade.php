@@ -34,12 +34,17 @@
                             <tr>
                                 @foreach($headerTables as $headerTable)
                                     @php
+                                        $class = "";
+
+                                        if ($headerTable == 'data' || $headerTable == 'revenue' || $headerTable == 'notpaid') 
+                                            $class = "border-end border-danger border-2 border-0";
+
                                         $value = $cashflow->{$headerTable};
                                         $hasDecimal = strpos($value, '.') !== false && preg_match('/\.\d+/', $value);
                                         $formattedValue = $hasDecimal ? '฿'.number_format($value, 0) : $value;
                                     @endphp
                             
-                                    <td>{{ $formattedValue }}</td>
+                                    <td class="{{ $class }}">{{ $formattedValue }}</td>
                                 @endforeach
                             </tr>
                         @endforeach
