@@ -242,5 +242,7 @@ return [
     'status' => 'Status',
     'ticketstatus' => 'Ticket Status',
     'modifyticketorder' => 'Modify Ticket',
-    
+
+    //ACCOUNTING
+    'cashflow' => "Cash Flow",
 ];
