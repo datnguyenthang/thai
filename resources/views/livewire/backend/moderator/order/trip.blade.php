@@ -29,7 +29,10 @@
                                 @if($customerTypeType == ONLINEPRICE)
                                     @foreach ($departRides as $ride)
                                         <tr>
-                                            <td>{{ $ride->name }}</td>
+                                            <td>
+                                                {{ $ride->name }}
+                                                <livewire:utils.orders.ride-info wire:key="{{ $ride->seatClassId }}" :rideId="$ride->id" :seatClassId="$ride->seatClassId" />
+                                            </td>
                                             <td>{{ $ride->departTime }}</td>
                                             <td>{{ $ride->returnTime }}</td>
                                             <td>{{ $ride->seatClass }}</td>
@@ -45,6 +48,9 @@
                                                         @if ($ride->seatClassId ===$order_depart_seatClassId) checked @endif
                                                 >
                                             </td>
+                                        </tr>
+                                        <tr>
+                                            
                                         </tr>
                                     @endforeach
                                 @endif
