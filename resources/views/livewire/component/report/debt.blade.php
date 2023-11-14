@@ -9,12 +9,14 @@
             <label>To</label>
             <input id="toDate" name="toDate" wire:model="toDate" class="form-control" type="{{ $selectType }}">
         </div>
+        {{--
         <div class="col-md-4">
             <div class="form-group">
                 <label class="form-control-label"></label>
                 <button class="btn bg_own_color text-light form-control" wire:click="downloadCashflow">Download</button>
             </div>
         </div>
+        --}}
     </div>
 
     <!-- Card Body -->
