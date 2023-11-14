@@ -7,7 +7,7 @@
     <span>{{ trans('backend.report') }}</span>
     <i class="fas fa-caret-down ms-3"></i>
 </a>
-<div class="collapse {{ in_array(Route::currentRouteName(), ['dailyReport', 'monthlyReport', 'yearlyReport', 'salePerformance']) ? 'show' : '' }}" id="submenu">
+<div class="collapse {{ in_array(Route::currentRouteName(), ['dailyReport', 'monthlyReport', 'yearlyReport', 'salePerformance', 'cashflow', 'debt']) ? 'show' : '' }}" id="submenu">
     <ul class="list-unstyled list-group-flush ms-3">
         <li class="list-group-item text-center">
             <a href="{{ route('dailyReport') }}" 
