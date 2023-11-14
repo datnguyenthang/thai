@@ -93,6 +93,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/yearlyreport', App\Http\Livewire\Component\Report\Yearly::class)->name('yearlyReport');
     Route::get('/saleperformance', App\Http\Livewire\Component\Report\Performance::class)->name('salePerformance');
     Route::get('/cashflow', App\Http\Livewire\Component\Report\Cashflow::class)->name('cashflow');
+    Route::get('/debt', App\Http\Livewire\Component\Report\debt::class)->name('debt');
     /*------All Manager Routes List------*/
     Route::middleware(['user-access:manager'])->group(function () {
 

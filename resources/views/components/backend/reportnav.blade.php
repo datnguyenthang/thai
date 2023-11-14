@@ -39,5 +39,11 @@
             <span>{{ trans('backend.cashflow') }}</span>
           </a>
         </li>
+        <li class="list-group-item text-center">
+          <a href="{{ route('debt') }}" 
+            class="text-decoration-none list-group-item-action ripple {{ Route::currentRouteName() == 'debt' ? 'list-group-item active' : '' }}">
+            <span>{{ trans('backend.debt') }}</span>
+          </a>
+        </li>
     </ul>
 </div>

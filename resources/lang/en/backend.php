@@ -245,4 +245,7 @@ return [
 
     //ACCOUNTING
     'cashflow' => "Cash Flow",
+
+    //DEBT
+    'debt' => "Debt",
 ];
