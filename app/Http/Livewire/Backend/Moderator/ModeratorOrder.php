@@ -51,6 +51,14 @@ class ModeratorOrder extends Component
     public $dropoff;
     public $dropoffAny;
     public $dropoffAnyOther;
+
+    public $returnPickup;
+    public $returnPickupAny;
+    public $returnPickupAnyOther;
+    public $returnDropoff;
+    public $returnDropoffAny;
+    public $returnDropoffAnyOther;
+
     public $note;
     public $promotionId;
     public $paymentMethod;
@@ -140,6 +148,8 @@ class ModeratorOrder extends Component
         $this->pickupdropoffs = Pickupdropoff::get();
         $this->pickup = 0;
         $this->dropoff = 0;
+        $this->returnPickup = 0;
+        $this->returnDropoff = 0;
 
         $this->paymentMethodList = PaymentMethod::get()->where('status', ACTIVE);
         //$this->paymentMethod = $this->paymentMethodList->first()->id;
@@ -189,6 +199,14 @@ class ModeratorOrder extends Component
 
     public function updatedDropoff(){
         if ($this->dropoff == DROPOFFANY) $this->dropoffAny =  $this->pickupdropoffs->first()->name;
+    }
+
+    public function updatedReturnPickup($returnPickup){
+        if ($this->returnPickup == PICKUPANY) $this->returnPickupAny =  $this->pickupdropoffs->first()->name;
+    }
+
+    public function updatedReturnDropoff($returnDropoff){
+        if ($this->returnDropoff == DROPOFFANY) $this->returnDropoffAny =  $this->pickupdropoffs->first()->name;
     }
 
     public function updatedStatus(){
@@ -406,15 +424,6 @@ class ModeratorOrder extends Component
             'paymentStatus' => 'required_if:isTransaction,1',
         ]);
 
-        //set value for pickup and dropoff
-        if ($this->pickup == PICKUPDONTUSESERVICE) $this->pickup = "";
-        if ($this->pickup == PICKUPANY) $this->pickup = $this->pickupAny;
-        if ($this->pickup == PICKUPANYOTHER) $this->pickup = $this->pickupAnyOther;
-
-        if ($this->dropoff == DROPOFFDONTUSESERVICE) $this->dropoff = "";
-        if ($this->dropoff == DROPOFFANY) $this->dropoff = $this->dropoffAny;
-        if ($this->dropoff == DROPOFFANYOTHER) $this->dropoff = $this->dropoffAnyOther;
-
         $codeOrder = Order::generateCode();
         $codeDepart = $codeOrder.'-1';
         $codeReturn = $codeOrder.'-2';
@@ -433,8 +442,6 @@ class ModeratorOrder extends Component
                 'phone' => $this->phone ?? null,
                 'email' => $this->email ?? null,
                 'note' => $this->note,
-                'pickup' => $this->pickup,
-                'dropoff' => $this->dropoff,
                 'adultQuantity' => intVal($this->adults),
                 'childrenQuantity' => intVal($this->children),
                 'onlinePrice' => $this->onlinePrice,
@@ -481,6 +488,8 @@ class ModeratorOrder extends Component
                 'seatClassId' => intVal($this->order_depart_seatClassId),
                 'price' => $this->departPrice,
                 'type' => DEPARTURETICKET,
+                'pickup' => $this->getPickup(),
+                'dropoff' => $this->getDropOff(),
                 'status' => 0,
             ]);
             
@@ -493,6 +502,8 @@ class ModeratorOrder extends Component
                     'seatClassId' => intVal($this->order_return_seatClassId),
                     'price' => $this->returnPrice,
                     'type' => RETURNTICKET,
+                    'pickup' => $this->getReturnPickup(),
+                    'dropoff' => $this->getReturnDropOff(),
                     'status' => 0,
                 ]);
             }
@@ -508,6 +519,34 @@ class ModeratorOrder extends Component
             DB::rollback();
             throw $e;
         }
+    }
+
+    public function getPickup(){
+        if ($this->pickup == PICKUPDONTUSESERVICE) $this->pickup = "";
+        if ($this->pickup == PICKUPANY) $this->pickup = $this->pickupAny;
+        if ($this->pickup == PICKUPANYOTHER) $this->pickup = $this->pickupAnyOther;
+        return $this->pickup;
+    }
+
+    public function getDropOff(){
+        if ($this->dropoff == DROPOFFDONTUSESERVICE) $this->dropoff = "";
+        if ($this->dropoff == DROPOFFANY) $this->dropoff = $this->dropoffAny;
+        if ($this->dropoff == DROPOFFANYOTHER) $this->dropoff = $this->dropoffAnyOther;
+        return $this->dropoff;
+    }
+
+    public function getReturnPickup(){
+        if ($this->returnPickup == PICKUPDONTUSESERVICE) $this->returnPickup = "";
+        if ($this->returnPickup == PICKUPANY) $this->returnPickup = $this->returnPickupAny;
+        if ($this->returnPickup == PICKUPANYOTHER) $this->returnPickup = $this->returnPickupAnyOther;
+        return $this->returnPickup;
+    }
+
+    public function getReturnDropOff(){
+        if ($this->returnDropoff == DROPOFFDONTUSESERVICE) $this->returnDropoff = "";
+        if ($this->returnDropoff == DROPOFFANY) $this->returnDropoff = $this->returnDropoffAny;
+        if ($this->returnDropoff == DROPOFFANYOTHER) $this->returnDropoff = $this->returnDropoffAnyOther;
+        return $this->returnDropoff;
     }
 
     public function getLocationFile($locationId) {

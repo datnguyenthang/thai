@@ -51,9 +51,21 @@
                             <span class="description" aria-hidden="true" x-show="openWarningTel">{{ trans('messages.correctinfo') }}</span>
                         </div>
 
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <textarea class="form-control" wire:model="note" rows="4" placeholder="{{ trans('messages.note') }}"></textarea>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
+                <div class="border rounded-3 overflow-hidden p-4 mt-3">
                     <!---Pickup & dropoff information--->
+                    <h4 class="select-departure-header mb-3 bg_own_color" >
+                        {{ $fromLocationName }}
+                            <i class="fas fa-arrow-right fa-md fa-1x"></i>
+                        {{ $toLocationName }}
+                    </h4>
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <h4>{{ trans('messages.pickupinfo') }}</h4>
@@ -117,12 +129,83 @@
                             @endif
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <textarea class="form-control" wire:model="note" rows="4" placeholder="{{ trans('messages.note') }}"></textarea>
+                </div>
+
+                <!---Pickup & dropoff information for roundtrip--->
+                @if ($tripType == ROUNDTRIP)
+                    <div class="border rounded-3 overflow-hidden p-4 mt-3">
+                        <!---Pickup & dropoff information--->
+                        <h4 class="select-departure-header mb-3 bg_own_color" >
+                            {{ $toLocationName }}
+                                <i class="fas fa-arrow-right fa-md fa-1x"></i>
+                            {{ $fromLocationName }}
+                        </h4>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <h4>{{ trans('messages.pickupinfo') }}</h4>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" wire:model="returnPickup" name="returnPickup" id="returnpickup1" value="0" checked>
+                                    <label class="form-check-label" for="radio1">{{ trans('messages.dontusetranferservie') }}</label>
+                                </div>
+                                    
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" wire:model="returnPickup" name="returnPickup" id="returnpickup2" value="1">
+                                    <label class="form-check-label" for="radio2">{{ trans('messages.pickupany') }}</label>
+                                </div>
+                                @if ($returnPickup == PICKUPANY)
+                                    <select id="selectreturnPickup" name="returnPickupAny" class="form-select" wire:model="returnPickupAny">
+                                        @foreach($pickupdropoffs as $pickupdropoff)
+                                            <option value="{{ $pickupdropoff->name }}">{{ $pickupdropoff->name }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                                    
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" wire:model="returnPickup" name="returnPickup" id="returnpickup3" value="2">
+                                    <label class="form-check-label" for="radio3">{{ trans('messages.pickupother') }}</label>
+                                </div>
+                                @if ($returnPickup == PICKUPANYOTHER)
+                                    <div class="form-input row">
+                                        <input class="form-control w-75" type="text" name="returnPickupAnyOther" wire:model="returnPickupAnyOther">
+                                        @error('returnPickupAnyOther') <span class="text-danger error">{{ $message }}</span> @enderror
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="col-md-6">
+                                <h4>{{ trans('messages.dropoffinfo') }}</h4>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" wire:model="returnDropoff" name="returnDropoff" id="returndropoff1" value="0" checked>
+                                    <label class="form-check-label" for="radio1">{{ trans('messages.dontusetranferservie') }}</label>
+                                </div>
+                                    
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" wire:model="returnDropoff" name="returnDropoff" id="returndropoff2" value="1">
+                                    <label class="form-check-label" for="radio2">{{ trans('messages.dropoffany') }}</label>
+                                </div>
+                                @if ($returnDropoff == DROPOFFANY)
+                                    <select id="selectDropoff" name="returnDropoffAny" class="form-select" wire:model="returnDropoffAny">
+                                        @foreach($pickupdropoffs as $pickupdropoff)
+                                            <option value="{{ $pickupdropoff->name }}">{{ $pickupdropoff->name }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                                    
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" wire:model="returnDropoff" name="returnDropoff" id="returndropoff3" value="2">
+                                    <label class="form-check-label" for="radio3">{{ trans('messages.dropoffother') }}</label>
+                                </div>
+                                @if ($returnDropoff == DROPOFFANYOTHER)
+                                    <div class="form-input row">
+                                        <input class="form-control w-75" type="text" wire:model="returnDropoffAnyOther" name="returnDropoffAnyOther">
+                                        @error('returnDropoffAnyOther') <span class="text-danger error">{{ $message }}</span> @enderror
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
+
                 <!---Booking detail--->
                 <div class="border rounded-3 overflow-hidden p-4 mt-3">
                     <h4 class="select-departure-header mb-3" >{{ trans('messages.bookingdetail') }}</h4>
@@ -138,10 +221,10 @@
                                 <tr class="order_item">
                                     <td class="product-name">
                                         {!! trans('messages.detailorder', ['fromlocation' => $fromLocationName, 
-                                                                          'tolocation' => $toLocationName, 
-                                                                          'ride' => $depart->name,
-                                                                          'departdate' => date('F j, Y', strtotime($depart->departDate)),
-                                                                          'departtime' =>  $depart->departTime]) !!}
+                                                                            'tolocation' => $toLocationName, 
+                                                                            'ride' => $depart->name,
+                                                                            'departdate' => date('F j, Y', strtotime($depart->departDate)),
+                                                                            'departtime' =>  $depart->departTime]) !!}
                                         <br>{{ trans('messages.people') }}: {{ $adults + $children }} <strong class="product-quantity">×{{ $adults + $children }}</strong>
                                     </td>
                                     <td class="product-total">
@@ -154,10 +237,10 @@
                                 <tr class="order_item">
                                     <td class="">
                                         {!! trans('messages.detailorder', ['fromlocation' => $toLocationName, 
-                                                                          'tolocation' => $fromLocationName, 
-                                                                          'ride' => $return->name,
-                                                                          'departdate' => date('F j, Y', strtotime($return->departDate)),
-                                                                          'departtime' =>  $return->departTime]) !!}
+                                                                            'tolocation' => $fromLocationName, 
+                                                                            'ride' => $return->name,
+                                                                            'departdate' => date('F j, Y', strtotime($return->departDate)),
+                                                                            'departtime' =>  $return->departTime]) !!}
                                         <br>{{ trans('messages.people') }}: {{ $adults + $children }} <strong class="product-quantity">×{{ $adults + $children }}</strong>	</td>
                     
                                     <td class="product-total">
@@ -205,7 +288,7 @@
                             <input type="checkbox" class="form-check-input" wire:model="agreepolicy" required>
                             <label class="form-check-label" for="agreepolicy">
                                 {!! trans('messages.policy') !!}
-                              </label>
+                            </label>
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -214,13 +297,6 @@
                                 {{ trans('messages.bookandpay') }}
                             </button>
                         </div>
-                    <!--
-                        <div class="col-md-12 mt-2">
-                            <button wire:click="saveAndPayLater" wire:loading.attr="disabled" class="btn btn-danger form-control">
-                                {{ trans('messages.saveandpaylater') }}
-                            </button>
-                        </div>
-                    -->
                     </div>
                 </div> 
             </div>

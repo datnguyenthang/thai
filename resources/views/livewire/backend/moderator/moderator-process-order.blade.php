@@ -23,7 +23,12 @@
     
     <!-- Let's also add the backdrop / overlay here -->
     <div class="modal-backdrop fade show" id="backdrop"
-        style="display: @if($showModalStatus === true || $showModalPayment === true || $showModalUpdateOrder === true) block @else none @endif;"></div>
+        style="display: @if($showModalStatus === true || 
+                            $showModalPayment === true || 
+                            $showModalUpdateOrder === true || 
+                            $showModalRefund) block 
+                        @else 
+                            none 
+                        @endif;">
     </div>
-
 </div>

@@ -52,12 +52,21 @@ class ProceedBooking extends Component
     public $lastName;
     public $email;
     public $phone;
+
     public $pickup;
     public $pickupAny;
     public $pickupAnyOther;
     public $dropoff;
     public $dropoffAny;
     public $dropoffAnyOther;
+
+    public $returnPickup;
+    public $returnPickupAny;
+    public $returnPickupAnyOther;
+    public $returnDropoff;
+    public $returnDropoffAny;
+    public $returnDropoffAnyOther;
+
     public $note;
     public $promotionId;
     public $agreepolicy;
@@ -76,6 +85,8 @@ class ProceedBooking extends Component
         'email' => 'required|max:255|email|regex:/(.+)@(.+)\.(.+)/i',
         'pickupAnyOther' => 'max:255|required_if:pickup,'.PICKUPANYOTHER,
         'dropoffAnyOther' => 'max:255|required_if:dropoff,'.DROPOFFANYOTHER,
+        'returnPickupAnyOther' => 'max:255|required_if:returnPickup,'.PICKUPANYOTHER,
+        'returnDropoffAnyOther' => 'max:255|required_if:returnDropoff,'.DROPOFFANYOTHER,
     ];
 
     public function mount(Request $request) {
@@ -131,6 +142,8 @@ class ProceedBooking extends Component
         $this->pickupdropoffs = Pickupdropoff::get();
         $this->pickup = 0;
         $this->dropoff = 0;
+        $this->returnPickup = 0;
+        $this->returnDropoff = 0;
 
         $this->originalPrice = $this->onlinePrice = $this->departPrice + $this->returnPrice;
         $this->finalPrice = $this->departPrice + $this->returnPrice;
@@ -144,6 +157,14 @@ class ProceedBooking extends Component
         if ($this->dropoff == DROPOFFANY) $this->dropoffAny =  $this->pickupdropoffs->first()->name;
     }
 
+    public function updatedReturnPickup($returnPickup){
+        if ($this->returnPickup == PICKUPANY) $this->returnPickupAny =  $this->pickupdropoffs->first()->name;
+    }
+
+    public function updatedReturnDropoff($returnDropoff){
+        if ($this->returnDropoff == DROPOFFANY) $this->returnDropoffAny =  $this->pickupdropoffs->first()->name;
+    }
+
     public function bookTicket(){
 
         $this->withValidator(function ($validator) {
@@ -151,15 +172,6 @@ class ProceedBooking extends Component
                 $this->emit('scroll-to-error'); // or dispatch browser event here
             }
         })->validate();
-        
-        //set value for pickup and dropoff
-        if ($this->pickup == PICKUPDONTUSESERVICE) $this->pickup = "";
-        if ($this->pickup == PICKUPANY) $this->pickup = $this->pickupAny;
-        if ($this->pickup == PICKUPANYOTHER) $this->pickup = $this->pickupAnyOther;
-
-        if ($this->dropoff == DROPOFFDONTUSESERVICE) $this->dropoff = "";
-        if ($this->dropoff == DROPOFFANY) $this->dropoff = $this->dropoffAny;
-        if ($this->dropoff == DROPOFFANYOTHER) $this->dropoff = $this->dropoffAnyOther;
 
         $codeOrder = Order::generateCode();
         $codeDepart = $codeOrder.'-1';
@@ -179,8 +191,6 @@ class ProceedBooking extends Component
                 'phone' => $this->phone,
                 'email' => $this->email,
                 'note' => $this->note,
-                'pickup' => $this->pickup,
-                'dropoff' => $this->dropoff,
                 'adultQuantity' => intVal($this->adults),
                 'childrenQuantity' => intVal($this->children),
                 'onlinePrice' => $this->onlinePrice, 
@@ -216,6 +226,8 @@ class ProceedBooking extends Component
                 'seatClassId' => intVal($this->order_depart_seatClassId),
                 'price' => intVal($this->departPrice), 
                 'type' => DEPARTURETICKET,
+                'pickup' => $this->getPickup(),
+                'dropoff' => $this->getDropOff(),
                 'status' => 0,
             ]);
             
@@ -228,6 +240,8 @@ class ProceedBooking extends Component
                     'seatClassId' => intVal($this->order_return_seatClassId),
                     'price' => intVal($this->returnPrice),
                     'type' => RETURNTICKET,
+                    'pickup' => $this->getReturnPickup(),
+                    'dropoff' => $this->getReturnDropOff(),
                     'status' => 0,
                 ]);
             }
@@ -239,6 +253,34 @@ class ProceedBooking extends Component
             DB::rollback();
             throw $e;
         }
+    }
+
+    public function getPickup(){
+        if ($this->pickup == PICKUPDONTUSESERVICE) $this->pickup = "";
+        if ($this->pickup == PICKUPANY) $this->pickup = $this->pickupAny;
+        if ($this->pickup == PICKUPANYOTHER) $this->pickup = $this->pickupAnyOther;
+        return $this->pickup;
+    }
+
+    public function getDropOff(){
+        if ($this->dropoff == DROPOFFDONTUSESERVICE) $this->dropoff = "";
+        if ($this->dropoff == DROPOFFANY) $this->dropoff = $this->dropoffAny;
+        if ($this->dropoff == DROPOFFANYOTHER) $this->dropoff = $this->dropoffAnyOther;
+        return $this->dropoff;
+    }
+
+    public function getReturnPickup(){
+        if ($this->returnPickup == PICKUPDONTUSESERVICE) $this->returnPickup = "";
+        if ($this->returnPickup == PICKUPANY) $this->returnPickup = $this->returnPickupAny;
+        if ($this->returnPickup == PICKUPANYOTHER) $this->returnPickup = $this->returnPickupAnyOther;
+        return $this->returnPickup;
+    }
+
+    public function getReturnDropOff(){
+        if ($this->returnDropoff == DROPOFFDONTUSESERVICE) $this->returnDropoff = "";
+        if ($this->returnDropoff == DROPOFFANY) $this->returnDropoff = $this->returnDropoffAny;
+        if ($this->returnDropoff == DROPOFFANYOTHER) $this->returnDropoff = $this->returnDropoffAnyOther;
+        return $this->returnDropoff;
     }
 
     public function removeCoupon() {
@@ -267,7 +309,7 @@ class ProceedBooking extends Component
         if ($coupon && Carbon::now()->between($coupon->fromDate, $coupon->toDate)) {
             //check valid quantity of coupon 
             $ordersWithCoupon = Order::where('promotionId', $coupon->id)
-                                       ->where('status', COMPLETEDORDER)->count();
+                                        ->where('status', COMPLETEDORDER)->count();
 
             if ($coupon->quantity == 0) { // if coupon has unlimited used time
                 $this->isValidCoupon = true;

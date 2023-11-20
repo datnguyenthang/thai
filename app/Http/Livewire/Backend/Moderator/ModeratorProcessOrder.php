@@ -55,7 +55,7 @@ class ModeratorProcessOrder extends Component
     public function mount($orderId){
         $this->orderId = $orderId;
         $this->order = OrderLib::getOrderDetail($this->orderId);
-        
+
         $this->orderStatuses = OrderStatus::select('order_statuses.status', 'order_statuses.orderId', 'order_statuses.note', 'order_statuses.changeDate', 'u.name')
                                             ->leftJoin('users as u', 'u.id', '=', 'order_statuses.userId')
                                             ->where('orderId', $this->orderId)->get();

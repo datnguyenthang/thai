@@ -20,12 +20,12 @@
 </head>
 <body>
     <div id="app">
-        @include('admin.layouts.navbar')
+        @include('agent.layouts.navbar')
 
         <!--Main layout-->
         <!--<main style="margin-top: 58px;">-->
             <div class="container-fluid pt-3 mt-5">
-                @include('admin.layouts.flash-message')
+                @include('agent.layouts.flash-message')
                 {{ $slot }}
             </div>
         <!--</main>-->

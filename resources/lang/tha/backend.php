@@ -56,6 +56,12 @@ return [
     'paymentimages' => 'Payment Upload Image',
     'processingorder' => 'Processing Order...',
     'updateorder' => 'Update Order',
+    'pickupinfo' => 'Pickup Infomation',
+    'dropoffinfo' => 'Dropoff Infomation',
+    'pickupinforeturn' => 'Return Dropoff Infomation',
+    'dropoffinforeturn' => 'Return Dropoff Infomation',
+    'returnpickup' => 'Return Pick up',
+    'returndropoff' => 'Return Drop off',
 
     'firstname' => 'First Name',
     'lastname' => 'Last Name',

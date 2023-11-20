@@ -1,3 +1,4 @@
+<!----Modal Ride------->
 {{--Show modal boostrap to quick view detail order--}}
 <div class="modal fade show" tabindex="-1" wire:model="boardingPass" wire:key="modal-{{ $rideId }}"
     style="display: @if($showModal === true) block @else none @endif;" role="dialog">
@@ -23,10 +24,8 @@
                                 <th>Full Name</th>
                                 <th>Customer Type</th>
                                 <th>User Name</th>
-                                <th>Price</th>
                                 <th>Payment Status</th>
                                 <th>Status</th>
-                                <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -47,7 +46,6 @@
                                     <td>{{ $listPassenger->fullname }}</td>
                                     <td>{{ $listPassenger->CustomerType }}</td>
                                     <td>{{ $listPassenger->name }}</td>
-                                    <th>{{ round($listPassenger->price) }}</th>
                                     <td>{{ PAYMENTSTATUS[$listPassenger->paymentStatus] }}</td>
                                     <td>{{ ORDERSTATUS[$listPassenger->status] }}</td>
                                     <td>
@@ -58,16 +56,6 @@
                                             {{ trans('backend.vieworder') }}
                                         </a>
                                     </td>
-                                    {{--
-                                    <td>
-                                        <button class="btn bg_own_color text-light"
-                                            wire:key="passenger-{{ $listPassenger->orderTicketId }}"
-                                            wire:click="printBoardingPass({{ $rideId }}, {{ $listPassenger->orderTicketId }})"
-                                            wire:loading.attr="disabled">
-                                                {{ trans('backend.printboardingpass') }}
-                                        </button>
-                                    </td>
-                                    --}}
                                     <td>
                                         <button class="btn bg_own_color text-light"
                                             wire:key="passenger-{{ $listPassenger->orderTicketId }}"

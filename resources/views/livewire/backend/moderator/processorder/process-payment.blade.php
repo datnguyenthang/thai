@@ -23,14 +23,6 @@
                                 <th>{{ $payment->transactionCode ?? '' }}</th>
                                 <th>{{ !is_null($payment->paymentStatus) ? PAYMENTSTATUS[$payment->paymentStatus] : '' }}</th>
                                 <th>{{ $payment->transactionDate ? date('Y-m-d H:i:s', strtotime($payment->transactionDate)) : '' }}</th>
-
-                                @if(($payment->paymentMethod == 3 || $payment->paymentMethod == 4) && auth()->user()->role == 'manager')
-                                    <th>
-                                        <a class="btn btn bg_own_color text-light" 
-                                            onclick="confirm('Are you sure for making refund on this order?') || event.stopImmediatePropagation()"
-                                            wire:click="refundOrder({{ $orderId, $payment->transactionCode}})">{{ trans('backend.refund') }}</a>
-                                    </th>
-                                @endif
                             </tr>
                             @endforeach
                             <tr>
@@ -38,7 +30,16 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th><button class="btn btn bg_own_color text-light" wire:click="viewOrderPayment()">{{ trans('backend.updatepayment') }}</button></th>
+                                <th>
+                                    <button class="btn btn bg_own_color text-light" wire:click="viewOrderPayment()">{{ trans('backend.updatepayment') }}</button>
+
+                                    @if(($payment->paymentMethod == 3 ||
+                                        $payment->paymentMethod == 4) && 
+                                        auth()->user()->role == 'manager')
+                                        <button class="btn btn bg_own_color text-light" 
+                                            wire:click="viewRefundPayment()">{{ trans('backend.refund') }}</button>
+                                    @endif
+                                </th>
                             </tr>
                     @endif
                     <tbody>
@@ -108,6 +109,49 @@ style="display: @if($showModalPayment === true) block @else none @endif;" role="
             </div>
             <div class="modal-footer">
                 <button type="button" wire:click="$set('showModalPayment', false)" class="btn btn-secondary">{{ trans('backend.close') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{--Show modal boostrap to refund order payment in Omise--}}
+<div class="modal fade show" tabindex="-1" 
+style="display: @if($showModalRefund === true) block @else none @endif;" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">{{ trans('backend.refundorderpayment') }}</h5>
+                <button class="btn-close" wire:click="$set('showModalRefund', false)"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <span class="form-label fw-bold">{{ trans('backend.paymentmethod') }}</span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12 mt-3">
+                        <div class="form-group">
+                            <span class="form-label fw-bold">{{ trans('backend.paymentmethodstatus') }}</span>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                        <button class="btn bg_own_color text-light"
+                                            wire:click="refundOrder({{ $orderId, $payment->transactionCode}})"
+                                            wire:loading.attr="disabled">{{ trans('backend.update') }}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" wire:click="$set('showModalRefund', false)" class="btn btn-secondary">{{ trans('backend.close') }}</button>
             </div>
         </div>
     </div>

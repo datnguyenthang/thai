@@ -8,7 +8,6 @@ style="display: @if($showModal === true) block @else none @endif;" role="dialog"
                 <button class="btn-close" wire:click="$set('showModal', false)"></button>
             </div>
             <div class="modal-body">
-                
                 @if($showModal === true && $orderDetail)
                     <div class="row">
                         <div class="col-md-6">
@@ -18,7 +17,6 @@ style="display: @if($showModal === true) block @else none @endif;" role="dialog"
                             <p>{{ trans('backend.phone') }}: {{ $orderDetail['phone'] }}</p>
                             <p>{{ trans('backend.email') }}: {{ $orderDetail['email'] }}</p>
                             <p>{{ trans('backend.bookingdate') }}: {{ $orderDetail['bookingDate'] }}</p>
-                            <p>{{ trans('backend.pickup') }}: {{ $orderDetail['pickup'] }}</p>
                         </div>
                         <div class="col-md-6">
                             <!--<p>{{ trans('backend.id') }} : {{ $orderDetail['id'] }}</p>-->
@@ -28,7 +26,6 @@ style="display: @if($showModal === true) block @else none @endif;" role="dialog"
                             <p>{{ trans('backend.children') }}: {{ $orderDetail['childrenQuantity'] }}</p>
                             <p>{{ trans('backend.note') }}: {{ $orderDetail['note'] }}</p>
                             <p>{{ trans('backend.orderstatus') }}: {{ ORDERSTATUS[$orderDetail->status] }}</p>
-                            <p>{{ trans('backend.dropoff') }}: {{ $orderDetail['dropoff'] }}</p>
                         </div>
                     </div>
                     <hr class="dashed-stroke">
@@ -45,6 +42,8 @@ style="display: @if($showModal === true) block @else none @endif;" role="dialog"
                                         <p>{{ trans('backend.departtime') }} : {{ $orderTicket['departTime'] }}</p>
                                         <p>{{ trans('backend.returntime') }}: {{ $orderTicket['returnTime'] }}</p>
                                         <p>{{ trans('backend.departdate') }}: {{ $orderTicket['departDate'] }}</p>
+                                        <p>{{ trans('backend.pickup') }}: {{ $orderTicket['pickup'] }}</p>
+                                        <p>{{ trans('backend.dropoff') }}: {{ $orderTicket['dropoff'] }}</p>
                                         <button class="btn bg_own_color text-light"
                                             wire:click="downnloadTicket({{ $orderTicket->orderId}}, {{$orderTicket->id}})"
                                             wire:loading.attr="disabled">{{ trans('backend.downloadeticket') }}</button>
@@ -56,8 +55,6 @@ style="display: @if($showModal === true) block @else none @endif;" role="dialog"
                                 @endif
                             @endif
 
-                            
-
                             @if($orderDetail->isReturn == ROUNDTRIP)
                                 @if($orderTicket->type == DEPARTURETICKET)
                                     <div class="col-md-6">
@@ -68,6 +65,8 @@ style="display: @if($showModal === true) block @else none @endif;" role="dialog"
                                         <p>{{ trans('backend.departtime') }} : {{ $orderTicket['departTime'] }}</p>
                                         <p>{{ trans('backend.returntime') }}: {{ $orderTicket['returnTime'] }}</p>
                                         <p>{{ trans('backend.departdate') }}: {{ $orderTicket['departDate'] }}</p>
+                                        <p>{{ trans('backend.pickup') }}: {{ $orderTicket['pickup'] }}</p>
+                                        <p>{{ trans('backend.dropoff') }}: {{ $orderTicket['dropoff'] }}</p>
                                         <button class="btn bg_own_color text-light"
                                             wire:click="downnloadTicket({{ $orderTicket->orderId }}, {{$orderTicket->id}})"
                                             wire:loading.attr="disabled">{{ trans('backend.downloadeticket') }}</button>
@@ -87,6 +86,8 @@ style="display: @if($showModal === true) block @else none @endif;" role="dialog"
                                         <p>{{ trans('backend.departtime') }} : {{ $orderTicket['departTime'] }}</p>
                                         <p>{{ trans('backend.returntime') }}: {{ $orderTicket['returnTime'] }}</p>
                                         <p>{{ trans('backend.departdate') }}: {{ $orderTicket['departDate'] }}</p>
+                                        <p>{{ trans('backend.pickup') }}: {{ $orderTicket['pickup'] }}</p>
+                                        <p>{{ trans('backend.dropoff') }}: {{ $orderTicket['dropoff'] }}</p>
                                         <button class="btn bg_own_color text-light"
                                             wire:click="downnloadTicket({{ $orderTicket->orderId }}, {{$orderTicket->id}})"
                                             wire:loading.attr="disabled">{{ trans('backend.downloadeticket') }}</button>

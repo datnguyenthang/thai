@@ -13,10 +13,10 @@
                     <tr class="order_item">
                         <td class="product-name">
                             {!! trans('messages.detailorder', ['fromlocation' => $fromLocationName, 
-                                                              'tolocation' => $toLocationName, 
-                                                              'ride' => isset($depart->name) ? $depart->name : '',
-                                                              'departdate' => isset($depart->departDate) ? date('F j, Y', strtotime($depart->departDate)) : '',
-                                                              'departtime' => isset($depart->departTime) ? $depart->departTime : '']) !!}
+                                                                'tolocation' => $toLocationName, 
+                                                                'ride' => isset($depart->name) ? $depart->name : '',
+                                                                'departdate' => isset($depart->departDate) ? date('F j, Y', strtotime($depart->departDate)) : '',
+                                                                'departtime' => isset($depart->departTime) ? $depart->departTime : '']) !!}
                             <br>{{ trans('messages.people') }}: {{ $adults + $children }} <strong class="product-quantity">×{{ $adults + $children }}</strong>
                         </td>
                         <td class="product-total">
@@ -29,10 +29,10 @@
                     <tr class="order_item">
                         <td class="">
                             {!! trans('messages.detailorder', ['fromlocation' => $toLocationName, 
-                                                              'tolocation' => $fromLocationName, 
-                                                              'ride' => isset($return->name) ? $return->name : '',
-                                                              'departdate' => isset($return->departDate) ? date('F j, Y', strtotime($return->departDate)) : '',
-                                                              'departtime' => isset($return->departTime) ? $return->departTime : '']) !!}
+                                                                'tolocation' => $fromLocationName, 
+                                                                'ride' => isset($return->name) ? $return->name : '',
+                                                                'departdate' => isset($return->departDate) ? date('F j, Y', strtotime($return->departDate)) : '',
+                                                                'departtime' => isset($return->departTime) ? $return->departTime : '']) !!}
                             <br>{{ trans('messages.people') }}: {{ $adults + $children }} <strong class="product-quantity">×{{ $adults + $children }}</strong>	</td>
         
                         <td class="product-total">
@@ -155,7 +155,7 @@
                     <div class="col-md-6">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">{{ trans('messages.pickupinfo') }}</span>
+                                <span class="input-group-text bg-secondary text-light">{{ trans('backend.pickupinfo') }}</span>
                             </div>
                             <p type="text" class="form-control mb-0">
                                 @if($pickup == PICKUPANY) {{ $pickupAny }} @endif
@@ -167,7 +167,7 @@
                     <div class="col-md-6">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">{{ trans('messages.dropoffinfo') }}</span>
+                                <span class="input-group-text bg-secondary text-light">{{ trans('backend.dropoffinfo') }}</span>
                             </div>
                             <p type="text" class="form-control mb-0">
                                 @if ($dropoff == DROPOFFANY) {{ $dropoffAny }} @endif
@@ -176,6 +176,34 @@
                         </div>
                     </div>
                 </div>
+                @if ($tripType == ROUNDTRIP)
+                    <!---Pickup & dropoff information--->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-secondary text-light">{{ trans('backend.pickupinforeturn') }}</span>
+                                </div>
+                                <p type="text" class="form-control mb-0">
+                                    @if($returnPickup == PICKUPANY) {{ $returnPickupAny }} @endif
+                                    @if($returnPickup == PICKUPANYOTHER) {{ $returnPickupAnyOther }} @endif
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-secondary text-light">{{ trans('backend.dropoffinforeturn') }}</span>
+                                </div>
+                                <p type="text" class="form-control mb-0">
+                                    @if ($returnDropoff == DROPOFFANY) {{ $returnDropoffAny }} @endif
+                                    @if ($returnDropoff == DROPOFFANYOTHER) {{ $returnDropoffAnyOther }} @endif
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
                 <!--NOTE-->
                 <div class="row mt-3">

@@ -11,7 +11,7 @@ class OrderTicket extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'orderId', 'rideId', 'code', 'seatClassId', 'price', 'type', 'status'
+        'id', 'orderId', 'rideId', 'code', 'seatClassId', 'price', 'type', 'pickup', 'dropoff', 'status'
     ];
 
     public function Order()

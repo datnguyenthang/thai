@@ -142,6 +142,41 @@ class TicketLib {
         }, $fileName);
     }
 
+    public static function printBoardingPass($orderTicketId){
+        $orderTicket = OrderLib::getOrderTicket($orderTicketId);
+        $customPaper = array(0,0,302,378);
+
+        $logoPath = public_path('img/logo.png');
+        $logoData = File::get($logoPath);
+        $logoBase64 = base64_encode($logoData);
+
+        // Initialize Dompdf with custom options
+        $tmp = sys_get_temp_dir();
+
+        $dompdf = new Dompdf([
+            'logOutputFile' => '',
+            'isRemoteEnabled' => true,
+            'fontDir' => $tmp,
+            'fontCache' => $tmp,
+            'tempDir' => $tmp,
+            'chroot' => $tmp,
+        ]);
+
+        ob_clean();
+
+        $dompdf->loadHTML(View::make('pdf.boardingPass', compact('orderTicket', 'logoBase64')));
+        $dompdf->setPaper($customPaper, 'portrait');
+        $dompdf->set_option('isHtml5ParserEnabled', true);
+        $dompdf->render();
+
+        header('Content-Type: application/pdf');
+        //header('Content-Disposition: attachment; filename="output.pdf"');
+
+        $dompdf->stream('', array('Attachment' => 0));
+        exit(0);
+    }
+    
+
     public function testPDF(){
         $order = Order::with(['orderTickets' => function($orderTicket){
             $orderTicket->select('order_tickets.*', 'r.*', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'sc.name as seatClassName')//,'sc.name as seatClassName')

@@ -51,6 +51,8 @@ return [
     //PROCESSBOOKING
     'pickupinfo' => 'Pickup Information',
     'dropoffinfo' => 'Dropoff Information',
+    'pickupinforeturn' => 'Return Dropoff Infomation',
+    'dropoffinforeturn' => 'Return Dropoff Infomation',
     'dontusetranferservie' => 'I dont use transfer service',
     'pickupany' => 'Drop off any hotel/resort',
     'pickupother' => 'Other hotel/resort',

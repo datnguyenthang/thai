@@ -166,7 +166,7 @@
                     <div class="col-md-6">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-secondary text-light">{{ trans('messages.pickupinfo') }}</span>
+                                <span class="input-group-text bg-secondary text-light">{{ trans('backend.pickupinfo') }}</span>
                             </div>
                             <p type="text" class="form-control mb-0">
                                 @if($pickup == PICKUPANY) {{ $pickupAny }} @endif
@@ -178,7 +178,7 @@
                     <div class="col-md-6">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text bg-secondary text-light">{{ trans('messages.dropoffinfo') }}</span>
+                                <span class="input-group-text bg-secondary text-light">{{ trans('backend.dropoffinfo') }}</span>
                             </div>
                             <p type="text" class="form-control mb-0">
                                 @if ($dropoff == DROPOFFANY) {{ $dropoffAny }} @endif
@@ -187,6 +187,35 @@
                         </div>
                     </div>
                 </div>
+
+                @if ($tripType == ROUNDTRIP)
+                    <!---Pickup & dropoff information--->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-secondary text-light">{{ trans('backend.pickupinforeturn') }}</span>
+                                </div>
+                                <p type="text" class="form-control mb-0">
+                                    @if($returnPickup == PICKUPANY) {{ $returnPickupAny }} @endif
+                                    @if($returnPickup == PICKUPANYOTHER) {{ $returnPickupAnyOther }} @endif
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-secondary text-light">{{ trans('backend.dropoffinforeturn') }}</span>
+                                </div>
+                                <p type="text" class="form-control mb-0">
+                                    @if ($returnDropoff == DROPOFFANY) {{ $returnDropoffAny }} @endif
+                                    @if ($returnDropoff == DROPOFFANYOTHER) {{ $returnDropoffAnyOther }} @endif
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
                 <!--NOTE-->
                 <div class="row mt-3">

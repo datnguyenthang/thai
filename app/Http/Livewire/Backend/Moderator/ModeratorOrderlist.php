@@ -102,6 +102,11 @@ class ModeratorOrderlist extends Component
         return TicketLib::downloadBoardingPass($orderTicketId);
     }
 
+    public function printBoardingPass($orderId = 0, $orderTicketId = 0){
+        $this->orderDetail = OrderLib::getOrderDetail($orderId);
+        return TicketLib::printBoardingPass($orderTicketId);
+    }
+
     public function viewOrder($orderId) {
         $this->orderDetail = OrderLib::getOrderDetail($orderId);
         $this->showModal = true;

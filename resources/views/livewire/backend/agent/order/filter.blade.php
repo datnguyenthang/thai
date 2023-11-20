@@ -20,7 +20,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.adults') }}</span>
-                <input type="number" id="adults" wire:model="adults" name="adults" class="form-control"  min="1" required/>
+                <input type="number" id="adults" wire:model="adults" name="adults" class="form-control" min="1" required/>
                 @error('adults') <span class="text-danger error">{{ $message }}</span> @enderror
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.departure') }}</span>
-                <select id="fromLocation" name="fromLocation" class="form-select" wire:model="fromLocation" required placeholder="{{ trans('messages.pickup') }}">
+                <select id="fromLocation" name="fromLocation" class="form-select" wire:model="fromLocation" wire:change="chooseFromLocation($event.target.value)" required placeholder="{{ trans('messages.pickup') }}">
                     @foreach($fromLocationList as $location)
                         <option value="{{ $location->id }}">{{ $location->name }}</option>
                     @endforeach
@@ -48,7 +48,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.destination') }}</span>
-                <select id="toLocation" name="toLocation" class="form-select" wire:model="toLocation" required placeholder="{{ trans('messages.dropoff') }}">
+                <select id="toLocation" name="toLocation" class="form-select" wire:model="toLocation" wire:change="chooseToLocation($event.target.value)" required placeholder="{{ trans('messages.dropoff') }}">
                     @foreach($toLocationList as $location)
                         <option value="{{ $location->id }}">{{ $location->name }}</option>
                     @endforeach

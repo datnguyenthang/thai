@@ -53,11 +53,20 @@
                     {{ trans('backend.children') }}: <strong>{{ $order->childrenQuantity }}</strong>
                 </li>
                 <li>
-                    {{ trans('backend.pickup') }}: <strong>{{ $order->pickup }}</strong>
-                </li>	
-                <li>
-                    {{ trans('backend.dropoff') }}: <strong>{{ $order->dropoff }}</strong>
+                    {{ trans('backend.pickup') }}: <strong>{{ $order->orderTickets[0]->pickup }}</strong>
                 </li>
+                <li>
+                    {{ trans('backend.dropoff') }}: <strong>{{ $order->orderTickets[0]->dropoff }}</strong>
+                </li>
+
+                @if(isset($order->orderTickets[1]))
+                    <li>
+                        {{ trans('backend.returnpickup') }}: <strong>{{ $order->orderTickets[1]->pickup }}</strong>
+                    </li>
+                    <li>
+                        {{ trans('backend.returndropoff') }}: <strong>{{ $order->orderTickets[1]->dropoff }}</strong>
+                    </li>
+                @endif
                 <li>
                     {{ trans('backend.note') }}: <strong>{{ $order->note }}</strong>
                 </li>

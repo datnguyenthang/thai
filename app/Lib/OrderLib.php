@@ -83,7 +83,7 @@ class OrderLib {
                                 'sc.name as seatClassName', 'sc.price as seatClassPrice',
                                 DB::raw('CONCAT(COALESCE(firstname, ""), " ", COALESCE(lastName, "")) as fullname'), 'o.customerType',
                                 'o.phone', 'o.originalPrice', 'o.couponAmount', 'o.finalPrice', 'o.agentId',
-                                'o.code', 'o.email', 'o.bookingDate', 'o.note', 'o.adultQuantity', 'o.childrenQuantity', 'o.pickup', 'o.dropoff',
+                                'o.code', 'o.email', 'o.bookingDate', 'o.note', 'o.adultQuantity', 'o.childrenQuantity', 'order_tickets.pickup', 'order_tickets.dropoff',
                                 'o.childrenQuantity', 'p.code as promotionCode', 'p.name as promotionName', 'p.discount as discount', 
                                 'op.paymentStatus', 'os.status as orderStatus', 'a.name as agentName', 'ct.type as agentType')
                         ->leftJoin('rides as r', 'r.id', '=', 'order_tickets.rideId')

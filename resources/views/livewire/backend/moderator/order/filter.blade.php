@@ -20,7 +20,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.adults') }}</span>
-                <input type="number" id="adults" wire:model.defer="adults" name="adults" class="form-control" min="1" required/>
+                <input type="number" id="adults" wire:model="adults" name="adults" class="form-control" min="1" required/>
                 @error('adults') <span class="text-danger error">{{ $message }}</span> @enderror
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.children') }}</span>
-                <input type="number" id="children" wire:model.defer="children" name="children" class="form-control" min="0" required/>
+                <input type="number" id="children" wire:model="children" name="children" class="form-control" min="0" required/>
                 @error('children') <span class="text-danger error">{{ $message }}</span> @enderror
             </div>
         </div>

@@ -22,6 +22,8 @@ return new class extends Migration
                 $table->integer('seatClassId');
                 $table->tinyInteger('type');/* 1=>Departure, 2=>Return */
                 $table->decimal('price', $precision = 10, $scale = 2);
+                $table->string('pickup')->nullable($value = true);
+                $table->string('dropoff')->nullable($value = true);
                 $table->tinyInteger('status')->default(0); /* 0=>Book, 9=>Already paid */
                 $table->timestamps();
 

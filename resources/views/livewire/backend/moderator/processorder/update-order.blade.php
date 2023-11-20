@@ -28,6 +28,11 @@
 
                     <!---Pickup & dropoff information--->
                     <div class="row mt-3">
+                        <h4 class="select-departure-header mb-3 bg_own_color" >
+                            {{ $order->orderTickets[0]->fromLocationName }}
+                                <i class="fas fa-arrow-right fa-md fa-1x"></i>
+                            {{ $order->orderTickets[0]->toLocationName }}
+                        </h4>
                         <div class="col-md-6">
                             <h4>{{ trans('messages.pickupinfo') }}</h4>
                             <div class="form-check">
@@ -90,6 +95,78 @@
                             @endif
                         </div>
                     </div>
+
+                    @if($tripType == ROUNDTRIP)
+                        <!---Pickup & dropoff information--->
+                        <div class="row mt-3">
+                            <h4 class="select-departure-header mb-3 bg_own_color" >
+                                {{ $order->orderTickets[1]->fromLocationName }}
+                                    <i class="fas fa-arrow-right fa-md fa-1x"></i>
+                                {{ $order->orderTickets[1]->toLocationName }}
+                            </h4>
+                            <div class="col-md-6">
+                                <h4>{{ trans('messages.pickupinfo') }}</h4>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" wire:model="returnPickup" name="returnPickup" id="returnpickup1" value="0" checked>
+                                    <label class="form-check-label" for="radio1">{{ trans('messages.dontusetranferservie') }}</label>
+                                </div>
+                                    
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" wire:model="returnPickup" name="returnPickup" id="returnpickup2" value="1">
+                                    <label class="form-check-label" for="radio2">{{ trans('messages.pickupany') }}</label>
+                                </div>
+                                @if ($returnPickup == PICKUPANY)
+                                    <select id="selectPickup" name="pickupAny" class="form-select" wire:model="returnPickupAny">
+                                        @foreach($pickupdropoffs as $pickupdropoff)
+                                            <option value="{{ $pickupdropoff->name }}">{{ $pickupdropoff->name }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                                    
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" wire:model="returnPickup" name="returnPickup" id="returnpickup3" value="2">
+                                    <label class="form-check-label" for="radio3">{{ trans('messages.pickupother') }}</label>
+                                </div>
+                                @if ($returnPickup == PICKUPANYOTHER)
+                                    <div class="form-input row">
+                                        <input class="form-control w-75" type="text" name="returnPickupAnyOther" wire:model="returnPickupAnyOther">
+                                        @error('pickupAnyOther') <span class="text-danger error">{{ $message }}</span> @enderror
+                                    </div>
+                                @endif
+                            </div>
+    
+                            <div class="col-md-6">
+                                <h4>{{ trans('messages.dropoffinfo') }}</h4>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" wire:model="returnDropoff" name="returnDropoff" id="returndropoff1" value="0" checked>
+                                    <label class="form-check-label" for="radio1">{{ trans('messages.dontusetranferservie') }}</label>
+                                </div>
+                                    
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" wire:model="returnDropoff" name="returnDropoff" id="returndropoff2" value="1">
+                                    <label class="form-check-label" for="radio2">{{ trans('messages.dropoffany') }}</label>
+                                </div>
+                                @if ($returnDropoff == DROPOFFANY)
+                                    <select id="selectDropoff" name="returnDropoffAny" class="form-select" wire:model="returnDropoffAny">
+                                        @foreach($pickupdropoffs as $pickupdropoff)
+                                            <option value="{{ $pickupdropoff->name }}">{{ $pickupdropoff->name }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                                    
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" wire:model="returnDropoff" name="returnDropoff" id="returndropoff3" value="2">
+                                    <label class="form-check-label" for="radio3">{{ trans('messages.dropoffother') }}</label>
+                                </div>
+                                @if ($returnDropoff == DROPOFFANYOTHER)
+                                    <div class="form-input row">
+                                        <input class="form-control w-75" type="text" wire:model="returnDropoffAnyOther" name="returnDropoffAnyOther">
+                                        @error('returnDropoffAnyOther') <span class="text-danger error">{{ $message }}</span> @enderror
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
 
                     <div class="row">
                         <div class="col-md-12 mt-3">

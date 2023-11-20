@@ -8,6 +8,6 @@ class AgentDashboard extends Component
 {
     public function render()
     {
-        return view('livewire.backend.agent.agent-dashboard');
+        return view('livewire.backend.agent.agent-dashboard')->layout('agent.layouts.app');
     }
 }

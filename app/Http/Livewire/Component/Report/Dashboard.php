@@ -82,6 +82,12 @@ class Dashboard extends Component
         return TicketLib::downloadBoardingPass($orderTicketId);
     }
 
+    public function printBoardingPass($rideId = 0, $orderTicketId = 0){
+        $this->listPassengers = DashboardLib::detailRides($rideId);
+
+        return TicketLib::printBoardingPass($orderTicketId);
+    }
+
     public function render(){
         $perPage = 10;
 

@@ -51,6 +51,9 @@ return [
     //PROCESSBOOKING
     'pickupinfo' => 'ข้อมูลเกี่ยวกับการจอดรับ',
     'dropoffinfo' => 'ข้อมูลเกี่ยวกับการจอดสั่ง',
+    'pickupinforeturn' => 'ข้อมูลการรับสินค้าคืน',
+    'dropoffinforeturn' => 'ข้อมูลการส่งคืนรถ',
+
     'dontusetranferservie' => 'ไม่ต้องการบริการ รับ-ส่ง ',
     'pickupany' => 'จอดรับที่โรงแรม/รีสอร์ตใด',
     'pickupother' => 'จอดรับที่โรงแรม/รีสอร์ตอื่นๆ',
