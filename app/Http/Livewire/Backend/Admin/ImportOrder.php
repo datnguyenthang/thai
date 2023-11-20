@@ -35,7 +35,7 @@ class ImportOrder extends Component
         $orders = Order::get();
 
         foreach($orders as $order){
-            OrderTicket::where('id', $order->id)
+            OrderTicket::where('orderId', $order->id)
                     ->where('type', 1)
                     ->update([
                         'pickup' => $order->pickup,
