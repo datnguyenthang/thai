@@ -131,7 +131,7 @@ class OrderLib {
                     ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = orders.id)');
             })
             ->select('orders.id', 'orders.code', 'u.name as username', 'orders.isReturn', 'ct.name as customerTypeName', 'a.name as agentName', 'orders.channel', 
-                    DB::raw('CONCAT(COALESCE(firstname, ""), " ", COALESCE(lastName, "")) as fullname'), 'orders.phone', 'orders.email', 'orders.note', 'orders.pickup', 'orders.dropoff',
+                    DB::raw('CONCAT(COALESCE(firstname, ""), " ", COALESCE(lastName, "")) as fullname'), 'orders.phone', 'orders.email', 'orders.note',
                     'orders.adultQuantity', 'orders.childrenQuantity', 'orders.finalPrice','orders.bookingDate', 'os.status',
                     'p.name as promotionName', 'op.paymentStatus', 'pm.name as paymentMethod', 'op.transactionCode', 'op.transactionDate')
             ->where(function ($query) use ($orderCode, $customerName, $customerPhone, $customerType, $agentId, $fromLocation, $toLocation, $orderStatus) {

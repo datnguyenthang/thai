@@ -39,6 +39,8 @@ class OrdersExport implements FromCollection, WithHeadings, WithMapping
             'Note',
             'Pickup',
             'Dropoff',
+            'Return Pickup',
+            'Return Dropoff',
             'Depart Trip Name',
             'Depart Date',
             'Depart Price',
@@ -79,11 +81,15 @@ class OrdersExport implements FromCollection, WithHeadings, WithMapping
             $row->departTripName = $ticket->name;
             $row->departDate = $ticket->departDate;
             $row->departPrice = $ticket->price;
+            $row->pickup = $ticket->pickup;
+            $row->dropoff = $ticket->dropoff;
         }
         if ($ticket->type == ROUNDTRIP) {
             $row->returnTripName = $ticket->name;
             $row->returnDate = $ticket->departDate;
             $row->returnPrice = $ticket->price;
+            $row->returnPickup = $ticket->pickup;
+            $row->returnDropoff = $ticket->dropoff;
         }
         $fields = [
             $row->id,
@@ -99,6 +105,8 @@ class OrdersExport implements FromCollection, WithHeadings, WithMapping
             $row->note,
             $row->pickup,
             $row->dropoff,
+            $row->returnPickup,
+            $row->returnDropoff,
             $row->departTripName,
             $row->departDate,
             $row->departPrice,
