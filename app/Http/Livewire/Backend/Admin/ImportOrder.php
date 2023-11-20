@@ -7,6 +7,8 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Order;
+use App\Models\OrderTicket;
 
 class ImportOrder extends Component
 {
@@ -27,6 +29,19 @@ class ImportOrder extends Component
         //} catch (\Exception $e) {
         //    session()->flash('error', 'An error occurred while importing data.');
         //}
+    }
+
+    public function migratePickupDropoff(){
+        $orders = Order::get();
+
+        foreach($orders as $order){
+            OrderTicket::where('id', $order->id)
+                    ->where('type', 1)
+                    ->update([
+                        'pickup' => $order->pickup,
+                        'dropoff' => $order->dropoff,
+                    ]);
+        }
     }
 
     public function render() {
