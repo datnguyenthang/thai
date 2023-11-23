@@ -28,9 +28,12 @@
                         <tr>
                             <th>Agent Name</th>
                             <th>Agent Code</th>
-                            <th>Revenue</th>
-                            <th>Paid</th>
-                            <th>Not Paid</th>
+                            <th class="table-success">Pax</th>
+                            <th class="table-success">Paid</th>
+                            <th class="table-success">Not Paid</th>
+                            <th class="table-danger">Pax</th>
+                            <th class="table-danger">Paid</th>
+                            <th class="table-danger">Not Paid</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,9 +41,12 @@
                             <tr>
                                 <td>{{ $agentDebt->agentName }}</td>
                                 <td>{{ $agentDebt->agentCode }}</td>
-                                <td>฿{{ number_format($agentDebt->revenue, 0) }}</td>
-                                <td class="text-success">฿{{ number_format($agentDebt->paid, 0) }}</td>
-                                <td class="text-danger">฿{{ number_format($agentDebt->notpaid, 0) }}</td>
+                                <td class="table-success">{{ $agentDebt->pax }}</td>
+                                <td class="table-success">฿{{ number_format($agentDebt->paid, 0) }}</td>
+                                <td class="table-success">฿{{ number_format($agentDebt->notpaid, 0) }}</td>
+                                <td class="table-danger">฿{{ number_format($agentDebt->ridePax, 0) }}</td>
+                                <td class="table-danger">฿{{ number_format($agentDebt->ridePaid, 0) }}</td>
+                                <td class="table-danger">฿{{ number_format($agentDebt->rideNotPaid, 0) }}</td>
                             </tr>
                         @endforeach
                     </tbody>
