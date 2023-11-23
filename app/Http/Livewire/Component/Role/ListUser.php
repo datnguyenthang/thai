@@ -34,10 +34,10 @@ class ListUser extends Component
         $user = auth()->user();
 
         $users = User::query()
-            ->when($this->search, function ($query) {
+            ->when($this->search, function ($query) use ($user){
                 $query->where('name', 'like', '%'.$this->search.'%')
-                      ->orWhere('email', 'like', '%'.$this->search.'%')
-                      ->orWhere('role', 'like', '%'.$this->search.'%');
+                        ->orWhere('email', 'like', '%'.$this->search.'%')
+                        ->orWhere('role', 'like', '%'.$this->search.'%');
                 if ($user->role == 'manager') $query->where('role', '>', MANAGER);
                 if ($user->role == 'admin')   $query->where('role', '>', ADMIN);
             })
