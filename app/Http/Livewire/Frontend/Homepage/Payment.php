@@ -47,10 +47,13 @@ class Payment extends Component
 
         $this->code = $this->folderName = Route::current()->parameter('code');
         $this->order = OrderLib::getOrderDetailByCode($this->code);
-        $this->paymentMethodList = PaymentMethod::get()->whereNotIn('name', [BANKTRANSFER, CASH]);
 
-        //redirect to homepage if there are no order match code found
-        if (!$this->order) redirect('/');
+        //redirect to homepage if there are no order match code found or has been paid
+        if (!$this->order || $this->order->paymentStatus == PAID) {
+            redirect('/');
+        }
+
+        $this->paymentMethodList = PaymentMethod::get()->whereNotIn('name', [BANKTRANSFER, CASH]);
 
         $this->errorMessage = session('message');
         if ($this->errorMessage) $this->tab = 'omise';
