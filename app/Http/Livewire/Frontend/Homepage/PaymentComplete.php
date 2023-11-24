@@ -26,6 +26,11 @@ class PaymentComplete extends Component {
     public function mount($code = ''){
         $this->code = $code;
         $this->order = OrderLib::getOrderDetailByCode($this->code);
+        if ($this->order->paymentStatus == PAID) {
+            $this->error = true;
+            return true;
+        }
+
 		$this->paymentMethodList = PaymentMethod::get()->whereNotIn('name', [BANKTRANSFER, CASH]);
 
         $this->paymentMethod = PaymentMethod::where('name', '=', OMISECARD)->first();
@@ -66,6 +71,5 @@ class PaymentComplete extends Component {
         if ($this->error) return view('livewire.frontend.homepage.success-booking');
 
         return view('livewire.frontend.homepage.payment-complete');
-        //if (!$this->error) return view('livewire.frontend.homepage.success-booking');
     }
 }
