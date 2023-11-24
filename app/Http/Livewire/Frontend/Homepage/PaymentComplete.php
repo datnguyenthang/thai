@@ -26,6 +26,7 @@ class PaymentComplete extends Component {
     public function mount($code = ''){
         $this->code = $code;
         $this->order = OrderLib::getOrderDetailByCode($this->code);
+
         if ($this->order->paymentStatus == PAID) {
             $this->error = true;
             return true;
