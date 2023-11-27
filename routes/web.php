@@ -145,5 +145,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/adminorder', App\Http\Livewire\Backend\Admin\AdminOrder::class)->name('adminOrder');
         Route::get('/adminorderlist', App\Http\Livewire\Backend\Admin\AdminOrderlist::class)->name('adminOrderlist');
         Route::get('/adminprocessorder/{orderId}', App\Http\Livewire\Backend\Admin\AdminProcessOrder::class)->name('adminProcessOrder');
+
+        //MANAGER USER only for admin and manager
+        Route::get('/role', App\Http\Livewire\Component\Role\ListRole::class)->name('listRole');
+        Route::get('/role/create/{roleId}', App\Http\Livewire\Component\Role\CreateRole::class)->name('createRole');
+        
+        Route::get('/permission', App\Http\Livewire\Component\Permission\ListPermission::class)->name('listPermission');
+        Route::get('/permission/create/{permissionId}', App\Http\Livewire\Component\Permission\CreatePermission::class)->name('createPermission');
+        Route::get('/matrixpermission', App\Http\Livewire\Component\Permission\MatrixPermission::class)->name('matrixPermission');
     });
 });
