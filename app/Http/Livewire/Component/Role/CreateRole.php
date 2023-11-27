@@ -24,8 +24,9 @@ class CreateRole extends Component
 
     public function save() {
         $this->validate([
-            'name' => 'required|unique:roles,name,' . $this->roleId,
+            'name' => ['required', 'regex:/^[a-zA-Z0-9]+$/', 'unique:roles,name,' . $this->roleId],
         ]);
+        
 
         if ($this->roleId > 0){ // update  role
             $role = Role::find($this->roleId);
