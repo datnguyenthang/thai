@@ -57,7 +57,7 @@ class CreateAgent extends Component
             'agentType' => 'required',
             'type' => 'required',
             //'manager' => 'required',
-            //'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i',
+            'email' => 'required|email|regex:/(.+)@(.+)\.(.+)/i',
             //'phone' => 'required|numeric|digits_between:8,11',
             //'paymentType' => 'required',
         ]);
@@ -80,7 +80,6 @@ class CreateAgent extends Component
             session()->flash('success', 'Agent updated successfully!');
             
         } else { // create agent
-           
             Agent::create([
                 'name' => $this->name,
                 'code' => $this->code,
