@@ -24,8 +24,67 @@
                 <table class="table table-striped datatable-table table-secondary mt-3">
                     <thead>
                         <tr>
+                            <th></th>
+                            <th class="table-warning"></th>
+                            <th class="table-warning"></th>
+                            <th colspan="{{ $colPaid->count() + 1 }}" class="table-success text-center">PAID</th>
+                            <th colspan="{{ $colNotPaid->count() + 1 }}" class="table-danger text-center">NOT PAID</th>
+                        </tr>
+                        <tr>
                             @foreach($headerTables as $key => $headerTable)
-                                <th>{{ ucwords($headerTable) }}</th>
+                                @php
+                                    $class = "";
+
+                                    if ($headerTable == 'revenue' || $headerTable == 'pax') $class = "table-warning";
+                                    if (str_contains($headerTable, '-paid')) {
+                                        $class = "table-success";
+                                        $headerTable = str_replace('-paid', '', $headerTable);
+                                    }
+                                    if (str_contains($headerTable, '-notpaid')) {
+                                        $class = "table-danger";
+                                        $headerTable = str_replace('-notpaid', '', $headerTable);
+                                    }
+                                    if ($headerTable == 'paid') {
+                                        $class = "table-success";
+                                        $headerTable = 'Total';
+                                    }
+                                    if ($headerTable == 'notpaid') {
+                                        $class = "table-danger";
+                                        $headerTable = 'Total';
+                                    }
+                                @endphp
+                                <th class="{{ $class }}">{{ ucwords($headerTable) }}</th>
+                            @endforeach
+                        </tr>
+                        <tr>
+                            <th colspan="3" class="text-center">TOTAL</th>
+                            @foreach($headerTables as $headerTable)
+                                @php
+                                    $class = "";
+
+                                    if ($headerTable == 'data' || $headerTable == 'revenue' || $headerTable == 'pax') continue;
+                                    
+                                    $totals = $cashflows->sum($headerTable);
+
+                                    if (str_contains($headerTable, '-paid')) {
+                                        $class = "table-success";
+                                        $headerTable = str_replace('-paid', '', $headerTable);
+                                    }
+                                    if (str_contains($headerTable, '-notpaid')) {
+                                        $class = "table-danger";
+                                        $headerTable = str_replace('-notpaid', '', $headerTable);
+                                    }
+                                    if ($headerTable == 'paid') {
+                                        $class = "table-success";
+                                        $headerTable = 'Total';
+                                    }
+                                    if ($headerTable == 'notpaid') {
+                                        $class = "table-danger";
+                                        $headerTable = 'Total';
+                                    }
+                                @endphp
+
+                                <th colspan="1" class="{{ $class }}">฿{{ number_format($totals, 0) }}</th>
                             @endforeach
                         </tr>
                     </thead>
@@ -36,8 +95,11 @@
                                     @php
                                         $class = "";
 
-                                        if ($headerTable == 'data' || $headerTable == 'revenue' || $headerTable == 'notpaid') 
-                                            $class = "border-end border-danger border-2 border-0";
+                                        if ($headerTable == 'revenue' || $headerTable == 'pax') $class = "table-warning";
+                                        if (str_contains($headerTable, '-paid')) $class = "table-success";
+                                        if (str_contains($headerTable, '-notpaid')) $class = "table-danger";
+                                        if ($headerTable == 'paid') $class = "table-success";
+                                        if ($headerTable == 'notpaid') $class = "table-danger";
 
                                         $value = $cashflow->{$headerTable};
                                         $hasDecimal = strpos($value, '.') !== false && preg_match('/\.\d+/', $value);

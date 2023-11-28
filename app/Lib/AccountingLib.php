@@ -30,7 +30,7 @@ class AccountingLib {
             case 'byMonth':
                 $dateFormat = '%Y-%m-%d';
                 $fromDate = Carbon::now()->parse("$fromDate")->firstOfMonth()->formatLocalized($dateFormat);
-                
+
                 if ($currentYearMonth == $toDate) $toDate = $currentDay;
                 else $toDate = Carbon::now()->parse("$toDate")->lastOfMonth()->formatLocalized($dateFormat);
                 break;
@@ -65,15 +65,18 @@ class AccountingLib {
                         ->selectRaw("DATE_FORMAT(orders.bookingDate, '{$dateFormat}') as data")
                         ->selectRaw('SUM(orders.adultQuantity) as pax')
                         ->selectRaw('SUM(orders.finalPrice) as revenue')
-                        ->selectRaw("SUM(CASE WHEN op.paymentStatus = 8 THEN orders.finalPrice ELSE 0 END) as paid")
-                        ->selectRaw("SUM(CASE WHEN op.paymentStatus = 0 THEN orders.finalPrice ELSE 0 END) as notpaid");
-        
-        
+                        ->selectRaw("SUM(CASE WHEN op.paymentStatus = 8 THEN orders.finalPrice ELSE 0 END) as paid");
+
         $pms = PaymentMethod::get();
         foreach ($pms as $pm) {
-            $workflows->selectRaw("SUM(CASE WHEN pm.name = '{$pm->name}' THEN orders.finalPrice ELSE 0 END) as '{$pm->name}'");
+            $workflows->selectRaw("SUM(CASE WHEN (pm.name = '{$pm->name}' AND op.paymentStatus = 8) THEN orders.finalPrice ELSE 0 END) as '{$pm->name}-paid'");
         }
-        
+
+        $workflows->selectRaw("SUM(CASE WHEN op.paymentStatus = 0 THEN orders.finalPrice ELSE 0 END) as notpaid");
+        foreach ($pms as $pm) {
+            $workflows->selectRaw("SUM(CASE WHEN (pm.name = '{$pm->name}' AND op.paymentStatus = 0) THEN orders.finalPrice ELSE 0 END) as '{$pm->name}-notpaid'");
+        }
+
         $workflows = $workflows
                 ->where(function ($query) use ($fromDate, $toDate, $status) {
                     if ($status) $query->where('os.status', $status);
@@ -83,6 +86,7 @@ class AccountingLib {
                 ->groupBy(DB::raw("DATE_FORMAT(orders.bookingDate, '{$dateFormat}')"))
                 ->orderBy(DB::raw("DATE_FORMAT(orders.bookingDate, '{$dateFormat}')"))
                 ->get();
+
         return $workflows;
     }
 }

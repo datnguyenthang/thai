@@ -20,11 +20,18 @@ class Cashflow extends Component {
 
     public $headerTables;
     public $cashflows;
+    public $colPaid, $colNotPaid;
 
     public function mount(){
         $this->fromDate = $this->toDate = now()->format('Y-m');
         $this->cashflows = AccountingLib::cashFlowByDate($this->fromDate, $this->toDate, $this->type);
         $this->headerTables = array_keys($this->cashflows->first()->getAttributes());
+        $this->colPaid = collect($this->headerTables)->filter(function($item){
+            return (str_contains($item, '-paid'));
+        });
+        $this->colNotPaid = collect($this->headerTables)->filter(function($item){
+            return (str_contains($item, '-notpaid'));
+        });
     }
 
     public function updated(){
