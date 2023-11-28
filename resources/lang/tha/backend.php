@@ -254,4 +254,5 @@ return [
 
     //DEBT
     'debt' => "Debt",
+    'agentbooking' => 'Agent Booking',
 ];

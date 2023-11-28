@@ -26,14 +26,29 @@
                 <table class="table table-striped datatable-table table-secondary mt-3">
                     <thead>
                         <tr>
-                            <th>Agent Name</th>
-                            <th>Agent Code</th>
+                            <th rowspan="1">Agent Name</th>
+                            <th rowspan="1">Agent Code</th>
+                            <th colspan="3" class="table-success text-center">Ordered</th>
+                            <th colspan="3" class="table-danger text-center">Traveled</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
                             <th class="table-success">Pax</th>
                             <th class="table-success">Paid</th>
                             <th class="table-success">Not Paid</th>
                             <th class="table-danger">Pax</th>
                             <th class="table-danger">Paid</th>
                             <th class="table-danger">Not Paid</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="text-center">Total</th>
+                            <th class="table-success">{{ $agentDebts->sum('pax') }}</th>
+                            <th class="table-success">฿{{ number_format($agentDebts->sum('paid'), 0) }}</th>
+                            <th class="table-success">฿{{ number_format($agentDebts->sum('notpaid'), 0) }}</th>
+                            <th class="table-danger">{{ $agentDebts->sum('ridePax') }}</th>
+                            <th class="table-danger">฿{{ number_format($agentDebts->sum('ridePaid'), 0) }}</th>
+                            <th class="table-danger">฿{{ number_format($agentDebts->sum('rideNotPaid'), 0) }}</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -13,8 +13,8 @@
                             <th scope="col"></th>
                             <th scope="col">Online</th>
                             <th scope="col">Customer</th>
-                            <th scope="col">Agent</th>
                             <th scope="col">Local</th>
+                            <th scope="col">Agent</th>
                         </tr>
                     </thead>
                     <tbody>
