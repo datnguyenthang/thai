@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>{{ trans('backend.orderid') }}</th>
+            <th>{{ trans('backend.bookingdate') }}</th>
             <th>{{ trans('backend.ordercode') }}</th>
             <th>{{ trans('backend.triptype') }}</th>
             <!--
@@ -10,9 +11,10 @@
             -->
             <th>{{ trans('backend.customertype') }}</th>
             <th>{{ trans('backend.agentname') }}</th>
-            <th>{{ trans('backend.bookingdate') }}</th>
+            
             <th>{{ trans('backend.totalprice') }}</th>
             <th>{{ trans('backend.orderstatus') }}</th>
+            <th>{{ trans('backend.paymentmethodstatus') }}</th>
             
             <th><i class="fas fa-tasks"></i>{{ trans('backend.action') }}</th>
         </tr>
@@ -22,6 +24,7 @@
             @foreach ($orderLists as $order)
                 <tr>
                     <td>{{ $order->id }}</td>
+                    <td>{{ $order->bookingDate }}</td>
                     <td>{{ $order->code }}</td>
                     <td>{{ TRIPTYPE[$order->isReturn] }}</td>
                     <!--
@@ -41,9 +44,10 @@
                     -->
                     <td>{{ $order->customerTypeName ? $order->customerTypeName : 'ONLINE' }}</td>
                     <td>{{ $order->agentName }}</td>
-                    <td>{{ $order->bookingDate }}</td>
+                    
                     <td>{{ round($order->finalPrice) }}</td>
                     <td>{{ ORDERSTATUS[$order->status] }}</td>
+                    <td>{{ PAYMENTSTATUS[$order->paymentStatus] }}</td>
                     <td>
                         <!--<button class="btn btn-info" wire:click="detail({{ $order->orderTicketId }})"></button>-->
                         <button class="call-btn btn btn-success btn-floating btn-sm"

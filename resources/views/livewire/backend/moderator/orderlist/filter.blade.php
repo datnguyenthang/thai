@@ -68,11 +68,11 @@
             <input wire:model.defer="bookingDate" class="form-control" type="date" placeholder="">
         </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2" wire:ignore>
         <div class="form-group">
             <label for="agentId" class="form-control-label">{{ trans('backend.agentname') }}</label>
-            <select id="agentId" name="agentId" class="form-select" wire:model.defer="agentId" >
-                <option value=""></option>
+            <select wire:model.defer="agentId" id="agentId" name="agentId" class="selectpicker w-100" data-live-search="true" data-style="btn-danger" data-size="5" title="Choosing one...">
+                <option value="">-----------------------</option>
                 @foreach($agents as $agent)
                     <option value="{{ $agent->id }}">{{ $agent->name }}</option>
                 @endforeach
@@ -119,4 +119,6 @@
             </div>
         </div>
     @endif
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css">
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
 </div>
