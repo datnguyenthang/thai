@@ -42,7 +42,7 @@
                 delay: (context) => {
                     let delay = 0;
                     if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                        delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                        delay = context.dataIndex * 30 + context.datasetIndex * 30;
                     }
                     return delay;
                 },
