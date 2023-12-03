@@ -59,7 +59,7 @@
                                 <td class="table-success">{{ $agentDebt->pax }}</td>
                                 <td class="table-success">฿{{ number_format($agentDebt->paid, 0) }}</td>
                                 <td class="table-success">฿{{ number_format($agentDebt->notpaid, 0) }}</td>
-                                <td class="table-danger">฿{{ number_format($agentDebt->ridePax, 0) }}</td>
+                                <td class="table-danger">{{ $agentDebt->ridePax }}</td>
                                 <td class="table-danger">฿{{ number_format($agentDebt->ridePaid, 0) }}</td>
                                 <td class="table-danger">฿{{ number_format($agentDebt->rideNotPaid, 0) }}</td>
                             </tr>
