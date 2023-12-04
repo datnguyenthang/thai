@@ -25,11 +25,13 @@
             <span>{{ trans('backend.orderlist') }}</span>
           </a>
 
-          <a href="{{ route('listUser') }}" 
-            class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listUser' ? 'active' : '' }}">
-            <i class="fas fa-chart-area fa-fw me-3"></i>
-            <span>{{ trans('backend.user') }}</span>
-          </a>
+          @if (auth()->user()->role == 'admin' || (auth()->user()->role == 'manager' && auth()->user()->email == "dongduong.nguy@gmail.com"))
+            <a href="{{ route('listUser') }}" 
+              class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'listUser' ? 'active' : '' }}">
+              <i class="fas fa-chart-area fa-fw me-3"></i>
+              <span>{{ trans('backend.user') }}</span>
+            </a>
+          @endif
 
           <a href="{{ route('managerLocation') }}" 
             class="list-group-item list-group-item-action py-2 ripple {{ Route::currentRouteName() == 'managerLocation' ? 'active' : '' }}">

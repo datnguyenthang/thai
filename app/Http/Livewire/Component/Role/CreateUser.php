@@ -24,7 +24,7 @@ class CreateUser extends Component
             $this->listRole = [MANAGER => 'Manager', MODERATOR => 'Moderator', AGENT => 'Agent' , CREATOR => 'Creator', VIEWER => 'Viewer'];
         
         if(auth()->user()->role == 'manager') 
-            $this->listRole = [MODERATOR => 'Moderator', AGENT => 'Agent' , VIEWER => 'Viewer'];
+            $this->listRole = [MANAGER => 'Manager', MODERATOR => 'Moderator', AGENT => 'Agent' , VIEWER => 'Viewer'];
         
         $this->listAgent = Agent::pluck('name', 'id');
         $this->agentId = null;
@@ -103,13 +103,17 @@ class CreateUser extends Component
 
     public function render(){
         $user = auth()->user();
-
         switch ($user->role) {
             case 'admin':
                 return view('livewire.component.role.create-user')->layout('admin.layouts.app');
                 break;
             case 'manager':
-                return view('livewire.component.role.create-user')->layout('manager.layouts.app');
+                if (auth()->user()->email == "dongduong.nguy@gmail.com")
+                    return view('livewire.component.role.create-user')->layout('manager.layouts.app');
+                else 
+                    return <<<'blade'
+                                <div><p>You do not have permission to access for this page.</p></div>
+                            blade;
                 break;
             default:
                 return <<<'blade'
