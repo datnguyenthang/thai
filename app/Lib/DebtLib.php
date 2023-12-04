@@ -90,9 +90,9 @@ class DebtLib {
         list($dateFormat, $fromDate, $toDate) = self::dateFormat($type, $fromDate, $toDate);
         $rideDebt = Agent::select('agents.id as agentId', 'agents.name as agentName', 'agents.code as agentCode',
                                     DB::raw('SUM(o.adultQuantity) as pax'),
-                                    DB::raw('SUM(o.finalPrice) as revenue'),
-                                    DB::raw('SUM(CASE WHEN op.paymentStatus = 8 THEN o.finalPrice ELSE 0 END) as paid'),
-                                    DB::raw('SUM(CASE WHEN op.paymentStatus = 0 THEN o.finalPrice ELSE 0 END) as notpaid')
+                                    DB::raw('SUM(ot.price) as revenue'),
+                                    DB::raw('SUM(CASE WHEN op.paymentStatus = 8 THEN ot.price ELSE 0 END) as paid'),
+                                    DB::raw('SUM(CASE WHEN op.paymentStatus = 0 THEN ot.price ELSE 0 END) as notpaid')
                                 )
                             ->leftJoin('orders as o', 'o.agentId', '=', 'agents.id')
                             ->leftJoin('order_tickets as ot', 'o.id', '=', 'ot.orderId')
