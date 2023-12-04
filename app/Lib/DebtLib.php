@@ -107,7 +107,7 @@ class DebtLib {
                             })
                             ->where(function ($query) use ($agentId, $fromDate, $toDate, $status) {
                                 $query->where('agents.id', $agentId);
-                                if ($status) $query->where('os.status', $status);
+                                if ($status) $query->where('o.status', $status);
                                 if ($fromDate) $query->where('r.departDate', '>=', $fromDate);
                                 if ($toDate) $query->where('r.departDate', '<=', $toDate);
                             })
