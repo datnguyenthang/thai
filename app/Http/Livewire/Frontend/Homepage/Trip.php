@@ -179,6 +179,8 @@ class Trip extends Component
                                         if ($seatClassId)
                                             $query->where('sc.id', $seatClassId);
                                     })
+                                    ->orderBy('rides.departDate')
+                                    ->orderBy('rides.departTime')
                                     ->get();
     }
 
@@ -204,6 +206,8 @@ class Trip extends Component
                                         if ($seatClassId)
                                             $query->where('sc.id', $seatClassId); 
                                     })
+                                    ->orderBy('rides.departDate')
+                                    ->orderBy('rides.departTime')
                                     ->get();
     }
 
