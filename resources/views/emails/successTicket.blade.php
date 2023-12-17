@@ -24,7 +24,9 @@
     </ul>
     <p></p>
     <p></p>
-    <p>Total paid&nbsp; <b>THB {{ round($order->finalPrice) }}</b>
+    @if(!$orderTicket->agentName)
+      <p>Total paid&nbsp; <b>THB {{ round($order->finalPrice) }}</b>
+    @endif
     </p>
     <p>Thank you very much for using SEUDAMGO!</p>
     <p>Best regards <br>SEUDAMGO TEAM </p>

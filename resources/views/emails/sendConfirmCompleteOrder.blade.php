@@ -47,10 +47,12 @@
                                           People: {{ $order->adultQuantity + $order->childrenQuantity }}
                                       </td>
                                       <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left"> {{ $order->adultQuantity + $order->childrenQuantity }} </td>
-                                      <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
-                                        <span>
-                                          <span>฿</span>{{ round($orderTicket->price) }} </span>
-                                      </td>
+                                      
+                                      @if(!$orderTicket->agentName)
+                                        <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
+                                          <span><span>฿</span>{{ round($orderTicket->price) }} </span>
+                                        </td>
+                                      @endif
                                     </tr>
                                   @endforeach
                                 </tbody>

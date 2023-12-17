@@ -47,20 +47,22 @@
                                         People: {{ $order->adultQuantity + $order->childrenQuantity }}
                                     </td>
                                     <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left"> {{ $order->adultQuantity + $order->childrenQuantity }} </td>
-                                    <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
-                                      <span>
-                                        <span>฿</span>{{ $orderTicket->price }} </span>
-                                    </td>
+                                    @if(!$orderTicket->agentName)
+                                      <td style="color:#636363;border:1px solid #e5e5e5;padding:12px;text-align:left;vertical-align:middle;font-family:'Helvetica Neue',Helvetica,Roboto,Arial,sans-serif" align="left">
+                                        <span><span>฿</span>{{ $orderTicket->price }} </span>
+                                      </td>
+                                    @endif
                                   </tr>
                                 @endforeach
                               </tbody>
                               <tfoot>
                                 <tr>
                                   <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">Subtotal:</th>
-                                  <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">
-                                    <span>
-                                      <span>฿</span>{{ $order->price }} </span>
-                                  </td>
+                                  @if(!$orderTicket->agentName)
+                                    <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">
+                                      <span><span>฿</span>{{ $order->price }} </span>
+                                    </td>
+                                  @endif
                                 </tr>
                                 <tr>
                                   <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Payment method:</th>
@@ -68,10 +70,11 @@
                                 </tr>
                                 <tr>
                                   <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Total:</th>
-                                  <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
-                                    <span>
-                                      <span>฿</span>{{ $order->price }} </span>
-                                  </td>
+                                  @if(!$orderTicket->agentName)
+                                    <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
+                                      <span><span>฿</span>{{ $order->price }} </span>
+                                    </td>
+                                  @endif
                                 </tr>
                               </tfoot>
                             </table>
