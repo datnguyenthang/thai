@@ -71,9 +71,9 @@
         revenueChart.data.datasets[0].data = [];
         revenueChart.data.datasets[1].data = [];
 
-        if (revenueOrderNewData.length == 0) return false;
+        if (revenueRideNewData.length == 0) return false;
 
-        const labels_orderNewData = revenueOrderNewData.map(item => item.data);
+        const labels_orderNewData = revenueRideNewData.map(item => item.data);
         const data_orderNewData = revenueOrderNewData.map(item => item.revenue);
         const data_rideNewData = revenueRideNewData.map(item => item.revenue);
 

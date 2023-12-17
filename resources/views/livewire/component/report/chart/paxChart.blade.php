@@ -68,9 +68,9 @@
         orderChart.data.datasets[0].data = [];
         orderChart.data.datasets[1].data = [];
 
-        if (paxOrderNewData.length == 0) return false;
+        if (paxTravelNewData.length == 0) return false;
 
-        const labels_newData = paxOrderNewData.map(item => item.data);
+        const labels_newData = paxTravelNewData.map(item => item.data);
         const data_paxOrderData = paxOrderNewData.map(item => item.pax);
         const data_PaxTravelData = paxTravelNewData.map(item => item.pax);
 
