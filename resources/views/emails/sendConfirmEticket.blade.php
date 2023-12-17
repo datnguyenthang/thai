@@ -55,35 +55,36 @@
                                     </tr>
                                   @endforeach
                                 </tbody>
-                                <tfoot>
-                                  <tr>
-                                    <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">Subtotal:</th>
-                                    <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">
-                                      <span>
-                                        <span>฿</span>{{ round($order->originalPrice) }} </span>
-                                    </td>
-                                  </tr>
-                                  @if($order->couponAmount)
-                                  <tr>
-                                    <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">Discount amount:</th>
-                                    <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">
-                                      <span>
-                                        <span>฿</span>{{ round($order->couponAmount) }} </span>
-                                    </td>
-                                  </tr>
-                                  @endif
-                                  <tr>
-                                    <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Payment method:</th>
-                                    <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Bank transfer / โอนเงิน</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Total:</th>
-                                    <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
-                                      <span>
-                                        <span>฿</span>{{ round($order->finalPrice) }} </span>
-                                    </td>
-                                  </tr>
-                                </tfoot>
+                                @if(!$orderTicket->agentName)
+                                  <tfoot>
+                                    <tr>
+                                      <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">Subtotal:</th>
+                                      <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">
+                                        <span><span>฿</span>{{ round($order->originalPrice) }}</span>
+                                      </td>
+                                    </tr>
+                                    @if($order->couponAmount)
+                                    <tr>
+                                      <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">Discount amount:</th>
+                                      <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left;border-top-width:4px" align="left">
+                                        <span>
+                                          <span>฿</span>{{ round($order->couponAmount) }} </span>
+                                      </td>
+                                    </tr>
+                                    @endif
+                                    <tr>
+                                      <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Payment method:</th>
+                                      <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Bank transfer / โอนเงิน</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row" colspan="2" style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">Total:</th>
+                                      <td style="color:#636363;border:1px solid #e5e5e5;vertical-align:middle;padding:12px;text-align:left" align="left">
+                                        <span>
+                                          <span>฿</span>{{ round($order->finalPrice) }} </span>
+                                      </td>
+                                    </tr>
+                                  </tfoot>
+                                @endif
                               </table>
                             </div>
                             <table cellspacing="0" cellpadding="0" border="0" style="width:100%;vertical-align:top;margin-bottom:40px;padding:0" width="100%">
