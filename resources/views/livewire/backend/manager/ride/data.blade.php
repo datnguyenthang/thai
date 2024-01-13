@@ -24,7 +24,7 @@
         </tr>
         @endif
         @foreach ($listRides as $ride)
-            <tr style="background-color: #{{ $ride->colorCode ?? 'fff' }} !important;">
+            <tr>
                 <td><input type="checkbox" wire:model="selected" value="{{ $ride->id }}" class="form-check-input" /></td>
                 <td>{{ $ride->id }}</td>
                 <td>{{ $ride->name }}</td>
@@ -33,7 +33,11 @@
                 <td>{{ $ride->departDate }}</td>
                 <td>{{ $ride->departTime }}</td>
                 <td>{{ $ride->returnTime }}</td>
-                <td>{{ $ride->colorCode }}</td>
+                <td>
+                    <span class="p-1" style="background-color: #{{ $ride->colorCode ?? "fff" }}">
+                        {{ $ride->colorCode ?? "" }}
+                    </span>
+                </td>                
                 <td>{{ RIDESTATUS[$ride->status] }}</td>
                 <td>
                     <button class="call-btn btn btn-outline-primary btn-floating btn-sm"
