@@ -171,6 +171,7 @@ return [
     'hoursBeforeBooking' => 'Allow booking before hours',
     'perpage' => 'Per Page',
     'selectride' => 'You have selected :selected rows of :totalride total',
+    'colorcode' => 'Color Code',
 
     //USER
     'createuser' => 'Create User',
@@ -255,4 +256,12 @@ return [
     //DEBT
     'debt' => "Debt",
     'agentbooking' => 'Agent Booking',
+
+    //ROLE
+    'createrole' => 'Create Role',
+
+    //PERMISSION
+    'createpermission' => 'Create Permission',
+    'permission' => 'Permission',
+    'matrixpermission' => 'Matrix Permission',
 ];
