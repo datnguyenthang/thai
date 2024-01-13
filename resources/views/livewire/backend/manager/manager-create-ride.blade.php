@@ -44,7 +44,7 @@
         <div class="form-outline mb-4">
             <label class="form-label" for="departDate">{{ trans('backend.departdate') }}</label>
             <input type="date" class="form-control w-50" id="departDate" wire:model="departDate">
-            @error('returnTime') <span class="text-danger error">{{ $message }}</span> @enderror
+            @error('departDate') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-outline mb-4">
