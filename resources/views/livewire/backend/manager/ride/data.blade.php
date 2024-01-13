@@ -24,7 +24,7 @@
         </tr>
         @endif
         @foreach ($listRides as $ride)
-            <tr style="background-color: #{{ $ride->colorCode ?? 'fff' }};">
+            <tr style="background-color: #{{ $ride->colorCode ?? 'fff' }} !important;">
                 <td><input type="checkbox" wire:model="selected" value="{{ $ride->id }}" class="form-check-input" /></td>
                 <td>{{ $ride->id }}</td>
                 <td>{{ $ride->name }}</td>
