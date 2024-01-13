@@ -73,7 +73,7 @@ class ManagerListRide extends Component
     }
 
     public function viewRide($rideId) {
-        $this->rideDetail = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 'tl.name as toLocation', 'rides.departTime', 'rides.returnTime', 'rides.departDate', 'rides.status')
+        $this->rideDetail = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 'tl.name as toLocation', 'rides.departTime', 'rides.returnTime', 'rides.departDate', 'rides.colorCode', 'rides.status')
                                 ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
                                 ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
                                 ->where('rides.id', '=', $rideId)
@@ -85,7 +85,7 @@ class ManagerListRide extends Component
     }
 
     protected function getRides() {
-        return Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 'tl.name as toLocation', 'rides.departTime', 'rides.returnTime', 'rides.departDate', 'rides.status')
+        return Ride::select('rides.id', 'rides.name', 'fl.name as fromLocation', 'tl.name as toLocation', 'rides.departTime', 'rides.returnTime', 'rides.departDate', 'rides.colorCode', 'rides.status')
             ->leftJoin('locations as fl', 'rides.fromLocation', '=', 'fl.id')
             ->leftJoin('locations as tl', 'rides.toLocation', '=', 'tl.id')
             ->where(function ($query) {
