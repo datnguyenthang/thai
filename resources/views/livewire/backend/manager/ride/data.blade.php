@@ -1,6 +1,6 @@
-<table class="table datatable-table table-secondary mt-3">
+<table class="table datatable-table mt-3">
     <thead>
-        <tr>
+        <tr class="table-secondary">
             <th><input type="checkbox" wire:model="selectedAll" class="form-check-input" /></th>
             <th>Id</th>
             <th wire:click="sortBy('name')"><i class="fas fa-sort"></i>{{ trans('backend.ridename') }}</th>
