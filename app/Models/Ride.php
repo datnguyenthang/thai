@@ -14,6 +14,6 @@ class Ride extends Model
      * @return response()
      */
     protected $fillable = [
-        'id', 'name', 'fromLocation', 'toLocation', 'departTime', 'returnTime', 'departDate', 'hoursBeforeBooking', 'status'
+        'id', 'name', 'fromLocation', 'toLocation', 'departTime', 'returnTime', 'departDate', 'hoursBeforeBooking', 'colorCode', 'status'
     ];
 }

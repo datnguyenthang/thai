@@ -17,6 +17,7 @@ class ManagerMassiveCreateRide extends Component
     public $departTime;
     public $returnTime;
     public $hoursBeforeBooking = 0;
+    public $colorCode;
     public $status;
 
     public $loopfrom;
@@ -129,6 +130,7 @@ class ManagerMassiveCreateRide extends Component
                     'returnTime' => $this->returnTime,
                     'departDate' => $day->format("Y-m-d"),
                     'hoursBeforeBooking' => intVal($this->hoursBeforeBooking),
+                    'colorCode' => $this->colorCode,
                     'status' => intVal($this->status),
                 ]);
 

@@ -1,4 +1,4 @@
-<table class="table datatable-table table-secondary table-striped mt-3">
+<table class="table datatable-table table-secondary mt-3">
     <thead>
         <tr>
             <th><input type="checkbox" wire:model="selectedAll" class="form-check-input" /></th>
@@ -9,6 +9,7 @@
             <th wire:click="sortBy('departDate')"><i class="fas fa-sort"></i>{{ trans('backend.departdate') }}</th>
             <th wire:click="sortBy('departTime')"><i class="fas fa-sort"></i>{{ trans('backend.departtime') }}</th>
             <th wire:click="sortBy('returnTime')"><i class="fas fa-sort"></i>{{ trans('backend.returntime') }}</th>
+            <th wire:click="sortBy('colorCode')"><i class="fas fa-sort"></i>{{ trans('backend.colorCode') }}</th>
             <th wire:click="sortBy('status')"><i class="fas fa-sort"></i>{{ trans('backend.ridestatus') }}</th>
             <th><i class="fas fa-tasks"></i>{{ trans('backend.action') }}</th>
         </tr>
@@ -23,7 +24,7 @@
         </tr>
         @endif
         @foreach ($listRides as $ride)
-            <tr>
+            <tr style="background-color: #{{ $ride->colorCode ?? "fff" }}">
                 <td><input type="checkbox" wire:model="selected" value="{{ $ride->id }}" class="form-check-input" /></td>
                 <td>{{ $ride->id }}</td>
                 <td>{{ $ride->name }}</td>
@@ -32,6 +33,7 @@
                 <td>{{ $ride->departDate }}</td>
                 <td>{{ $ride->departTime }}</td>
                 <td>{{ $ride->returnTime }}</td>
+                <td>{{ $ride->colorCode }}</td>
                 <td>{{ RIDESTATUS[$ride->status] }}</td>
                 <td>
                     <button class="call-btn btn btn-outline-primary btn-floating btn-sm"

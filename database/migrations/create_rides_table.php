@@ -22,6 +22,7 @@ return new class extends Migration
                 $table->string('departTime');
                 $table->string('returnTime')->nullable($value = true);
                 $table->date('departDate');
+                $table->string('colorCode');
                 $table->integer('hoursBeforeBooking')->default(0);/* 0=>Anytime*/
                 $table->tinyInteger('status')->default(0); /* 0=>Available, 1=>unAvailable */
 

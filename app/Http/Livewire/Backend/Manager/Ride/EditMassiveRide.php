@@ -20,6 +20,7 @@ class EditMassiveRide extends Component
     public $returnTime;
     //public $departDate;
     public $hoursBeforeBooking = 0;
+    public $colorCode;
     public $status;
 
     public $locations;
@@ -47,6 +48,7 @@ class EditMassiveRide extends Component
             $this->returnTime = $ride->returnTime;
             //$this->departDate = $ride->departDate;
             $this->hoursBeforeBooking = $ride->hoursBeforeBooking;
+            $this->colorCode = $ride->colorCode;
             $this->status = $ride->status;
 
             $this->seatClasses = SeatClass::select('id','rideId', 'name as nameClass', 'capacity', 'price')
@@ -110,6 +112,7 @@ class EditMassiveRide extends Component
             $ride->returnTime = $this->returnTime;
             //$ride->departDate = $this->departDate;
             $ride->hoursBeforeBooking = $this->hoursBeforeBooking;
+            $ride->colorCode = $this->colorCode;
             $ride->status = intVal($this->status);
             $ride->save();
             

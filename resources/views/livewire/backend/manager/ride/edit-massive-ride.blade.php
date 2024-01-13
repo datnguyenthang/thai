@@ -52,6 +52,12 @@
         </div>
 
         <div class="form-outline mb-4">
+            <label class="form-label" for="colorCode">{{ trans('backend.colorCode') }}</label>
+            <input type="text" class="form-control" id="colorCode" wire:model.defer="colorCode"  />
+            @error('colorCode') <span class="text-danger error">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="form-outline mb-4">
             <label class="form-label" for="status">{{ trans('backend.ridestatus') }}</label>
             <select id="status" class="form-select" wire:model.defer="status">
                 @foreach(RIDESTATUS as $key => $value)
@@ -66,12 +72,12 @@
         <table class="table">
             <thead>
                 <tr>
-                  <th>{{ trans('backend.seatclassname') }}</th>
-                  <th>{{ trans('backend.capacity') }}</th>
-                  <th>{{ trans('backend.price') }}</th>
+                    <th>{{ trans('backend.seatclassname') }}</th>
+                    <th>{{ trans('backend.capacity') }}</th>
+                    <th>{{ trans('backend.price') }}</th>
                 </tr>
-              </thead>
-              <tbody>
+            </thead>
+            <tbody>
                 @foreach ($seatClasses as $index => $seatClass)
                 <tr>
                     <td>
