@@ -16,7 +16,7 @@ style="display: @if($showModal === true) block @else none @endif;" role="dialog"
                     <p>{{ trans('backend.departtime') }} : {{ $rideDetail['departTime'] }}</p>
                     <p>{{ trans('backend.returntime') }}: {{ $rideDetail['returnTime'] }}</p>
                     <p>{{ trans('backend.departdate') }}: {{ $rideDetail['departDate'] }}</p>
-                    <p>{{ trans('backend.colorCode') }}: {{ $rideDetail['colorCode'] }}</p>
+                    <p>{{ trans('backend.colorcode') }}: {{ $rideDetail['colorCode'] }}</p>
                     <p>{{ trans('backend.ridestatus') }} : {{ RIDESTATUS[$rideDetail['status']] }}</p>
                     <!-- Other details -->
 

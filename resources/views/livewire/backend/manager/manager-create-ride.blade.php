@@ -54,7 +54,7 @@
         </div>
 
         <div class="form-outline mb-4">
-            <label class="form-label" for="colorCode">{{ trans('backend.colorCode') }}</label>
+            <label class="form-label" for="colorCode">{{ trans('backend.colorcode') }}</label>
             <input type="text" class="form-control w-50" id="colorCode" wire:model.defer="colorCode"  />
             @error('colorCode') <span class="text-danger error">{{ $message }}</span> @enderror
         </div>

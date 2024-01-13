@@ -9,7 +9,7 @@
             <th wire:click="sortBy('departDate')"><i class="fas fa-sort"></i>{{ trans('backend.departdate') }}</th>
             <th wire:click="sortBy('departTime')"><i class="fas fa-sort"></i>{{ trans('backend.departtime') }}</th>
             <th wire:click="sortBy('returnTime')"><i class="fas fa-sort"></i>{{ trans('backend.returntime') }}</th>
-            <th wire:click="sortBy('colorCode')"><i class="fas fa-sort"></i>{{ trans('backend.colorCode') }}</th>
+            <th wire:click="sortBy('colorCode')"><i class="fas fa-sort"></i>{{ trans('backend.colorcode') }}</th>
             <th wire:click="sortBy('status')"><i class="fas fa-sort"></i>{{ trans('backend.ridestatus') }}</th>
             <th><i class="fas fa-tasks"></i>{{ trans('backend.action') }}</th>
         </tr>
