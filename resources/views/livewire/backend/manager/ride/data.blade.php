@@ -34,7 +34,7 @@
                 <td>{{ $ride->departTime }}</td>
                 <td>{{ $ride->returnTime }}</td>
                 <td>
-                    <span class="p-1" style="background-color: #{{ $ride->colorCode ?? "fff" }}">
+                    <span class="p-2 text-white" style="background-color: #{{ $ride->colorCode ?? "fff" }}">
                         {{ $ride->colorCode ?? "" }}
                     </span>
                 </td>                
