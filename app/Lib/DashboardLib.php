@@ -16,7 +16,7 @@ use App\Models\Ride;
 class DashboardLib {
 
     public static function ridesInDay($fromDate = 0, $toDate = 0, $depart = 0, $dest = 0, $isOrder = true, $perPage = 10){
-        $rides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
+        $rides = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate', 'rides.colorCode',
                                 DB::raw('SUM(o.adultQuantity + COALESCE(o.childrenQuantity, 0)) as totalCustomer'),
                                 DB::raw('SUM(CASE WHEN os.status = '.CONFIRMEDORDER.' THEN (o.adultQuantity + COALESCE(o.childrenQuantity, 0)) ELSE 0 END) as totalCustomerConfirm'),
                                 
@@ -52,7 +52,7 @@ class DashboardLib {
                         if (!$fromDate && !$toDate)
                             $query->where('rides.departDate', '=', Carbon::now()->toDateString());
                     })
-                    ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate')
+                    ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate', 'rides.colorCode')
                     ->when($isOrder, function ($query) {
                         $query->having('totalCustomer', '>', 0);
                     })
@@ -64,7 +64,7 @@ class DashboardLib {
     }
 
     public static function revenueInDay(){
-        $revenue = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
+        $revenue = Ride::select('rides.id', 'rides.name', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate', 'rides.colorCode',
                                 DB::raw('SUM(CASE WHEN os.status = '.CONFIRMEDORDER.' THEN o.finalPrice ELSE 0 END) as priceConfirmed'),
                                 DB::raw('SUM(CASE WHEN os.status <> '.CONFIRMEDORDER.' THEN o.finalPrice ELSE 0 END) as priceNotConfirmed'),
                             )
@@ -82,7 +82,7 @@ class DashboardLib {
                             ->whereRaw('os.id = (select max(id) from order_statuses where order_statuses.orderId = o.id)');
                     })
                     ->where('rides.departDate', '=', Carbon::now()->toDateString())
-                    ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate')
+                    ->groupBy('rides.id', 'rides.name', 'fl.name', 'tl.name', 'rides.departTime', 'rides.returnTime', 'rides.departDate', 'rides.colorCode')
                     ->first();
         return $revenue;
     }
@@ -134,7 +134,7 @@ class DashboardLib {
     }
 
     public static function detailRides($rideId = 0) {
-        $passengers = Ride::select('rides.id', 'rides.name as Ridename', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate',
+        $passengers = Ride::select('rides.id', 'rides.name as Ridename', 'fl.name as fromLocationName', 'tl.name as toLocationName', 'rides.departTime', 'rides.returnTime', 'rides.departDate', 'rides.colorCode',
                                 'o.id as orderId','o.code', 'o.phone', 'o.email', 'o.adultQuantity', 'o.childrenQuantity', 'ot.pickup', 'ot.dropoff', 'ot.id as orderTicketId', 'ot.price',
                                 DB::raw('COALESCE(op.paymentStatus, 0) as paymentStatus'), 'os.status',
                                 DB::raw('CONCAT(COALESCE(o.firstname, ""), " ", COALESCE(o.lastName, "")) as fullname'),
