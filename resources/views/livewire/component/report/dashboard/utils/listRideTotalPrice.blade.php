@@ -17,17 +17,18 @@
                     </a>
                 </th>
             </tr>
+
             @foreach($listRides as $key => $ride)
                 <tr class="{{ $ride->isDepart ? 'table-danger' : 'table-success'; }}">
-                    <td>{{ $ride->id }}</td>
-                    <td>{{ $ride->name }}</td>
-                    <td>{{ $ride->fromLocationName }}</td>
-                    <td>{{ $ride->toLocationName }}</td>
-                    <td>{{ $ride->departDate . ' ' . $ride->departTime }}</td>
-                    <td><strong class="text-success">{{ $ride->totalCustomerConfirm }}</strong>/<strong>{{ $ride->totalCustomer }}</strong></td>
-                    <td><strong class="text-success">{{ $ride->totalOrderConfirm }}</strong>/<strong>{{ $ride->totalOrder }}</strong></td>
-                    <td><strong class="text-success">{{ round($ride->totalMoneyConfirm) }}</strong>/<strong>{{ round($ride->totalMoney) }}</strong></td>
-                    <td>
+                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}>{{ $ride->id }}</td>
+                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}>{{ $ride->name }}</td>
+                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}>{{ $ride->fromLocationName }}</td>
+                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}>{{ $ride->toLocationName }}</td>
+                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}>{{ $ride->departDate . ' ' . $ride->departTime }}</td>
+                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}><strong class="text-success">{{ $ride->totalCustomerConfirm }}</strong>/<strong>{{ $ride->totalCustomer }}</strong></td>
+                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}><strong class="text-success">{{ $ride->totalOrderConfirm }}</strong>/<strong>{{ $ride->totalOrder }}</strong></td>
+                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}><strong class="text-success">{{ round($ride->totalMoneyConfirm) }}</strong>/<strong>{{ round($ride->totalMoney) }}</strong></td>
+                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}>
                         <a href="#" wire:click="displayRide({{ $ride->id }})">
                             <i class="fas fa-eye"></i>
                         </a>
