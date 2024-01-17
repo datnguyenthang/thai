@@ -19,16 +19,19 @@
             </tr>
 
             @foreach($listRides as $key => $ride)
+                @php
+                    $color = !$ride->isDepart ? 'style=background-color:#'.$ride->colorCode.';' : '';
+                @endphp
                 <tr class="{{ $ride->isDepart ? 'table-danger' : 'table-success'; }}">
-                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}>{{ $ride->id }}</td>
-                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}>{{ $ride->name }}</td>
-                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}>{{ $ride->fromLocationName }}</td>
-                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}>{{ $ride->toLocationName }}</td>
-                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}>{{ $ride->departDate . ' ' . $ride->departTime }}</td>
-                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}><strong class="text-success">{{ $ride->totalCustomerConfirm }}</strong>/<strong>{{ $ride->totalCustomer }}</strong></td>
-                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}><strong class="text-success">{{ $ride->totalOrderConfirm }}</strong>/<strong>{{ $ride->totalOrder }}</strong></td>
-                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}><strong class="text-success">{{ round($ride->totalMoneyConfirm) }}</strong>/<strong>{{ round($ride->totalMoney) }}</strong></td>
-                    <td {{ $ride->colorCode ? 'style=background-color:#'.$ride->colorCode.';' : '' }}>
+                    <td {{ $color }}>{{ $ride->id }}</td>
+                    <td {{ $color }}>{{ $ride->name }}</td>
+                    <td {{ $color }}>{{ $ride->fromLocationName }}</td>
+                    <td {{ $color }}>{{ $ride->toLocationName }}</td>
+                    <td {{ $color }}>{{ $ride->departDate . ' ' . $ride->departTime }}</td>
+                    <td {{ $color }}><strong class="text-success">{{ $ride->totalCustomerConfirm }}</strong>/<strong>{{ $ride->totalCustomer }}</strong></td>
+                    <td {{ $color }}><strong class="text-success">{{ $ride->totalOrderConfirm }}</strong>/<strong>{{ $ride->totalOrder }}</strong></td>
+                    <td {{ $color }}><strong class="text-success">{{ round($ride->totalMoneyConfirm) }}</strong>/<strong>{{ round($ride->totalMoney) }}</strong></td>
+                    <td {{ $color }}>
                         <a href="#" wire:click="displayRide({{ $ride->id }})">
                             <i class="fas fa-eye"></i>
                         </a>
