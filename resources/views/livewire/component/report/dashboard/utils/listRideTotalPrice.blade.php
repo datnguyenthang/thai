@@ -20,7 +20,7 @@
 
             @foreach($listRides as $key => $ride)
                 @php
-                    $color = !$ride->isDepart ? 'style=background-color:#'.$ride->colorCode.';' : '';
+                    $color = (!$ride->isDepart && $ride->colorCode) ? 'style=background-color:#'.$ride->colorCode.';' : '';
                 @endphp
                 <tr class="{{ $ride->isDepart ? 'table-danger' : 'table-success'; }}">
                     <td {{ $color }}>{{ $ride->id }}</td>
