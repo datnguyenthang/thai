@@ -107,7 +107,7 @@
                                         if ($headerTable == 'notpaid') $class = "table-danger";
 
                                         $value = $cashflow->{$headerTable};
-                                        $hasDecimal = strpos($value, '.') !== false && preg_match('/\.\d+/', $value);
+                                        $hasDecimal = strpos($value, '.') !== false && preg_match('/\.\d+/', $value) && !$cashflow->pax;
                                         $formattedValue = $hasDecimal ? '฿'.number_format($value, 0) : $value;
                                     @endphp
                             
