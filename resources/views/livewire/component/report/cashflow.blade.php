@@ -89,9 +89,7 @@
                                     }
                                 @endphp
 
-                                <th colspan="1" class="{{ $class }}">
-                                    {{ $headerTable == 'pax' ? '฿'.number_format($totals, 0) : number_format($totals, 0) }}
-                                </th>
+                                <th colspan="1" class="{{ $class }}">฿{{ number_format($totals, 0) }}</th>
                             @endforeach
                         </tr>
                     </thead>
