@@ -57,12 +57,13 @@
                             @endforeach
                         </tr>
                         <tr>
-                            <th colspan="3" class="text-center">TOTAL</th>
+                            <th colspan="1" class="text-center">TOTAL</th>
                             @foreach($headerTables as $headerTable)
                                 @php
                                     $class = "";
 
-                                    if ($headerTable == 'data' || $headerTable == 'revenue' || $headerTable == 'pax') continue;
+                                    //if ($headerTable == 'data' || $headerTable == 'revenue' || $headerTable == 'pax') continue;
+                                    if ($headerTable == 'data') continue;
                                     
                                     $totals = $cashflows->sum($headerTable);
 
