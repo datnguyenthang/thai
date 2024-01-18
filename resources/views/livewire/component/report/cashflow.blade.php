@@ -75,7 +75,7 @@
                                         $class = "table-danger";
                                         $headerTable = str_replace('-notpaid', '', $headerTable);
                                     }
-                                    if ($headerTable == $headerTable == 'revenue' || $headerTable == 'pax') {
+                                    if ($headerTable == 'revenue' || $headerTable == 'pax') {
                                         $class = "table-warning";
                                     }
 
