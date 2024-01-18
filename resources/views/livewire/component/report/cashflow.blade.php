@@ -89,7 +89,9 @@
                                     }
                                 @endphp
 
-                                <th colspan="1" class="{{ $class }}">฿{{ number_format($totals, 0) }}</th>
+                                <th colspan="1" class="{{ $class }}">
+                                    {{ $headerTable == 'pax' ? '฿'.number_format($totals, 0) : number_format($totals, 0) }}
+                                </th>
                             @endforeach
                         </tr>
                     </thead>
@@ -108,10 +110,7 @@
 
                                         $value = $cashflow->{$headerTable};
                                         $hasDecimal = strpos($value, '.') !== false && preg_match('/\.\d+/', $value);
-
-                                        if ($headerTable == 'pax') $formattedValue = $value;
-                                        else $formattedValue = $hasDecimal ? '฿'.number_format($value, 0) : $value;
-
+                                        $formattedValue = $hasDecimal ? '฿'.number_format($value, 0) : $value;
                                     @endphp
                             
                                     <td class="{{ $class }}">{{ $formattedValue }}</td>
