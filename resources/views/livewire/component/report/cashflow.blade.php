@@ -108,7 +108,10 @@
 
                                         $value = $cashflow->{$headerTable};
                                         $hasDecimal = strpos($value, '.') !== false && preg_match('/\.\d+/', $value);
-                                        $formattedValue = ($hasDecimal && $headerTable != 'pax') ? '฿'.number_format($value, 0) : $value;
+
+                                        if ($headerTable == 'pax') $formattedValue = $value;
+                                        else $formattedValue = $hasDecimal ? '฿'.number_format($value, 0) : $value;
+
                                     @endphp
                             
                                     <td class="{{ $class }}">{{ $formattedValue }}</td>
