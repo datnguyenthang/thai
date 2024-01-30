@@ -31,7 +31,7 @@
                         }
                     }
                 @endphp
-                <tr class="{{ $ride->isDepart ? 'table-danger' : 'table-success'; }}">
+                <tr class="{{ $class }}">
                     <td {{ $color }}>{{ $ride->id }}</td>
                     <td {{ $color }}>{{ $ride->name }}</td>
                     <td {{ $color }}>{{ $ride->fromLocationName }}</td>
