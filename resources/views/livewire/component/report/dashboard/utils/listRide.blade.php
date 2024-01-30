@@ -17,15 +17,29 @@
                 </th>
             </tr>
             @foreach($listRides as $key => $ride)
+                @php
+                    if ($ride->isDepart) {
+                        $class = 'table-danger';
+                        $color = '';
+                    } else {
+                        if($ride->colorCode) {
+                            $color = 'style=background-color:#'.$ride->colorCode.';';
+                            $class = '';
+                        } else {
+                            $class = 'table-success';
+                            $color = '';
+                        }
+                    }
+                @endphp
                 <tr class="{{ $ride->isDepart ? 'table-danger' : 'table-success'; }}">
-                    <td>{{ $ride->id }}</td>
-                    <td>{{ $ride->name }}</td>
-                    <td>{{ $ride->fromLocationName }}</td>
-                    <td>{{ $ride->toLocationName }}</td>
-                    <td>{{ $ride->departDate . ' ' . $ride->departTime }}</td>
-                    <td><strong class="text-success">{{ $ride->totalCustomerConfirm }}</strong>/<strong>{{ $ride->totalCustomer }}</strong></td>
-                    <td><strong class="text-success">{{ $ride->totalOrderConfirm }}</strong>/<strong>{{ $ride->totalOrder }}</strong></td>
-                    <td>
+                    <td {{ $color }}>{{ $ride->id }}</td>
+                    <td {{ $color }}>{{ $ride->name }}</td>
+                    <td {{ $color }}>{{ $ride->fromLocationName }}</td>
+                    <td {{ $color }}>{{ $ride->toLocationName }}</td>
+                    <td {{ $color }}>{{ $ride->departDate . ' ' . $ride->departTime }}</td>
+                    <td {{ $color }}><strong class="text-success">{{ $ride->totalCustomerConfirm }}</strong>/<strong>{{ $ride->totalCustomer }}</strong></td>
+                    <td {{ $color }}><strong class="text-success">{{ $ride->totalOrderConfirm }}</strong>/<strong>{{ $ride->totalOrder }}</strong></td>
+                    <td {{ $color }}>
                         <a href="#" wire:click="displayRide({{ $ride->id }})">
                             <i class="fas fa-eye"></i>
                         </a>
