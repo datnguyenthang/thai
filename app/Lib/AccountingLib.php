@@ -35,7 +35,7 @@ class AccountingLib {
                 //if ($currentYearMonth == $toDate) $toDate = $currentDay;
                 //else 
                 //$toDate = Carbon::now()->parse("$toDate")->lastOfMonth()->formatLocalized($dateFormat);
-				$toDate = Carbon::now()->parse("$toDate")->->endOfMonth()->setTime(23, 59, 59)->format($dateFormat);
+				$toDate = Carbon::now()->parse("$toDate")->endOfMonth()->setTime(23, 59, 59)->format($dateFormat);
                 break;
             case 'byDay':
                 $dateFormat = '%Y-%m-%d';
