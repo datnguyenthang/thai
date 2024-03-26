@@ -79,63 +79,54 @@ return [
     'policycustomer' => 'Policy for Customer',
     'policydetail' => '<article class="policy p-3 policy-border text-dark">
                             <div class="entry-content">
-                            <ol>
-                                <li><strong> Children ticket: </strong><span style="font-weight: 400;">Free ticket for children under 5 years old accompanied by an adult. Children who are exempt from ticket use the same seat as the accompanying adult. Each adult can accompany no more than 01 ticket-free child. When a passenger is traveling with more than 1 child under 5 years old, the second child or more must buy a ticket (corresponding to the normal ticket price). In case customers want their child to use a single seat in the vehicle/van (pick-up and drop-off service), a regular seat ticket fee will be charged.</span></li>
-                                <li><strong> Fun pet travel:</strong><span style="font-weight: 400;"> Passengers are only allowed to bring 01 pet on the boat</span></li>
-                            </ol>
-                            <ul>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">For small pets under 5kg, customers can bring them together. For large pets from 5kg to less than 30kg, a standard cage is required.</span></li>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">Passengers are responsible for any damage to other Passengers or their belongings caused by pets.</span></li>
-                            </ul>
-                            <ol start="3">
-                                <li><strong> Luggage policy:</strong></li>
-                            </ol>
-                            <ul>
-                                <li style="font-weight: 400;"><strong>General regulations:</strong><span style="font-weight: 400;"> Each passenger can bring a maximum of 01 piece of luggage (20 kg of luggage) for free. For excess baggage, each excess kilogram is 20 Baht/1 kg and a maximum of 30 kg. For additional baggage, there is a charge of THB 200/piece.</span></li>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">Customers are not allowed to bring illegal items as prescribed by law, flammable materials or potentially dangerous substances. Seudamgo has the right to refuse baggage if the customer violates the above requirements.</span></li>
-                                <li style="font-weight: 400;"><strong>Damaged luggage:</strong><span style="font-weight: 400;"> Passengers are responsible for damages to previously damaged baggage or if the damage is due to improper packaging that occurred before using the service. In case the luggage is damaged due to causes related to SEUDAMGO, the compensation for damages cannot exceed 500 baht/1 customer</span></li>
-                                <li style="font-weight: 400;"><strong>Luggage delay:</strong><span style="font-weight: 400;"> Before boarding the boat, passengers must hand over their luggage to Seudamgo staff to load the luggage onto the train and ensure the luggage is brought on board. Customers are responsible if luggage is left behind at the port. (In case the customer forgets their luggage at the office, the customer must pay the shipping costs to their location)</span></li>
-                            </ul>
-                            <ol start="4">
-                                <li><strong> Check-in:</strong></li>
-                            </ol>
-                            <ul>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">Passengers must check in at least 30 minutes before departure time. If customers do not check in on time or miss the boat, Seudamgo reserves the right not to refund the ticket price and is not responsible for any loss or damage. Customers need to present their electronic ticket (including booking number/trip information) at the ticket counter.</span></li>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">For passengers using Package Van+Boat, they need to arrive at the van/minibus waiting location at least 15 minutes before the departure time on the ticket.</span></li>
-                            </ul>
-                            <ol start="5">
-                                <li><strong>Ticket exchange/Refund:</strong></li>
-                            </ol>
-                            <ul>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">Each passenger is only allowed to exchange ticket one time per order. Note: Customers can only reschedule within 90 days of the previously booked train ticket departure date; Rerouting is not allowed. Passengers must make change requests at least 24 hours before train departure. If a passenger requests a ticket change less than 24 hours before train departure, the ticket change is not applicable.</span></li>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">If a passenger requests a refund 48 hours before departure time, the refund will be 50% of the value of the original ticket price.</span></li>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">If a passenger requests a refund 24 hours to less than 48 hours before departure, the refund will be 30% of the value of the original ticket price. If the passenger requests a refund after the above time, the ticket cannot be refunded.</span></li>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">Processing time for ticket refund requests will be made within 24 hours.</span></li>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">In case of force majeure such as: sudden illness, accident, etc., please contact Seudamgo for support (passengers need to provide authentic documents for each respective case)</span></li>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">How to change tickets/refund tickets:</span></li>
-                            </ul>
-                            <ol>
-                                <li><span style="font-weight: 400;"> Directly at Seudamgo`s office: Passengers can go directly to Seudamgo`s office to receive support from staff at the office.</span></li>
-                                <li><span style="font-weight: 400;"> Via Seudamgo official communication channel: Line Official Account: @seudamgo or email: info@seudamgo.com</span></li>
-                            </ol>
-                            <ul>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">Refund regulations:</span></li>
-                            </ul>
-                            <ol>
-                                <li><span style="font-weight: 400;"> Refunds are made according to the customer`s payment method when booking.</span></li>
-                                <li><span style="font-weight: 400;"> The normal refund processing time will be within 7 days from the date your ticket refund request is accepted (in some cases it may be longer due to other factors).</span></li>
-                                <li><span style="font-weight: 400;"> Seudamgo does not bear any costs incurred in the process of refunding passengers.</span></li>
-                                <li><span style="font-weight: 400;"> Passengers are not allowed to smoke, including using e-cigarettes, both on the train and in the van/bus. Violations will be fined 5000THB</span></li>
-                                <li><span style="font-weight: 400;"> Departure and arrival times may change due to weather conditions. If there is weather forecast information in advance, SEUDAMGO will notify passengers on media channels. In this case, if passengers require a ticket refund, please contact Seudamgo`s official communication channel: Line Official Account: @seudamgo or email: info@seudamgo.com for support.</span></li>
-                                <li><strong> Additional services:</strong></li>
-                            </ol>
-                            <ul>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">Parking service: Passengers can park their car at Laem Sok Trat office, service fee is 50 THB/day/car.</span></li>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">Bulky luggage:</span></li>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">+ Bicycle (folding) service fee is 500THB/bike</span></li>
-                                <li style="font-weight: 400;"><span style="font-weight: 400;">+ Water sports equipment (shortboard, longboard, skateboard, knee board, windsurfing board, etc.) service fee 300 THB/one device</span></li>
-                            </ul>
-                                <p><span style="font-weight: 400;">*** Note: Customers need to contact Seudamgo in advance to register for this service.</span></p>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>1. Children ticket:&nbsp;</strong>Free ticket for children under 5 years old accompanied by an adult. Children who are exempt from ticket use the same seat as the accompanying adult. Each adult can accompany no more than 01 ticket-free child. When a passenger is traveling with more than 1 child under 5 years old, the second child or more must buy a ticket (corresponding to the normal ticket price). In case customers want their child to use a single seat in the vehicle/van (pick-up and drop-off service), a regular seat ticket fee will be charged.</p>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>2. Fun pet travel:</strong> Passengers are only allowed to bring 01 pet on the boat</p>
+                                <ul style="list-style-type: undefined;margin-left:0in;">
+                                    <li>For small pets under 5kg, customers can bring them together. For large pets from 5kg to less than 30kg, a standard cage is required.</li>
+                                    <li>Passengers are responsible for any damage to other Passengers or their belongings caused by pets.</li>
+                                </ul>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>3. Luggage policy:</strong></p>
+                                <ul style="list-style-type: undefined;margin-left:0in;">
+                                    <li><strong>General regulations:</strong> Each passenger can bring a maximum of 01 piece of luggage (20 kg of luggage) for free. For excess baggage, each excess kilogram is 20 Baht/1 kg and a maximum of 30 kg. For additional baggage, there is a charge of THB 200/piece.</li>
+                                    <li>Customers are not allowed to bring illegal items as prescribed by law, flammable materials or potentially dangerous substances. Seudamgo has the right to refuse baggage if the customer violates the above requirements.</li>
+                                    <li><strong>Damaged luggage:</strong> Passengers are responsible for damages to previously damaged baggage or if the damage is due to improper packaging that occurred before using the service. In case the luggage is damaged due to causes related to SEUDAMGO, the compensation for damages cannot exceed 500 baht/1 customer</li>
+                                    <li><strong>Luggage delay:</strong> Before boarding the boat, passengers must hand over their luggage to Seudamgo staff to load the luggage onto the train and ensure the luggage is brought on board. Customers are responsible if luggage is left behind at the port. (In case the customer forgets their luggage at the office, the customer must pay the shipping costs to their location)</li>
+                                </ul>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>4. Check-in:</strong></p>
+                                <ul style="list-style-type: undefined;margin-left:0in;">
+                                    <li>Passengers must check in at least 30 minutes before departure time. If customers do not check in on time or miss the boat, Seudamgo reserves the right not to refund the ticket price and is not responsible for any loss or damage. Customers need to present their electronic ticket (including booking number/trip information) at the ticket counter.</li>
+                                    <li>For passengers using Package Van+Boat, they need to arrive at the van/minibus waiting location at least 15 minutes before the departure time on the ticket.</li>
+                                </ul>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>5. Ticket exchange/Refund:</strong></p>
+                                <ul style="list-style-type: undefined;margin-left:0in;">
+                                    <li>Each passenger is only allowed to exchange ticket one time per order. Note: Customers can only reschedule within 90 days of the previously booked train ticket departure date; Rerouting is not allowed. Passengers must make change requests at least 24 hours before train departure. If a passenger requests a ticket change less than 24 hours before train departure, the ticket change is not applicable.</li>
+                                    <li>If a passenger requests a refund 48 hours before departure time, the refund will be 50% of the value of the original ticket price.</li>
+                                    <li>If a passenger requests a refund 24 hours to less than 48 hours before departure, the refund will be 30% of the value of the original ticket price. If the passenger requests a refund after the above time, the ticket cannot be refunded.</li>
+                                    <li>Processing time for ticket refund requests will be made within 24 hours.</li>
+                                    <li>In case of force majeure such as: sudden illness, accident, etc., please contact Seudamgo for support (passengers need to provide authentic documents for each respective case)</li>
+                                    <li>How to change tickets/refund tickets:</li>
+                                </ul>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;">a. Directly at Seudamgo&apos;s office: Passengers can go directly to Seudamgo&apos;s office to receive support from staff at the office.</p>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;">b. Via Seudamgo&apos;s official communication channel: Line Official Account: @seudamgo or email: info@seudamgo.com</p>
+                                <div style="margin:0in;line-height:115%;font-size:15px;font-family:"Arial",sans-serif;">
+                                    <ul style="margin-bottom:0in;list-style-type: undefined;margin-left:0in;">
+                                        <li style="margin:0in;line-height:115%;font-size:15px;font-family:"Arial",sans-serif;">Refund regulations:</li>
+                                    </ul>
+                                </div>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;">a. Refunds are made according to the customer&apos;s payment method when booking.</p>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;">b. The normal refund processing time will be within 7 days from the date your ticket refund request is accepted (in some cases it may be longer due to other factors).</p>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;">c. Seudamgo does not bear any costs incurred in the process of refunding passengers.</p>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>6.</strong> Passengers are not allowed to smoke, including using e-cigarettes, both on the train and in the van/bus. Violations will be fined 5000THB</p>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>7.</strong> Departure and arrival times may change due to weather conditions. If there is weather forecast information in advance, SEUDAMGO will notify passengers on media channels. In this case, if passengers require a ticket refund, please contact Seudamgo&apos;s official communication channel: Line Official Account: @seudamgo or email: info@seudamgo.com for support.</p>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>8. Additional services:</strong></p>
+                                <ul style="list-style-type: undefined;margin-left:0in;">
+                                    <li>Parking service: Passengers can park their car at Laem Sok Trat office, service fee is 50 THB/day/car.</li>
+                                    <li>Bulky luggage:</li>
+                                    <li>+ Bicycle (folding) service fee is 500THB/bike</li>
+                                    <li>+ Water sports equipment (shortboard, longboard, skateboard, knee board, windsurfing board, etc.) service fee 300 THB/one device</li>
+                                </ul>
+                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;">*** Note: Customers need to contact Seudamgo in advance to register for this service.</p>
+                                <p style="margin:0in;line-height:115%;font-size:15px;font-family:"Arial",sans-serif;">&nbsp;</p>
                             </div>
                         </article>',
 
