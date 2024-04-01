@@ -80,54 +80,302 @@ return [
     'policycustomer' => 'นโยบายสำหรับลูกค้า',
     'policydetail' => '<article class="policy p-3 policy-border text-dark">
                             <div class="entry-content">
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>1. Children ticket:&nbsp;</strong>Free ticket for children under 5 years old accompanied by an adult. Children who are exempt from ticket use the same seat as the accompanying adult. Each adult can accompany no more than 01 ticket-free child. When a passenger is traveling with more than 1 child under 5 years old, the second child or more must buy a ticket (corresponding to the normal ticket price). In case customers want their child to use a single seat in the vehicle/van (pick-up and drop-off service), a regular seat ticket fee will be charged.</p>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>2. Fun pet travel:</strong> Passengers are only allowed to bring 01 pet on the boat</p>
-                                <ul style="list-style-type: undefined;margin-left:0in;">
-                                    <li>For small pets under 5kg, customers can bring them together. For large pets from 5kg to less than 30kg, a standard cage is required.</li>
-                                    <li>Passengers are responsible for any damage to other Passengers or their belongings caused by pets.</li>
-                                </ul>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>3. Luggage policy:</strong></p>
-                                <ul style="list-style-type: undefined;margin-left:0in;">
-                                    <li><strong>General regulations:</strong> Each passenger can bring a maximum of 01 piece of luggage (20 kg of luggage) for free. For excess baggage, each excess kilogram is 20 Baht/1 kg and a maximum of 30 kg. For additional baggage, there is a charge of THB 200/piece.</li>
-                                    <li>Customers are not allowed to bring illegal items as prescribed by law, flammable materials or potentially dangerous substances. Seudamgo has the right to refuse baggage if the customer violates the above requirements.</li>
-                                    <li><strong>Damaged luggage:</strong> Passengers are responsible for damages to previously damaged baggage or if the damage is due to improper packaging that occurred before using the service. In case the luggage is damaged due to causes related to SEUDAMGO, the compensation for damages cannot exceed 500 baht/1 customer</li>
-                                    <li><strong>Luggage delay:</strong> Before boarding the boat, passengers must hand over their luggage to Seudamgo staff to load the luggage onto the train and ensure the luggage is brought on board. Customers are responsible if luggage is left behind at the port. (In case the customer forgets their luggage at the office, the customer must pay the shipping costs to their location)</li>
-                                </ul>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>4. Check-in:</strong></p>
-                                <ul style="list-style-type: undefined;margin-left:0in;">
-                                    <li>Passengers must check in at least 30 minutes before departure time. If customers do not check in on time or miss the boat, Seudamgo reserves the right not to refund the ticket price and is not responsible for any loss or damage. Customers need to present their electronic ticket (including booking number/trip information) at the ticket counter.</li>
-                                    <li>For passengers using Package Van+Boat, they need to arrive at the van/minibus waiting location at least 15 minutes before the departure time on the ticket.</li>
-                                </ul>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>5. Ticket exchange/Refund:</strong></p>
-                                <ul style="list-style-type: undefined;margin-left:0in;">
-                                    <li>Each passenger is only allowed to exchange ticket one time per order. Note: Customers can only reschedule within 90 days of the previously booked train ticket departure date; Rerouting is not allowed. Passengers must make change requests at least 24 hours before train departure. If a passenger requests a ticket change less than 24 hours before train departure, the ticket change is not applicable.</li>
-                                    <li>If a passenger requests a refund 48 hours before departure time, the refund will be 50% of the value of the original ticket price.</li>
-                                    <li>If a passenger requests a refund 24 hours to less than 48 hours before departure, the refund will be 30% of the value of the original ticket price. If the passenger requests a refund after the above time, the ticket cannot be refunded.</li>
-                                    <li>Processing time for ticket refund requests will be made within 24 hours.</li>
-                                    <li>In case of force majeure such as: sudden illness, accident, etc., please contact Seudamgo for support (passengers need to provide authentic documents for each respective case)</li>
-                                    <li>How to change tickets/refund tickets:</li>
-                                </ul>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;">a. Directly at Seudamgo&apos;s office: Passengers can go directly to Seudamgo&apos;s office to receive support from staff at the office.</p>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;">b. Via Seudamgo&apos;s official communication channel: Line Official Account: @seudamgo or email: info@seudamgo.com</p>
-                                <div style="margin:0in;line-height:115%;font-size:15px;font-family:"Arial",sans-serif;">
-                                    <ul style="margin-bottom:0in;list-style-type: undefined;margin-left:0in;">
-                                        <li style="margin:0in;line-height:115%;font-size:15px;font-family:"Arial",sans-serif;">Refund regulations:</li>
-                                    </ul>
-                                </div>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;">a. Refunds are made according to the customer&apos;s payment method when booking.</p>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;">b. The normal refund processing time will be within 7 days from the date your ticket refund request is accepted (in some cases it may be longer due to other factors).</p>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;">c. Seudamgo does not bear any costs incurred in the process of refunding passengers.</p>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>6.</strong> Passengers are not allowed to smoke, including using e-cigarettes, both on the train and in the van/bus. Violations will be fined 5000THB</p>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>7.</strong> Departure and arrival times may change due to weather conditions. If there is weather forecast information in advance, SEUDAMGO will notify passengers on media channels. In this case, if passengers require a ticket refund, please contact Seudamgo&apos;s official communication channel: Line Official Account: @seudamgo or email: info@seudamgo.com for support.</p>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;"><strong>8. Additional services:</strong></p>
-                                <ul style="list-style-type: undefined;margin-left:0in;">
-                                    <li>Parking service: Passengers can park their car at Laem Sok Trat office, service fee is 50 THB/day/car.</li>
-                                    <li>Bulky luggage:</li>
-                                    <li>+ Bicycle (folding) service fee is 500THB/bike</li>
-                                    <li>+ Water sports equipment (shortboard, longboard, skateboard, knee board, windsurfing board, etc.) service fee 300 THB/one device</li>
-                                </ul>
-                                <p style="margin:0in;line-height:150%;font-size:15px;font-family:"Arial",sans-serif;margin-top:12.0pt;margin-right:0in;margin-bottom:12.0pt;margin-left:0in;">*** Note: Customers need to contact Seudamgo in advance to register for this service.</p>
-                                <p style="margin:0in;line-height:115%;font-size:15px;font-family:"Arial",sans-serif;">&nbsp;</p>
+                            <p class="MsoListParagraphCxSpFirst" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;text-indent:-.25in;
+                            line-height:150%;mso-list:l0 level1 lfo1"><!--[if !supportLists]--><b><span lang="VI" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif;">1.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span></span></b><!--[endif]--><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ตั๋วเด็ก: ตั๋วฟรีสำหรับเด็กอายุต่ำกว่า </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">5 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ปีที่เดินทางมาพร้อมกับผู้ใหญ่
+                            เด็กที่ได้รับการยกเว้นไม่ต้องซื้อตั๋วจะใช้ที่นั่งเดียวกับผู้ใหญ่ที่ร่วมเดินทางด้วย
+                            ผู้ใหญ่แต่ละคนสามารถเดินทางร่วมกับเด็กที่ไม่มีตั๋วได้ไม่เกิน </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">1 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">คน
+                            เมื่อผู้โดยสารเดินทางพร้อมเด็กอายุต่ำกว่า </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">5 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ปีมากกว่า </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">1 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">คน เด็กคนที่ </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">2 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ขึ้นไปจะต้องซื้อตั๋ว (ตามราคาตั๋วปกติ)
+                            ในกรณีที่ลูกค้าต้องการให้บุตรหลานใช้ที่นั่งเดี่ยวในยานพาหนะ/รถตู้
+                            (บริการรับและส่ง) จะมีการเรียกเก็บค่าธรรมเนียมตั๋วที่นั่งปกติ</span><span lang="VI" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;text-indent:-.25in;
+                            line-height:150%;mso-list:l0 level1 lfo1"><!--[if !supportLists]--><b><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-fareast-font-family:&quot;Angsana New&quot;;
+                            mso-fareast-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">2.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span></span></b><!--[endif]--><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">การเดินทางกับสัตว์เลี้ยง ผู้โดยสาร </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">1 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">คน สามารถนำสัตว์เลี้ยงขึ้นเรือ เพียง </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">1 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ตัว ได้เท่านั้น</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> - </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">สำหรับสัตว์เลี้ยงขนาดเล็กที่มีน้ำหนักไม่เกิน
+                            </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">5 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">กก. ลูกค้าสามารถเดินทางร่วมกันได้
+                            สำหรับสัตว์เลี้ยงขนาดใหญ่ที่มีน้ำหนักตั้งแต่ </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">5 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">กก. แต่น้อยกว่า </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">30 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">กก.
+                            จำเป็นต้องใช้กรงแบบมาตรฐานในการเดินทาง</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> – </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ผู้โดยสารต้องรับผิดชอบต่อความเสียหายต่อผู้โดยสารท่านอื่นหรือทรัพย์สินที่เกิดจากสัตว์เลี้ยง</span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;text-indent:-.25in;
+                            line-height:150%;mso-list:l0 level1 lfo1"><!--[if !supportLists]--><b><span lang="VI" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif;">3.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span></span></b><!--[endif]--><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">นโยบายเกี่ยวกับสัมภาระ:</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> - </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ข้อกำหนดทั่วไป: ผู้โดยสารแต่ละคนสามารถนำสัมภาระมาได้สูงสุด </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">1 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ชิ้น (สัมภาระ </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">20 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">กิโลกรัม) โดยไม่เสียค่าใช้จ่าย
+                            สำหรับน้ำหนักสัมภาระส่วนเกิน กิโลกรัมส่วนเกิน กิโลกรัมละ </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">20 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">บาท/</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">1 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">กิโลกรัม และสูงสุดไม่เกิน </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">30 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">กิโลกรัม
+                            สำหรับสัมภาระเพิ่มเติมจะคิดค่าบริการ </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">200 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">บาท/ชิ้น</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> - </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ไม่อนุญาตให้ลูกค้านำสิ่งของผิดกฎหมายตามที่กฎหมายกำหนด
+                            วัตถุไวไฟ หรือสารที่อาจเป็นอันตราย
+                            เสือดำโกมีสิทธิ์ปฏิเสธสัมภาระหากลูกค้าฝ่าฝืนข้อกำหนดข้างต้น</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> - </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">สัมภาระเสียหาย:
+                            ผู้โดยสารจะต้องรับผิดชอบต่อความเสียหายของสัมภาระที่เสียหายก่อนหน้านี้หรือหากความเสียหายนั้นเกิดจากการบรรจุภัณฑ์ที่ไม่เหมาะสมที่เกิดขึ้นก่อนใช้บริการ
+                            ในกรณีที่กระเป๋าเดินทางเสียหายเนื่องจากสาเหตุที่เกี่ยวข้องกับเสือดำโก
+                            ค่าชดเชยความเสียหายจะไม่เกิน </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">500 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">บาท/ </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">1 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">คน</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> - </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">การล่าช้าของสัมภาระ: ก่อนขึ้นเรือ
+                            ผู้โดยสารจะต้องมอบสัมภาระให้กับเจ้าหน้าที่ของเสือดำโก
+                            เพื่อโหลดและนำสัมภาระขึ้นเรือ
+                            ลูกค้าจะต้องรับผิดชอบหากสัมภาระถูกทิ้งไว้ที่ท่าเรือ
+                            (ในกรณีที่ลูกค้าลืมสัมภาระไว้ที่สำนักงาน
+                            ลูกค้าจะต้องชำระค่าขนส่งไปยังสถานที่ของตน)</span><span lang="VI" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;text-indent:-.25in;
+                            line-height:150%;mso-list:l0 level1 lfo1"><!--[if !supportLists]--><b><span lang="VI" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif;">4.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span></span></b><!--[endif]--><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">เช็คอิน:</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> - </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ผู้โดยสารจะต้องเช็คอินก่อนเวลาออกเดินทางอย่างน้อย </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">30 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">นาที
+                            หากลูกค้าเช็คอินไม่ตรงเวลาหรือพลาดเรือ เสือดำโกขอสงวนสิทธิ์ไม่คืนเงินค่าตั๋ว
+                            และไม่รับผิดชอบต่อการสูญหายหรือเสียหายใดๆ ลูกค้าต้องแสดงตั๋วอิเล็กทรอนิกส์
+                            (รวมถึงหมายเลขการจอง/ข้อมูลการเดินทาง) ที่เคาน์เตอร์จำหน่ายตั๋ว</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> - </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">สำหรับผู้โดยสารที่ใช้แพ็คเกจรถตู้+เรือ
+                            ต้องมาถึงจุดรอรถตู้/รถมินิบัสอย่างน้อย </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">15 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">นาทีก่อนเวลาออกเดินทางตามตั๋ว</span><span lang="VI" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;text-indent:-.25in;
+                            line-height:150%;mso-list:l0 level1 lfo1"><!--[if !supportLists]--><b><span lang="VI" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif;">5.<span style="font-variant-numeric: normal; font-variant-east-asian: normal; font-variant-alternates: normal; font-kerning: auto; font-optical-sizing: auto; font-feature-settings: normal; font-variation-settings: normal; font-variant-position: normal; font-weight: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </span></span></b><!--[endif]--><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">การเปลี่ยนตั๋ว/ขอคืนเงิน:</span><span lang="VI" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;line-height:150%"><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">- </span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">ผู้โดยสารแต่ละคนสามารถแลกเปลี่ยนตั๋วได้เพียง </span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">1</span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI"> ครั้งต่อ </span><span lang="VI" style="font-size:14.0pt;line-height:150%;
+                            font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:
+                            major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:VI">1</span><span lang="TH" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI"> คำสั่งซื้อ หมายเหตุ:
+                            ลูกค้าสามารถกำหนดเวลาใหม่ได้ภายใน </span><span lang="VI" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">90</span><span lang="TH" style="font-size:14.0pt;line-height:150%;font-family:
+                            &quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;
+                            mso-bidi-theme-font:major-bidi;mso-ansi-language:VI">
+                            วันนับจากวันออกเดินทางของตั๋วเรือที่จองไว้ก่อนหน้านี้เท่านั้น
+                            ไม่อนุญาตให้เปลี่ยนเส้นทาง ผู้โดยสารต้องทำการขอเปลี่ยนแปลงอย่างน้อย </span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">24</span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI"> ชั่วโมงก่อนเรือออกเดินทาง หากผู้โดยสารขอเปลี่ยนแปลงตั๋วน้อยกว่า </span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">24</span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI"> ชั่วโมงก่อนเรือออกเดินทาง การเปลี่ยนแปลงตั๋วจะไม่สามารถทำได้</span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;line-height:150%"><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">&nbsp;</span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;line-height:150%"><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">- </span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">หากผู้โดยสารขอคืนเงิน </span><span lang="VI" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">48</span><span lang="TH" style="font-size:14.0pt;line-height:150%;font-family:
+                            &quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;
+                            mso-bidi-theme-font:major-bidi;mso-ansi-language:VI"> ชั่วโมงก่อนเวลาออกเดินทาง
+                            การคืนเงินจะเป็น </span><span lang="VI" style="font-size:14.0pt;line-height:150%;
+                            font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:
+                            major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:VI">50%</span><span lang="TH" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI"> ของมูลค่าตั๋วเดิม</span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;line-height:150%"><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">- </span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">หากผู้โดยสารขอคืนเงินภายใน </span><span lang="VI" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">24</span><span lang="TH" style="font-size:14.0pt;line-height:150%;font-family:
+                            &quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;
+                            mso-bidi-theme-font:major-bidi;mso-ansi-language:VI"> ชั่วโมงถึงน้อยกว่า </span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">48</span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI"> ชั่วโมงก่อนออกเดินทาง การคืนเงินจะเป็น </span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">30%</span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI"> ของมูลค่าตั๋วเดิม หากผู้โดยสารขอคืนเงินหลังจากเวลาข้างต้น
+                            จะไม่สามารถขอคืนเงินค่าตั๋วได้</span><span lang="VI" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;line-height:150%"><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">- </span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">ระยะเวลาดำเนินการสำหรับการขอคืนตั๋วจะดำเนินการภายใน </span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">24</span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI"> ชั่วโมง</span><span lang="VI" style="font-size:14.0pt;line-height:150%;
+                            font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:
+                            major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:VI"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;line-height:150%"><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">- </span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">ในกรณีที่เกิดเหตุสุดวิสัย เช่น การเจ็บป่วยกะทันหัน อุบัติเหตุ ฯลฯ
+                            โปรดติดต่อเสือดำโกเพื่อขอความช่วยเหลือ
+                            (ผู้โดยสารต้องแสดงเอกสารที่เกี่ยวข้องสำหรับแต่ละกรณี)</span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;line-height:150%"><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">&nbsp;</span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;line-height:150%"><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">- </span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">วิธีเปลี่ยนตั๋ว/ขอคืนตั๋ว:</span><span lang="VI" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:1.0in;mso-add-space:auto;line-height:150%"><b><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">a.</span></b><span lang="VI" style="font-size:
+                            14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:
+                            major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;
+                            mso-ansi-language:VI"> </span><span lang="TH" style="font-size:14.0pt;line-height:
+                            150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">ทำได้โดยตรงที่สำนักงานของเสือดำโก:
+                            ผู้โดยสารสามารถไปที่สำนักงานของเสือดำโกได้โดยตรงเพื่อรับความช่วยเหลือจากเจ้าหน้าที่ที่สำนักงาน</span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:1.0in;mso-add-space:auto;line-height:150%"><b><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">b.</span></b><span lang="VI" style="font-size:
+                            14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:
+                            major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;
+                            mso-ansi-language:VI"> </span><span lang="TH" style="font-size:14.0pt;line-height:
+                            150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">ผ่านช่องทางการออนไลน์อย่างเป็นทางการของ เสือดำโก: </span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">Line Official Account: @seudamgo </span><span lang="TH" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">หรืออีเมล: </span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">info@seudamgo.com<o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;line-height:150%"><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">&nbsp;</span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:.5in;mso-add-space:auto;line-height:150%"><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">- </span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">กฎการคืนเงิน:</span><span lang="VI" style="font-size:14.0pt;line-height:150%;
+                            font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:
+                            major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:VI"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:1.0in;mso-add-space:auto;line-height:150%"><b><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">a.</span></b><span lang="VI" style="font-size:
+                            14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:
+                            major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;
+                            mso-ansi-language:VI"> </span><span lang="TH" style="font-size:14.0pt;line-height:
+                            150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">การคืนเงินจะดำเนินการตามวิธีการชำระเงินของลูกค้าเมื่อทำการจอง</span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpMiddle" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:1.0in;mso-add-space:auto;line-height:150%"><b><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">b.</span></b><span lang="VI" style="font-size:
+                            14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:
+                            major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;
+                            mso-ansi-language:VI"> </span><span lang="TH" style="font-size:14.0pt;line-height:
+                            150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">ระยะเวลาดำเนินการคืนเงินตามปกติคือภายใน </span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">7</span><span lang="TH" style="font-size:14.0pt;
+                            line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI"> วันนับจากวันที่คำขอคืนเงินค่าตั๋วของคุณได้รับการยอมรับ
+                            (ในบางกรณีอาจนานกว่านั้นเนื่องจากปัจจัยอื่นๆ)</span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI"><o:p></o:p></span></p>
+                            
+                            <p class="MsoListParagraphCxSpLast" style="margin-top:12.0pt;margin-right:0in;
+                            margin-bottom:12.0pt;margin-left:1.0in;mso-add-space:auto;line-height:150%"><b><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI">c.</span></b><span lang="VI" style="font-size:
+                            14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:
+                            major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;
+                            mso-ansi-language:VI"> </span><span lang="TH" style="font-size:14.0pt;line-height:
+                            150%;font-family:&quot;Angsana New&quot;,serif;mso-ascii-theme-font:major-bidi;
+                            mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;mso-ansi-language:
+                            VI">เสือดำโกจะไม่รับผิดชอบค่าใช้จ่ายใดๆ
+                            ที่เกิดขึ้นในกระบวนการคืนเงินให้กับผู้โดยสาร</span><span lang="VI" style="font-size:14.0pt;line-height:150%;font-family:&quot;Angsana New&quot;,serif;
+                            mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
+                            major-bidi;mso-ansi-language:VI"><o:p></o:p></span></p>
+                            
+                            <p class="MsoNormal" style="margin-top:12.0pt;margin-right:0in;margin-bottom:
+                            12.0pt;margin-left:0in;line-height:150%"><b><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">6.</span></b><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ห้ามผู้โดยสารสูบบุหรี่ รวมถึงการใช้บุหรี่ไฟฟ้า ทั้งในรถเรือ
+                            และในรถตู้/รถบัส ฝ่าฝืนจะถูกปรับ </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">5,000 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">บาท</span><span lang="VI" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"><o:p></o:p></span></p>
+                            
+                            <p class="MsoNormal" style="margin-top:12.0pt;margin-right:0in;margin-bottom:
+                            12.0pt;margin-left:0in;line-height:150%"><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">7. </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">เวลาออกเดินทางและมาถึงอาจมีการเปลี่ยนแปลงเนื่องจากสภาพอากาศ
+                            หากมีข้อมูลพยากรณ์อากาศล่วงหน้า
+                            เสือดำโกจะแจ้งให้ผู้โดยสารทราบทางช่องทางสื่อต่างๆ ในกรณีนี้
+                            หากผู้โดยสารต้องการขอคืนเงินค่าตั๋ว
+                            โปรดติดต่อช่องทางอย่างเป็นทางการของเสือดำโก: </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">Line Official Account: @seudamgo </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">หรืออีเมล: </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">info@seudamgo.com </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">เพื่อรับการช่วยเหลือ</span><span lang="VI" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"><o:p></o:p></span></p>
+                            
+                            <p class="MsoNormal" style="margin-top:12.0pt;margin-right:0in;margin-bottom:
+                            12.0pt;margin-left:0in;line-height:150%"><b><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">8.</span></b><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">บริการเพิ่มเติม:</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> - </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">บริการที่จอดรถ: ผู้โดยสารสามารถจอดรถได้ที่สำนักงานแหลมศอก
+                            ตราด ค่าบริการ </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">50 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">บาท/วัน/คัน</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> - </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">สัมภาระขนาดใหญ่:</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> + </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ค่าบริการจักรยาน (แบบพับ) </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">500 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">บาท/คัน</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> + </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">อุปกรณ์กีฬาทางน้ำ (ชอร์ตบอร์ด</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">, </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">ลองบอร์ด</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">, </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">สเก็ตบอร์ด</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">, </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">สนับเข่า</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">, </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">วินด์เซิร์ฟบอร์ด ฯลฯ) ค่าบริการ </span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">300 </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">บาท/เครื่อง</span><span lang="vi" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"> *** </span><span lang="TH" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;">หมายเหตุ:
+                            ลูกค้าต้องติดต่อเสือดำโกล่วงหน้าเพื่อลงทะเบียนแจ้งการใช้บริการนี้</span><span lang="VI" style="font-size: 14pt; line-height: 150%; font-family: &quot;Angsana New&quot;, serif; background: white;"><o:p></o:p></span></p>
                             </div>
                         </article>',
     'privatepolicy' => 'นโยบายความเป็นส่วนตัว',
