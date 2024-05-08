@@ -36,7 +36,9 @@ class ModeratorOrder extends Component
     public $fromLocation;
     public $toLocation;
     public $departureDate;
+    public $minDepartureDate;
     public $returnDate;
+    public $minReturnDate;
     public $adults;
     public $children;
     public $customerType;
@@ -139,6 +141,16 @@ class ModeratorOrder extends Component
 
         $this->departureDate = now()->addDay()->toDateString();
         $this->returnDate = now()->addDays(2)->toDateString();
+
+        if (auth()->user()->role = "manager" || auth()->user()->role = "admin") {
+            $this->minDepartureDate = date('Y-m-d', strtotime('-30 days'));
+            $this->minReturnDate = date('Y-m-d', strtotime('-28 days'));
+        }
+
+        if (auth()->user()->role = "moderator") {
+            $this->minDepartureDate = date('Y-m-d');
+            $this->minReturnDate = now()->addDays(2)->toDateString();
+        }
 
         $this->fromLocationList = Location::get()->where('status', ACTIVE);
         $this->toLocationList = Location::get()->where('status', ACTIVE);

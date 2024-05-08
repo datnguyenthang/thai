@@ -75,7 +75,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.departuredate') }}</span>
-                <input id="departureDate" wire:model="departureDate" name="departureDate" class="form-control" type="date" min="{{ date('Y-m-d', strtotime('-30 days')) }}" required>
+                <input id="departureDate" wire:model="departureDate" name="departureDate" class="form-control" type="date" min="{{ $minDepartureDate }}" required>
                 @error('departureDate') <span class="text-danger error">{{ $message }}</span> @enderror
             </div>
         </div>
@@ -84,7 +84,7 @@
         <div class="col-md-3">
             <div class="form-group">
                 <span class="form-label">{{ trans('messages.returndate') }}</span>
-                <input id="returnDate" wire:model="returnDate" name="returnDate" class="form-control" type="date" min="{{ $returnDate }}" required="">
+                <input id="returnDate" wire:model="returnDate" name="returnDate" class="form-control" type="date" min="{{ $minReturnDate }}" required="">
                 @error('returnDate') <span class="text-danger error">{{ $message }}</span> @enderror
             </div>
         </div>
