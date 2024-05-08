@@ -142,12 +142,12 @@ class ModeratorOrder extends Component
         $this->departureDate = now()->addDay()->toDateString();
         $this->returnDate = now()->addDays(2)->toDateString();
 
-        if (auth()->user()->role = "manager" || auth()->user()->role = "admin") {
+        if (auth()->user()->role == "manager" || auth()->user()->role == "admin") {
             $this->minDepartureDate = date('Y-m-d', strtotime('-30 days'));
-            $this->minReturnDate = date('Y-m-d', strtotime('-28 days'));
+            $this->minReturnDate = date('Y-m-d', strtotime('-30 days'));
         }
 
-        if (auth()->user()->role = "moderator") {
+        if (auth()->user()->role == "moderator") {
             $this->minDepartureDate = date('Y-m-d');
             $this->minReturnDate = now()->addDays(2)->toDateString();
         }
